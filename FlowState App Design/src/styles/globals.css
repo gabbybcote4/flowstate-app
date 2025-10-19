@@ -1,0 +1,678 @@
+@import "tailwindcss";
+
+@theme {
+  /* Lavender color palette */
+  --color-lavender-50: #f5f3ff;
+  --color-lavender-100: #ede9fe;
+  --color-lavender-200: #ddd6fe;
+  --color-lavender-300: #c4b5fd;
+  --color-lavender-400: #a78bfa;
+  --color-lavender-500: #8b5cf6;
+  --color-lavender-600: #7c3aed;
+  --color-lavender-700: #6d28d9;
+  
+  /* Peach color palette */
+  --color-peach-50: #fff7ed;
+  --color-peach-100: #ffedd5;
+  --color-peach-200: #fed7aa;
+  --color-peach-300: #fdba74;
+  --color-peach-400: #fb923c;
+  --color-peach-500: #f97316;
+  
+  /* Mood Theme Tokens */
+  --mood-low-bg: #dbeafe;
+  --mood-low-border: #93c5fd;
+  --mood-low-text: #1e3a8a;
+  --mood-low-accent: #3b82f6;
+  
+  --mood-moderate-bg: #fed7aa;
+  --mood-moderate-border: #fb923c;
+  --mood-moderate-text: #9a3412;
+  --mood-moderate-accent: #f97316;
+  
+  --mood-good-bg: #d1fae5;
+  --mood-good-border: #6ee7b7;
+  --mood-good-text: #065f46;
+  --mood-good-accent: #10b981;
+  
+  /* Life Area Tokens */
+  --life-health-bg: #fef3c7;
+  --life-health-border: #fbbf24;
+  --life-health-text: #92400e;
+  --life-health-accent: #f59e0b;
+  
+  --life-work-bg: #ddd6fe;
+  --life-work-border: #a78bfa;
+  --life-work-text: #5b21b6;
+  --life-work-accent: #8b5cf6;
+  
+  --life-social-bg: #fce7f3;
+  --life-social-border: #f9a8d4;
+  --life-social-text: #9f1239;
+  --life-social-accent: #ec4899;
+  
+  --life-personal-bg: #d1fae5;
+  --life-personal-border: #6ee7b7;
+  --life-personal-text: #065f46;
+  --life-personal-accent: #10b981;
+  
+  --life-creative-bg: #fae8ff;
+  --life-creative-border: #e879f9;
+  --life-creative-text: #701a75;
+  --life-creative-accent: #d946ef;
+  
+  --life-learning-bg: #dbeafe;
+  --life-learning-border: #60a5fa;
+  --life-learning-text: #1e3a8a;
+  --life-learning-accent: #3b82f6;
+  
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  
+  --animate-duration-fast: 150ms;
+  --animate-duration-normal: 200ms;
+  --animate-duration-slow: 300ms;
+  
+  /* Switch component colors */
+  --color-primary: #a78bfa;
+  --color-switch-background: #e5e7eb;
+  --color-card: #ffffff;
+  --color-ring: #a78bfa;
+  --color-input: #e5e7eb;
+  --color-card-foreground: #1f2937;
+  --color-primary-foreground: #ffffff;
+  --color-background: #ffffff;
+  --color-muted-foreground: #6b7280;
+  --color-accent: #f3f4f6;
+  --color-ring-offset-background: #ffffff;
+}
+
+* {
+  margin: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #1f2937;
+  background: white;
+}
+
+/* Hide scrollbar across all browsers while maintaining scroll functionality */
+* {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+*::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+h1 {
+  font-size: 1.875rem;
+  font-weight: 600;
+  line-height: 2.25rem;
+  letter-spacing: -0.025em;
+}
+
+h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.75rem;
+}
+
+h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.75rem;
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+button, input, textarea, select {
+  font-family: inherit;
+}
+
+/* Smooth transitions for calm UX */
+* {
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: var(--animate-duration-normal);
+}
+
+/* Minimal mode - reduced effects */
+.minimal-mode {
+  filter: brightness(0.95);
+}
+
+.minimal-mode * {
+  transition-duration: 0ms !important;
+  animation-duration: 0ms !important;
+}
+
+/* Gentle nudge toast styling */
+.gentle-nudge-toast {
+  animation: gentle-slide-in 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes gentle-slide-in {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Disable animations in minimal mode */
+.minimal-mode .gentle-nudge-toast {
+  animation: none;
+}
+
+/* Navigation micro-animations */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up-bounce {
+  0% {
+    transform: translateY(100%);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-gentle {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* Tap feedback ripple */
+@keyframes tap-ripple {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* Page transition animations */
+.page-transition-enter {
+  animation: fade-up 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.page-transition-exit {
+  animation: fade-in 0.3s reverse cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Bottom nav entrance */
+.nav-enter {
+  animation: slide-up-bounce 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Subtle hover glow effect for interactive elements */
+.interactive-glow {
+  transition: box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.interactive-glow:hover {
+  box-shadow: 0 0 20px -5px rgba(167, 139, 250, 0.4);
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ============================================
+   DARK MODE STYLES
+   ============================================ */
+
+/* Dark mode CSS variables for UI components */
+.dark {
+  color-scheme: dark;
+  --color-switch-background: #52525b;
+  --color-card: #27272a;
+  --color-input: #3f3f46;
+  --color-card-foreground: #fafafa;
+  --color-primary-foreground: #ffffff;
+  --color-background: #18181b;
+  --color-muted-foreground: #a1a1aa;
+  --color-accent: #3f3f46;
+  --color-ring-offset-background: #27272a;
+}
+
+/* Base dark mode colors */
+.dark body {
+  background: #18181b;
+  color: #e4e4e7;
+}
+
+.dark h1,
+.dark h2,
+.dark h3 {
+  color: #fafafa;
+}
+
+.dark p {
+  color: #d4d4d8;
+}
+
+/* Dark mode backgrounds */
+.dark .bg-white {
+  background-color: #27272a !important;
+}
+
+.dark .bg-gray-50 {
+  background-color: #3f3f46 !important;
+}
+
+.dark .bg-gray-100 {
+  background-color: #52525b !important;
+}
+
+/* Dark mode borders */
+.dark .border-gray-200 {
+  border-color: #52525b !important;
+}
+
+.dark .border-gray-100,
+.dark .border-t {
+  border-color: #3f3f46 !important;
+}
+
+/* Dark mode text colors */
+.dark .text-gray-600 {
+  color: #a1a1aa !important;
+}
+
+.dark .text-gray-700 {
+  color: #d4d4d8 !important;
+}
+
+.dark .text-gray-800 {
+  color: #e4e4e7 !important;
+}
+
+.dark .text-gray-900 {
+  color: #fafafa !important;
+}
+
+/* Dark mode shadows */
+.dark .shadow-sm {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5) !important;
+}
+
+.dark .shadow {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5), 0 1px 2px -1px rgba(0, 0, 0, 0.5) !important;
+}
+
+.dark .shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Dark mode opacity adjustments */
+.dark .opacity-60 {
+  opacity: 0.7 !important;
+}
+
+.dark .opacity-70 {
+  opacity: 0.8 !important;
+}
+
+/* Dark mode form inputs */
+.dark input,
+.dark textarea,
+.dark select {
+  background-color: #3f3f46 !important;
+  border-color: #52525b !important;
+  color: #fafafa !important;
+}
+
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: #71717a !important;
+}
+
+/* Dark mode navigation */
+.dark nav {
+  background-color: #27272a !important;
+  border-color: #3f3f46 !important;
+}
+
+/* Dark mode dialogs and toasts */
+.dark [role="dialog"] {
+  background-color: #27272a !important;
+  border-color: #3f3f46 !important;
+}
+
+.dark [class*="DialogOverlay"] {
+  background-color: rgba(0, 0, 0, 0.7) !important;
+}
+
+.dark .gentle-nudge-toast {
+  background-color: #27272a !important;
+  border-color: #3f3f46 !important;
+  color: #fafafa !important;
+}
+
+/* Dark mode gradient backgrounds */
+.dark .bg-gradient-to-b {
+  background: linear-gradient(to bottom, #18181b, #27272a) !important;
+}
+
+.dark .from-lavender-100 {
+  --tw-gradient-from: #27272a !important;
+}
+
+.dark .via-lavender-50 {
+  --tw-gradient-via: #18181b !important;
+}
+
+.dark .to-white {
+  --tw-gradient-to: #09090b !important;
+}
+
+/* ============================================
+   DARK MODE - THEME COLOR ACCENTS
+   These use the selected color theme for subtle accents
+   ============================================ */
+
+/* Theme-aware routine block backgrounds */
+.dark .bg-lavender-100 {
+  background-color: #3f3f46 !important;
+}
+
+.dark .bg-lavender-50 {
+  background-color: #27272a !important;
+}
+
+/* Lavender borders and accents - use theme color */
+.dark .border-lavender-100,
+.dark .border-lavender-200 {
+  border-color: #52525b !important;
+}
+
+.dark .border-lavender-300,
+.dark .border-lavender-400 {
+  border-color: var(--color-primary) !important;
+  opacity: 0.5;
+}
+
+.dark .text-lavender-600,
+.dark .text-lavender-700 {
+  color: var(--color-primary-light) !important;
+}
+
+.dark .text-lavender-400 {
+  color: var(--color-primary) !important;
+}
+
+/* Lavender buttons - keep theme color */
+.dark .bg-lavender-400,
+.dark .bg-lavender-500 {
+  /* These use the actual lavender colors for buttons - override with theme */
+  background-color: var(--color-primary) !important;
+}
+
+.dark .hover\:bg-lavender-500:hover,
+.dark .hover\:bg-lavender-200:hover {
+  background-color: var(--color-primary-dark) !important;
+}
+
+/* Lavender rings for today indicator */
+.dark .ring-lavender-300 {
+  --tw-ring-color: var(--color-primary) !important;
+  --tw-ring-opacity: 0.3 !important;
+}
+
+.dark .bg-peach-50 {
+  background-color: #3f3f46 !important;
+}
+
+.dark .bg-blue-50 {
+  background-color: #27272a !important;
+}
+
+.dark .bg-pink-50 {
+  background-color: #3f3f46 !important;
+}
+
+.dark .bg-emerald-50 {
+  background-color: #27272a !important;
+}
+
+/* Dark mode mood button colors */
+.dark .bg-blue-100 {
+  background-color: #1e3a8a !important;
+}
+
+.dark .bg-peach-100,
+.dark .bg-orange-100 {
+  background-color: #9a3412 !important;
+}
+
+.dark .bg-green-100 {
+  background-color: #166534 !important;
+}
+
+.dark .bg-pink-100 {
+  background-color: #9f1239 !important;
+}
+
+/* Dark mode text colors for mood buttons */
+.dark .text-blue-700 {
+  color: #93c5fd !important;
+}
+
+.dark .text-orange-700 {
+  color: #fdba74 !important;
+}
+
+.dark .text-green-700 {
+  color: #86efac !important;
+}
+
+/* Dark mode status indicators */
+.dark .bg-green-400 {
+  background-color: #4ade80 !important;
+}
+
+/* Dark mode trend indicator colors */
+.dark .text-green-500 {
+  color: #22c55e !important;
+}
+
+.dark .text-orange-400 {
+  color: #fb923c !important;
+}
+
+/* Dark mode - Life Dashboard specific colors */
+.dark .text-lavender-500 {
+  color: #C9A3DC !important;
+}
+
+.dark .text-lavender-600 {
+  color: #B88FCC !important;
+}
+
+.dark .text-lavender-700 {
+  color: #A67BBC !important;
+}
+
+.dark .text-peach-500 {
+  color: #EBBBA7 !important;
+}
+
+.dark .border-lavender-200 {
+  border-color: #C9A3DC !important;
+  opacity: 0.3;
+}
+
+.dark .from-lavender-100 {
+  --tw-gradient-from: #3f3f46 !important;
+}
+
+.dark .to-peach-100 {
+  --tw-gradient-to: #52525b !important;
+}
+
+.dark .bg-gray-50 {
+  background-color: #3f3f46 !important;
+}
+
+.dark .bg-blue-50 {
+  background-color: #1e3a5f !important;
+}
+
+.dark .bg-green-50 {
+  background-color: #1e4a3a !important;
+}
+
+/* Range input styling */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: white;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  border: 3px solid #C9A3DC;
+  transition: transform 0.2s;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: white;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  border: 3px solid #C9A3DC;
+  transition: transform 0.2s;
+}
+
+input[type="range"]::-moz-range-thumb:hover {
+  transform: scale(1.1);
+}
+
+.dark input[type="range"]::-webkit-slider-thumb {
+  background: #1f2937;
+}
+
+.dark input[type="range"]::-moz-range-thumb {
+  background: #1f2937;
+}
+
+.dark .border-blue-200,
+.dark .border-blue-400 {
+  border-color: #3b82f6 !important;
+}
+
+/* Preserve inline styles for theme colors (buttons use inline styles) */
+.dark button[style*="background-color"]:not(:disabled) {
+  /* Inline styles for theme buttons take precedence - this is intentional */
+}
+
+/* Dark mode hover states */
+.dark .hover\:bg-blue-100:hover {
+  background-color: #1e3a8a !important;
+  opacity: 0.8;
+}
+
+.dark .hover\:bg-lavender-100:hover {
+  background-color: #3f3f46 !important;
+  border-color: var(--color-primary);
+  opacity: 0.9;
+}
+
+/* ============================================
+   THEME COLOR UTILITIES (works in both light and dark mode)
+   ============================================ */
+
+/* Add subtle theme color glow to elements */
+.theme-accent-glow {
+  box-shadow: 0 0 20px -5px var(--color-primary);
+}
+
+/* Add theme color border */
+.theme-accent-border {
+  border-color: var(--color-primary) !important;
+}
+
+/* Dark mode specific theme accents */
+.dark .theme-tinted-bg {
+  background: linear-gradient(135deg, #27272a 0%, #3f3f46 100%);
+  border-left: 3px solid var(--color-primary);
+}
+
+/* Scrollbar utilities */
+.scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

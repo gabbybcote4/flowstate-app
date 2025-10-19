@@ -1,0 +1,20 @@
+import React from 'react';
+
+interface CalendarEventCardProps {
+  time: string;
+  title: string;
+  type: 'event' | 'todo';
+  color?: string;
+}
+
+export function CalendarEventCard({ time, title, type, color = 'bg-lavender-50' }: CalendarEventCardProps) {
+  return (
+    <div className="flex items-start gap-4 mb-3">
+      <div className="text-sm opacity-60 w-16 pt-1">{time}</div>
+      <div className={`flex-1 p-3 rounded-xl ${color} border border-opacity-20`}>
+        <div className="text-sm opacity-50 mb-1">{type === 'event' ? '📅 Event' : '✓ To-Do'}</div>
+        <div>{title}</div>
+      </div>
+    </div>
+  );
+}
