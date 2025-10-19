@@ -548,7 +548,7 @@ export function CalendarScreen() {
                   const statusColor = status === 'full' ? '#10b981' : status === 'balanced' ? '#f59e0b' : '#ef4444';
                   
                   return (
-                    <motion.div
+                    < div
                       key={balance.area}
                       initial={{ opacity: 0, scale: 0.9 }}
                       animate={{ opacity: 1, scale: 1 }}
@@ -566,7 +566,7 @@ export function CalendarScreen() {
                         style={{ backgroundColor: statusColor }}
                         title={status}
                       />
-                    </motion.div>
+                    </ div>
                   );
                 })}
               </div>

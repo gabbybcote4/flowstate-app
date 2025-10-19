@@ -32,7 +32,7 @@ export function TimeOfDayIndicator() {
       <div className="absolute inset-0 flex items-center px-4">
         <div className="flex-1 h-1 bg-gray-200 rounded-full relative">
           {/* Progress indicator */}
-          <motion.div
+          < div
             className="absolute top-0 left-0 h-full rounded-full"
             style={{
               width: `${dayProgress}%`,
@@ -44,7 +44,7 @@ export function TimeOfDayIndicator() {
           />
           
           {/* Moving sun/moon icon */}
-          <motion.div
+          < div
             className="absolute top-1/2 -translate-y-1/2 -ml-4"
             style={{ left: `${dayProgress}%` }}
             animate={{ 
@@ -59,7 +59,7 @@ export function TimeOfDayIndicator() {
             <div className="w-8 h-8 rounded-full bg-white shadow-lg flex items-center justify-center text-lg">
               {isDay ? '☀️' : '🌙'}
             </div>
-          </motion.div>
+          </ div>
         </div>
       </div>
 

@@ -61,7 +61,7 @@ export function NotificationsStep({}: OnboardingStepProps) {
 
       {/* Notification Types */}
       {config.notifications.enabled && (
-        <motion.div
+        < div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           className="space-y-2"
@@ -76,7 +76,7 @@ export function NotificationsStep({}: OnboardingStepProps) {
             const isEnabled = config.notifications[item.key as keyof typeof config.notifications];
 
             return (
-              <motion.div
+              < div
                 key={item.key}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -95,15 +95,15 @@ export function NotificationsStep({}: OnboardingStepProps) {
                   checked={isEnabled}
                   onCheckedChange={() => toggleNotification(item.key)}
                 />
-              </motion.div>
+              </ div>
             );
           })}
-        </motion.div>
+        </ div>
       )}
 
       {/* Frequency */}
       {config.notifications.enabled && (
-        <motion.div
+        < div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
@@ -129,7 +129,7 @@ export function NotificationsStep({}: OnboardingStepProps) {
               </button>
             ))}
           </div>
-        </motion.div>
+        </ div>
       )}
     </div>
   );

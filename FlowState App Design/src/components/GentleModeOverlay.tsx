@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from 'motion/react';
+//  from 'motion/react';
 import { useEmotionalState } from './EmotionalStateManager';
 import { useTheme } from './ThemeContext';
 import { Moon, Sparkles, X, Lightbulb } from 'lucide-react';
@@ -62,14 +62,14 @@ export function GentleModeOverlay() {
 
   return (
     <AnimatePresence>
-      <motion.div
+      < div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         className="fixed inset-0 z-40 pointer-events-none"
       >
         {/* Dimming overlay */}
-        <motion.div
+        < div
           initial={{ opacity: 0 }}
           animate={{ opacity: (100 - brightness) / 100 }}
           className="absolute inset-0 bg-black"
@@ -77,7 +77,7 @@ export function GentleModeOverlay() {
 
         {/* Gentle mode card */}
         <div className="absolute top-4 left-1/2 -translate-x-1/2 w-full max-w-md px-4 pointer-events-auto">
-          <motion.div
+          < div
             initial={{ y: -100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -100, opacity: 0 }}
@@ -88,13 +88,13 @@ export function GentleModeOverlay() {
             <div className="p-6 pb-4">
               <div className="flex items-start justify-between mb-3">
                 <div className="flex items-center gap-3">
-                  <motion.div
+                  < div
                     animate={{ scale: [1, 1.1, 1] }}
                     transition={{ repeat: Infinity, duration: 2 }}
                     className="w-12 h-12 rounded-2xl bg-indigo-100 flex items-center justify-center"
                   >
                     <Moon size={24} className="text-indigo-600" />
-                  </motion.div>
+                  </ div>
                   <div>
                     <h3 className="text-indigo-900 mb-1">Gentle Mode Active</h3>
                     <p className="text-xs text-indigo-600">Dimmed brightness • Simplified view</p>
@@ -127,7 +127,7 @@ export function GentleModeOverlay() {
                 </div>
                 <div className="grid grid-cols-2 gap-2">
                   {gentleActivities.slice(0, 4).map((activity, index) => (
-                    <motion.button
+                    < button
                       key={index}
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -146,13 +146,13 @@ export function GentleModeOverlay() {
                           {activity.text}
                         </span>
                       </div>
-                    </motion.button>
+                    </ button>
                   ))}
                 </div>
               </div>
 
               {/* Affirmation */}
-              <motion.div
+              < div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5 }}
@@ -164,7 +164,7 @@ export function GentleModeOverlay() {
                     {getAffirmation(currentState)}
                   </p>
                 </div>
-              </motion.div>
+              </ div>
             </div>
 
             {/* Footer */}
@@ -179,9 +179,9 @@ export function GentleModeOverlay() {
                 Exit gentle mode
               </button>
             </div>
-          </motion.div>
+          </ div>
         </div>
-      </motion.div>
+      </ div>
     </AnimatePresence>
   );
 }

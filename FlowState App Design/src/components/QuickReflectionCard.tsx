@@ -46,7 +46,7 @@ export function QuickReflectionCard() {
   const randomPrompt = prompts[Math.floor(Math.random() * prompts.length)];
 
   return (
-    <motion.div 
+    < div 
       className="bg-white rounded-3xl shadow-md p-5 mb-6"
       animate={{ 
         boxShadow: isFocused 
@@ -81,7 +81,7 @@ export function QuickReflectionCard() {
         />
         
         {reflection.trim() && (
-          <motion.button
+          < button
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             onClick={handleSubmit}
@@ -89,13 +89,13 @@ export function QuickReflectionCard() {
             style={{ backgroundColor: themeColors.primary }}
           >
             <Send size={14} />
-          </motion.button>
+          </ button>
         )}
       </div>
       
       <div className="text-xs opacity-40 mt-2 text-right">
         {reflection.length}/200
       </div>
-    </motion.div>
+    </ div>
   );
 }

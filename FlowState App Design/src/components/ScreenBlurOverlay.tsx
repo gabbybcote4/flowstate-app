@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from 'motion/react';
+//  from 'motion/react';
 import { useEffect, useState } from 'react';
 
 interface ScreenBlurOverlayProps {
@@ -21,7 +21,7 @@ export function ScreenBlurOverlay({ isTransitioning }: ScreenBlurOverlayProps) {
   return (
     <AnimatePresence>
       {show && (
-        <motion.div
+        < div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}

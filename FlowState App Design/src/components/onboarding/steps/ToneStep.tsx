@@ -62,7 +62,7 @@ export function ToneStep({ }: OnboardingStepProps) {
           const isSelected = config.tone === option.value;
 
           return (
-            <motion.button
+            < button
               key={option.value}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -134,7 +134,7 @@ export function ToneStep({ }: OnboardingStepProps) {
 
               {/* Selection Indicator */}
               {isSelected && (
-                <motion.div
+                < div
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   className="mt-4 flex items-center gap-2"
@@ -143,15 +143,15 @@ export function ToneStep({ }: OnboardingStepProps) {
                     <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#A78BFA' }} />
                   </div>
                   <span style={{ fontSize: '14px', fontWeight: '500' }}>Selected</span>
-                </motion.div>
+                </ div>
               )}
-            </motion.button>
+            </ button>
           );
         })}
       </div>
 
       {/* Helper Text */}
-      <motion.div
+      < div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.4 }}
@@ -160,7 +160,7 @@ export function ToneStep({ }: OnboardingStepProps) {
         <p className="text-sm opacity-50">
           Don't worry, you can change this anytime in Settings
         </p>
-      </motion.div>
+      </ div>
     </div>
   );
 }

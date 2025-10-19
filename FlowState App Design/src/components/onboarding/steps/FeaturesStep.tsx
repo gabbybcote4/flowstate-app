@@ -38,7 +38,7 @@ export function FeaturesStep({}: OnboardingStepProps) {
           if (features.length === 0) return null;
 
           return (
-            <motion.div
+            < div
               key={category}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -62,7 +62,7 @@ export function FeaturesStep({}: OnboardingStepProps) {
                   const isCore = feature.category === 'core';
 
                   return (
-                    <motion.div
+                    < div
                       key={feature.key}
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
@@ -114,11 +114,11 @@ export function FeaturesStep({}: OnboardingStepProps) {
                         onCheckedChange={() => toggleFeature(feature.key)}
                         disabled={isCore}
                       />
-                    </motion.div>
+                    </ div>
                   );
                 })}
               </div>
-            </motion.div>
+            </ div>
           );
         })}
       </div>

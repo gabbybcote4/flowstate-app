@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
 import { useUserConfig } from '../../config/UserConfigContext';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '../ui/button';
@@ -49,7 +48,7 @@ interface ConfigOnboardingWizardProps {
 
 export function ConfigOnboardingWizard({ onComplete }: ConfigOnboardingWizardProps) {
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
-  const [direction, setDirection] = useState(1);
+  //const [direction, setDirection] = useState(1);
   const { config, updateConfig } = useUserConfig();
 
   const currentStep = ONBOARDING_STEPS[currentStepIndex];
@@ -67,7 +66,7 @@ export function ConfigOnboardingWizard({ onComplete }: ConfigOnboardingWizardPro
       console.log('✅ Onboarding marked as complete');
       onComplete();
     } else {
-      setDirection(1);
+      //setDirection(1);
       setCurrentStepIndex(prev => prev + 1);
       updateConfig({ onboardingStep: currentStepIndex + 1 });
     }
@@ -75,37 +74,34 @@ export function ConfigOnboardingWizard({ onComplete }: ConfigOnboardingWizardPro
 
   const handleBack = () => {
     if (currentStepIndex > 0) {
-      setDirection(-1);
+      //setDirection(-1);
       setCurrentStepIndex(prev => prev - 1);
       updateConfig({ onboardingStep: currentStepIndex - 1 });
     }
   };
 
-  const slideVariants = {
-    enter: (direction: number) => ({
-      x: direction > 0 ? 300 : -300,
-      opacity: 0,
-    }),
-    center: {
-      x: 0,
-      opacity: 1,
-    },
-    exit: (direction: number) => ({
-      x: direction < 0 ? 300 : -300,
-      opacity: 0,
-    }),
-  };
+//  const slideVariants = {
+//    enter: (direction: number) => ({
+//      x: direction > 0 ? 300 : -300,
+//      opacity: 0,
+//    }),
+//    center: {
+//      x: 0,
+//      opacity: 1,
+//    },
+//    exit: (direction: number) => ({
+//      x: direction < 0 ? 300 : -300,
+//      opacity: 0,
+//    }),
+//  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-peach-50 flex flex-col">
       {/* Progress Bar */}
       <div className="w-full h-1 bg-gray-100">
-        <motion.div
+        < div
           className="h-full rounded-r-full"
           style={{ background: 'linear-gradient(90deg, #A78BFA 0%, #C084FC 100%)' }}
-          initial={{ width: 0 }}
-          animate={{ width: `${((currentStepIndex + 1) / ONBOARDING_STEPS.length) * 100}%` }}
-          transition={{ duration: 0.3 }}
         />
       </div>
 
@@ -115,9 +111,7 @@ export function ConfigOnboardingWizard({ onComplete }: ConfigOnboardingWizardPro
         <div className={`flex-1 ${showPreview ? 'lg:w-3/5' : 'w-full'} overflow-y-auto`}>
           <div className="max-w-3xl mx-auto px-6 py-8">
             {/* Step Counter */}
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
+            < div
               className="mb-6"
             >
               <p className="text-sm opacity-50">
@@ -133,21 +127,13 @@ export function ConfigOnboardingWizard({ onComplete }: ConfigOnboardingWizardPro
               >
                 {currentStep.title}
               </h2>
-            </motion.div>
+            </ div>
 
             {/* Step Component */}
-            <AnimatePresence mode="wait" custom={direction}>
-              <motion.div
+              < div
                 key={currentStepIndex}
-                custom={direction}
-                variants={slideVariants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                transition={{
-                  x: { type: 'spring', stiffness: 300, damping: 30 },
-                  opacity: { duration: 0.2 },
-                }}
+                //custom={direction}
+                //variants={slideVariants}
               >
                 <StepComponent
                   onNext={handleNext}
@@ -155,21 +141,17 @@ export function ConfigOnboardingWizard({ onComplete }: ConfigOnboardingWizardPro
                   isFirst={currentStepIndex === 0}
                   isLast={currentStepIndex === ONBOARDING_STEPS.length - 1}
                 />
-              </motion.div>
-            </AnimatePresence>
+              </ div>
           </div>
         </div>
 
         {/* Right Side - Live Preview (desktop only) */}
         {showPreview && (
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 50 }}
+          < div
             className="hidden lg:flex lg:w-2/5 border-l border-gray-200 bg-white/50 backdrop-blur-sm"
           >
             <LivePreviewPanel />
-          </motion.div>
+          </ div>
         )}
       </div>
 
@@ -190,14 +172,8 @@ export function ConfigOnboardingWizard({ onComplete }: ConfigOnboardingWizardPro
           {/* Progress Dots */}
           <div className="flex items-center gap-2">
             {ONBOARDING_STEPS.map((_, index) => (
-              <motion.div
+              < div
                 key={index}
-                initial={false}
-                animate={{
-                  scale: currentStepIndex === index ? 1.2 : 1,
-                  opacity: currentStepIndex === index ? 1 : 0.3,
-                }}
-                transition={{ duration: 0.3 }}
                 className="rounded-full"
                 style={{
                   width: currentStepIndex === index ? '32px' : '8px',

@@ -6,7 +6,7 @@ export function WelcomeStep({ onNext }: OnboardingStepProps) {
   return (
     <div className="space-y-8">
       {/* Hero Section */}
-      <motion.div
+      < div
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.5 }}
@@ -43,10 +43,10 @@ export function WelcomeStep({ onNext }: OnboardingStepProps) {
         >
           In the next few steps, we'll customize FlowState to match your needs, energy patterns, and preferences. Your choices will shape your entire experience.
         </p>
-      </motion.div>
+      </ div>
 
       {/* Feature Highlights */}
-      <motion.div
+      < div
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.2, duration: 0.5 }}
@@ -99,10 +99,10 @@ export function WelcomeStep({ onNext }: OnboardingStepProps) {
             Everything stays on your device unless you choose to sync
           </p>
         </div>
-      </motion.div>
+      </ div>
 
       {/* What We'll Cover */}
-      <motion.div
+      < div
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.4, duration: 0.5 }}
@@ -126,7 +126,7 @@ export function WelcomeStep({ onNext }: OnboardingStepProps) {
             'Notification settings',
             'App integrations',
           ].map((item, index) => (
-            <motion.div
+            < div
               key={index}
               initial={{ x: -20, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
@@ -138,13 +138,13 @@ export function WelcomeStep({ onNext }: OnboardingStepProps) {
                 style={{ backgroundColor: '#A78BFA' }}
               />
               <span className="opacity-70">{item}</span>
-            </motion.div>
+            </ div>
           ))}
         </div>
-      </motion.div>
+      </ div>
 
       {/* Privacy Note */}
-      <motion.div
+      < div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.8 }}
@@ -153,7 +153,7 @@ export function WelcomeStep({ onNext }: OnboardingStepProps) {
         <p className="text-sm opacity-50">
           💜 This should take about 3-5 minutes. You can change any of these settings later in your preferences.
         </p>
-      </motion.div>
+      </ div>
     </div>
   );
 }

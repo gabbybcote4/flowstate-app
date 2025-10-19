@@ -41,7 +41,7 @@ export function IntegrationsStep({}: OnboardingStepProps) {
           const isEnabled = integration.enabled;
 
           return (
-            <motion.button
+            < button
               key={integration.id}
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -99,7 +99,7 @@ export function IntegrationsStep({}: OnboardingStepProps) {
                   </div>
                 </div>
               </div>
-            </motion.button>
+            </ button>
           );
         })}
       </div>

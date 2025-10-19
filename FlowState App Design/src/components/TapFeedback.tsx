@@ -22,7 +22,7 @@ export function TapFeedback({
   }
 
   return (
-    <motion.div
+    < div
       whileTap={{ scale }}
       transition={{
         type: 'spring',
@@ -33,6 +33,6 @@ export function TapFeedback({
       onClick={onClick}
     >
       {children}
-    </motion.div>
+    </ div>
   );
 }

@@ -19,7 +19,7 @@ interface SkeletonProps {
 
 export function Skeleton({ className = '', animate = true }: SkeletonProps) {
   return (
-    <motion.div
+    < div
       className={`bg-gray-200 rounded ${className}`}
       animate={animate ? {
         opacity: [0.5, 0.8, 0.5],

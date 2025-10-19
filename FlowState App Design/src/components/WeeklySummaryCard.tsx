@@ -168,7 +168,7 @@ export function WeeklySummaryCard({ onViewDetails }: WeeklySummaryCardProps) {
   };
 
   return (
-    <motion.div 
+    < div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       className="bg-white rounded-3xl shadow-sm p-5 border border-gray-100 hover:shadow-md transition-shadow duration-200"
@@ -237,6 +237,6 @@ export function WeeklySummaryCard({ onViewDetails }: WeeklySummaryCardProps) {
           <ChevronRight size={14} />
         </button>
       )}
-    </motion.div>
+    </ div>
   );
 }

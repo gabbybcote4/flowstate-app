@@ -23,7 +23,7 @@ export function LifeAreasStep({}: OnboardingStepProps) {
 
       <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
         {config.lifeAreas.map((area, index) => (
-          <motion.button
+          < button
             key={area.id}
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -43,16 +43,16 @@ export function LifeAreasStep({}: OnboardingStepProps) {
             <div className="text-3xl mb-2">{area.icon}</div>
             <div style={{ fontSize: '14px', fontWeight: '500' }}>{area.label}</div>
             {area.enabled && (
-              <motion.div
+              < div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 className="mt-2 mx-auto w-5 h-5 rounded-full flex items-center justify-center"
                 style={{ backgroundColor: area.color }}
               >
                 <Check size={14} className="text-white" />
-              </motion.div>
+              </ div>
             )}
-          </motion.button>
+          </ button>
         ))}
       </div>
 

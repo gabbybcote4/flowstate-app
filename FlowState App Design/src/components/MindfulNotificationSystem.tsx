@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from '../lib/motion-shim';
+//  from '../lib/motion-shim';
 import { useEmotionalState } from './EmotionalStateManager';
 import { useTheme } from './ThemeContext';
 import { 
@@ -10,9 +10,9 @@ import {
   Wind, 
   Timer, 
   Target, 
-  CheckCircle,
+ // CheckCircle,
   MessageCircle,
-  Lightbulb,
+ // Lightbulb,
   X
 } from 'lucide-react';
 
@@ -268,7 +268,6 @@ export function MindfulNotificationDisplay() {
 
   return (
     <div className="fixed top-4 right-4 z-50 space-y-3 max-w-sm pointer-events-none">
-      <AnimatePresence>
         {notifications.map((notification) => (
           <MindfulNotificationCard
             key={notification.id}
@@ -277,7 +276,6 @@ export function MindfulNotificationDisplay() {
             themeColors={themeColors}
           />
         ))}
-      </AnimatePresence>
     </div>
   );
 }
@@ -313,53 +311,42 @@ function MindfulNotificationCard({ notification, onDismiss, themeColors }: Notif
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, x: 100, scale: 0.95 }}
-      animate={{ opacity: 1, x: 0, scale: 1 }}
-      exit={{ opacity: 0, x: 100, scale: 0.95 }}
-      transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+    < div
+
       className={`${getBackgroundStyle(notification.type)} rounded-2xl shadow-lg border-2 overflow-hidden pointer-events-auto`}
     >
       <div className="p-4">
         <div className="flex items-start gap-3">
           {/* Icon */}
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.1, type: 'spring', stiffness: 200 }}
+          < div
+
             className="flex-shrink-0 w-10 h-10 rounded-xl bg-white/80 flex items-center justify-center"
             style={{ color: themeColors.primary }}
           >
             {notification.icon}
-          </motion.div>
+          </ div>
 
           {/* Content */}
           <div className="flex-1 min-w-0">
-            <motion.p
-              initial={{ opacity: 0, y: 5 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.15 }}
+            <p
+
               className="text-sm text-gray-800 mb-1"
             >
               {notification.message}
-            </motion.p>
+            </p>
             {notification.subtext && (
-              <motion.p
-                initial={{ opacity: 0, y: 5 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
+              <p
+
                 className="text-xs text-gray-600 leading-relaxed"
               >
                 {notification.subtext}
-              </motion.p>
+              </p>
             )}
 
             {/* Action button */}
             {notification.action && (
-              <motion.button
-                initial={{ opacity: 0, y: 5 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.25 }}
+              < button
+
                 onClick={notification.action.handler}
                 className="mt-3 px-4 py-1.5 rounded-lg text-xs transition-colors"
                 style={{
@@ -368,7 +355,7 @@ function MindfulNotificationCard({ notification, onDismiss, themeColors }: Notif
                 }}
               >
                 {notification.action.label}
-              </motion.button>
+              </ button>
             )}
           </div>
 
@@ -383,14 +370,12 @@ function MindfulNotificationCard({ notification, onDismiss, themeColors }: Notif
       </div>
 
       {/* Progress bar */}
-      <motion.div
-        initial={{ scaleX: 1 }}
-        animate={{ scaleX: 0 }}
-        transition={{ duration: notification.duration ? notification.duration / 1000 : 8, ease: 'linear' }}
+      < div
+
         className="h-1 bg-white/40"
         style={{ transformOrigin: 'left' }}
       />
-    </motion.div>
+    </ div>
   );
 }
 
@@ -400,7 +385,7 @@ export function generateMindfulSuggestion(context: {
   energyLevel: 'low' | 'moderate' | 'high';
   emotionalState: string;
 }): string {
-  const { timeOfDay, energyLevel, emotionalState } = context;
+  const { timeOfDay, energyLevel,  } = context;
 
   const suggestions = {
     morning: {

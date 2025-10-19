@@ -44,17 +44,17 @@ export function StaggeredList({
   };
 
   return (
-    <motion.div
+    < div
       variants={containerVariants}
       initial="hidden"
       animate="visible"
       className={className}
     >
       {children.map((child, index) => (
-        <motion.div key={index} variants={itemVariants}>
+        < div key={index} variants={itemVariants}>
           {child}
-        </motion.div>
+        </ div>
       ))}
-    </motion.div>
+    </ div>
   );
 }

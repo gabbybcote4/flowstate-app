@@ -13,7 +13,7 @@ export function WelcomeScreen({ userName = 'Friend', onStartCheckIn }: WelcomeSc
       {/* Animated Wave Background */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Wave 1 - Bottom */}
-        <motion.div
+        < div
           className="absolute bottom-0 left-0 right-0"
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 0.15 }}
@@ -25,7 +25,7 @@ export function WelcomeScreen({ userName = 'Friend', onStartCheckIn }: WelcomeSc
             preserveAspectRatio="none"
             style={{ height: '320px' }}
           >
-            <motion.path
+            <path
               fill="#A78BFA"
               fillOpacity="1"
               d="M0,160L48,170.7C96,181,192,203,288,197.3C384,192,480,160,576,154.7C672,149,768,171,864,181.3C960,192,1056,192,1152,170.7C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
@@ -43,10 +43,10 @@ export function WelcomeScreen({ userName = 'Friend', onStartCheckIn }: WelcomeSc
               }}
             />
           </svg>
-        </motion.div>
+        </ div>
 
         {/* Wave 2 - Mid */}
-        <motion.div
+        < div
           className="absolute bottom-0 left-0 right-0"
           initial={{ y: 120, opacity: 0 }}
           animate={{ y: 0, opacity: 0.1 }}
@@ -58,7 +58,7 @@ export function WelcomeScreen({ userName = 'Friend', onStartCheckIn }: WelcomeSc
             preserveAspectRatio="none"
             style={{ height: '280px' }}
           >
-            <motion.path
+            <path
               fill="#C084FC"
               fillOpacity="1"
               d="M0,224L48,213.3C96,203,192,181,288,186.7C384,192,480,224,576,229.3C672,235,768,213,864,202.7C960,192,1056,192,1152,213.3C1248,235,1344,277,1392,298.7L1440,320L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
@@ -77,10 +77,10 @@ export function WelcomeScreen({ userName = 'Friend', onStartCheckIn }: WelcomeSc
               }}
             />
           </svg>
-        </motion.div>
+        </ div>
 
         {/* Wave 3 - Top accent */}
-        <motion.div
+        < div
           className="absolute bottom-0 left-0 right-0"
           initial={{ y: 140, opacity: 0 }}
           animate={{ y: 0, opacity: 0.08 }}
@@ -92,7 +92,7 @@ export function WelcomeScreen({ userName = 'Friend', onStartCheckIn }: WelcomeSc
             preserveAspectRatio="none"
             style={{ height: '240px' }}
           >
-            <motion.path
+            <path
               fill="#E9D5FF"
               fillOpacity="1"
               d="M0,288L48,277.3C96,267,192,245,288,250.7C384,256,480,288,576,293.3C672,299,768,277,864,266.7C960,256,1056,256,1152,277.3C1248,299,1344,341,1392,362.7L1440,384L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
@@ -111,14 +111,14 @@ export function WelcomeScreen({ userName = 'Friend', onStartCheckIn }: WelcomeSc
               }}
             />
           </svg>
-        </motion.div>
+        </ div>
       </div>
 
       {/* Main Content */}
       <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-6 py-12">
         <div className="max-w-md w-full text-center">
           {/* Sparkle Icon */}
-          <motion.div
+          < div
             initial={{ scale: 0, rotate: -180, opacity: 0 }}
             animate={{ scale: 1, rotate: 0, opacity: 1 }}
             transition={{ 
@@ -138,10 +138,10 @@ export function WelcomeScreen({ userName = 'Friend', onStartCheckIn }: WelcomeSc
             >
               <Sparkles className="text-white" size={40} />
             </div>
-          </motion.div>
+          </ div>
 
           {/* Greeting */}
-          <motion.div
+          < div
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.7 }}
@@ -167,10 +167,10 @@ export function WelcomeScreen({ userName = 'Friend', onStartCheckIn }: WelcomeSc
             >
               You're in Flow.
             </p>
-          </motion.div>
+          </ div>
 
           {/* Main Message */}
-          <motion.p
+          <p
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.9 }}
@@ -181,10 +181,10 @@ export function WelcomeScreen({ userName = 'Friend', onStartCheckIn }: WelcomeSc
             }}
           >
             Let's begin by understanding how you're feeling today. This helps us adapt everything to your energy.
-          </motion.p>
+          </p>
 
           {/* CTA Button */}
-          <motion.div
+          < div
             initial={{ y: 20, opacity: 0, scale: 0.95 }}
             animate={{ y: 0, opacity: 1, scale: 1 }}
             transition={{ 
@@ -208,10 +208,10 @@ export function WelcomeScreen({ userName = 'Friend', onStartCheckIn }: WelcomeSc
               Let's Start Your First Check-In
               <Sparkles size={20} />
             </button>
-          </motion.div>
+          </ div>
 
           {/* Privacy Note */}
-          <motion.div
+          < div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 1.3 }}
@@ -238,10 +238,10 @@ export function WelcomeScreen({ userName = 'Friend', onStartCheckIn }: WelcomeSc
                 <span style={{ color: '#6B21A8', fontWeight: '500' }}>Your privacy matters:</span> Data is stored locally on your device and syncs only when you choose to. You're always in control.
               </p>
             </div>
-          </motion.div>
+          </ div>
 
           {/* Floating particles decoration */}
-          <motion.div
+          < div
             className="absolute top-1/4 left-1/4"
             animate={{
               y: [0, -20, 0],
@@ -257,9 +257,9 @@ export function WelcomeScreen({ userName = 'Friend', onStartCheckIn }: WelcomeSc
               className="w-2 h-2 rounded-full"
               style={{ background: '#A78BFA' }}
             />
-          </motion.div>
+          </ div>
 
-          <motion.div
+          < div
             className="absolute top-1/3 right-1/4"
             animate={{
               y: [0, 20, 0],
@@ -276,9 +276,9 @@ export function WelcomeScreen({ userName = 'Friend', onStartCheckIn }: WelcomeSc
               className="w-3 h-3 rounded-full"
               style={{ background: '#C084FC' }}
             />
-          </motion.div>
+          </ div>
 
-          <motion.div
+          < div
             className="absolute bottom-1/3 left-1/3"
             animate={{
               y: [0, -15, 0],
@@ -295,7 +295,7 @@ export function WelcomeScreen({ userName = 'Friend', onStartCheckIn }: WelcomeSc
               className="w-2 h-2 rounded-full"
               style={{ background: '#E9D5FF' }}
             />
-          </motion.div>
+          </ div>
         </div>
       </div>
     </div>

@@ -58,7 +58,7 @@ export function StackConnector({
     return (
       <div className={`flex items-center gap-2 ${className}`}>
         {/* Left line */}
-        <motion.div
+        < div
           initial={animated ? { scaleX: 0 } : undefined}
           animate={{ scaleX: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
@@ -67,7 +67,7 @@ export function StackConnector({
         />
         
         {/* Icon/Label */}
-        <motion.div
+        < div
           initial={animated ? { scale: 0, rotate: -180 } : undefined}
           animate={{ scale: 1, rotate: 0 }}
           transition={{ 
@@ -89,10 +89,10 @@ export function StackConnector({
           ) : (
             getIcon()
           )}
-        </motion.div>
+        </ div>
         
         {/* Right line */}
-        <motion.div
+        < div
           initial={animated ? { scaleX: 0 } : undefined}
           animate={{ scaleX: 1 }}
           transition={{ duration: 0.5, delay: 0.4 }}
@@ -107,7 +107,7 @@ export function StackConnector({
   return (
     <div className={`flex flex-col items-center gap-2 ${className}`}>
       {/* Top line */}
-      <motion.div
+      < div
         initial={animated ? { scaleY: 0 } : undefined}
         animate={{ scaleY: 1 }}
         transition={{ duration: 0.5, delay: 0.2 }}
@@ -116,7 +116,7 @@ export function StackConnector({
       />
       
       {/* Icon/Label */}
-      <motion.div
+      < div
         initial={animated ? { scale: 0, rotate: -180 } : undefined}
         animate={{ scale: 1, rotate: 0 }}
         transition={{ 
@@ -138,10 +138,10 @@ export function StackConnector({
         ) : (
           getIcon()
         )}
-      </motion.div>
+      </ div>
       
       {/* Bottom line */}
-      <motion.div
+      < div
         initial={animated ? { scaleY: 0 } : undefined}
         animate={{ scaleY: 1 }}
         transition={{ duration: 0.5, delay: 0.4 }}
@@ -170,7 +170,7 @@ export function StackConnectorDotted({
     return (
       <div className={`flex items-center gap-1 py-2 ${className}`}>
         {[...Array(8)].map((_, i) => (
-          <motion.div
+          < div
             key={i}
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
@@ -186,7 +186,7 @@ export function StackConnectorDotted({
   return (
     <div className={`flex flex-col items-center gap-1 px-2 ${className}`}>
       {[...Array(8)].map((_, i) => (
-        <motion.div
+        < div
           key={i}
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
@@ -223,7 +223,7 @@ export function StackConnectorFlow({
         
         {/* Flowing particles */}
         {[0, 1, 2].map((i) => (
-          <motion.div
+          < div
             key={i}
             className="absolute w-2 h-2 rounded-full"
             style={{ backgroundColor: color }}
@@ -253,7 +253,7 @@ export function StackConnectorFlow({
       
       {/* Flowing particles */}
       {[0, 1, 2].map((i) => (
-        <motion.div
+        < div
           key={i}
           className="absolute w-2 h-2 rounded-full"
           style={{ backgroundColor: color }}
@@ -298,7 +298,7 @@ export function HabitStackVisualizer({
       {habits.map((habit, index) => (
         <React.Fragment key={habit.id}>
           {/* Habit card */}
-          <motion.div
+          < div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: index * 0.1 }}
@@ -322,7 +322,7 @@ export function HabitStackVisualizer({
                 </svg>
               </div>
             )}
-          </motion.div>
+          </ div>
           
           {/* Connector (except after last habit) */}
           {index < habits.length - 1 && (

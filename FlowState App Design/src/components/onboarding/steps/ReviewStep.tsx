@@ -21,7 +21,7 @@ export function ReviewStep({ onNext, onBack }: OnboardingStepProps) {
   return (
     <div className="space-y-8">
       {/* Hero */}
-      <motion.div
+      < div
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         className="text-center"
@@ -48,10 +48,10 @@ export function ReviewStep({ onNext, onBack }: OnboardingStepProps) {
         <p className="opacity-70">
           Here's what we've built for you
         </p>
-      </motion.div>
+      </ div>
 
       {/* Phone Mock Preview */}
-      <motion.div
+      < div
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.2 }}
@@ -89,10 +89,10 @@ export function ReviewStep({ onNext, onBack }: OnboardingStepProps) {
             </div>
           </div>
         </div>
-      </motion.div>
+      </ div>
 
       {/* Summary Grid */}
-      <motion.div
+      < div
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.4 }}
@@ -190,10 +190,10 @@ export function ReviewStep({ onNext, onBack }: OnboardingStepProps) {
             {config.notifications.enabled ? config.notifications.frequency : 'Disabled'}
           </p>
         </div>
-      </motion.div>
+      </ div>
 
       {/* Edit Button */}
-      <motion.div
+      < div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.6 }}
@@ -210,7 +210,7 @@ export function ReviewStep({ onNext, onBack }: OnboardingStepProps) {
         <p className="text-sm opacity-50 mt-4">
           You can customize everything later in Settings
         </p>
-      </motion.div>
+      </ div>
     </div>
   );
 }

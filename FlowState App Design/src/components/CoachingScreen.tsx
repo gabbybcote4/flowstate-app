@@ -505,7 +505,7 @@ export function CoachingScreen({ onNavigate }: CoachingScreenProps) {
       >
         {/* Floating Timer */}
         {activeTimer && timerSeconds > 0 && (
-          <motion.div
+          < div
             initial={{ y: -100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50"
@@ -523,7 +523,7 @@ export function CoachingScreen({ onNavigate }: CoachingScreenProps) {
                 Stop
               </button>
             </div>
-          </motion.div>
+          </ div>
         )}
 
         <div className="p-6 md:p-8 pt-12 md:pt-16">
@@ -541,7 +541,7 @@ export function CoachingScreen({ onNavigate }: CoachingScreenProps) {
               </p>
               
               {/* Chat with Coach Button */}
-              <motion.button
+              < button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => onNavigate('coach-chat')}
@@ -550,7 +550,7 @@ export function CoachingScreen({ onNavigate }: CoachingScreenProps) {
               >
                 <MessageCircle size={18} />
                 <span>Chat with Your Coach</span>
-              </motion.button>
+              </ button>
             </div>
 
           {/* Progress Dots */}
@@ -569,7 +569,7 @@ export function CoachingScreen({ onNavigate }: CoachingScreenProps) {
 
           {/* Step 1: Mood */}
           {step === 1 && (
-            <motion.div
+            < div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               className="bg-white rounded-3xl shadow-lg p-8"
@@ -602,12 +602,12 @@ export function CoachingScreen({ onNavigate }: CoachingScreenProps) {
                 Continue
                 <ArrowRight size={20} />
               </button>
-            </motion.div>
+            </ div>
           )}
 
           {/* Step 2: Energy */}
           {step === 2 && (
-            <motion.div
+            < div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               className="bg-white rounded-3xl shadow-lg p-8"
@@ -640,12 +640,12 @@ export function CoachingScreen({ onNavigate }: CoachingScreenProps) {
                 Continue
                 <ArrowRight size={20} />
               </button>
-            </motion.div>
+            </ div>
           )}
 
           {/* Step 3: Focus */}
           {step === 3 && (
-            <motion.div
+            < div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               className="bg-white rounded-3xl shadow-lg p-8"
@@ -678,12 +678,12 @@ export function CoachingScreen({ onNavigate }: CoachingScreenProps) {
                 Get My Coaching
                 <Sparkles size={20} />
               </button>
-            </motion.div>
+            </ div>
           )}
 
           {/* Step 4: Reflection & Suggestions */}
           {step === 4 && (
-            <motion.div
+            < div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               className="space-y-6"
@@ -743,7 +743,7 @@ export function CoachingScreen({ onNavigate }: CoachingScreenProps) {
                               </button>
                             </div>
                           ) : (
-                            <motion.button
+                            < button
                               whileHover={{ scale: 1.02 }}
                               whileTap={{ scale: 0.98 }}
                               onClick={() => handleSuggestionAction('smallWin', suggestions.smallWin)}
@@ -751,7 +751,7 @@ export function CoachingScreen({ onNavigate }: CoachingScreenProps) {
                               style={{ backgroundColor: themeColors.primary }}
                             >
                               {suggestions.smallWin.actionLabel}
-                            </motion.button>
+                            </ button>
                           )
                         )}
                       </div>
@@ -766,7 +766,7 @@ export function CoachingScreen({ onNavigate }: CoachingScreenProps) {
                         <div className="text-sm opacity-60 mb-1">Task Focus</div>
                         <p className="text-gray-700 mb-3">{suggestions.taskFocus.text}</p>
                         {suggestions.taskFocus.action && (
-                          <motion.button
+                          < button
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
                             onClick={() => handleSuggestionAction('taskFocus', suggestions.taskFocus)}
@@ -774,7 +774,7 @@ export function CoachingScreen({ onNavigate }: CoachingScreenProps) {
                             style={{ backgroundColor: themeColors.primary }}
                           >
                             {suggestions.taskFocus.actionLabel}
-                          </motion.button>
+                          </ button>
                         )}
                       </div>
                     </div>
@@ -791,7 +791,7 @@ export function CoachingScreen({ onNavigate }: CoachingScreenProps) {
                   Check in again
                 </button>
               )}
-            </motion.div>
+            </ div>
           )}
         </div>
       </div>

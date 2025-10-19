@@ -1,23 +1,22 @@
 import { useState, useEffect } from 'react';
 import { useTheme } from './ThemeContext';
-import { motion, AnimatePresence } from '../lib/motion-shim';
 import {
   Brain,
   TrendingUp,
   Moon,
   Zap,
   CheckCircle2,
-  Calendar,
+  //Calendar,
   ChevronRight,
   Sparkles,
   Sun,
-  Cloud,
+  //Cloud,
   Star,
   RefreshCw,
 } from 'lucide-react';
 import {
-  RadialBarChart,
-  RadialBar,
+  //RadialBarChart,
+  //RadialBar,
   AreaChart,
   Area,
   BarChart,
@@ -57,14 +56,14 @@ export function AIInsightsEngine() {
   const [chartData, setChartData] = useState<ChartData | null>(null);
   const [selectedInsight, setSelectedInsight] = useState<Insight | null>(null);
   const [isExpanded, setIsExpanded] = useState(false);
-  const [isRefreshing, setIsRefreshing] = useState(false);
+  //const [isRefreshing, setIsRefreshing] = useState(false);
 
   useEffect(() => {
     analyzeData();
   }, []);
 
   const analyzeData = () => {
-    setIsRefreshing(true);
+    //setIsRefreshing(true);
     
     // Add a small delay for the animation to be visible
     setTimeout(() => {
@@ -72,7 +71,7 @@ export function AIInsightsEngine() {
         // Load all data sources and ensure they're arrays
         let checkInData = JSON.parse(localStorage.getItem('flowstate-coaching-data') || '[]');
         let habits = JSON.parse(localStorage.getItem('flowstate-habits') || '[]');
-        const reflections = JSON.parse(localStorage.getItem('flowstate-reflections') || '{}');
+        //const reflections = JSON.parse(localStorage.getItem('flowstate-reflections') || '{}');
 
         // Ensure checkInData is an array
         if (!Array.isArray(checkInData)) {
@@ -85,11 +84,11 @@ export function AIInsightsEngine() {
         }
 
         // Generate insights
-        const generatedInsights = generateInsights(checkInData, habits, reflections);
+        const generatedInsights = generateInsights(checkInData, habits, );
         setInsights(generatedInsights);
 
         // Generate chart data
-        const charts = generateChartData(checkInData, habits, reflections);
+        const charts = generateChartData(checkInData, habits, );
         setChartData(charts);
       } catch (error) {
         console.error('Error analyzing data:', error);
@@ -97,13 +96,13 @@ export function AIInsightsEngine() {
         setChartData(null);
       }
       
-      setIsRefreshing(false);
+      //setIsRefreshing(false);
     }, 300);
   };
 
-  const generateInsights = (checkIns: any[], habits: any[], reflections: any): Insight[] => {
+  const generateInsights = (checkIns: any[], habits: any[], ): Insight[] => {
     const insights: Insight[] = [];
-    const today = new Date();
+    //const today = new Date();
 
     // Ensure we have valid arrays
     if (!Array.isArray(checkIns) || !Array.isArray(habits)) {
@@ -332,7 +331,7 @@ export function AIInsightsEngine() {
     return insights.sort((a, b) => b.confidence - a.confidence).slice(0, 4);
   };
 
-  const generateChartData = (checkIns: any[], habits: any[], reflections: any): ChartData => {
+  const generateChartData = (checkIns: any[], habits: any[], ): ChartData => {
     // Ensure we have valid arrays
     const safeCheckIns = Array.isArray(checkIns) ? checkIns : [];
     const safeHabits = Array.isArray(habits) ? habits : [];
@@ -475,9 +474,7 @@ export function AIInsightsEngine() {
   // Show a gentle placeholder if not enough data yet
   if (!chartData || insights.length === 0) {
     return (
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
+      < div
         className="bg-white rounded-3xl shadow-lg p-8 text-center"
       >
         <div 
@@ -490,16 +487,14 @@ export function AIInsightsEngine() {
         <p className="text-sm opacity-50 max-w-md mx-auto">
           Keep checking in and completing habits. We'll start discovering patterns in your data soon! 
         </p>
-      </motion.div>
+      </ div>
     );
   }
 
   return (
     <div className="space-y-4">
       {/* Main Insights Card */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
+      < div
         className="bg-white rounded-3xl shadow-lg overflow-hidden"
       >
         {/* Header */}
@@ -522,33 +517,28 @@ export function AIInsightsEngine() {
                 <p className="text-sm opacity-60">Patterns discovered from your data</p>
               </div>
             </div>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+            < button
+              //whileHover={{ scale: 1.05 }}
+              //whileTap={{ scale: 0.95 }}
               onClick={analyzeData}
               className="w-10 h-10 rounded-xl flex items-center justify-center transition-colors hover:bg-white/50"
               title="Refresh insights"
             >
-              <motion.div
-                animate={{ rotate: isRefreshing ? 360 : 0 }}
-                transition={{ duration: 0.5, ease: 'easeInOut' }}
+              < div
               >
                 <RefreshCw size={18} className="opacity-60" />
-              </motion.div>
-            </motion.button>
+              </ div>
+            </ button>
           </div>
         </div>
 
         {/* Key Insights */}
         <div className="p-6 pt-4 space-y-3">
-          {insights.map((insight, index) => {
+          {insights.map((insight, ) => {
             const Icon = getInsightIcon(insight.icon);
             return (
-              <motion.div
+              < div
                 key={insight.id}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.1 }}
                 onClick={() => setSelectedInsight(insight)}
                 className="p-4 rounded-2xl cursor-pointer transition-all hover:shadow-md"
                 style={{ 
@@ -582,7 +572,7 @@ export function AIInsightsEngine() {
                   </div>
                   <ChevronRight size={18} className="opacity-40 flex-shrink-0" />
                 </div>
-              </motion.div>
+              </ div>
             );
           })}
         </div>
@@ -597,21 +587,15 @@ export function AIInsightsEngine() {
             <span className="text-sm">{isExpanded ? 'Hide' : 'View'} Detailed Analytics</span>
           </button>
         </div>
-      </motion.div>
+      </ div>
 
       {/* Expanded Charts */}
-      <AnimatePresence>
         {isExpanded && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
+          < div
             className="space-y-4 overflow-hidden"
           >
             {/* Energy & Mood Trends */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+            < div
               className="bg-white rounded-3xl shadow-lg p-6"
             >
               <div className="flex items-center justify-between mb-4">
@@ -671,14 +655,11 @@ export function AIInsightsEngine() {
                   />
                 </AreaChart>
               </ResponsiveContainer>
-            </motion.div>
+            </ div>
 
             {/* Sleep Correlation */}
             {chartData.sleepCorrelation.length > 0 && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 }}
+              < div
                 className="bg-white rounded-3xl shadow-lg p-6"
               >
                 <div className="flex items-center gap-2 mb-4">
@@ -712,14 +693,11 @@ export function AIInsightsEngine() {
                     />
                   </BarChart>
                 </ResponsiveContainer>
-              </motion.div>
+              </ div>
             )}
 
             {/* Productivity Peaks - Radial Chart */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
+            < div
               className="bg-white rounded-3xl shadow-lg p-6"
             >
               <div className="flex items-center gap-2 mb-4">
@@ -761,10 +739,9 @@ export function AIInsightsEngine() {
                   />
                 </RadarChart>
               </ResponsiveContainer>
-            </motion.div>
-          </motion.div>
+            </ div>
+          </ div>
         )}
-      </AnimatePresence>
     </div>
   );
 }

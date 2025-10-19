@@ -82,7 +82,7 @@ export function CorrelationCard({
   const strengthPercentage = Math.round(strength);
 
   return (
-    <motion.div
+    < div
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       whileHover={onClick ? { scale: 1.02 } : undefined}
@@ -124,7 +124,7 @@ export function CorrelationCard({
       {/* Strength Bar */}
       <div className="mb-3">
         <div className="h-2 bg-white/60 rounded-full overflow-hidden">
-          <motion.div
+          < div
             initial={{ width: 0 }}
             animate={{ width: `${strengthPercentage}%` }}
             transition={{ duration: 1, delay: 0.2, ease: 'easeOut' }}
@@ -166,7 +166,7 @@ export function CorrelationCard({
           </span>
         </div>
       )}
-    </motion.div>
+    </ div>
   );
 }
 
@@ -250,7 +250,7 @@ export function CorrelationInsightsList({
   return (
     <div className={`space-y-3 ${className}`}>
       {insights.map((insight, index) => (
-        <motion.div
+        < div
           key={insight.id}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -260,7 +260,7 @@ export function CorrelationInsightsList({
             {...insight}
             onClick={onInsightClick ? () => onInsightClick(insight.id) : undefined}
           />
-        </motion.div>
+        </ div>
       ))}
     </div>
   );

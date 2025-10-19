@@ -356,12 +356,12 @@ export function WeeklyInsightsDashboard({ onNavigate }: WeeklyInsightsDashboardP
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: themeColors.background }}>
-        <motion.div
+        < div
           animate={{ rotate: 360 }}
           transition={{ repeat: Infinity, duration: 1, ease: 'linear' }}
         >
           <RefreshCw size={32} style={{ color: themeColors.primary }} />
-        </motion.div>
+        </ div>
       </div>
     );
   }
@@ -369,7 +369,7 @@ export function WeeklyInsightsDashboard({ onNavigate }: WeeklyInsightsDashboardP
   return (
     <div className="min-h-screen pb-24" style={{ backgroundColor: themeColors.background }}>
       {/* Header */}
-      <motion.div
+      < div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         className="bg-white border-b border-gray-100 px-6 py-4 sticky top-0 z-10"
@@ -399,12 +399,12 @@ export function WeeklyInsightsDashboard({ onNavigate }: WeeklyInsightsDashboardP
             <RefreshCw size={18} className="text-gray-600" />
           </button>
         </div>
-      </motion.div>
+      </ div>
 
       <div className="px-6 py-6 space-y-6 max-w-6xl mx-auto">
         {/* Insight of the Week */}
         {insight && (
-          <motion.div
+          < div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="bg-gradient-to-br from-lavender-50 to-purple-50 rounded-3xl p-6 border-2"
@@ -426,11 +426,11 @@ export function WeeklyInsightsDashboard({ onNavigate }: WeeklyInsightsDashboardP
                 <p className="text-gray-700 leading-relaxed">{insight.message}</p>
               </div>
             </div>
-          </motion.div>
+          </ div>
         )}
 
         {/* Mood vs Sleep Chart */}
-        <motion.div
+        < div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
@@ -494,10 +494,10 @@ export function WeeklyInsightsDashboard({ onNavigate }: WeeklyInsightsDashboardP
               </p>
             </div>
           </div>
-        </motion.div>
+        </ div>
 
         {/* Life Area Distribution */}
-        <motion.div
+        < div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
@@ -537,7 +537,7 @@ export function WeeklyInsightsDashboard({ onNavigate }: WeeklyInsightsDashboardP
               {lifeAreaData.map((area, index) => {
                 const AreaIcon = LIFE_AREAS.find(a => a.name === area.area)?.icon || Calendar;
                 return (
-                  <motion.div
+                  < div
                     key={area.area}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -559,7 +559,7 @@ export function WeeklyInsightsDashboard({ onNavigate }: WeeklyInsightsDashboardP
                     <div className="text-right">
                       <p className="text-sm opacity-70">{area.percentage}%</p>
                     </div>
-                  </motion.div>
+                  </ div>
                 );
               })}
             </div>
@@ -573,7 +573,7 @@ export function WeeklyInsightsDashboard({ onNavigate }: WeeklyInsightsDashboardP
               </p>
             </div>
           </div>
-        </motion.div>
+        </ div>
       </div>
     </div>
   );

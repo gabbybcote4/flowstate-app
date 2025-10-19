@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, createContext, useContext } from 'react';
-import { motion, AnimatePresence } from '../lib/motion-shim';
-import { useEmotionalState } from './EmotionalStateManager';
+//  from '../lib/motion-shim';
+//import { useEmotionalState } from './EmotionalStateManager';
 import { useTheme } from './ThemeContext';
 import {
   Sparkles,
@@ -9,14 +9,14 @@ import {
   Brain,
   Bell,
   Plus,
-  Clock,
+ // Clock,
   MessageCircleHeart,
   Target,
   X,
-  Check,
-  TrendingUp,
-  Coffee,
-  Moon,
+  //Check,
+ // TrendingUp,
+ // Coffee,
+//  Moon,
 } from 'lucide-react';
 
 /**
@@ -78,7 +78,7 @@ export function useNotifications() {
 // Notification Provider
 export function NotificationProvider({ children }: { children: React.ReactNode }) {
   const [notifications, setNotifications] = useState<EnhancedNotification[]>([]);
-  const [snoozedNotifications, setSnoozedNotifications] = useState<Map<string, number>>(new Map());
+ // const [snoozedNotifications, setSnoozedNotifications] = useState<Map<string, number>>(new Map());
   const timeoutRefs = useRef<Map<string, NodeJS.Timeout>>(new Map());
 
   const showNotification = (notification: Omit<EnhancedNotification, 'id' | 'timestamp'>) => {
@@ -115,7 +115,7 @@ export function NotificationProvider({ children }: { children: React.ReactNode }
     if (!notification) return;
 
     dismissNotification(id);
-    setSnoozedNotifications(prev => new Map(prev).set(notification.type, Date.now() + duration));
+   // setSnoozedNotifications(prev => new Map(prev).set(notification.type, Date.now() + duration));
 
     // Re-show after snooze duration
     setTimeout(() => {
@@ -126,11 +126,11 @@ export function NotificationProvider({ children }: { children: React.ReactNode }
         actions: notification.actions,
         metadata: notification.metadata,
       });
-      setSnoozedNotifications(prev => {
-        const newMap = new Map(prev);
-        newMap.delete(notification.type);
-        return newMap;
-      });
+      // setSnoozedNotifications(prev => {
+      //   const newMap = new Map(prev);
+      //   newMap.delete(notification.type);
+      //   return newMap;
+      // });
     }, duration);
   };
 
@@ -163,7 +163,7 @@ export function NotificationProvider({ children }: { children: React.ReactNode }
 // Smart Notification Generator Hook
 export function useSmartNotifications(onNavigate?: (screen: string) => void) {
   const { showNotification } = useNotifications();
-  const { currentState, isGentleMode } = useEmotionalState();
+  //const { currentState, isGentleMode } = useEmotionalState();
   const lastCheckRef = useRef<Map<string, number>>(new Map());
 
   // Micro-win detection
@@ -233,60 +233,60 @@ export function useSmartNotifications(onNavigate?: (screen: string) => void) {
   // Breathing prompts
   useEffect(() => {
     const checkBreathingPrompts = () => {
-      const hour = new Date().getHours();
-      const lastBreath = lastCheckRef.current.get('breathe') || 0;
-      const timeSinceLastBreath = Date.now() - lastBreath;
+      //const hour = new Date().getHours();
+      //const lastBreath = lastCheckRef.current.get('breathe') || 0;
+     // const timeSinceLastBreath = Date.now() - lastBreath;
       
       // Afternoon breathing prompt (2-4 PM)
-      const isAfternoonSlump = hour >= 14 && hour <= 16;
+     // const isAfternoonSlump = hour >= 14 && hour <= 16;
       
       // Anxious/overwhelmed state
-      const needsCalming = currentState === 'anxious' || currentState === 'overwhelmed';
+     // const needsCalming = currentState === 'anxious' || currentState === 'overwhelmed';
       
-      if ((isAfternoonSlump || needsCalming) && timeSinceLastBreath > 1800000) { // 30 min cooldown
-        const messages = [
-          'Your mind needs a reset. Three deep breaths can shift everything.',
-          'Notice your breathing right now. Is it shallow? Let\'s fix that together.',
-          'Pause. Breathe in for 4, hold for 4, out for 6. You\'ve got this.',
-        ];
+      // if ((isAfternoonSlump || needsCalming) && timeSinceLastBreath > 1800000) { // 30 min cooldown
+      //   const messages = [
+      //     'Your mind needs a reset. Three deep breaths can shift everything.',
+      //     'Notice your breathing right now. Is it shallow? Let\'s fix that together.',
+      //     'Pause. Breathe in for 4, hold for 4, out for 6. You\'ve got this.',
+      //   ];
         
-        showNotification({
-          type: 'breathe',
-          title: '🫁 Time to breathe',
-          message: messages[Math.floor(Math.random() * messages.length)],
-          actions: [
-            {
-              id: 'open-breathing',
-              label: 'Start Breathing',
-              icon: Wind,
-              variant: 'primary',
-              handler: () => {
-                onNavigate?.('focus');
-                // Could trigger breathing exercise specifically
-              },
-            },
-            {
-              id: 'snooze',
-              label: 'Snooze 20m',
-              icon: Clock,
-              variant: 'ghost',
-              handler: () => {
-                // Will be handled by NotificationCard
-              },
-            },
-          ],
-          duration: 14000,
-        });
+      //   showNotification({
+      //     type: 'breathe',
+      //     title: '🫁 Time to breathe',
+      //     message: messages[Math.floor(Math.random() * messages.length)],
+      //     actions: [
+      //       {
+      //         id: 'open-breathing',
+      //         label: 'Start Breathing',
+      //         icon: Wind,
+      //         variant: 'primary',
+      //         handler: () => {
+      //           onNavigate?.('focus');
+      //           // Could trigger breathing exercise specifically
+      //         },
+      //       },
+      //       {
+      //         id: 'snooze',
+      //         label: 'Snooze 20m',
+      //         icon: Clock,
+      //         variant: 'ghost',
+      //         handler: () => {
+      //           // Will be handled by NotificationCard
+      //         },
+      //       },
+      //     ],
+      //     duration: 14000,
+      //   });
         
-        lastCheckRef.current.set('breathe', Date.now());
-      }
+      //   lastCheckRef.current.set('breathe', Date.now());
+      // }
     };
 
     const interval = setInterval(checkBreathingPrompts, 120000); // Check every 2 minutes
     checkBreathingPrompts();
     
     return () => clearInterval(interval);
-  }, [showNotification, currentState, onNavigate]);
+  }, [showNotification, , onNavigate]);
 
   // Gentle plan suggestions
   useEffect(() => {
@@ -417,7 +417,6 @@ export function EnhancedNotificationDisplay() {
 
   return (
     <div className="fixed top-20 right-4 z-50 space-y-3 max-w-md pointer-events-none">
-      <AnimatePresence>
         {notifications.map((notification) => (
           <NotificationCard
             key={notification.id}
@@ -427,7 +426,6 @@ export function EnhancedNotificationDisplay() {
             themeColors={themeColors}
           />
         ))}
-      </AnimatePresence>
     </div>
   );
 }
@@ -440,7 +438,7 @@ interface NotificationCardProps {
   themeColors: any;
 }
 
-function NotificationCard({ notification, onDismiss, onSnooze, themeColors }: NotificationCardProps) {
+function NotificationCard({ notification, onDismiss, onSnooze,  }: NotificationCardProps) {
   const [progress, setProgress] = useState(100);
 
   useEffect(() => {
@@ -510,16 +508,7 @@ function NotificationCard({ notification, onDismiss, onSnooze, themeColors }: No
   const IconComponent = styles.icon;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, x: 400, scale: 0.9 }}
-      animate={{ opacity: 1, x: 0, scale: 1 }}
-      exit={{ opacity: 0, x: 400, scale: 0.9, transition: { duration: 0.4 } }}
-      transition={{ 
-        type: 'spring', 
-        damping: 30, 
-        stiffness: 400,
-        opacity: { duration: 0.3 },
-      }}
+    < div
       className="pointer-events-auto"
     >
       <div
@@ -532,50 +521,35 @@ function NotificationCard({ notification, onDismiss, onSnooze, themeColors }: No
         <div className="p-5">
           <div className="flex items-start gap-4">
             {/* Icon */}
-            <motion.div
-              initial={{ scale: 0, rotate: -180 }}
-              animate={{ scale: 1, rotate: 0 }}
-              transition={{ 
-                type: 'spring', 
-                delay: 0.2, 
-                damping: 15, 
-                stiffness: 200,
-              }}
+            < div
               className="flex-shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center"
               style={{ backgroundColor: styles.iconBg }}
             >
               <IconComponent size={24} style={{ color: styles.iconColor }} />
-            </motion.div>
+            </ div>
 
             {/* Text Content */}
             <div className="flex-1 min-w-0">
-              <motion.h4
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
+              <h4
                 className="text-gray-900 mb-1.5"
               >
                 {notification.title}
-              </motion.h4>
+              </h4>
               
-              <motion.p
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.35 }}
+              <p
+   
                 className="text-sm text-gray-700 leading-relaxed mb-4"
               >
                 {notification.message}
-              </motion.p>
+              </p>
 
               {/* Action Buttons */}
               {notification.actions && notification.actions.length > 0 && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 }}
+                < div
+
                   className="flex flex-wrap gap-2"
                 >
-                  {notification.actions.map((action, index) => {
+                  {notification.actions.map((action, ) => {
                     const ActionIcon = action.icon;
                     const isPrimary = action.variant === 'primary';
                     const isGhost = action.variant === 'ghost';
@@ -591,11 +565,9 @@ function NotificationCard({ notification, onDismiss, onSnooze, themeColors }: No
                     };
 
                     return (
-                      <motion.button
+                      < button
                         key={action.id}
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.45 + index * 0.05 }}
+
                         onClick={handleClick}
                         className={`
                           px-4 py-2 rounded-xl text-xs flex items-center gap-2 transition-all
@@ -609,36 +581,33 @@ function NotificationCard({ notification, onDismiss, onSnooze, themeColors }: No
                       >
                         {ActionIcon && <ActionIcon size={14} />}
                         {action.label}
-                      </motion.button>
+                      </ button>
                     );
                   })}
-                </motion.div>
+                </ div>
               )}
             </div>
 
             {/* Dismiss Button */}
-            <motion.button
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.25 }}
+            < button
+
               onClick={onDismiss}
               className="flex-shrink-0 w-8 h-8 rounded-full bg-white/70 hover:bg-white transition-colors flex items-center justify-center group"
             >
               <X size={14} className="text-gray-600 group-hover:text-gray-900 transition-colors" />
-            </motion.button>
+            </ button>
           </div>
         </div>
 
         {/* Progress Bar */}
         <div className="h-1 bg-white/30 relative overflow-hidden">
-          <motion.div
+          < div
             className="absolute inset-y-0 left-0 bg-white/60"
             style={{ width: `${progress}%` }}
-            transition={{ duration: 0.05, ease: 'linear' }}
           />
         </div>
       </div>
-    </motion.div>
+    </ div>
   );
 }
 

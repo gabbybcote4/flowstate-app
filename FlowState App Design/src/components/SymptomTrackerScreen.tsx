@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+//  from 'motion/react';
 import { useTheme } from './ThemeContext';
 import {
   ArrowLeft,
@@ -317,7 +317,7 @@ export function SymptomTrackerScreen({ onNavigate }: SymptomTrackerScreenProps) 
   return (
     <div className="min-h-screen pb-24" style={{ backgroundColor: themeColors.background }}>
       {/* Header */}
-      <motion.div
+      < div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         className="sticky top-0 z-20 bg-white border-b border-gray-100 px-6 py-4"
@@ -348,13 +348,13 @@ export function SymptomTrackerScreen({ onNavigate }: SymptomTrackerScreenProps) 
             </button>
           </div>
         </div>
-      </motion.div>
+      </ div>
 
       <div className="max-w-4xl mx-auto px-4 md:px-6 py-6">
         {viewMode === 'track' ? (
           <>
             {/* Today's Summary */}
-            <motion.div
+            < div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               className="bg-gradient-to-br from-lavender-50 to-purple-50 rounded-3xl p-6 mb-6 border border-lavender-200"
@@ -392,7 +392,7 @@ export function SymptomTrackerScreen({ onNavigate }: SymptomTrackerScreenProps) 
                   })}
                 </div>
               )}
-            </motion.div>
+            </ div>
 
             {/* Symptom Categories */}
             <div className="space-y-4">
@@ -401,7 +401,7 @@ export function SymptomTrackerScreen({ onNavigate }: SymptomTrackerScreenProps) 
                 const CategoryIcon = category.icon;
 
                 return (
-                  <motion.div
+                  < div
                     key={category.id}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -425,18 +425,18 @@ export function SymptomTrackerScreen({ onNavigate }: SymptomTrackerScreenProps) 
                           <p className="text-xs opacity-50">{category.symptoms.length} symptoms</p>
                         </div>
                       </div>
-                      <motion.div
+                      < div
                         animate={{ rotate: isExpanded ? 180 : 0 }}
                         transition={{ duration: 0.2 }}
                       >
                         <ChevronDown size={20} className="text-gray-400" />
-                      </motion.div>
+                      </ div>
                     </button>
 
                     {/* Symptoms List */}
                     <AnimatePresence>
                       {isExpanded && (
-                        <motion.div
+                        < div
                           initial={{ height: 0, opacity: 0 }}
                           animate={{ height: 'auto', opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
@@ -473,7 +473,7 @@ export function SymptomTrackerScreen({ onNavigate }: SymptomTrackerScreenProps) 
                                   {/* Severity Buttons */}
                                   <div className="flex gap-2 mb-3">
                                     {symptom.severity.map(level => (
-                                      <motion.button
+                                      < button
                                         key={level}
                                         onClick={() => addEntry(category.id, symptom.id, level)}
                                         whileHover={{ scale: 1.05 }}
@@ -488,7 +488,7 @@ export function SymptomTrackerScreen({ onNavigate }: SymptomTrackerScreenProps) 
                                         }}
                                       >
                                         {level}
-                                      </motion.button>
+                                      </ button>
                                     ))}
                                   </div>
 
@@ -518,10 +518,10 @@ export function SymptomTrackerScreen({ onNavigate }: SymptomTrackerScreenProps) 
                               );
                             })}
                           </div>
-                        </motion.div>
+                        </ div>
                       )}
                     </AnimatePresence>
-                  </motion.div>
+                  </ div>
                 );
               })}
             </div>
@@ -529,7 +529,7 @@ export function SymptomTrackerScreen({ onNavigate }: SymptomTrackerScreenProps) 
         ) : (
           <>
             {/* Insights View */}
-            <motion.div
+            < div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               className="space-y-4"
@@ -543,7 +543,7 @@ export function SymptomTrackerScreen({ onNavigate }: SymptomTrackerScreenProps) 
                   </h2>
 
                   {insights.map((insight, index) => (
-                    <motion.div
+                    < div
                       key={index}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -562,7 +562,7 @@ export function SymptomTrackerScreen({ onNavigate }: SymptomTrackerScreenProps) 
                           <p className="text-sm opacity-70">{insight.message}</p>
                         </div>
                       </div>
-                    </motion.div>
+                    </ div>
                   ))}
                 </>
               ) : (
@@ -577,7 +577,7 @@ export function SymptomTrackerScreen({ onNavigate }: SymptomTrackerScreenProps) 
 
               {/* Weekly Overview */}
               {entries.length > 0 && (
-                <motion.div
+                < div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
@@ -623,11 +623,11 @@ export function SymptomTrackerScreen({ onNavigate }: SymptomTrackerScreenProps) 
                       );
                     })}
                   </div>
-                </motion.div>
+                </ div>
               )}
 
               {/* Tips */}
-              <motion.div
+              < div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
@@ -645,8 +645,8 @@ export function SymptomTrackerScreen({ onNavigate }: SymptomTrackerScreenProps) 
                     </ul>
                   </div>
                 </div>
-              </motion.div>
-            </motion.div>
+              </ div>
+            </ div>
           </>
         )}
       </div>

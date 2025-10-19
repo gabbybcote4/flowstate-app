@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Button } from './ui/button';
+//import { Button } from './ui/button';
 import { useLocalStorage } from '../hooks/useLocalStorage';
-import { motion, AnimatePresence } from 'motion/react';
+//  from 'motion/react';
 import { AuthScreen } from './AuthScreen';
 import { WelcomeScreen } from './WelcomeScreen';
 import { ConfigOnboardingWizard } from './onboarding/ConfigOnboardingWizard';
@@ -13,7 +13,7 @@ import {
   Target, 
   Zap, 
   UserPlus,
-  ArrowRight,
+ // ArrowRight,
   ChevronRight
 } from 'lucide-react';
 
@@ -75,7 +75,7 @@ interface OnboardingScreenProps {
 
 export function OnboardingScreen({ onComplete }: OnboardingScreenProps) {
   const [currentStep, setCurrentStep] = useState(0);
-  const [direction, setDirection] = useState(1);
+  const [, setDirection] = useState(1);
 
   const handleNext = () => {
     if (currentStep === onboardingSteps.length - 1) {
@@ -92,20 +92,20 @@ export function OnboardingScreen({ onComplete }: OnboardingScreenProps) {
 
   const step = onboardingSteps[currentStep];
 
-  const slideVariants = {
-    enter: (direction: number) => ({
-      x: direction > 0 ? 300 : -300,
-      opacity: 0
-    }),
-    center: {
-      x: 0,
-      opacity: 1
-    },
-    exit: (direction: number) => ({
-      x: direction < 0 ? 300 : -300,
-      opacity: 0
-    })
-  };
+  // const slideVariants = {
+  //   enter: (direction: number) => ({
+  //     x: direction > 0 ? 300 : -300,
+  //     opacity: 0
+  //   }),
+  //   center: {
+  //     x: 0,
+  //     opacity: 1
+  //   },
+  //   exit: (direction: number) => ({
+  //     x: direction < 0 ? 300 : -300,
+  //     opacity: 0
+  //   })
+  // };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-peach-50 flex flex-col">
@@ -122,25 +122,16 @@ export function OnboardingScreen({ onComplete }: OnboardingScreenProps) {
       {/* Main Content */}
       <div className="flex-1 flex flex-col items-center justify-center px-6 pb-12">
         <div className="w-full max-w-md">
-          <AnimatePresence mode="wait" custom={direction}>
-            <motion.div
+            < div
               key={currentStep}
-              custom={direction}
-              variants={slideVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{
-                x: { type: "spring", stiffness: 300, damping: 30 },
-                opacity: { duration: 0.2 }
-              }}
+             // custom={direction}
+              //variants={slideVariants}
+
               className="flex flex-col items-center text-center"
             >
               {/* Illustration */}
-              <motion.div
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ delay: 0.1 }}
+              < div
+
                 className="mb-8"
               >
                 <div 
@@ -152,23 +143,19 @@ export function OnboardingScreen({ onComplete }: OnboardingScreenProps) {
                 >
                   {step.illustration}
                 </div>
-              </motion.div>
+              </ div>
 
               {/* Icon */}
-              <motion.div
-                initial={{ y: 10, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.2 }}
+              < div
+
                 className="mb-4"
               >
                 {step.icon}
-              </motion.div>
+              </ div>
 
               {/* Title */}
-              <motion.h1
-                initial={{ y: 10, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.3 }}
+              <h1
+
                 className="mb-4"
                 style={{
                   color: '#6B21A8',
@@ -178,13 +165,11 @@ export function OnboardingScreen({ onComplete }: OnboardingScreenProps) {
                 }}
               >
                 {step.title}
-              </motion.h1>
+              </h1>
 
               {/* Description */}
-              <motion.p
-                initial={{ y: 10, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.4 }}
+              <p
+  
                 className="mb-12 opacity-70 max-w-sm"
                 style={{
                   fontSize: '16px',
@@ -192,13 +177,11 @@ export function OnboardingScreen({ onComplete }: OnboardingScreenProps) {
                 }}
               >
                 {step.description}
-              </motion.p>
+              </p>
 
               {/* CTA Button */}
-              <motion.div
-                initial={{ y: 10, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.5 }}
+              < div
+
                 className="w-full"
               >
                 <button
@@ -214,23 +197,17 @@ export function OnboardingScreen({ onComplete }: OnboardingScreenProps) {
                   {step.buttonText}
                   <ChevronRight size={20} />
                 </button>
-              </motion.div>
-            </motion.div>
-          </AnimatePresence>
+              </ div>
+            </ div>
         </div>
       </div>
 
       {/* Progress Dots */}
       <div className="pb-8 flex items-center justify-center gap-2">
         {onboardingSteps.map((_, index) => (
-          <motion.div
+          < div
             key={index}
-            initial={false}
-            animate={{
-              scale: currentStep === index ? 1.2 : 1,
-              opacity: currentStep === index ? 1 : 0.3
-            }}
-            transition={{ duration: 0.3 }}
+
             className="rounded-full transition-all"
             style={{
               width: currentStep === index ? '32px' : '8px',
@@ -260,7 +237,7 @@ export function OnboardingWrapper({ children }: { children: React.ReactNode }) {
     'flowstate-welcome-complete',
     false
   );
-  const [userName, setUserName] = useLocalStorage('flowstate-user-name', 'Friend');
+  const [userName, ] = useLocalStorage('flowstate-user-name', 'Friend');
 
   const handleOnboardingComplete = () => {
     setHasCompletedOnboarding(true);

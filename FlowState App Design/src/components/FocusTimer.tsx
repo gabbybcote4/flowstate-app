@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+//  from 'motion/react';
 import { Play, Pause, RotateCcw } from 'lucide-react';
 
 export function FocusTimer() {
@@ -51,7 +51,7 @@ export function FocusTimer() {
     <div className="flex flex-col items-center">
       {/* Duration Selector */}
       {!isRunning && (
-        <motion.div
+        < div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           className="flex gap-3 mb-8"
@@ -69,7 +69,7 @@ export function FocusTimer() {
               {duration.label}
             </button>
           ))}
-        </motion.div>
+        </ div>
       )}
 
       {/* Timer Display */}
@@ -109,7 +109,7 @@ export function FocusTimer() {
 
         {/* Time text */}
         <div className="absolute inset-0 flex items-center justify-center">
-          <motion.div
+          < div
             key={timeLeft}
             initial={{ scale: 1 }}
             animate={{ scale: [1, 1.02, 1] }}
@@ -120,22 +120,22 @@ export function FocusTimer() {
               {formatTime(timeLeft)}
             </div>
             {isRunning && (
-              <motion.p
+              <p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 0.6 }}
                 className="text-sm"
               >
                 Stay focused...
-              </motion.p>
+              </p>
             )}
-          </motion.div>
+          </ div>
         </div>
       </div>
 
       {/* Controls */}
       <div className="flex gap-4">
         {/* Play/Pause Button */}
-        <motion.button
+        < button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => setIsRunning(!isRunning)}
@@ -143,48 +143,48 @@ export function FocusTimer() {
         >
           <AnimatePresence mode="wait">
             {isRunning ? (
-              <motion.div
+              < div
                 key="pause"
                 initial={{ scale: 0, rotate: -180 }}
                 animate={{ scale: 1, rotate: 0 }}
                 exit={{ scale: 0, rotate: 180 }}
               >
                 <Pause size={32} fill="white" />
-              </motion.div>
+              </ div>
             ) : (
-              <motion.div
+              < div
                 key="play"
                 initial={{ scale: 0, rotate: -180 }}
                 animate={{ scale: 1, rotate: 0 }}
                 exit={{ scale: 0, rotate: 180 }}
               >
                 <Play size={32} fill="white" className="ml-1" />
-              </motion.div>
+              </ div>
             )}
           </AnimatePresence>
-        </motion.button>
+        </ button>
 
         {/* Reset Button */}
-        <motion.button
+        < button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={handleReset}
           className="w-20 h-20 rounded-full bg-white text-lavender-600 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center"
         >
           <RotateCcw size={28} />
-        </motion.button>
+        </ button>
       </div>
 
       {/* Completion Message */}
       {timeLeft === 0 && (
-        <motion.div
+        < div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="mt-8 p-6 bg-green-50 rounded-3xl text-center"
         >
           <p className="text-2xl mb-2">✨ Great focus session!</p>
           <p className="opacity-70">You completed {selectedDuration} minutes</p>
-        </motion.div>
+        </ div>
       )}
     </div>
   );

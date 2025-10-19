@@ -11,7 +11,6 @@ import {
   Sparkles,
   ChevronRight
 } from 'lucide-react';
-import { motion, AnimatePresence } from '../lib/motion-shim';
 import { Badge } from './ui/badge';
 import { 
   AdaptiveEngine, 
@@ -141,7 +140,7 @@ export function AdaptiveRecommendationsWidget() {
       <div 
         className="p-6 text-white"
         style={{ 
-          background: `linear-gradient(135deg, ${themeColors.primary}, ${themeColors.secondary})` 
+          //background: `linear-gradient(135deg, ${themeColors.primary}, ${themeColors.secondary})` 
         }}
       >
         <div className="flex items-center justify-between mb-3">
@@ -192,11 +191,8 @@ export function AdaptiveRecommendationsWidget() {
           <div className="text-xs opacity-60 mb-3">Key Recommendations</div>
           <div className="space-y-2">
             {recommendations.topSuggestions.map((suggestion: string, index: number) => (
-              <motion.div
+              < div
                 key={index}
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.1 }}
                 className="flex items-start gap-3 p-3 rounded-xl bg-gray-50"
               >
                 <div 
@@ -206,7 +202,7 @@ export function AdaptiveRecommendationsWidget() {
                   <Sparkles size={14} style={{ color: themeColors.primary }} />
                 </div>
                 <p className="text-sm text-gray-700 leading-relaxed">{suggestion}</p>
-              </motion.div>
+              </ div>
             ))}
           </div>
         </div>
@@ -235,13 +231,8 @@ export function AdaptiveRecommendationsWidget() {
       </div>
 
       {/* Detailed Insights (Expandable) */}
-      <AnimatePresence>
         {showDetails && recommendations.insights.length > 0 && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
+          < div
             className="border-t border-gray-200 overflow-hidden"
           >
             <div className="p-6 bg-gray-50 space-y-3">
@@ -250,11 +241,8 @@ export function AdaptiveRecommendationsWidget() {
                 const InsightIcon = getInsightIcon(insight.type);
                 
                 return (
-                  <motion.div
+                  < div
                     key={index}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 }}
                     className="bg-white rounded-xl p-4 shadow-sm"
                   >
                     <div className="flex items-start gap-3">
@@ -301,13 +289,12 @@ export function AdaptiveRecommendationsWidget() {
                         </div>
                       </div>
                     </div>
-                  </motion.div>
+                  </ div>
                 );
               })}
             </div>
-          </motion.div>
+          </ div>
         )}
-      </AnimatePresence>
 
       {/* Data Sources Footer */}
       <div className="px-6 py-3 bg-gray-50 border-t border-gray-200">

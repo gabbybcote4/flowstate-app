@@ -169,7 +169,7 @@ export function DailyMomentumRing() {
 
           {/* Center text */}
           <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <motion.div
+            < div
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ delay: 0.5, type: 'spring', stiffness: 200 }}
@@ -177,7 +177,7 @@ export function DailyMomentumRing() {
               style={{ color: getMotivationColor() }}
             >
               {momentum.percentage}%
-            </motion.div>
+            </ div>
             <div className="text-xs opacity-60 mt-1">complete</div>
           </div>
         </div>
@@ -216,7 +216,7 @@ export function DailyMomentumRing() {
 
       {/* Motivational nudge */}
       {momentum.percentage < 30 && momentum.total > 0 && (
-        <motion.div
+        < div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1 }}
@@ -225,7 +225,7 @@ export function DailyMomentumRing() {
           <p className="text-xs opacity-60 text-center">
             Small steps create big momentum ✨
           </p>
-        </motion.div>
+        </ div>
       )}
     </div>
   );

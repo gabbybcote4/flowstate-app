@@ -23,7 +23,7 @@ export function LivePreviewPanel() {
 
   return (
     <div className="flex-1 flex flex-col items-center justify-center p-8">
-      <motion.div
+      < div
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.5 }}
@@ -72,7 +72,7 @@ export function LivePreviewPanel() {
             {/* Dashboard Preview */}
             <div className="px-4 pb-20">
               {/* Greeting */}
-              <motion.div
+              < div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="mb-4"
@@ -92,7 +92,7 @@ export function LivePreviewPanel() {
                 >
                   Your Flow
                 </h1>
-              </motion.div>
+              </ div>
 
               {/* Widgets Grid */}
               <div className="space-y-3">
@@ -101,7 +101,7 @@ export function LivePreviewPanel() {
                     .sort((a, b) => a.position - b.position)
                     .slice(0, 4)
                     .map((widget, index) => (
-                      <motion.div
+                      < div
                         key={widget.id}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -123,11 +123,11 @@ export function LivePreviewPanel() {
                             {widget.type}
                           </span>
                         </div>
-                      </motion.div>
+                      </ div>
                     ))
                 ) : enabledWidgets.length > 0 ? (
                   enabledWidgets.slice(0, 4).map((widget, index) => (
-                    <motion.div
+                    < div
                       key={widget}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -149,7 +149,7 @@ export function LivePreviewPanel() {
                           {widget}
                         </span>
                       </div>
-                    </motion.div>
+                    </ div>
                   ))
                 ) : (
                   <div className="text-center py-12 opacity-30">
@@ -177,7 +177,7 @@ export function LivePreviewPanel() {
               {navItems.map((item, index) => {
                 const Icon = item.icon;
                 return (
-                  <motion.div
+                  < div
                     key={item.key}
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
@@ -202,7 +202,7 @@ export function LivePreviewPanel() {
                     >
                       {item.label}
                     </span>
-                  </motion.div>
+                  </ div>
                 );
               })}
             </div>
@@ -210,7 +210,7 @@ export function LivePreviewPanel() {
         </div>
 
         {/* Theme Indicator */}
-        <motion.div
+        < div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8 }}
@@ -219,8 +219,8 @@ export function LivePreviewPanel() {
           <p className="text-xs opacity-50">
             Theme: {config.theme.mode} • Tone: {config.tone}
           </p>
-        </motion.div>
-      </motion.div>
+        </ div>
+      </ div>
     </div>
   );
 }

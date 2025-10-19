@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from '../lib/motion-shim';
+//  from '../lib/motion-shim';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
@@ -29,15 +29,15 @@ export function AuthScreen({ onAuthComplete }: AuthScreenProps) {
     onAuthComplete();
   };
 
-  const handleSocialAuth = async (provider: 'google' | 'apple') => {
-    setIsLoading(true);
+  // const handleSocialAuth = async (provider: 'google' | 'apple') => {
+  //   setIsLoading(true);
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
+  //   // Simulate API call
+  //   await new Promise(resolve => setTimeout(resolve, 1500));
     
-    setIsLoading(false);
-    onAuthComplete();
-  };
+  //   setIsLoading(false);
+  //   onAuthComplete();
+  // };
 
   const toggleMode = () => {
     setMode(mode === 'login' ? 'signup' : 'login');
@@ -46,17 +46,11 @@ export function AuthScreen({ onAuthComplete }: AuthScreenProps) {
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-purple-50 via-white to-peach-50">
       {/* Header with Logo */}
-      <motion.div
-        initial={{ y: -20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6 }}
+      < div
         className="pt-12 pb-8 px-6"
       >
         <div className="flex flex-col items-center">
-          <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
+          < div
             className="w-16 h-16 rounded-full flex items-center justify-center mb-4"
             style={{
               background: 'linear-gradient(135deg, #A78BFA 0%, #C084FC 100%)',
@@ -64,11 +58,8 @@ export function AuthScreen({ onAuthComplete }: AuthScreenProps) {
             }}
           >
             <Sparkles className="text-white" size={32} />
-          </motion.div>
-          <motion.h1
-            initial={{ y: 10, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
+          </ div>
+          <h1
             className="text-center"
             style={{
               fontSize: '32px',
@@ -77,40 +68,30 @@ export function AuthScreen({ onAuthComplete }: AuthScreenProps) {
             }}
           >
             FlowState
-          </motion.h1>
-          <motion.p
-            initial={{ y: 10, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.4, duration: 0.5 }}
+          </h1>
+          <p
+
             className="text-center mt-2 opacity-60"
           >
             {mode === 'login' ? 'Welcome back' : 'Start your journey'}
-          </motion.p>
+          </p>
         </div>
-      </motion.div>
+      </ div>
 
       {/* Main Content */}
       <div className="flex-1 px-6 pb-12">
         <div className="max-w-md mx-auto">
-          <AnimatePresence mode="wait">
-            <motion.div
+            < div
               key={mode}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
             >
               {/* Form Card */}
-              <motion.form
+              <form
                 onSubmit={handleSubmit}
                 className="rounded-3xl p-6 mb-6"
                 style={{
                   background: 'white',
                   boxShadow: '0 10px 40px rgba(167, 139, 250, 0.08)'
                 }}
-                initial={{ scale: 0.95, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ delay: 0.2, duration: 0.5 }}
               >
                 <div className="space-y-5">
                   {/* Email Input */}
@@ -187,9 +168,7 @@ export function AuthScreen({ onAuthComplete }: AuthScreenProps) {
                   >
                     {isLoading ? (
                       <div className="flex items-center gap-2">
-                        <motion.div
-                          animate={{ rotate: 360 }}
-                          transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+                        < div
                           className="w-5 h-5 border-2 border-white border-t-transparent rounded-full"
                         />
                         <span>Please wait...</span>
@@ -199,31 +178,25 @@ export function AuthScreen({ onAuthComplete }: AuthScreenProps) {
                     )}
                   </Button>
                 </div>
-              </motion.form>
+              </form>
 
               {/* Divider */}
-              <motion.div
+              < div
                 className="flex items-center gap-4 mb-6"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.4 }}
               >
                 <div className="flex-1 h-px bg-gray-200" />
                 <span className="text-sm opacity-40">or continue with</span>
                 <div className="flex-1 h-px bg-gray-200" />
-              </motion.div>
+              </ div>
 
               {/* Social Auth Buttons */}
-              <motion.div
+              < div
                 className="space-y-3 mb-6"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
               >
                 {/* Google */}
                 <button
                   type="button"
-                  onClick={() => handleSocialAuth('google')}
+                  //onClick={() => handleSocialAuth('google')}
                   disabled={isLoading}
                   className="w-full h-14 rounded-2xl flex items-center justify-center gap-3 transition-all hover:shadow-md disabled:opacity-50"
                   style={{
@@ -244,7 +217,7 @@ export function AuthScreen({ onAuthComplete }: AuthScreenProps) {
                 {/* Apple */}
                 <button
                   type="button"
-                  onClick={() => handleSocialAuth('apple')}
+                  //onClick={() => handleSocialAuth('apple')}
                   disabled={isLoading}
                   className="w-full h-14 rounded-2xl flex items-center justify-center gap-3 transition-all hover:shadow-md disabled:opacity-50"
                   style={{
@@ -258,24 +231,18 @@ export function AuthScreen({ onAuthComplete }: AuthScreenProps) {
                   </svg>
                   <span>Continue with Apple</span>
                 </button>
-              </motion.div>
+              </ div>
 
               {/* Privacy Message */}
-              <motion.p
+              <p
                 className="text-center text-sm opacity-50 mb-6 px-4"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.6 }}
               >
                 We'll never spam or overwhelm you 💜
-              </motion.p>
+              </p>
 
               {/* Toggle Login/Signup */}
-              <motion.div
+              < div
                 className="text-center"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.7 }}
               >
                 <button
                   type="button"
@@ -298,37 +265,24 @@ export function AuthScreen({ onAuthComplete }: AuthScreenProps) {
                     </>
                   )}
                 </button>
-              </motion.div>
-            </motion.div>
-          </AnimatePresence>
+              </ div>
+            </ div>
         </div>
       </div>
 
       {/* Loading Progress Dots (when auth is in progress) */}
       {isLoading && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+        < div
           className="fixed bottom-8 left-0 right-0 flex justify-center gap-2"
         >
           {[0, 1, 2].map((i) => (
-            <motion.div
+            < div
               key={i}
               className="w-2 h-2 rounded-full"
               style={{ backgroundColor: '#A78BFA' }}
-              animate={{
-                scale: [1, 1.5, 1],
-                opacity: [0.3, 1, 0.3]
-              }}
-              transition={{
-                duration: 1.5,
-                repeat: Infinity,
-                delay: i * 0.2
-              }}
             />
           ))}
-        </motion.div>
+        </ div>
       )}
     </div>
   );

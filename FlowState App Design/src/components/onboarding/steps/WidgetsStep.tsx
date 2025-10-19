@@ -42,7 +42,7 @@ export function WidgetsStep({}: OnboardingStepProps) {
           const isEnabled = config.widgets[widget.key as keyof typeof config.widgets];
 
           return (
-            <motion.div
+            < div
               key={widget.key}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -80,7 +80,7 @@ export function WidgetsStep({}: OnboardingStepProps) {
                 checked={isEnabled}
                 onCheckedChange={() => toggleWidget(widget.key)}
               />
-            </motion.div>
+            </ div>
           );
         })}
       </div>

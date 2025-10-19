@@ -80,7 +80,7 @@ export function DashboardLayoutStep({}: OnboardingStepProps) {
           const isSelected = config.dashboardTemplate === template.value;
 
           return (
-            <motion.button
+            < button
               key={template.value}
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -131,7 +131,7 @@ export function DashboardLayoutStep({}: OnboardingStepProps) {
                 </div>
                 <p className="text-sm opacity-60">{template.description}</p>
               </div>
-            </motion.button>
+            </ button>
           );
         })}
       </div>

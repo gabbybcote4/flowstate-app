@@ -206,7 +206,7 @@ export function NotificationTestPanel({ onNavigate }: { onNavigate?: (screen: st
             const isSelected = selectedType === type.id;
             
             return (
-              <motion.button
+              < button
                 key={type.id}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => setSelectedType(type.id)}
@@ -234,7 +234,7 @@ export function NotificationTestPanel({ onNavigate }: { onNavigate?: (screen: st
                   </div>
                 </div>
                 <p className="text-xs opacity-70">{type.description}</p>
-              </motion.button>
+              </ button>
             );
           })}
         </div>

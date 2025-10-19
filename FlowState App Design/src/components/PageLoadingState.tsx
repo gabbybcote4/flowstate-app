@@ -6,19 +6,19 @@ export function PageLoadingState() {
   const { themeColors } = useTheme();
 
   return (
-    <motion.div
+    < div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className="fixed inset-0 flex items-center justify-center bg-white/80 z-50"
     >
-      <motion.div
+      < div
         className="flex flex-col items-center gap-4"
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ delay: 0.1 }}
       >
-        <motion.div
+        < div
           animate={{ rotate: 360 }}
           transition={{
             duration: 1.5,
@@ -30,16 +30,16 @@ export function PageLoadingState() {
             size={32} 
             style={{ color: themeColors.primary }}
           />
-        </motion.div>
-        <motion.div
+        </ div>
+        < div
           initial={{ opacity: 0, y: 5 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
           className="text-sm opacity-60"
         >
           Loading...
-        </motion.div>
-      </motion.div>
-    </motion.div>
+        </ div>
+      </ div>
+    </ div>
   );
 }

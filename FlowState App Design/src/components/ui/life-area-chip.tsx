@@ -98,7 +98,7 @@ export function LifeAreaChip({
   const displayLabel = label || config.label;
 
   return (
-    <motion.button
+    < button
       whileTap={onClick ? { scale: 0.95 } : undefined}
       onClick={onClick}
       className={`
@@ -128,7 +128,7 @@ export function LifeAreaChip({
       
       {/* Remove button */}
       {removable && onRemove && (
-        <motion.button
+        < button
           whileTap={{ scale: 0.9 }}
           onClick={(e) => {
             e.stopPropagation();
@@ -144,9 +144,9 @@ export function LifeAreaChip({
           }}
         >
           <X size={size === 'sm' ? 10 : 12} />
-        </motion.button>
+        </ button>
       )}
-    </motion.button>
+    </ button>
   );
 }
 

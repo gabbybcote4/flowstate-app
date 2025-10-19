@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useTheme } from './ThemeContext';
 import { Clock, Calendar, AlertCircle, TrendingUp, Heart, Briefcase, Users, Sparkles, Home as HomeIcon, Palette, Plus, X, ArrowLeft } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+//  from 'motion/react';
 import { toast } from 'sonner@2.0.3';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
@@ -208,7 +208,7 @@ function TimeSlot({
               const bgColor = lifeArea?.color || themeColors.primary;
               
               return (
-                <motion.div
+                < div
                   key={block.id}
                   initial={{ scaleY: 0 }}
                   animate={{ scaleY: 1 }}
@@ -241,7 +241,7 @@ function TimeSlot({
               const bgGradient = lifeArea?.gradient || 'from-lavender-200 to-purple-200';
               
               return (
-                <motion.div
+                < div
                   key={block.id}
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -277,7 +277,7 @@ function TimeSlot({
                       <span className="px-2 py-0.5 bg-white/40 rounded">Flexible</span>
                     )}
                   </div>
-                </motion.div>
+                </ div>
               );
             })}
           </div>
@@ -392,7 +392,7 @@ export function TimeFlowScreen({ onNavigate }: TimeFlowScreenProps) {
     <DndProvider backend={HTML5Backend}>
       <div className="min-h-screen pb-24" style={{ backgroundColor: themeColors.background }}>
         {/* Header */}
-        <motion.div
+        < div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           className="bg-white border-b border-gray-100 px-6 py-4 sticky top-0 z-20"
@@ -443,14 +443,14 @@ export function TimeFlowScreen({ onNavigate }: TimeFlowScreenProps) {
               </div>
             ))}
           </div>
-        </motion.div>
+        </ div>
 
         {/* Main Content */}
         <div className="flex gap-6 p-6">
           {/* Sidebar - Draggable Items */}
           <AnimatePresence>
             {showSidebar && (
-              <motion.div
+              < div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
@@ -496,7 +496,7 @@ export function TimeFlowScreen({ onNavigate }: TimeFlowScreenProps) {
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </ div>
             )}
           </AnimatePresence>
 

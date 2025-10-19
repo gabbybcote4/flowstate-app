@@ -39,7 +39,7 @@ export function JournalingStep({}: OnboardingStepProps) {
           const isMainToggle = option.key === 'enabled';
 
           return (
-            <motion.div
+            < div
               key={option.key}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -79,7 +79,7 @@ export function JournalingStep({}: OnboardingStepProps) {
                 onCheckedChange={() => toggleJournaling(option.key)}
                 disabled={!isMainToggle && !config.journaling.enabled}
               />
-            </motion.div>
+            </ div>
           );
         })}
       </div>

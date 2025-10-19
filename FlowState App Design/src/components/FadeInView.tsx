@@ -26,7 +26,7 @@ export function FadeInView({
   };
 
   return (
-    <motion.div
+    < div
       initial={{ 
         opacity: 0,
         ...directionVariants[direction]
@@ -44,6 +44,6 @@ export function FadeInView({
       className={className}
     >
       {children}
-    </motion.div>
+    </ div>
   );
 }

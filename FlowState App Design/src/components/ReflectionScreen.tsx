@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useTheme } from './ThemeContext';
 import { useEmotionalState } from './EmotionalStateManager';
 import { CelebrationAnimation } from './CelebrationAnimations';
-import { motion, AnimatePresence } from 'motion/react';
+//  from 'motion/react';
 import { Sparkles, TrendingUp, Heart, Target, CheckCircle } from 'lucide-react';
 import { toast } from 'sonner@2.0.3';
 
@@ -209,7 +209,7 @@ export function ReflectionScreen() {
             </div>
             <div className="flex flex-wrap gap-2">
               {feltRightOptions.map(option => (
-                <motion.button
+                < button
                   key={option}
                   onClick={() => toggleOption(option, whatFeltRight, setWhatFeltRight)}
                   whileTap={{ scale: 0.95 }}
@@ -222,7 +222,7 @@ export function ReflectionScreen() {
                   `}
                 >
                   {option}
-                </motion.button>
+                </ button>
               ))}
             </div>
           </div>
@@ -235,7 +235,7 @@ export function ReflectionScreen() {
             </div>
             <div className="flex flex-wrap gap-2">
               {challengedOptions.map(option => (
-                <motion.button
+                < button
                   key={option}
                   onClick={() => toggleOption(option, whatChallenged, setWhatChallenged)}
                   whileTap={{ scale: 0.95 }}
@@ -248,7 +248,7 @@ export function ReflectionScreen() {
                   `}
                 >
                   {option}
-                </motion.button>
+                </ button>
               ))}
             </div>
           </div>
@@ -292,7 +292,7 @@ export function ReflectionScreen() {
             
             <div className="space-y-3">
               {/* Pattern Card */}
-              <motion.div 
+              < div 
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="bg-gradient-to-br from-lavender-50 to-white rounded-2xl p-5 shadow-sm"
@@ -304,10 +304,10 @@ export function ReflectionScreen() {
                     <div>{insights.patterns}</div>
                   </div>
                 </div>
-              </motion.div>
+              </ div>
 
               {/* Wins Card */}
-              <motion.div 
+              < div 
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
@@ -320,10 +320,10 @@ export function ReflectionScreen() {
                     <div>{insights.wins}</div>
                   </div>
                 </div>
-              </motion.div>
+              </ div>
 
               {/* Tomorrow's Focus */}
-              <motion.div 
+              < div 
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
@@ -336,10 +336,10 @@ export function ReflectionScreen() {
                     <div className="text-blue-900">{insights.suggestion}</div>
                   </div>
                 </div>
-              </motion.div>
+              </ div>
 
               {/* Average Sleep */}
-              <motion.div 
+              < div 
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
@@ -347,12 +347,12 @@ export function ReflectionScreen() {
               >
                 <div className="text-sm opacity-60 mb-1">7-Day Sleep Average</div>
                 <div className="text-2xl">{insights.avgSleep} hours</div>
-              </motion.div>
+              </ div>
             </div>
           </div>
 
           {/* Complete Button */}
-          <motion.button 
+          < button 
             onClick={handleCompleteReflection}
             whileTap={{ scale: 0.98 }}
             disabled={hasCompletedToday && !showCelebration}
@@ -372,7 +372,7 @@ export function ReflectionScreen() {
                 Complete Reflection
               </>
             )}
-          </motion.button>
+          </ button>
         </div>
       </div>
 

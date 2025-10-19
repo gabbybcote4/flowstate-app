@@ -102,7 +102,7 @@ export function ThemeStep({}: OnboardingStepProps) {
             const isSelected = config.theme.mode === option.value;
 
             return (
-              <motion.button
+              < button
                 key={option.value}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -192,7 +192,7 @@ export function ThemeStep({}: OnboardingStepProps) {
                     {option.description}
                   </p>
                 </div>
-              </motion.button>
+              </ button>
             );
           })}
         </div>
@@ -212,7 +212,7 @@ export function ThemeStep({}: OnboardingStepProps) {
             const isSelected = config.theme.primaryColor === option.value;
 
             return (
-              <motion.button
+              < button
                 key={option.value}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -241,14 +241,14 @@ export function ThemeStep({}: OnboardingStepProps) {
                 >
                   {option.label}
                 </span>
-              </motion.button>
+              </ button>
             );
           })}
         </div>
       </div>
 
       {/* Helper Text */}
-      <motion.div
+      < div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.6 }}
@@ -257,7 +257,7 @@ export function ThemeStep({}: OnboardingStepProps) {
         <p className="text-sm opacity-50">
           Your theme choices are reflected in the live preview on the right →
         </p>
-      </motion.div>
+      </ div>
     </div>
   );
 }

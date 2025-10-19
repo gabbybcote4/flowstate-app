@@ -94,7 +94,7 @@ export function SupportCircleBadge({
   const isEmoji = avatar && avatar.length <= 2;
 
   return (
-    <motion.div
+    < div
       whileHover={onClick ? { scale: 1.02 } : undefined}
       whileTap={onClick ? { scale: 0.98 } : undefined}
       onClick={onClick}
@@ -138,7 +138,7 @@ export function SupportCircleBadge({
         
         {/* Active indicator */}
         {active && (
-          <motion.div
+          < div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             className={`
@@ -168,7 +168,7 @@ export function SupportCircleBadge({
       >
         <IconComponent size={sizes.iconSize} style={{ color: config.color }} />
       </div>
-    </motion.div>
+    </ div>
   );
 }
 
@@ -201,7 +201,7 @@ export function SupportCircleAvatar({
   const isEmoji = avatar && avatar.length <= 2;
 
   return (
-    <motion.div
+    < div
       whileHover={onClick ? { scale: 1.1 } : undefined}
       whileTap={onClick ? { scale: 0.95 } : undefined}
       onClick={onClick}
@@ -230,7 +230,7 @@ export function SupportCircleAvatar({
       {active && (
         <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-green-500 border-2 border-white" />
       )}
-    </motion.div>
+    </ div>
   );
 }
 

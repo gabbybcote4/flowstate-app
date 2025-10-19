@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { motion } from '../lib/motion-shim';
-import { useTheme } from './ThemeContext';
+//import { motion } from '../lib/motion-shim';
+//import { useTheme } from './ThemeContext';
 import { Sunrise, Sun, Sunset, Moon, Heart } from 'lucide-react';
 
 interface GreetingData {
@@ -11,7 +11,7 @@ interface GreetingData {
 }
 
 export function AdaptiveGreeting() {
-  const { themeColors } = useTheme();
+  //const { themeColors } = useTheme();
   const [greeting, setGreeting] = useState<GreetingData | null>(null);
 
   useEffect(() => {
@@ -104,9 +104,7 @@ export function AdaptiveGreeting() {
   const Icon = greeting.icon;
 
   return (
-    <motion.div 
-      initial={{ opacity: 0, y: -10 }}
-      animate={{ opacity: 1, y: 0 }}
+    < div 
       className="mb-6 p-6 rounded-3xl shadow-lg relative overflow-hidden"
       style={{
         background: `linear-gradient(135deg, ${greeting.gradient[0]}, ${greeting.gradient[1]})`
@@ -134,6 +132,6 @@ export function AdaptiveGreeting() {
           <span className="opacity-70">Your energy matters more than your output</span>
         </div>
       </div>
-    </motion.div>
+    </ div>
   );
 }

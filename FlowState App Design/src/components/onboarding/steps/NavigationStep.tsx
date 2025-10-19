@@ -64,7 +64,7 @@ export function NavigationStep({}: OnboardingStepProps) {
           const isBottomNav = index < 5;
 
           return (
-            <motion.div
+            < div
               key={key}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -118,7 +118,7 @@ export function NavigationStep({}: OnboardingStepProps) {
                   Bottom Nav
                 </span>
               )}
-            </motion.div>
+            </ div>
           );
         })}
       </div>
