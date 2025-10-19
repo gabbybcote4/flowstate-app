@@ -24,7 +24,7 @@ import {
 import { Switch } from './ui/switch';
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from '../lib/motion-shim';
 import { toast } from 'sonner@2.0.3';
 import {
   Dialog,

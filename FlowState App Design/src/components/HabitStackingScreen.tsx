@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence, Reorder } from 'motion/react';
+import { motion, AnimatePresence, Reorder } from '../lib/motion-shim';
 import { useTheme } from './ThemeContext';
 import { 
   Plus, 

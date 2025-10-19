@@ -14,7 +14,7 @@ import {
   Brain,
   Heart
 } from 'lucide-react';
-import { motion } from 'motion/react';
+import { motion } from '../lib/motion-shim';
 
 interface Module {
   id: number;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useTheme } from './ThemeContext';
 import { Plus, Sparkles, Calendar, Target, Bell, Heart, CheckCircle2, X, Edit2, Check, TrendingUp, Award, Lightbulb, Eye, EyeOff, Settings, Trash2, Star, Link2 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from '../lib/motion-shim';
 import { toast } from 'sonner@2.0.3';
 import { HabitCompletionStats } from './HabitCompletionStats';
 import { AISuggestionsWidget } from './AISuggestionsWidget';

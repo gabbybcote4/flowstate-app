@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from '../lib/motion-shim';
 import { useEffect, useState } from 'react';
 import { useTheme } from './ThemeContext';
 import { Sparkles, Heart, Star, Flower2, CheckCircle } from 'lucide-react';

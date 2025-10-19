@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from '../lib/motion-shim';
 import { Play, Pause } from 'lucide-react';
 
 type BreathPhase = 'inhale' | 'hold' | 'exhale' | 'rest';

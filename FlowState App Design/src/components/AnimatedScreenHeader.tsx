@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+import { motion } from '../lib/motion-shim';
 import { ArrowLeft } from 'lucide-react';
 import { useTheme } from './ThemeContext';
 

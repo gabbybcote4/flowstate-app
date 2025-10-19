@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+import { motion } from '../lib/motion-shim';
 import { useTheme } from './ThemeContext';
 
 export const LIFE_AREAS = [

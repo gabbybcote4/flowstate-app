@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useTheme } from './ThemeContext';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from '../lib/motion-shim';
 import {
   Target,
   Zap,

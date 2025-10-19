@@ -17,7 +17,7 @@ import {
   CheckCircle2,
   Sparkles
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from '../lib/motion-shim';
 import { toast } from 'sonner@2.0.3';
 
 interface HabitCard {

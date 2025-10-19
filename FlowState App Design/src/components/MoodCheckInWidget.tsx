@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { motion } from 'motion/react';
+import { motion } from '../lib/motion-shim';
 import { useTheme } from './ThemeContext';
 import { Sparkles, ArrowRight } from 'lucide-react';
 import { toast } from 'sonner@2.0.3';

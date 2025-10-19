@@ -16,7 +16,7 @@ import {
   MessageCircle,
   Plus
 } from 'lucide-react';
-import { motion } from 'motion/react';
+import { motion } from '../lib/motion-shim';
 
 interface LifeArea {
   id: string;

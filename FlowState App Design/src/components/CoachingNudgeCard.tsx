@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+import { motion } from '../lib/motion-shim';
 import { useTheme } from './ThemeContext';
 import { useEmotionalState } from './EmotionalStateManager';
 import { Sparkles, Heart, Lightbulb, Coffee, Moon } from 'lucide-react';

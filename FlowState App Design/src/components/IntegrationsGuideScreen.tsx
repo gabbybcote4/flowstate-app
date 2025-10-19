@@ -13,7 +13,7 @@ import {
   Copy,
   Check
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from '../lib/motion-shim';
 import { Badge } from './ui/badge';
 import { toast } from 'sonner@2.0.3';
 

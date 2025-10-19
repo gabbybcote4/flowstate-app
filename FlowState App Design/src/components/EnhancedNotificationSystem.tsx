@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, createContext, useContext } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from '../lib/motion-shim';
 import { useEmotionalState } from './EmotionalStateManager';
 import { useTheme } from './ThemeContext';
 import {

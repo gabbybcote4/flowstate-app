@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from '../lib/motion-shim';
 import { ChevronRight, X } from 'lucide-react';
 import { useTheme } from './ThemeContext';
 import { LucideIcon } from 'lucide-react';

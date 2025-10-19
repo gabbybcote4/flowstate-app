@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { motion } from 'motion/react';
+import { motion } from '../lib/motion-shim';
 import { Play, Pause, Volume2 } from 'lucide-react';
 import { Slider } from './ui/slider';
 

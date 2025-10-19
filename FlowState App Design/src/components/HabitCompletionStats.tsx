@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+import { motion } from '../lib/motion-shim';
 import { TrendingUp, Target, CheckCircle2 } from 'lucide-react';
 import { useTheme } from './ThemeContext';
 
