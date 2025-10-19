@@ -1,5 +1,5 @@
 import React, { Suspense, lazy, useEffect } from 'react';
-import { ThemeProvider, useTheme } from './components/ThemeContext';
+import { ThemeProvider } from './components/ThemeContext';
 import { EmotionalStateProvider } from './components/EmotionalStateManager';
 import { NotificationProvider, EnhancedNotificationDisplay } from './components/EnhancedNotificationSystem';
 import { NavigationProvider, useNavigation } from './components/NavigationContext';
@@ -45,58 +45,58 @@ import {
 // ============================================================================
 
 const CheckInScreen = lazy(() =>
-  import('./components/CheckInScreen').then(m => ({ default: m.CheckInScreen }))
+  import('./screens/CheckInScreen').then(m => ({ default: m.default }))
 );
 const DashboardScreen = lazy(() =>
-  import('./components/DashboardScreen').then(m => ({ default: m.DashboardScreen }))
+  import('./screens/DashboardScreen').then(m => ({ default: m.default }))
 );
 const TodosScreen = lazy(() =>
-  import('./components/TodosScreen').then(m => ({ default: m.TodosScreen }))
+  import('./screens/TodosScreen').then(m => ({ default: m.default }))
 );
 const HabitBuilderScreen = lazy(() =>
-  import('./components/HabitBuilderScreen').then(m => ({ default: m.HabitBuilderScreen }))
+  import('./screens/HabitBuilderScreen').then(m => ({ default: m.default }))
 );
 const CoachingScreen = lazy(() =>
-  import('./components/CoachingScreen').then(m => ({ default: m.CoachingScreen }))
+  import('./screens/CoachingScreen').then(m => ({ default: m.default }))
 );
 const CoachChatScreen = lazy(() =>
-  import('./components/CoachChatScreen').then(m => ({ default: m.CoachChatScreen }))
+  import('./screens/CoachChatScreen').then(m => ({ default: m.default }))
 );
 const GrowthMapScreen = lazy(() =>
-  import('./components/GrowthMapScreen').then(m => ({ default: m.GrowthMapScreen }))
+  import('./screens/GrowthMapScreen').then(m => ({ default: m.default }))
 );
 const ReflectionScreen = lazy(() =>
-  import('./components/ReflectionScreen').then(m => ({ default: m.ReflectionScreen }))
+  import('./screens/ReflectionScreen').then(m => ({ default: m.default }))
 );
 const CalendarScreen = lazy(() =>
-  import('./components/CalendarScreen').then(m => ({ default: m.CalendarScreen }))
+  import('./screens/CalendarScreen').then(m => ({ default: m.default }))
 );
 const FocusToolsScreen = lazy(() =>
-  import('./components/FocusToolsScreen').then(m => ({ default: m.FocusToolsScreen }))
+  import('./screens/FocusToolsScreen').then(m => ({ default: m.default }))
 );
 const TimeFlowScreen = lazy(() =>
-  import('./components/TimeFlowScreen').then(m => ({ default: m.TimeFlowScreen }))
+  import('./screens/TimeFlowScreen').then(m => ({ default: m.default }))
 );
 const DisciplineBuilderScreen = lazy(() =>
-  import('./components/DisciplineBuilderScreen').then(m => ({ default: m.DisciplineBuilderScreen }))
+  import('./screens/DisciplineBuilderScreen').then(m => ({ default: m.default }))
 );
 const HabitEducationScreen = lazy(() =>
-  import('./components/HabitEducationScreen').then(m => ({ default: m.HabitEducationScreen }))
+  import('./screens/HabitEducationScreen').then(m => ({ default: m.default }))
 );
 const IntegrationsScreen = lazy(() =>
-  import('./components/IntegrationsScreen').then(m => ({ default: m.IntegrationsScreen }))
+  import('./screens/IntegrationsScreen').then(m => ({ default: m.default }))
 );
 const SymptomTrackerScreen = lazy(() =>
-  import('./components/SymptomTrackerScreen').then(m => ({ default: m.SymptomTrackerScreen }))
+  import('./screens/SymptomTrackerScreen').then(m => ({ default: m.default }))
 );
 const CommunityScreen = lazy(() =>
-  import('./components/CommunityScreen').then(m => ({ default: m.CommunityScreen }))
+  import('./screens/CommunityScreen').then(m => ({ default: m.default }))
 );
 const WeeklyInsightsDashboard = lazy(() =>
-  import('./components/WeeklyInsightsDashboard').then(m => ({ default: m.WeeklyInsightsDashboard }))
+  import('./screens/WeeklyInsightsDashboard').then(m => ({ default: m.default }))
 );
 const SettingsScreen = lazy(() =>
-  import('./components/SettingsScreen').then(m => ({ default: m.SettingsScreen }))
+  import('./screens/SettingsScreen').then(m => ({ default: m.default }))
 );
 
 // ============================================================================

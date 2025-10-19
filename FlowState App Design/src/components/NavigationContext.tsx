@@ -5,7 +5,7 @@
  * restore last screen functionality, and navigation stack
  */
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 // ============================================================================
 // TYPE DEFINITIONS
@@ -17,6 +17,7 @@ export type ScreenName =
   | 'todos'
   | 'calendar'
   | 'coach'
+  | 'coach-chat'
   | 'reflection'
   | 'settings'
   | 'habit-builder'
