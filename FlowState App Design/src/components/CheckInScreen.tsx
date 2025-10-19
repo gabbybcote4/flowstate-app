@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { MoodButton } from "./MoodButton";
+import { useState, useEffect } from "react";import { MoodButton } from "./MoodButton";
 import { useTheme } from "./ThemeContext";
 import { useActivityNudges } from "./NudgeSystem";
-import { setLocalStorageItem } from "../hooks/useLocalStorage";
+//import { setLocalStorageItem } from "../hooks/useLocalStorage";
 
 interface CheckInScreenProps {
   onComplete: (mood: string) => void;
@@ -11,7 +10,7 @@ interface CheckInScreenProps {
 export function CheckInScreen({
   onComplete,
 }: CheckInScreenProps) {
-  const { themeColors } = useTheme();
+ const { themeColors } = useTheme();
   const { showMorningNudge } = useActivityNudges();
   
   // Show morning nudge when component mounts

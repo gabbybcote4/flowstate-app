@@ -24,13 +24,15 @@ interface AnimatedMoreMenuProps {
 }
 
 export function AnimatedMoreMenu({
- //isOpen,
+  isOpen,
   onClose,
   categories,
   currentScreen,
   onNavigate
 }: AnimatedMoreMenuProps) {
   const { themeColors } = useTheme();
+
+  if (!isOpen) return null;
 
   const handleItemClick = (itemId: string) => {
     onNavigate(itemId);
