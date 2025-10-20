@@ -13,7 +13,7 @@ import type {
   Snapshot,
   SymptomLog,
   HabitLog,
-} from '../components/storage';
+} from '../components/storage/storage';
 
 // Re-export types for convenience
 export type {

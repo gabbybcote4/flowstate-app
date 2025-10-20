@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { useUserConfig } from '../config/UserConfigContext';
-import { useTheme } from '../components/ThemeContext';
+import { useTheme } from '../components/context/ThemeContext';
 
 /**
  * Hook to synchronize UserConfig with ThemeContext and apply configuration on app load

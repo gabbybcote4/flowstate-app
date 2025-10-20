@@ -1,24 +1,25 @@
-import React, { Suspense, lazy, useEffect } from 'react';
-import { ThemeProvider } from './components/ThemeContext';
-import { EmotionalStateProvider } from './components/EmotionalStateManager';
-import { NotificationProvider, EnhancedNotificationDisplay } from './components/EnhancedNotificationSystem';
-import { NavigationProvider, useNavigation } from './components/NavigationContext';
+import React, { useEffect } from 'react';
+import { ThemeProvider } from './components/context/ThemeContext';
+import { EmotionalStateProvider } from './components/manager/EmotionalStateManager';
+import { NotificationProvider, EnhancedNotificationDisplay } from './components/system/EnhancedNotificationSystem';
+import { NavigationProvider, useNavigation } from './components/context/NavigationContext';
 import { UserConfigProvider } from './config/UserConfigContext';
-import { MindfulNotificationDisplay } from './components/MindfulNotificationSystem';
-import { GentleModeOverlay } from './components/GentleModeOverlay';
-import { useNudgeSystem } from './components/NudgeSystem';
-import { NavigationTransition } from './components/NavigationTransition';
-import { ScreenTransitionLoader } from './components/ScreenTransitionLoader';
-import { AnimatedBottomNav } from './components/AnimatedBottomNav';
-import { AnimatedMoreMenu } from './components/AnimatedMoreMenu';
+import { MindfulNotificationDisplay } from './components/system/MindfulNotificationSystem';
+import { GentleModeOverlay } from './components/overlay/GentleModeOverlay';
+import { ScreenLabel } from './components/overlay/ScreenLabel';
+// import { useNudgeSystem } from './components/system/NudgeSystem';
+import { NavigationTransition } from './components/transition/NavigationTransition';
+import { ScreenTransitionLoader } from './components/loader/ScreenTransitionLoader';
+import { AnimatedBottomNav } from './components/nav/AnimatedBottomNav';
+import { AnimatedMoreMenu } from './components/menu/AnimatedMoreMenu';
 import { ScrollToTop } from './components/ScrollToTop';
-import { PageLoadingState } from './components/PageLoadingState';
+//import { PageLoadingState } from './components/state/PageLoadingState';
 import { Toaster } from './components/ui/sonner';
 import { useMoodCheck } from './hooks/useMoodCheck';
 import { useScreenTransition } from './hooks/useScreenTransition';
 import { migrateLocalStorage } from './lib/localStorage-migration';
-import { DevTools } from './components/DevTools';
-import { OnboardingWrapper } from './components/OnboardingScreen';
+import { DevTools } from './components/tools/DevTools';
+import { OnboardingWrapper } from './screens/OnboardingScreen';
 import { useConfigSync } from './hooks/useConfigSync';
 import {
   Home,
@@ -41,63 +42,27 @@ import {
 } from 'lucide-react';
 
 // ============================================================================
-// LAZY-LOADED SCREENS
+// SCREENS 
 // ============================================================================
 
-const CheckInScreen = lazy(() =>
-  import('./screens/CheckInScreen').then(m => ({ default: m.default }))
-);
-const DashboardScreen = lazy(() =>
-  import('./screens/DashboardScreen').then(m => ({ default: m.default }))
-);
-const TodosScreen = lazy(() =>
-  import('./screens/TodosScreen').then(m => ({ default: m.default }))
-);
-const HabitBuilderScreen = lazy(() =>
-  import('./screens/HabitBuilderScreen').then(m => ({ default: m.default }))
-);
-const CoachingScreen = lazy(() =>
-  import('./screens/CoachingScreen').then(m => ({ default: m.default }))
-);
-const CoachChatScreen = lazy(() =>
-  import('./screens/CoachChatScreen').then(m => ({ default: m.default }))
-);
-const GrowthMapScreen = lazy(() =>
-  import('./screens/GrowthMapScreen').then(m => ({ default: m.default }))
-);
-const ReflectionScreen = lazy(() =>
-  import('./screens/ReflectionScreen').then(m => ({ default: m.default }))
-);
-const CalendarScreen = lazy(() =>
-  import('./screens/CalendarScreen').then(m => ({ default: m.default }))
-);
-const FocusToolsScreen = lazy(() =>
-  import('./screens/FocusToolsScreen').then(m => ({ default: m.default }))
-);
-const TimeFlowScreen = lazy(() =>
-  import('./screens/TimeFlowScreen').then(m => ({ default: m.default }))
-);
-const DisciplineBuilderScreen = lazy(() =>
-  import('./screens/DisciplineBuilderScreen').then(m => ({ default: m.default }))
-);
-const HabitEducationScreen = lazy(() =>
-  import('./screens/HabitEducationScreen').then(m => ({ default: m.default }))
-);
-const IntegrationsScreen = lazy(() =>
-  import('./screens/IntegrationsScreen').then(m => ({ default: m.default }))
-);
-const SymptomTrackerScreen = lazy(() =>
-  import('./screens/SymptomTrackerScreen').then(m => ({ default: m.default }))
-);
-const CommunityScreen = lazy(() =>
-  import('./screens/CommunityScreen').then(m => ({ default: m.default }))
-);
-const WeeklyInsightsDashboard = lazy(() =>
-  import('./screens/WeeklyInsightsDashboard').then(m => ({ default: m.default }))
-);
-const SettingsScreen = lazy(() =>
-  import('./screens/SettingsScreen').then(m => ({ default: m.default }))
-);
+import { CheckInScreen } from './screens/CheckInScreen';
+import { DashboardScreen } from './screens/DashboardScreen';
+import { TodosScreen } from './screens/TodosScreen';
+//import { HabitBuilderScreen } from './screens/HabitBuilderScreen';
+import { CoachingScreen } from './screens/CoachingScreen';
+//import { CoachChatScreen } from './screens/CoachChatScreen';
+//import { GrowthMapScreen } from './screens/GrowthMapScreen';
+import { ReflectionScreen } from './screens/ReflectionScreen';
+import { CalendarScreen } from './screens/CalendarScreen';
+import { FocusToolsScreen } from './screens/FocusToolsScreen';
+import { TimeFlowScreen } from './screens/TimeFlowScreen';
+//import {DisciplineBuilderScreen } from './screens/DisciplineBuilderScreen';
+//import { HabitEducationScreen } from './screens/HabitEducationScreen';
+//import { IntegrationsScreen } from './screens/IntegrationsScreen';
+import { SymptomTrackerScreen } from './screens/SymptomTrackerScreen';
+//import { CommunityScreen } from './screens/CommunityScreen';
+import { WeeklyInsightsDashboard } from './screens/WeeklyInsightsDashboard';
+import { SettingsScreen } from './screens/SettingsScreen';
 
 // ============================================================================
 // NAVIGATION CONFIGURATION
@@ -152,7 +117,7 @@ const MORE_MENU_CATEGORIES = [
 // ============================================================================
 
 function AppContent() {
-  const { navigate, currentScreen, params } = useNavigation();
+  const { navigate, currentScreen,  } = useNavigation();
   const { hasSetMood, setMood } = useMoodCheck();
   const [showMoreMenu, setShowMoreMenu] = React.useState(false);
   
@@ -160,7 +125,7 @@ function AppContent() {
   useConfigSync();
   
   // Initialize nudge system
-  useNudgeSystem();
+  // useNudgeSystem();
   
   // Screen transition management
   const { isTransitioning } = useScreenTransition(currentScreen);
@@ -228,57 +193,52 @@ function AppContent() {
 
       {/* Screen Content with Animations */}
       <div className="relative min-h-screen bg-white overflow-x-hidden">
-        <Suspense fallback={<PageLoadingState />}>
-          <NavigationTransition screenKey={currentScreen} direction="up">
-            {currentScreen === 'checkin' && (
-              <CheckInScreen onComplete={handleCheckInComplete} />
-            )}
-            {currentScreen === 'home' && (
-              <DashboardScreen
-                onNavigateToHabits={handleNavigateToHabits}
-                onNavigate={handleNavigate}
-              />
-            )}
-            {currentScreen === 'coach' && (
-              <CoachingScreen onNavigate={handleNavigate} />
-            )}
-            {currentScreen === 'coach-chat' && (
-              <CoachChatScreen onNavigate={handleNavigate} />
-            )}
-            {currentScreen === 'growth-map' && (
-              <GrowthMapScreen
-                onNavigate={(screen, area) => {
-                  if (area && screen === 'habits') {
-                    navigate('habit-builder', { selectedArea: area });
-                  } else {
-                    navigate(screen as any);
-                  }
-                }}
-              />
-            )}
-            {currentScreen === 'todos' && <TodosScreen />}
-            {currentScreen === 'focus-tools' && <FocusToolsScreen />}
-            {currentScreen === 'habit-builder' && (
-              <HabitBuilderScreen initialSelectedArea={params.selectedArea} />
-            )}
-            {currentScreen === 'timeflow' && <TimeFlowScreen />}
-            {currentScreen === 'reflection' && <ReflectionScreen />}
-            {currentScreen === 'calendar' && <CalendarScreen />}
-            {currentScreen === 'settings' && <SettingsScreen />}
-            {currentScreen === 'discipline-builder' && <DisciplineBuilderScreen />}
-            {currentScreen === 'habit-education' && <HabitEducationScreen />}
-            {currentScreen === 'integrations' && <IntegrationsScreen />}
-            {currentScreen === 'symptom-tracker' && (
-              <SymptomTrackerScreen onNavigate={handleNavigate} />
-            )}
-            {currentScreen === 'community' && (
-              <CommunityScreen onNavigate={handleNavigate} />
-            )}
-            {currentScreen === 'weekly-insights' && (
-              <WeeklyInsightsDashboard onNavigate={handleNavigate} />
-            )}
-          </NavigationTransition>
-        </Suspense>
+        <NavigationTransition screenKey={currentScreen} direction="up">
+  {currentScreen === 'checkin' && (
+    <CheckInScreen onComplete={handleCheckInComplete} />
+  )}
+  {currentScreen === 'home' && (
+    <DashboardScreen
+      onNavigateToHabits={handleNavigateToHabits}
+      onNavigate={handleNavigate}
+    />
+  )}
+  {currentScreen === 'coach' && <CoachingScreen onNavigate={handleNavigate} />}
+  {/* {currentScreen === 'coach-chat' && <CoachChatScreen onNavigate={handleNavigate} />} */}
+  {/* {currentScreen === 'growth-map' && (
+    <GrowthMapScreen
+      onNavigate={(screen, area) => {
+        if (area && screen === 'habits') {
+          navigate('habit-builder', { selectedArea: area });
+        } else {
+          navigate(screen as any);
+        }
+      }}
+    />
+  )} */}
+  {currentScreen === 'todos' && <TodosScreen />}
+  {currentScreen === 'focus-tools' && <FocusToolsScreen />}
+  {/* {currentScreen === 'habit-builder' 
+   // <HabitBuilderScreen initialSelectedArea={params.selectedArea} />
+  )} */}
+  {currentScreen === 'timeflow' && <TimeFlowScreen />}
+  {currentScreen === 'reflection' && <ReflectionScreen />}
+  {currentScreen === 'calendar' && <CalendarScreen />}
+  {currentScreen === 'settings' && <SettingsScreen />}
+  {/* {currentScreen === 'discipline-builder' && <DisciplineBuilderScreen />}
+  {currentScreen === 'habit-education' && <HabitEducationScreen />}
+  {currentScreen === 'integrations' && <IntegrationsScreen />} */}
+  {currentScreen === 'symptom-tracker' && (
+    <SymptomTrackerScreen onNavigate={handleNavigate} />
+  )}
+  {/* {currentScreen === 'community' && (
+    //<CommunityScreen onNavigate={handleNavigate} />
+  )} */}
+  {currentScreen === 'weekly-insights' && (
+    <WeeklyInsightsDashboard onNavigate={handleNavigate} />
+  )}
+</NavigationTransition>
+
       </div>
 
       {/* Animated Bottom Navigation */}
@@ -301,6 +261,9 @@ function AppContent() {
       
       {/* Gentle Mode Overlay */}
       <GentleModeOverlay />
+
+  {/* Developer: current screen label (top-left) */}
+  <ScreenLabel />
 
       {/* Mindful Notifications */}
       <MindfulNotificationDisplay />

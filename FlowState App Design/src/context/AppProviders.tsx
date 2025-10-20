@@ -5,10 +5,10 @@
  */
 
 import React, { memo } from 'react';
-import { ThemeProvider } from '../components/ThemeContext';
-import { EmotionalStateProvider } from '../components/EmotionalStateManager';
-import { NotificationProvider } from '../components/EnhancedNotificationSystem';
-import { NavigationProvider } from '../components/NavigationContext';
+import { ThemeProvider } from '../components/context/ThemeContext';
+import { EmotionalStateProvider } from '../components/manager/EmotionalStateManager';
+import { NotificationProvider } from '../components/system/EnhancedNotificationSystem';
+import { NavigationProvider } from '../components/context/NavigationContext';
 import { UserConfigProvider } from '../config/UserConfigContext';
 
 interface AppProvidersProps {
