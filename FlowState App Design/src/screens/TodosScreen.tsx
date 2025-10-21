@@ -4,6 +4,7 @@ import { TodoCard } from '../components/card/TodoCard';
 import { useTheme } from '../components/context/ThemeContext';
 import { useActivityNudges } from '../components/system/NudgeSystem';
 import { Plus } from 'lucide-react';
+import { DevTag } from '../components/overlay/DevTag';
 
 interface Todo {
   id: number;
@@ -119,11 +120,12 @@ export function TodosScreen() {
 
   return (
     <div 
-      className="min-h-screen bg-gradient-to-b"
+      className="min-h-screen bg-gradient-to-b relative"
       style={{
         backgroundImage: `linear-gradient(to bottom, ${themeColors.gradientFrom}, ${themeColors.gradientTo})`
       }}
     >
+      <div className="absolute top-0 left-0 bg-black/75 text-white px-2 py-1 text-sm rounded-br z-50">TODOS SCREEN</div>
       <div className="p-4 md:p-6 pt-8 md:pt-12 pb-32">
         <div className="max-w-md mx-auto px-4">
           {/* Header */}

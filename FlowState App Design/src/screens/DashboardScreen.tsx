@@ -20,6 +20,7 @@ import { TimeOfDayIndicator } from '../components/indicator/TimeOfDayIndicator';
 //import { AmbientParticles } from './AmbientParticles';
 //import { getLocalStorageItem } from '../hooks/useLocalStorage';
 import { getAdaptiveBackground } from '../components/background/adaptiveBackgrounds';
+import { DevTag } from '../components/overlay/DevTag';
 import { useUserConfig } from '../config/UserConfigContext';
 import { Moon, Footprints, Heart, Activity, Smile, Zap, MessageCircleHeart, Flower2, TrendingUp, CheckCircle2 } from 'lucide-react';
 
@@ -423,6 +424,7 @@ export function DashboardScreen({  onNavigate }: DashboardScreenProps = {}) {
         background: `linear-gradient(to bottom, ${adaptiveBackground.gradientFrom}, ${adaptiveBackground.gradientTo})`,
       }}
     >
+      <div className="absolute top-0 left-0 bg-black/75 text-white px-2 py-1 text-sm rounded-br z-50">DASHBOARD SCREEN</div>
       {/* Ambient Particles */}
 
       <div className="p-4 md:p-6 pt-8 md:pt-12 relative z-10">
@@ -436,6 +438,7 @@ export function DashboardScreen({  onNavigate }: DashboardScreenProps = {}) {
           <div className="mb-6">
             <TimeOfDayIndicator />
           </div>
+      <DevTag name="DashboardScreen" />
 
           {/* Weather + Moon Widget - conditionally rendered */}
           {(config.widgets.weather || config.widgets.moon) && (

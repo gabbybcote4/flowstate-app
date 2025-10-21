@@ -66,9 +66,9 @@ export function MoodCheckInWidget() {
 
   return (
     < div 
-      className="bg-white rounded-3xl shadow-md p-5 mb-6"
-
+      className="bg-white rounded-3xl shadow-md p-5 mb-6 relative"
     >
+      <div className="absolute top-0 right-0 bg-black/75 text-white px-2 py-1 text-[10px] rounded-bl z-50">MOOD CHECK-IN</div>
       <div className="flex items-center gap-2 mb-4">
         <Sparkles size={18} style={{ color: themeColors.primary }} />
         <h3>Quick Mood Check-In</h3>

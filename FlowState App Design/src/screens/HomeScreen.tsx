@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { HealthWidget } from './HealthWidget';
-import { TodoCard } from './TodoCard';
-import { AISuggestionsWidget } from './AISuggestionsWidget';
-import { WeeklySummaryCard } from './WeeklySummaryCard';
-import { WeatherMoonWidget } from './WeatherMoonWidget';
-import { AdaptiveGreeting } from './AdaptiveGreeting';
-import { MoodCheckInWidget } from './MoodCheckInWidget';
-import { QuickReflectionCard } from './QuickReflectionCard';
-import { TimeOfDayIndicator } from './TimeOfDayIndicator';
-import { AmbientParticles } from './AmbientParticles';
-import { useTheme } from '../components/context/ThemeContext';
-import { useActivityNudges } from './NudgeSystem';
-import { getAdaptiveBackground, getTimeOfDay } from './adaptiveBackgrounds';
+import { useState, useEffect } from 'react';
+import { HealthWidget } from '../components/widget/HealthWidget';
+// import { TodoCard } from './TodoCard';
+// import { AISuggestionsWidget } from '../components/widget/AISuggestionsWidget';
+import { WeeklySummaryCard } from '../components/card/WeeklySummaryCard';
+import { WeatherMoonWidget } from '../components/widget/WeatherMoonWidget';
+import { AdaptiveGreeting } from '../components/greeting/AdaptiveGreeting';
+import { MoodCheckInWidget } from '../components/widget/MoodCheckInWidget';
+import { QuickReflectionCard } from '../components/card/QuickReflectionCard';
+import { TimeOfDayIndicator } from '../components/indicator/TimeOfDayIndicator';
+// import { AmbientParticles } from '../components/particles/AmbientParticles';
+// import { useTheme } from '../components/context/ThemeContext';
+// import { useActivityNudges } from '../components/system/NudgeSystem';
+import { getAdaptiveBackground, getTimeOfDay } from '../components/background/adaptiveBackgrounds';
 import { Moon, Footprints, Heart, Plus } from 'lucide-react';
 import {
   Dialog,
@@ -20,30 +20,30 @@ import {
   DialogHeader,
   DialogTitle,
   DialogFooter,
-} from './ui/dialog';
-import { Input } from './ui/input';
-import { Label } from './ui/label';
+} from '../components/ui/dialog';
+import { Input } from '../components/ui/input';
+import { Label } from '../components/ui/label';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from './ui/select';
+} from '../components/ui/select';
 
-const DEFAULT_TODOS = [
-  { id: 1, title: 'Morning meditation', completed: true, time: 'morning', icon: '🧘' },
-  { id: 2, title: 'Hydrate (500ml)', completed: true, time: 'morning', icon: '💧' },
-  { id: 3, title: 'Gentle stretch', completed: false, time: 'morning', icon: '🌱' },
-  { id: 4, title: 'Light lunch prep', completed: false, time: 'afternoon', icon: '🥗' },
-  { id: 5, title: 'Project check-in', completed: false, time: 'afternoon', icon: '💼' },
-  { id: 6, title: 'Evening walk', completed: false, time: 'evening', icon: '🌙' },
-  { id: 7, title: 'Reflection journal', completed: false, time: 'evening', icon: '📔' },
-];
+// const DEFAULT_TODOS = [
+//   { id: 1, title: 'Morning meditation', completed: true, time: 'morning', icon: '🧘' },
+//   { id: 2, title: 'Hydrate (500ml)', completed: true, time: 'morning', icon: '💧' },
+//   { id: 3, title: 'Gentle stretch', completed: false, time: 'morning', icon: '🌱' },
+//   { id: 4, title: 'Light lunch prep', completed: false, time: 'afternoon', icon: '🥗' },
+//   { id: 5, title: 'Project check-in', completed: false, time: 'afternoon', icon: '💼' },
+//   { id: 6, title: 'Evening walk', completed: false, time: 'evening', icon: '🌙' },
+//   { id: 7, title: 'Reflection journal', completed: false, time: 'evening', icon: '📔' },
+// ];
 
 export function HomeScreen() {
-  const { themeColors } = useTheme();
-  const { showCompletionNudge } = useActivityNudges();
+  // const { themeColors } = useTheme();
+  // const { showCompletionNudge } = useActivityNudges();
   const [adaptiveBg, setAdaptiveBg] = useState(getAdaptiveBackground());
   const [currentTimeOfDay, setCurrentTimeOfDay] = useState(getTimeOfDay());
   
@@ -58,15 +58,15 @@ export function HomeScreen() {
   }, []);
   
   // Load todos from localStorage or use defaults
-  const [todos, setTodos] = useState(() => {
-    try {
-      const savedTodos = localStorage.getItem('flowstate-todos');
-      return savedTodos ? JSON.parse(savedTodos) : DEFAULT_TODOS;
-    } catch (error) {
-      console.error('Error loading todos from localStorage:', error);
-      return DEFAULT_TODOS;
-    }
-  });
+  // const [todos, setTodos] = useState(() => {
+  //   try {
+  //     const savedTodos = localStorage.getItem('flowstate-todos');
+  //     return savedTodos ? JSON.parse(savedTodos) : DEFAULT_TODOS;
+  //   } catch (error) {
+  //     console.error('Error loading todos from localStorage:', error);
+  //     return DEFAULT_TODOS;
+  //   }
+  // });
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newTodoTitle, setNewTodoTitle] = useState('');
@@ -74,58 +74,58 @@ export function HomeScreen() {
   const [newTodoIcon, setNewTodoIcon] = useState('✨');
 
   // Save todos to localStorage whenever they change
-  useEffect(() => {
-    try {
-      localStorage.setItem('flowstate-todos', JSON.stringify(todos));
-    } catch (error) {
-      console.error('Error saving todos to localStorage:', error);
-    }
-  }, [todos]);
+  // useEffect(() => {
+  //   try {
+  //     localStorage.setItem('flowstate-todos', JSON.stringify(todos));
+  //   } catch (error) {
+  //     console.error('Error saving todos to localStorage:', error);
+  //   }
+  // }, [todos]);
 
-  const toggleTodo = (id: number) => {
-    const updatedTodos = todos.map(todo => {
-      if (todo.id === id) {
-        const isCompleting = !todo.completed;
-        return {
-          ...todo,
-          completed: isCompleting,
-          completedAt: isCompleting ? new Date().toISOString() : undefined,
-        };
-      }
-      return todo;
-    });
-    setTodos(updatedTodos);
+  // const toggleTodo = (id: number) => {
+  //   const updatedTodos = todos.map(todo => {
+  //     if (todo.id === id) {
+  //       const isCompleting = !todo.completed;
+  //       return {
+  //         ...todo,
+  //         completed: isCompleting,
+  //         completedAt: isCompleting ? new Date().toISOString() : undefined,
+  //       };
+  //     }
+  //     return todo;
+  //   });
+  //   setTodos(updatedTodos);
     
-    // Show completion nudge when a task is completed
-    const toggledTodo = updatedTodos.find(t => t.id === id);
-    if (toggledTodo?.completed) {
-      const completedCount = updatedTodos.filter(t => t.completed).length;
-      showCompletionNudge(completedCount);
-    }
-  };
+  //   // Show completion nudge when a task is completed
+  //   const toggledTodo = updatedTodos.find(t => t.id === id);
+  //   if (toggledTodo?.completed) {
+  //     const completedCount = updatedTodos.filter(t => t.completed).length;
+  //     showCompletionNudge(completedCount);
+  //   }
+  // };
 
-  const handleAddTodo = () => {
-    if (newTodoTitle.trim()) {
-      const newTodo = {
-        id: Math.max(...todos.map(t => t.id), 0) + 1,
-        title: newTodoTitle,
-        completed: false,
-        time: newTodoTime,
-        icon: newTodoIcon,
-      };
-      setTodos([...todos, newTodo]);
-      setNewTodoTitle('');
-      setNewTodoIcon('✨');
-      setNewTodoTime('morning');
-      setIsModalOpen(false);
-    }
-  };
+  // const handleAddTodo = () => {
+  //   if (newTodoTitle.trim()) {
+  //     const newTodo = {
+  //       id: Math.max(...todos.map(t => t.id), 0) + 1,
+  //       title: newTodoTitle,
+  //       completed: false,
+  //       time: newTodoTime,
+  //       icon: newTodoIcon,
+  //     };
+  //     setTodos([...todos, newTodo]);
+  //     setNewTodoTitle('');
+  //     setNewTodoIcon('✨');
+  //     setNewTodoTime('morning');
+  //     setIsModalOpen(false);
+  //   }
+  // };
 
-  const todayDate = new Date().toLocaleDateString('en-US', { 
-    weekday: 'long', 
-    month: 'long', 
-    day: 'numeric' 
-  });
+  // const todayDate = new Date().toLocaleDateString('en-US', { 
+  //   weekday: 'long', 
+  //   month: 'long', 
+  //   day: 'numeric' 
+  // });
 
   return (
     <div 
@@ -135,7 +135,6 @@ export function HomeScreen() {
       }}
     >
       {/* Ambient particles that change with time of day */}
-      <AmbientParticles />
       
       <div className="p-4 md:p-6 pt-8 md:pt-12 pb-32 relative" style={{ zIndex: 2 }}>
         <div className="max-w-md mx-auto px-4">
@@ -177,7 +176,6 @@ export function HomeScreen() {
         <QuickReflectionCard />
 
         {/* AI Suggestions Widget */}
-        <AISuggestionsWidget />
 
         {/* Weekly Summary */}
         <WeeklySummaryCard />
@@ -195,7 +193,7 @@ export function HomeScreen() {
             )}
           </div>
           <div className="flex flex-col gap-3">
-            {todos.filter(t => t.time === 'morning').map(todo => (
+            {/* {todos.filter(t => t.time === 'morning').map(todo => (
               <TodoCard
                 key={todo.id}
                 title={todo.title}
@@ -203,7 +201,7 @@ export function HomeScreen() {
                 completed={todo.completed}
                 onToggle={() => toggleTodo(todo.id)}
               />
-            ))}
+            ))} */}
           </div>
         </div>
 
@@ -220,7 +218,7 @@ export function HomeScreen() {
             )}
           </div>
           <div className="flex flex-col gap-3">
-            {todos.filter(t => t.time === 'afternoon').map(todo => (
+            {/* {todos.filter(t => t.time === 'afternoon').map(todo => (
               <TodoCard
                 key={todo.id}
                 title={todo.title}
@@ -228,7 +226,7 @@ export function HomeScreen() {
                 completed={todo.completed}
                 onToggle={() => toggleTodo(todo.id)}
               />
-            ))}
+            ))} */}
           </div>
         </div>
 
@@ -245,7 +243,7 @@ export function HomeScreen() {
             )}
           </div>
           <div className="flex flex-col gap-3">
-            {todos.filter(t => t.time === 'evening').map(todo => (
+            {/* {todos.filter(t => t.time === 'evening').map(todo => (
               <TodoCard
                 key={todo.id}
                 title={todo.title}
@@ -253,7 +251,7 @@ export function HomeScreen() {
                 completed={todo.completed}
                 onToggle={() => toggleTodo(todo.id)}
               />
-            ))}
+            ))} */}
           </div>
         </div>
 
@@ -320,13 +318,13 @@ export function HomeScreen() {
             >
               Cancel
             </button>
-            <button
+            {/* <button
               onClick={handleAddTodo}
               disabled={!newTodoTitle.trim()}
               className="px-4 py-2 rounded-xl bg-lavender-400 text-white hover:bg-lavender-500 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
             >
               Add To-Do
-            </button>
+            </button> */}
           </DialogFooter>
         </DialogContent>
       </Dialog>

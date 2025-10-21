@@ -104,34 +104,39 @@ export function AdaptiveGreeting() {
   const Icon = greeting.icon;
 
   return (
-    < div 
-      className="mb-6 p-6 rounded-3xl shadow-lg relative overflow-hidden"
-      style={{
-        background: `linear-gradient(135deg, ${greeting.gradient[0]}, ${greeting.gradient[1]})`
-      }}
-    >
-      {/* Decorative background elements */}
-      <div className="absolute top-0 right-0 w-32 h-32 opacity-10">
-        <Icon size={128} />
+    <div style={{ position: 'relative' }}>
+      <div className="absolute top-0 right-0 bg-black/75 text-white px-2 py-1 text-[10px] rounded-bl z-50">
+        ADAPTIVE GREETING
       </div>
+      <div 
+        className="mb-6 p-6 rounded-3xl shadow-lg relative overflow-hidden"
+        style={{
+          background: `linear-gradient(135deg, ${greeting.gradient[0]}, ${greeting.gradient[1]})`
+        }}
+      >
+        {/* Decorative background elements */}
+        <div className="absolute top-0 right-0 w-32 h-32 opacity-10">
+          <Icon size={128} />
+        </div>
 
-      <div className="relative z-10">
-        <div className="flex items-center gap-3 mb-2">
-          <div className="w-10 h-10 rounded-full bg-white/40 flex items-center justify-center">
-            <Icon size={20} />
+        <div className="relative z-10">
+          <div className="flex items-center gap-3 mb-2">
+            <div className="w-10 h-10 rounded-full bg-white/40 flex items-center justify-center">
+              <Icon size={20} />
+            </div>
+            <h2 className="text-gray-800">{greeting.message}</h2>
           </div>
-          <h2 className="text-gray-800">{greeting.message}</h2>
-        </div>
-        <p className="text-gray-700 opacity-80 leading-relaxed">
-          {greeting.submessage}
-        </p>
-        
-        {/* Mood indicator */}
-        <div className="mt-4 flex items-center gap-2 text-sm">
-          <Heart size={14} className="text-red-500" />
-          <span className="opacity-70">Your energy matters more than your output</span>
+          <p className="text-gray-700 opacity-80 leading-relaxed">
+            {greeting.submessage}
+          </p>
+          
+          {/* Mood indicator */}
+          <div className="mt-4 flex items-center gap-2 text-sm">
+            <Heart size={14} className="text-red-500" />
+            <span className="opacity-70">Your energy matters more than your output</span>
+          </div>
         </div>
       </div>
-    </ div>
+    </div>
   );
 }

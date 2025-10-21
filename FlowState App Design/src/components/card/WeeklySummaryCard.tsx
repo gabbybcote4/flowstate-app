@@ -168,75 +168,78 @@ export function WeeklySummaryCard({ onViewDetails }: WeeklySummaryCardProps) {
   };
 
   return (
-    < div 
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="bg-white rounded-3xl shadow-sm p-5 border border-gray-100 hover:shadow-md transition-shadow duration-200"
-    >
-      {/* Header */}
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="text-gray-700 flex items-center gap-2">
-          <span>📊</span>
-          <span>This Week</span>
-        </h3>
-        <div className="text-xs opacity-50">Last 7 days</div>
+    <div style={{ position: 'relative' }}>
+      <div className="absolute top-0 right-0 bg-black/75 text-white px-2 py-1 text-[10px] rounded-bl z-50">
+        WEEKLY SUMMARY CARD
       </div>
+      <div 
+        className="bg-white rounded-3xl shadow-sm p-5 border border-gray-100 hover:shadow-md transition-shadow duration-200"
+      >
+        {/* Header */}
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="text-gray-700 flex items-center gap-2">
+            <span>📊</span>
+            <span>This Week</span>
+          </h3>
+          <div className="text-xs opacity-50">Last 7 days</div>
+        </div>
 
-      {/* Stats Grid */}
-      <div className="grid grid-cols-3 gap-4 mb-4">
-        {/* Mood */}
-        <div className="flex flex-col items-center p-3 bg-gray-50 rounded-2xl">
-          <div className="text-2xl mb-1.5">🌤️</div>
-          <div className="text-xs opacity-60 mb-1.5">Mood</div>
-          <div className="flex items-center gap-1.5">
-            <span className="text-sm">{getMoodLabel(summary.averageMood)}</span>
-            <TrendIcon trend={summary.moodTrend} />
+        {/* Stats Grid */}
+        <div className="grid grid-cols-3 gap-4 mb-4">
+          {/* Mood */}
+          <div className="flex flex-col items-center p-3 bg-gray-50 rounded-2xl">
+            <div className="text-2xl mb-1.5">🌤️</div>
+            <div className="text-xs opacity-60 mb-1.5">Mood</div>
+            <div className="flex items-center gap-1.5">
+              <span className="text-sm">{getMoodLabel(summary.averageMood)}</span>
+              <TrendIcon trend={summary.moodTrend} />
+            </div>
+          </div>
+
+          {/* Sleep */}
+          <div className="flex flex-col items-center p-3 bg-gray-50 rounded-2xl">
+            <div className="text-2xl mb-1.5">💤</div>
+            <div className="text-xs opacity-60 mb-1.5">Sleep</div>
+            <div className="flex items-center gap-1.5">
+              <span className="text-sm">
+                {summary.averageSleep > 0 ? `${summary.averageSleep.toFixed(1)}h` : '—'}
+              </span>
+              <TrendIcon trend={summary.sleepTrend} />
+            </div>
+          </div>
+
+          {/* Habits */}
+          <div className="flex flex-col items-center p-3 bg-gray-50 rounded-2xl">
+            <div className="text-2xl mb-1.5">✅</div>
+            <div className="text-xs opacity-60 mb-1.5">Habits</div>
+            <div className="flex items-center gap-1.5">
+              <span className="text-sm">{summary.todosCompleted}</span>
+              <TrendIcon trend={summary.todosTrend} />
+            </div>
           </div>
         </div>
 
-        {/* Sleep */}
-        <div className="flex flex-col items-center p-3 bg-gray-50 rounded-2xl">
-          <div className="text-2xl mb-1.5">💤</div>
-          <div className="text-xs opacity-60 mb-1.5">Sleep</div>
-          <div className="flex items-center gap-1.5">
-            <span className="text-sm">
-              {summary.averageSleep > 0 ? `${summary.averageSleep.toFixed(1)}h` : '—'}
-            </span>
-            <TrendIcon trend={summary.sleepTrend} />
+        {/* Insight */}
+        {summary.weekInsight && (
+          <div className="p-3 bg-gradient-to-br from-lavender-50 to-purple-50 rounded-2xl mb-3 border border-lavender-200">
+            <div className="flex items-start gap-2">
+              <Sparkles size={14} className="text-lavender-600 mt-0.5 flex-shrink-0" />
+              <p className="text-sm text-gray-700 leading-relaxed">{summary.weekInsight}</p>
+            </div>
           </div>
-        </div>
+        )}
 
-        {/* Habits */}
-        <div className="flex flex-col items-center p-3 bg-gray-50 rounded-2xl">
-          <div className="text-2xl mb-1.5">✅</div>
-          <div className="text-xs opacity-60 mb-1.5">Habits</div>
-          <div className="flex items-center gap-1.5">
-            <span className="text-sm">{summary.todosCompleted}</span>
-            <TrendIcon trend={summary.todosTrend} />
-          </div>
-        </div>
+        {/* View Details Button */}
+        {onViewDetails && (
+          <button
+            onClick={onViewDetails}
+            className="w-full py-2 px-4 bg-gray-50 hover:bg-gray-100 rounded-2xl text-sm flex items-center justify-center gap-2 transition-colors"
+          >
+            View Full Insights
+            <ChevronRight size={14} />
+          </button>
+        )}
       </div>
-
-      {/* Insight */}
-      {summary.weekInsight && (
-        <div className="p-3 bg-gradient-to-br from-lavender-50 to-purple-50 rounded-2xl mb-3 border border-lavender-200">
-          <div className="flex items-start gap-2">
-            <Sparkles size={14} className="text-lavender-600 mt-0.5 flex-shrink-0" />
-            <p className="text-sm text-gray-700 leading-relaxed">{summary.weekInsight}</p>
-          </div>
-        </div>
-      )}
-
-      {/* View Details Button */}
-      {onViewDetails && (
-        <button
-          onClick={onViewDetails}
-          className="w-full py-2 px-4 bg-gray-50 hover:bg-gray-100 rounded-2xl text-sm flex items-center justify-center gap-2 transition-colors"
-        >
-          View Full Insights
-          <ChevronRight size={14} />
-        </button>
-      )}
-    </ div>
+    </div>
   );
 }

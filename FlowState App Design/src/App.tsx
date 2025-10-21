@@ -7,6 +7,7 @@ import { UserConfigProvider } from './config/UserConfigContext';
 import { MindfulNotificationDisplay } from './components/system/MindfulNotificationSystem';
 import { GentleModeOverlay } from './components/overlay/GentleModeOverlay';
 import { ScreenLabel } from './components/overlay/ScreenLabel';
+import { DevOverlayProvider } from './components/overlay/DevOverlayContext';
 // import { useNudgeSystem } from './components/system/NudgeSystem';
 import { NavigationTransition } from './components/transition/NavigationTransition';
 import { ScreenTransitionLoader } from './components/loader/ScreenTransitionLoader';
@@ -309,7 +310,13 @@ export default function App() {
           <NotificationProvider>
             <NavigationProvider persist initialScreen="home">
               <OnboardingWrapper>
-                <AppContent />
+                { (import.meta as any)?.env?.DEV ? (
+                  <DevOverlayProvider>
+                    <AppContent />
+                  </DevOverlayProvider>
+                ) : (
+                  <AppContent />
+                ) }
               </OnboardingWrapper>
             </NavigationProvider>
           </NotificationProvider>

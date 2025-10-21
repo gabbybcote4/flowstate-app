@@ -93,7 +93,11 @@ export function LifeAreaDialog({ isOpen, onClose, lifeArea }: LifeAreaDialogProp
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-lg">
+      <div style={{ position: 'relative' }}>
+        <div className="absolute top-0 right-0 bg-black/75 text-white px-2 py-1 text-[10px] rounded-bl z-50">
+          LIFE AREA DIALOG
+        </div>
+        <DialogContent className="max-w-lg z-50">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-3">
             <span className="text-3xl">{lifeArea.icon}</span>

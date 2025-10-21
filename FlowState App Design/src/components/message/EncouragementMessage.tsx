@@ -14,6 +14,7 @@ const encouragementMessages = [
   "You're allowed to do things at your own pace 🐢",
 ];
 
+
 export function EncouragementMessage() {
   const [message, setMessage] = useState('');
 
@@ -25,14 +26,19 @@ export function EncouragementMessage() {
   }, []);
 
   return (
-    <div className="bg-gradient-to-br from-lavender-100 to-peach-100 rounded-3xl shadow-sm p-6 border border-lavender-200">
-      <div className="flex items-start gap-3">
-        <div className="flex-shrink-0 mt-1">
-          <Sparkles size={24} className="text-lavender-600" />
-        </div>
-        <div className="flex-1">
-          <h3 className="text-lavender-700 mb-2">A gentle reminder</h3>
-          <p className="text-gray-700 leading-relaxed">{message}</p>
+    <div style={{ position: 'relative' }}>
+      <div className="absolute top-0 right-0 bg-black/75 text-white px-2 py-1 text-[10px] rounded-bl z-50">
+        ENCOURAGEMENT MESSAGE
+      </div>
+      <div className="bg-gradient-to-br from-lavender-100 to-peach-100 rounded-3xl shadow-sm p-6 border border-lavender-200">
+        <div className="flex items-start gap-3">
+          <div className="flex-shrink-0 mt-1">
+            <Sparkles size={24} className="text-lavender-600" />
+          </div>
+          <div className="flex-1">
+            <h3 className="text-lavender-700 mb-2">A gentle reminder</h3>
+            <p className="text-gray-700 leading-relaxed">{message}</p>
+          </div>
         </div>
       </div>
     </div>

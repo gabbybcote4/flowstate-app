@@ -11,11 +11,12 @@ export function FocusToolsScreen() {
 
   return (
     <div 
-      className="min-h-screen bg-gradient-to-b"
+      className="min-h-screen bg-gradient-to-b relative"
       style={{
         backgroundImage: `linear-gradient(to bottom, ${themeColors.gradientTo}, ${themeColors.gradientFrom})`
       }}
     >
+      <div className="absolute top-0 left-0 bg-black/75 text-white px-2 py-1 text-sm rounded-br z-50">FOCUS TOOLS SCREEN</div>
       <div className="p-4 md:p-6 pt-8 md:pt-12 pb-32">
         <div className="max-w-md mx-auto px-4">
           {/* Header */}

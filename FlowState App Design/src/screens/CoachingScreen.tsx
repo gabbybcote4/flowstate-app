@@ -494,7 +494,8 @@ export function CoachingScreen({ onNavigate }: CoachingScreenProps) {
   }
 
   return (
-    <div>
+    <div className="relative">
+      <div className="absolute top-0 left-0 bg-black/75 text-white px-2 py-1 text-sm rounded-br z-50">COACHING SCREEN</div>
       {renderTabs()}
       
       <div

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";import { MoodButton } from "../components/button/MoodButton";
+import { DevTag } from '../components/overlay/DevTag';
 import { useTheme } from "../components/context/ThemeContext";
 import { useActivityNudges } from "../components/system/NudgeSystem";
 //import { setLocalStorageItem } from "../hooks/useLocalStorage";
@@ -42,7 +43,8 @@ export function CheckInScreen({
   const { greeting, prompt } = getTimeGreeting();
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-lavender-100 via-lavender-50 to-white flex flex-col">
+    <div className="min-h-screen bg-gradient-to-b from-lavender-100 via-lavender-50 to-white flex flex-col relative">
+      <div className="absolute top-0 left-0 bg-black/75 text-white px-2 py-1 text-sm rounded-br z-50">CHECK-IN SCREEN</div>
       <div className="flex-1 flex flex-col p-4 md:p-6 pt-8 md:pt-12 pb-28">
         <div className="flex-1 flex flex-col justify-center max-w-md mx-auto w-full items-center px-4">
           <div className="text-center p-16 mb-12">

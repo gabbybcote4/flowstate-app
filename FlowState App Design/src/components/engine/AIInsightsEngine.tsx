@@ -492,10 +492,14 @@ export function AIInsightsEngine() {
   }
 
   return (
-    <div className="space-y-4">
-      {/* Main Insights Card */}
-      < div
-        className="bg-white rounded-3xl shadow-lg overflow-hidden"
+    <div style={{ position: 'relative' }}>
+      <div className="absolute top-0 right-0 bg-black/75 text-white px-2 py-1 text-[10px] rounded-bl z-50">
+        AI INSIGHTS ENGINE
+      </div>
+      <div className="space-y-4">
+        {/* Main Insights Card */}
+        <div
+          className="bg-white rounded-3xl shadow-lg overflow-hidden"
       >
         {/* Header */}
         <div 
