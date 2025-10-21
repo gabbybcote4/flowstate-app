@@ -1,23 +1,16 @@
-// Using the automatic JSX runtime - no React import required
-
+// DevTag.tsx
 interface DevTagProps {
   name: string;
 }
 
-/**
- * Small inline tag used in screens to identify the component for quick dev reference.
- * Lightweight and non-interactive by default.
- */
 import { useDevOverlay } from './DevOverlayContext';
 
 export function DevTag({ name }: DevTagProps) {
-  // Only show in development and when enabled via the overlay toggle
   if (!(import.meta as any)?.env?.DEV) return null;
 
   const { enabled } = useDevOverlay();
   if (!enabled) return null;
 
-  // Tiny dot with hover popup
   return (
     <div
       className="absolute top-2 left-2 z-[9999]"

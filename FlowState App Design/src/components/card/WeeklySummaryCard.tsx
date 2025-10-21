@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { TrendingUp, TrendingDown, Minus, Sparkles, ChevronRight } from 'lucide-react';
-import { motion } from 'motion/react';
+//import { motion } from 'motion/react';
 
 interface WeeklySummary {
   averageMood: number;

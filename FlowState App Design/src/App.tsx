@@ -150,9 +150,10 @@ function AppContent() {
   const handleCheckInComplete = React.useCallback((mood: string) => {
     console.log('🎯 handleCheckInComplete called with mood:', mood);
     // Update mood state before navigating
-    setMood(mood);
+    setMood(mood); /*
     console.log('💾 Mood state updated, navigating to home...');
-    navigate('home');
+    */ navigate('home');
+    console.log('Mood state updated, navigating to home...');
   }, [navigate, setMood]);
 
   const handleNavigateToHabits = React.useCallback((lifeArea: string) => {

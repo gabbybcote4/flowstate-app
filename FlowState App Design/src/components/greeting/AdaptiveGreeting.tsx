@@ -16,7 +16,7 @@ export function AdaptiveGreeting() {
 
   useEffect(() => {
     updateGreeting();
-    // Update every minute to keep time-based greetings fresh
+    // update every minute to keep time-based greetings fresh
     const interval = setInterval(updateGreeting, 60000);
     return () => clearInterval(interval);
   }, []);
@@ -25,7 +25,7 @@ export function AdaptiveGreeting() {
     const hour = new Date().getHours();
     const userName = localStorage.getItem('flowstate-username') || 'friend';
     
-    // Get today's check-in data for energy-aware messaging
+    // get today's check-in data for energy-aware messaging
     const today = new Date().toDateString();
     const savedData = localStorage.getItem('flowstate-coaching-data');
     let energy = 3; // default
@@ -44,7 +44,7 @@ export function AdaptiveGreeting() {
 
     let greetingData: GreetingData;
 
-    // Early Morning (5-7 AM)
+    // early morning (5-7 am)
     if (hour >= 5 && hour < 7) {
       greetingData = {
         message: `Early bird, ${userName} 🌅`,
@@ -55,7 +55,7 @@ export function AdaptiveGreeting() {
         gradient: ['#FEF3C7', '#FCD34D']
       };
     }
-    // Morning (7-12 PM)
+    // morning (7-12 pm)
     else if (hour >= 7 && hour < 12) {
       greetingData = {
         message: `Good morning, ${userName} ☀️`,
@@ -66,7 +66,7 @@ export function AdaptiveGreeting() {
         gradient: ['#FBBF24', '#F59E0B']
       };
     }
-    // Afternoon (12-5 PM)
+    // afternoon (12-5 pm)
     else if (hour >= 12 && hour < 17) {
       greetingData = {
         message: `Good afternoon, ${userName} 🌤️`,
@@ -77,7 +77,7 @@ export function AdaptiveGreeting() {
         gradient: ['#FDE68A', '#FCD34D']
       };
     }
-    // Evening (5-9 PM)
+    // evening (5-9 pm)
     else if (hour >= 17 && hour < 21) {
       greetingData = {
         message: `Good evening, ${userName} 🌅`,
@@ -86,7 +86,7 @@ export function AdaptiveGreeting() {
         gradient: ['#FBCFE8', '#F9A8D4']
       };
     }
-    // Night (9 PM - 5 AM)
+    // night (9 pm - 5 am)
     else {
       greetingData = {
         message: `Good night, ${userName} 🌙`,
@@ -114,7 +114,7 @@ export function AdaptiveGreeting() {
           background: `linear-gradient(135deg, ${greeting.gradient[0]}, ${greeting.gradient[1]})`
         }}
       >
-        {/* Decorative background elements */}
+        {/* decorative background elements */}
         <div className="absolute top-0 right-0 w-32 h-32 opacity-10">
           <Icon size={128} />
         </div>

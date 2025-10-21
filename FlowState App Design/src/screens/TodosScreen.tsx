@@ -4,7 +4,7 @@ import { TodoCard } from '../components/card/TodoCard';
 import { useTheme } from '../components/context/ThemeContext';
 import { useActivityNudges } from '../components/system/NudgeSystem';
 import { Plus } from 'lucide-react';
-import { DevTag } from '../components/overlay/DevTag';
+//import { DevTag } from '../components/overlay/DevTag';
 
 interface Todo {
   id: number;

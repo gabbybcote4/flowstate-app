@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+//import { motion } from 'motion/react';
 import { ReactNode } from 'react';
 
 interface TapFeedbackProps {
@@ -11,7 +11,7 @@ interface TapFeedbackProps {
 
 export function TapFeedback({ 
   children, 
-  scale = 0.95,
+  //scale = 0.95,
   disabled = false,
   className = '',
   onClick
@@ -27,12 +27,12 @@ export function TapFeedback({
         TAP FEEDBACK
       </div>
       <div
-        whileTap={{ scale }}
-        transition={{
-          type: 'spring',
-          stiffness: 400,
-          damping: 17
-        }}
+        // whileTap={{ scale }}
+        // transition={{
+        //   type: 'spring',
+        //   stiffness: 400,
+        //   damping: 17
+        // }}
         className={className}
         onClick={onClick}
       >

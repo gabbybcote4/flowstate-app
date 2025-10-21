@@ -9,7 +9,7 @@ export function QuickReflectionCard() {
 
   const handleSubmit = () => {
     if (reflection.trim()) {
-      // Save to localStorage
+      // save to localStorage
       const today = new Date().toISOString().split('T')[0];
       const existingReflections = JSON.parse(
         localStorage.getItem('flowstate-reflections') || '{}'

@@ -474,7 +474,7 @@ export function AIInsightsEngine() {
   // Show a gentle placeholder if not enough data yet
   if (!chartData || insights.length === 0) {
     return (
-      < div
+      <div
         className="bg-white rounded-3xl shadow-lg p-8 text-center"
       >
         <div 
@@ -487,7 +487,7 @@ export function AIInsightsEngine() {
         <p className="text-sm opacity-50 max-w-md mx-auto">
           Keep checking in and completing habits. We'll start discovering patterns in your data soon! 
         </p>
-      </ div>
+      </div>
     );
   }
 
@@ -500,48 +500,47 @@ export function AIInsightsEngine() {
         {/* Main Insights Card */}
         <div
           className="bg-white rounded-3xl shadow-lg overflow-hidden"
-      >
-        {/* Header */}
-        <div 
-          className="p-6 pb-4"
-          style={{ 
-            background: `linear-gradient(135deg, ${themeColors.primary}15 0%, ${themeColors.primary}05 100%)`
-          }}
         >
-          <div className="flex items-center justify-between mb-2">
-            <div className="flex items-center gap-3">
-              <div 
-                className="w-12 h-12 rounded-2xl flex items-center justify-center"
-                style={{ backgroundColor: `${themeColors.primary}20` }}
+          {/* Header */}
+          <div 
+            className="p-6 pb-4"
+            style={{ 
+              background: `linear-gradient(135deg, ${themeColors.primary}15 0%, ${themeColors.primary}05 100%)`
+            }}
+          >
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-3">
+                <div 
+                  className="w-12 h-12 rounded-2xl flex items-center justify-center"
+                  style={{ backgroundColor: `${themeColors.primary}20` }}
+                >
+                  <Brain size={24} style={{ color: themeColors.primary }} />
+                </div>
+                <div>
+                  <h3 className="mb-0">AI Insights</h3>
+                  <p className="text-sm opacity-60">Patterns discovered from your data</p>
+                </div>
+              </div>
+              <button
+                //whileHover={{ scale: 1.05 }}
+                //whileTap={{ scale: 0.95 }}
+                onClick={analyzeData}
+                className="w-10 h-10 rounded-xl flex items-center justify-center transition-colors hover:bg-white/50"
+                title="Refresh insights"
               >
-                <Brain size={24} style={{ color: themeColors.primary }} />
-              </div>
-              <div>
-                <h3 className="mb-0">AI Insights</h3>
-                <p className="text-sm opacity-60">Patterns discovered from your data</p>
-              </div>
+                <div>
+                  <RefreshCw size={18} className="opacity-60" />
+                </div>
+              </button>
             </div>
-            < button
-              //whileHover={{ scale: 1.05 }}
-              //whileTap={{ scale: 0.95 }}
-              onClick={analyzeData}
-              className="w-10 h-10 rounded-xl flex items-center justify-center transition-colors hover:bg-white/50"
-              title="Refresh insights"
-            >
-              < div
-              >
-                <RefreshCw size={18} className="opacity-60" />
-              </ div>
-            </ button>
           </div>
-        </div>
 
         {/* Key Insights */}
         <div className="p-6 pt-4 space-y-3">
           {insights.map((insight, ) => {
             const Icon = getInsightIcon(insight.icon);
             return (
-              < div
+              <div
                 key={insight.id}
                 onClick={() => setSelectedInsight(insight)}
                 className="p-4 rounded-2xl cursor-pointer transition-all hover:shadow-md"
@@ -595,11 +594,11 @@ export function AIInsightsEngine() {
 
       {/* Expanded Charts */}
         {isExpanded && (
-          < div
+          <div
             className="space-y-4 overflow-hidden"
           >
             {/* Energy & Mood Trends */}
-            < div
+            <div
               className="bg-white rounded-3xl shadow-lg p-6"
             >
               <div className="flex items-center justify-between mb-4">
@@ -663,7 +662,7 @@ export function AIInsightsEngine() {
 
             {/* Sleep Correlation */}
             {chartData.sleepCorrelation.length > 0 && (
-              < div
+              <div
                 className="bg-white rounded-3xl shadow-lg p-6"
               >
                 <div className="flex items-center gap-2 mb-4">
@@ -701,7 +700,7 @@ export function AIInsightsEngine() {
             )}
 
             {/* Productivity Peaks - Radial Chart */}
-            < div
+            <div
               className="bg-white rounded-3xl shadow-lg p-6"
             >
               <div className="flex items-center gap-2 mb-4">
@@ -743,9 +742,10 @@ export function AIInsightsEngine() {
                   />
                 </RadarChart>
               </ResponsiveContainer>
-            </ div>
-          </ div>
+            </div>
+          </div>
         )}
+      </div>
     </div>
   );
 }

@@ -159,8 +159,11 @@ function CoachingCheckInStatus() {
               <span className="opacity-80">
               </span>
             </div>
-            <div className="text-xs opacity-60">
+            <div className="text-xs opacity-60"> /*
               ✓ Checked in today — visit Coach tab for full guidance
+            </div> */
+            <div className="text-xs opacity-60">
+              Checked in today — visit Coach tab for full guidance
             </div>
           </div>
           <div>
@@ -511,8 +514,10 @@ export function DashboardScreen({  onNavigate }: DashboardScreenProps = {}) {
                 <div className="grid grid-cols-2 gap-3 text-sm">
                   <div>
                     <div className="opacity-60 text-xs mb-1">Habits</div>
-                    <div className="opacity-90">
+                    <div className="opacity-90"> /*
                       {habitsStats.total > 0 ? `${habitsStats.completed}/${habitsStats.total}` : 'None yet'}
+                    */
+                      {habitsStats.completed > 0 ? `${habitsStats.completed} done ✓` : 'Start now'}
                     </div>
                   </div>
                   <div>
