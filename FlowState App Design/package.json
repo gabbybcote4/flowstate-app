@@ -1,5 +1,5 @@
 {
-      "name": "FlowState App Design",
+      "name": "FlowState",
       "version": "0.1.0",
       "private": true,
       "dependencies": {
@@ -63,6 +63,9 @@
       },
       "scripts": {
             "dev": "vite",
-            "build": "vite build"
+            "build": "tsc -b && vite build",
+            "preview": "vite preview --strictPort",
+            "lint": "eslint . --ext .ts,.tsx",
+            "format": "prettier -w ."
       }
 }

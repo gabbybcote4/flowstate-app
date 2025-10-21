@@ -1,11 +1,17 @@
+# FlowState
 
-  # FlowState App Design
+Adaptive routine app (TS + React + Tailwind).
 
-  This is a code bundle for FlowState App Design. The original project is available at https://www.figma.com/design/Q4CI4AxvtoDLhuFgqfftBS/FlowState-App-Design.
+## Quick start
+pnpm i
+pnpm dev
 
-  ## Running the code
+## Scripts
+- dev: start dev server
+- build: production build
+- preview: preview build locally
+- lint: eslint + ts
+- format: prettier
 
-  Run `npm i` to install the dependencies.
-
-  Run `npm run dev` to start the development server.
-  
+## Tech
+TypeScript, React, Tailwind, Vite (or Next), Vercel deploy.
