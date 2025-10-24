@@ -195,7 +195,7 @@
 //                   e.stopPropagation();
 //                   onConvertToEvent(event.id);
 //                 }}
-//                 className="p-1 hover:bg-[var(--color-card)]/50 rounded transition-colors"
+//                 className="p-1 hover:flow-card"
 //                 title="Convert to Event"
 //               >
 //                 <ArrowRight size={12} className="opacity-60" />
@@ -206,7 +206,7 @@
 //                 e.stopPropagation();
 //                 onEdit(event);
 //               }}
-//               className="p-1 hover:bg-[var(--color-card)]/50 rounded transition-colors"
+//               className="p-1 hover:flow-card"
 //             >
 //               <Edit2 size={12} className="opacity-60" />
 //             </button>
@@ -215,7 +215,7 @@
 //                 e.stopPropagation();
 //                 onDelete(event.id);
 //               }}
-//               className="p-1 hover:bg-[var(--color-card)]/50 rounded transition-colors"
+//               className="p-1 hover:flow-card"
 //             >
 //               <Trash2 size={12} className="opacity-60" />
 //             </button>
@@ -261,7 +261,7 @@
 //       } ${isOver ? 'bg-lavender-50' : ''}`}
 //     >
 //       {showTimeLabel && (
-//         <div className="absolute left-0 -top-2.5 text-xs opacity-60 w-14 pr-2 text-right bg-[var(--color-card)] z-10">
+//         <div className="absolute left-0 -top-2.5 text-xs opacity-60 w-14 pr-2 text-right flow-card">
 //           {hour.toString().padStart(2, '0')}:00
 //         </div>
 //       )}
@@ -492,7 +492,7 @@
 //     <DndProvider backend={HTML5Backend}>
 //       <div className="min-h-screen pb-24" style={{ backgroundColor: themeColors.background }}>
 //         {/* Header */}
-//         <div className="bg-[var(--color-card)] border-b border-[var(--color-ring-offset-background)] px-6 py-4 sticky top-0 z-10">
+//         <div className="flow-card">
 //           <div className="flex items-center justify-between mb-4">
 //             <div>
 //               <h1 className="text-gray-900 flex items-center gap-2">
@@ -548,7 +548,7 @@
 //                   const statusColor = status === 'full' ? '#10b981' : status === 'balanced' ? '#f59e0b' : '#ef4444';
                   
 //                   return (
-//                     < div
+//                     <div
 //                       key={balance.area}
 //                       initial={{ opacity: 0, scale: 0.9 }}
 //                       animate={{ opacity: 1, scale: 1 }}
@@ -608,7 +608,7 @@
 //                   const date = new Date(currentDate.getTime() + offset * 86400000);
 //                   return (
 //                     <div key={offset}>
-//                       <h3 className="text-sm mb-2 sticky top-0 bg-[var(--color-card)] py-2">
+//                       <h3 className="text-sm mb-2 sticky top-0 flow-card">
 //                         {date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}
 //                       </h3>
 //                       {renderDayView(date, true)}
@@ -628,7 +628,7 @@
 
 //                   return (
 //                     <div key={i} className="min-h-[200px]">
-//                       <h3 className="text-sm mb-2 sticky top-0 bg-[var(--color-card)] py-2">
+//                       <h3 className="text-sm mb-2 sticky top-0 flow-card">
 //                         {date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}
 //                       </h3>
 //                       <div className="space-y-1">

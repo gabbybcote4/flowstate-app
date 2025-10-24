@@ -32,7 +32,7 @@ export function FocusToolsScreen() {
 
           {/* Tabs */}
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid w-full grid-cols-3 bg-[var(--color-card)] p-1.5 rounded-3xl mb-8 shadow-md">
+            <TabsList className="grid w-full grid-cols-3 flow-card">
               <TabsTrigger 
                 value="timer" 
                 className="rounded-2xl data-[state=active]:bg-gradient-to-br data-[state=active]:from-lavender-400 data-[state=active]:to-purple-400 data-[state=active]:text-white data-[state=active]:shadow-lg transition-all duration-300"

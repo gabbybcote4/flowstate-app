@@ -28,14 +28,14 @@ export function TimeOfDayIndicator() {
   const isDay = hour >= 6 && hour < 20;
 
   return (
-    <div className="mb-4 relative h-12 bg-[var(--color-card)]/40 rounded-2xl overflow-hidden">
+    <div className="mb-4 relative h-12 flow-card">
 
       {/* time indicator track */}
       <div className="absolute inset-0 flex items-center px-4">
         <div className="flex-1 h-1 bg-gray-200 rounded-full relative">
 
           {/* progress indicator */}
-          < div
+          <div
             className="absolute top-0 left-0 h-full rounded-full"
             style={{
               width: `${dayProgress}%`,
@@ -46,11 +46,11 @@ export function TimeOfDayIndicator() {
           />
           
           {/* moving sun/moon icon */}
-          < div
+          <div
             className="absolute top-1/2 -translate-y-1/2 -ml-4"
             style={{ left: `${dayProgress}%` }}
           >
-            <div className="w-8 h-8 rounded-full bg-[var(--color-card)] shadow-lg flex items-center justify-center text-lg">
+            <div className="w-8 h-8 rounded-full flow-card">
               {isDay ? '☀️' : '🌙'}
             </div>
           </ div>

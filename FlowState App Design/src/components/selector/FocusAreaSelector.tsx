@@ -18,7 +18,7 @@ const focusAreas = [
 
 export function FocusAreaSelector({ selectedArea, onSelect }: FocusAreaSelectorProps) {
   return (
-    <div className="bg-[var(--color-card)] rounded-3xl shadow-sm p-5 border border-[var(--color-ring-offset-background)]">
+    <div className="flow-card">
       <h3 className="mb-4 text-[var(--color-card-foreground)]">Today's Focus Area</h3>
       <div className="grid grid-cols-4 gap-3">
         {focusAreas.map((area) => (

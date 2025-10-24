@@ -72,7 +72,7 @@ function SheetContent({
         data-slot="sheet-content"
         className={cn(
           "fixed z-50 flex flex-col gap-4 shadow-lg border transition ease-in-out",
-          "bg-[var(--color-card)] text-[var(--color-card-foreground)] border-[var(--color-ring-offset-background)]",
+          "flow-card",
           "data-[state=open]:animate-in data-[state=closed]:animate-out",
           "data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0",
           side === "right" &&

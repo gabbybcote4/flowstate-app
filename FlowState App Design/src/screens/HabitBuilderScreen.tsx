@@ -392,7 +392,7 @@ export function HabitBuilderScreen({ initialSelectedArea }: HabitBuilderScreenPr
     >
       {/* header */}
       <div
-        className="sticky top-0 z-40 bg-[var(--color-card)] border-b"
+        className="sticky top-0 z-40 flow-card"
         style={{ borderColor: borderCol }}
       >
         <div className="max-w-4xl mx-auto px-4 md:px-6">
@@ -476,7 +476,7 @@ export function HabitBuilderScreen({ initialSelectedArea }: HabitBuilderScreenPr
                     className={`px-3 py-1.5 rounded-lg text-sm whitespace-nowrap ${
                       selectedArea === area
                         ? "text-white shadow-md"
-                        : "bg-[var(--color-card)]/50 hover:bg-[var(--color-card)]"
+                        : "flow-card"
                     }`}
                     style={
                       selectedArea === area

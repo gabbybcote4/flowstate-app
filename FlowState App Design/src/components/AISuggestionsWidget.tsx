@@ -194,7 +194,7 @@
 //           className="w-14 h-14 bg-gradient-to-br from-lavender-400 to-purple-400 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center relative"
 //           aria-label="Open AI suggestions"
 //         >
-//           < div
+//           <div
 //             animate={{ 
 //               rotate: [0, 10, -10, 10, 0],
 //             }}
@@ -208,7 +208,7 @@
 //           </ div>
           
 //           {/* Notification dot */}
-//           < div
+//           <div
 //             initial={{ scale: 0 }}
 //             animate={{ scale: 1 }}
 //             className="absolute -top-1 -right-1 w-4 h-4 bg-pink-400 rounded-full border-2 border-white"
@@ -217,7 +217,7 @@
 //       ) : (
 //         // Expanded Dropdown Panel
 //         <AnimatePresence>
-//           < div
+//           <div
 //             initial={{ opacity: 0, y: -20, scale: 0.95 }}
 //             animate={{ opacity: 1, y: 0, scale: 1 }}
 //             exit={{ opacity: 0, y: -20, scale: 0.95 }}
@@ -232,7 +232,7 @@
 //                 {/* Header with minimize button */}
 //                 <div className="flex items-center justify-between mb-4">
 //                   <div className="flex items-center gap-2">
-//                     < div
+//                     <div
 //                       initial={{ scale: 0.8 }}
 //                       animate={{ scale: 1 }}
 //                       transition={{ 
@@ -241,10 +241,10 @@
 //                         repeatType: 'reverse',
 //                         repeatDelay: 3
 //                       }}
-//                       className="w-10 h-10 bg-[var(--color-card)] rounded-2xl shadow-sm flex items-center justify-center"
+//                       className="w-10 h-10 flow-card"
 //                     >
 //                       {isAdded ? (
-//                         < div
+//                         <div
 //                           initial={{ scale: 0 }}
 //                           animate={{ scale: 1 }}
 //                           transition={{ type: 'spring', stiffness: 200, damping: 10 }}
@@ -264,7 +264,7 @@
 //                   </div>
 //                   <button
 //                     onClick={handleMinimize}
-//                     className="p-2 rounded-full hover:bg-[var(--color-card)]/50 transition-colors"
+//                     className="p-2 rounded-full hover:flow-card"
 //                     aria-label="Minimize suggestion"
 //                   >
 //                     <X size={18} className="opacity-60" />
@@ -292,7 +292,7 @@
 //                     </button>
 //                     <button
 //                       onClick={handleMinimize}
-//                       className="w-full px-4 py-2 rounded-2xl bg-[var(--color-card)]/80 text-lavender-700 hover:bg-[var(--color-card)] transition-colors text-sm"
+//                       className="w-full px-4 py-2 rounded-2xl flow-card"
 //                     >
 //                       Maybe later
 //                     </button>
@@ -300,7 +300,7 @@
 //                 )}
 
 //                 {isAdded && (
-//                   < div
+//                   <div
 //                     initial={{ opacity: 0 }}
 //                     animate={{ opacity: 1 }}
 //                     className="text-center py-2 text-green-600"
@@ -311,7 +311,7 @@
 //               </div>
 
 //               {/* Subtle animation line at bottom */}
-//               < div
+//               <div
 //                 className="h-1 bg-gradient-to-r from-lavender-400 via-purple-400 to-lavender-400"
 //                 initial={{ scaleX: 0 }}
 //                 animate={{ scaleX: 1 }}

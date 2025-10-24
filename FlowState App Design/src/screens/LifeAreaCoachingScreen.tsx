@@ -229,7 +229,7 @@ import { motion, AnimatePresence } from "framer-motion";
 //           </button>
 
 //           {/* Area header */}
-//           < div
+//           <div
 //             initial={{ opacity: 0, y: 20 }}
 //             animate={{ opacity: 1, y: 0 }}
 //             className={`bg-gradient-to-br ${area.gradient} rounded-3xl p-8 mb-8 border border-gray-200`}
@@ -255,8 +255,8 @@ import { motion, AnimatePresence } from "framer-motion";
 //                 <span className="opacity-70">Life Balance Progress</span>
 //                 <span style={{ color: area.color }}>{progress}%</span>
 //               </div>
-//               <div className="bg-[var(--color-card)]/50 rounded-full h-3 overflow-hidden">
-//                 < div
+//               <div className="flow-card">
+//                 <div
 //                   initial={{ width: 0 }}
 //                   animate={{ width: `${progress}%` }}
 //                   transition={{ duration: 0.8, ease: "easeOut" }}
@@ -268,11 +268,11 @@ import { motion, AnimatePresence } from "framer-motion";
 //           </ div>
 
 //           {/* Reflection prompt */}
-//           < div
+//           <div
 //             initial={{ opacity: 0, y: 20 }}
 //             animate={{ opacity: 1, y: 0 }}
 //             transition={{ delay: 0.1 }}
-//             className="bg-[var(--color-card)] rounded-2xl p-6 shadow-sm border border-gray-200 mb-6"
+//             className="flow-card"
 //           >
 //             <div className="flex items-start gap-3">
 //               <div 
@@ -291,11 +291,11 @@ import { motion, AnimatePresence } from "framer-motion";
 //           </ div>
 
 //           {/* Goals overview */}
-//           < div
+//           <div
 //             initial={{ opacity: 0, y: 20 }}
 //             animate={{ opacity: 1, y: 0 }}
 //             transition={{ delay: 0.2 }}
-//             className="bg-[var(--color-card)] rounded-2xl p-6 shadow-sm border border-gray-200 mb-6"
+//             className="flow-card"
 //           >
 //             <div className="flex items-center justify-between mb-4">
 //               <div className="flex items-center gap-2">
@@ -354,11 +354,11 @@ import { motion, AnimatePresence } from "framer-motion";
 //           </ div>
 
 //           {/* Current habits */}
-//           < div
+//           <div
 //             initial={{ opacity: 0, y: 20 }}
 //             animate={{ opacity: 1, y: 0 }}
 //             transition={{ delay: 0.3 }}
-//             className="bg-[var(--color-card)] rounded-2xl p-6 shadow-sm border border-gray-200 mb-6"
+//             className="flow-card"
 //           >
 //             <div className="flex items-center gap-2 mb-4">
 //               <CheckCircle2 size={20} style={{ color: area.color }} />
@@ -389,7 +389,7 @@ import { motion, AnimatePresence } from "framer-motion";
 //           </ div>
 
 //           {/* AI suggestions */}
-//           < div
+//           <div
 //             initial={{ opacity: 0, y: 20 }}
 //             animate={{ opacity: 1, y: 0 }}
 //             transition={{ delay: 0.4 }}
@@ -406,7 +406,7 @@ import { motion, AnimatePresence } from "framer-motion";
 //               {area.aiSuggestions.map((suggestion, index) => (
 //                 <div
 //                   key={index}
-//                   className="bg-[var(--color-card)] rounded-xl p-4 flex items-start gap-3 hover:shadow-sm transition-shadow"
+//                   className="flow-card"
 //                 >
 //                   <div 
 //                     className="w-6 h-6 rounded-full flex items-center justify-center text-white text-xs flex-shrink-0"
@@ -443,10 +443,10 @@ import { motion, AnimatePresence } from "framer-motion";
 //         </div>
 
 //         {/* Balance wheel visualization */}
-//         < div
+//         <div
 //           initial={{ opacity: 0, scale: 0.95 }}
 //           animate={{ opacity: 1, scale: 1 }}
-//           className="bg-[var(--color-card)] rounded-3xl p-8 shadow-sm border border-gray-200 mb-8"
+//           className="flow-card"
 //         >
 //           <h3 className="text-center mb-6 text-gray-900">Your Life Balance</h3>
 //           <div className="grid grid-cols-4 gap-4">

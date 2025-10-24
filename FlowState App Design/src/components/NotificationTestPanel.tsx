@@ -3,7 +3,7 @@
 // Testing UI for the Enhanced Notification System
 // Can be added to Settings or accessed via a debug mode
 import { useState } from 'react';
-import { useNotifications } from './system/EnhancedNotificationSystem';
+import { useNotifications } from './EnhancedNotificationSystem';
 import { useTheme } from './ThemeContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -172,7 +172,7 @@ export function NotificationTestPanel({ onNavigate }: { onNavigate?: (screen: st
   ];
 
   return (
-    <div className="bg-[var(--color-card)] rounded-3xl shadow-sm p-6 border border-[var(--color-ring-offset-background)]">
+    <div className="flow-card">
 
       {/* header */}
       <div className="flex items-center justify-between mb-6">

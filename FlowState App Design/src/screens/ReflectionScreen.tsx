@@ -195,8 +195,7 @@ export function ReflectionScreen() {
                     px-4 py-2 rounded-full transition-all duration-200
                     ${whatFeltRight.includes(option)
                       ? 'bg-lavender-200 text-lavender-900 shadow-md'
-                      : 'bg-[var(--color-card)] text-[var(--color-card-foreground)] hover:bg-lavender-50 shadow-sm'
-                    }
+                      : 'flow-card'                    }
                   `}
                 >
                   {option}
@@ -220,8 +219,7 @@ export function ReflectionScreen() {
                     px-4 py-2 rounded-full transition-all duration-200
                     ${whatChallenged.includes(option)
                       ? 'bg-peach-200 text-peach-900 shadow-md'
-                      : 'bg-[var(--color-card)] text-[var(--color-card-foreground)] hover:bg-peach-50 shadow-sm'
-                    }
+                      : 'flow-card'                    }
                   `}
                 >
                   {option}
@@ -233,7 +231,7 @@ export function ReflectionScreen() {
           {/* sleep hours */}
           <div className="mb-8">
             <h2 className="mb-4">How much sleep did you get?</h2>
-            <div className="bg-[var(--color-card)] rounded-3xl shadow-sm p-5">
+            <div className="flow-card">
               <div className="flex items-center gap-4">
                 <span className="text-2xl">💤</span>
                 <input
@@ -270,7 +268,7 @@ export function ReflectionScreen() {
             <div className="space-y-3">
 
               {/* pattern card */}
-              < div 
+              <div 
                 className="bg-gradient-to-br from-lavender-50 to-white rounded-2xl p-5 shadow-sm"
               >
                 <div className="flex items-start gap-3">
@@ -283,7 +281,7 @@ export function ReflectionScreen() {
               </ div>
 
               {/* wins card */}
-              < div 
+              <div 
                 className="bg-gradient-to-br from-peach-50 to-white rounded-2xl p-5 shadow-sm"
               >
                 <div className="flex items-start gap-3">
@@ -296,7 +294,7 @@ export function ReflectionScreen() {
               </ div>
 
               {/* tomorrow's focus */}
-              < div 
+              <div 
                 className="bg-gradient-to-br from-blue-50 to-white rounded-2xl p-5 shadow-sm border border-blue-100"
               >
                 <div className="flex items-start gap-3">
@@ -309,8 +307,8 @@ export function ReflectionScreen() {
               </ div>
 
               {/* average sleep */}
-              < div 
-                className="bg-[var(--color-card)] rounded-2xl p-5 shadow-sm text-center"
+              <div 
+                className="flow-card"
               >
                 <div className="text-sm opacity-60 mb-1">7-Day Sleep Average</div>
                 <div className="text-2xl">{insights.avgSleep} hours</div>

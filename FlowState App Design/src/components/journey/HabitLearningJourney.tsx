@@ -199,7 +199,7 @@ import { motion, AnimatePresence } from "framer-motion";
 //           </button>
 
 //           {/* Module header */}
-//           < div
+//           <div
 //             initial={{ opacity: 0, y: 20 }}
 //             animate={{ opacity: 1, y: 0 }}
 //             className="mb-8"
@@ -219,14 +219,14 @@ import { motion, AnimatePresence } from "framer-motion";
 //           </ div>
 
 //           {/* Content */}
-//           < div
+//           <div
 //             initial={{ opacity: 0, y: 20 }}
 //             animate={{ opacity: 1, y: 0 }}
 //             transition={{ delay: 0.1 }}
 //             className="space-y-6"
 //           >
 //             {/* Main concept */}
-//             <div className="bg-[var(--color-card)] rounded-2xl p-6 shadow-sm border border-[var(--color-ring-offset-background)]">
+//             <div className="flow-card">
 //               <h3 className="mb-3 text-gray-900">💡 Main Concept</h3>
 //               <p className="text-[var(--color-card-foreground)] leading-relaxed">{module.content.mainConcept}</p>
 //             </div>
@@ -238,7 +238,7 @@ import { motion, AnimatePresence } from "framer-motion";
 //             </div>
 
 //             {/* How to do it */}
-//             <div className="bg-[var(--color-card)] rounded-2xl p-6 shadow-sm border border-[var(--color-ring-offset-background)]">
+//             <div className="flow-card">
 //               <h3 className="mb-4 text-gray-900">✨ How To Do It</h3>
 //               <ol className="space-y-3">
 //                 {module.content.howToDo.map((step, index) => (
@@ -286,7 +286,7 @@ import { motion, AnimatePresence } from "framer-motion";
 //                 whileHover={{ scale: 1.02 }}
 //                 whileTap={{ scale: 0.98 }}
 //                 onClick={handleApplyToLife}
-//                 className="w-full py-4 rounded-2xl border-2 flex items-center justify-center gap-2 bg-[var(--color-card)] hover:bg-gray-50 transition-colors"
+//                 className="w-full py-4 rounded-2xl border-2 flex items-center justify-center gap-2 flow-card"
 //                 style={{ borderColor: themeColors.primary, color: themeColors.primary }}
 //               >
 //                 <Sparkles size={20} />
@@ -314,7 +314,7 @@ import { motion, AnimatePresence } from "framer-motion";
           
 //           {/* Progress bar */}
 //           <div className="bg-gray-100 rounded-full h-3 overflow-hidden">
-//             < div
+//             <div
 //               initial={{ width: 0 }}
 //               animate={{ width: `${progressPercentage}%` }}
 //               transition={{ duration: 0.5 }}
@@ -342,7 +342,7 @@ import { motion, AnimatePresence } from "framer-motion";
 //               const Icon = module.icon;
 
 //               return (
-//                 < div
+//                 <div
 //                   key={module.id}
 //                   initial={{ opacity: 0, x: -20 }}
 //                   animate={{ opacity: 1, x: 0 }}
@@ -351,8 +351,7 @@ import { motion, AnimatePresence } from "framer-motion";
 //                   <button
 //                     onClick={() => isUnlocked && setCurrentModule(module.id)}
 //                     disabled={!isUnlocked}
-//                     className={`w-full bg-[var(--color-card)] rounded-2xl p-6 shadow-sm border-2 transition-all text-left ${
-//                       isUnlocked ? 'hover:shadow-md hover:scale-[1.02]' : 'opacity-50 cursor-not-allowed'
+//                     className={`w-full flow-card'//                       isUnlocked ? 'hover:shadow-md hover:scale-[1.02]' : 'opacity-50 cursor-not-allowed'
 //                     }`}
 //                     style={{
 //                       borderColor: isCompleted ? module.color : isUnlocked ? '#e5e7eb' : '#f3f4f6'
@@ -415,7 +414,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 //         {/* Completion message */}
 //         {completedModules.length === modules.length && (
-//           < div
+//           <div
 //             initial={{ opacity: 0, y: 20 }}
 //             animate={{ opacity: 1, y: 0 }}
 //             className="mt-8 bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-6 border-2 border-purple-200 text-center"

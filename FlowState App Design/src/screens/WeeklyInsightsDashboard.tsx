@@ -291,7 +291,7 @@ export function WeeklyInsightsDashboard({ onNavigate }: WeeklyInsightsDashboardP
 
   const CustomTooltip = ({ active, payload }: any) =>
     active && payload?.length ? (
-      <div className="bg-[var(--color-card)] px-4 py-3 rounded-xl shadow-lg border border-[var(--color-ring-offset-background)]">
+      <div className="flow-card">
         <p className="text-sm mb-2 opacity-70">{payload[0].payload.day}</p>
         <p className="text-sm flex items-center gap-2">
           <span className="w-3 h-3 rounded-full bg-purple-400" />
@@ -306,7 +306,7 @@ export function WeeklyInsightsDashboard({ onNavigate }: WeeklyInsightsDashboardP
 
   const PieTooltip = ({ active, payload }: any) =>
     active && payload?.length ? (
-      <div className="bg-[var(--color-card)] px-4 py-3 rounded-xl shadow-lg border border-[var(--color-ring-offset-background)]">
+      <div className="flow-card">
         <p className="text-sm mb-1">{payload[0].name}</p>
         <p className="text-sm opacity-70">
           {payload[0].value}h ({payload[0].payload.percentage}%)
@@ -325,7 +325,7 @@ export function WeeklyInsightsDashboard({ onNavigate }: WeeklyInsightsDashboardP
   return (
     <div className="min-h-screen pb-24">
       {/* header */}
-      <div className="bg-[var(--color-card)] border-b border-[var(--color-ring-offset-background)] px-6 py-4 sticky top-0 z-10">
+      <div className="flow-card">
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-3">
             {onNavigate && (
@@ -387,7 +387,7 @@ export function WeeklyInsightsDashboard({ onNavigate }: WeeklyInsightsDashboardP
         )}
 
         {/* mood vs sleep chart */}
-        <div className="bg-[var(--color-card)] rounded-3xl p-6 shadow-sm border border-[var(--color-ring-offset-background)]">
+        <div className="flow-card">
           <div className="flex items-center justify-between mb-6">
             <div>
               <h3 className="mb-1">Mood & sleep patterns</h3>
@@ -427,7 +427,7 @@ export function WeeklyInsightsDashboard({ onNavigate }: WeeklyInsightsDashboardP
         </div>
 
         {/* life area distribution */}
-        <div className="bg-[var(--color-card)] rounded-3xl p-6 shadow-sm border border-[var(--color-ring-offset-background)]">
+        <div className="flow-card">
           <div className="mb-6">
             <h3 className="mb-1">Life area balance</h3>
             <p className="text-sm opacity-60">Where your time & energy went</p>

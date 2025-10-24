@@ -88,7 +88,7 @@ export function CoachingNudgeCard({ context }: { context?: 'dashboard' | 'todos'
   };
 
   return (
-    < div
+    <div
       className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-4 border-2 border-purple-200 shadow-sm"
     >
       <div className="flex items-start gap-3">
@@ -115,7 +115,7 @@ export function CoachingNudgeCard({ context }: { context?: 'dashboard' | 'todos'
 
         <button
           onClick={() => setIsVisible(false)}
-          className="flex-shrink-0 w-6 h-6 rounded-full bg-[var(--color-card)]/50 hover:bg-[var(--color-card)]/80 flex items-center justify-center transition-colors text-xs text-gray-500"
+          className="flex-shrink-0 w-6 h-6 rounded-full flow-card"
         >
           ✕
         </button>
@@ -128,7 +128,7 @@ export function CoachingNudgeCard({ context }: { context?: 'dashboard' | 'todos'
 export function MiniCoachingNudge({ message, emoji = '💜' }: { message: string; emoji?: string }) {
 
   return (
-    < div
+    <div
       className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl px-4 py-3 border border-purple-200 flex items-center gap-2"
     >
       <span className="text-lg">{emoji}</span>
@@ -189,10 +189,10 @@ export function EmptyStateCoaching({
   const content = getContent();
 
   return (
-    < div
+    <div
       className="text-center py-12 px-6"
     >
-      < div
+      <div
         className="text-6xl mb-6"
       >
         {content.emoji}

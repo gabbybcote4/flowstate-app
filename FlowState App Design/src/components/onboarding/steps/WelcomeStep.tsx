@@ -36,7 +36,7 @@ export function WelcomeStep({ onNext }: OnboardingStepProps) {
         ].map(({ icon: Icon, title, text }) => (
           <div
             key={title}
-            className="rounded-3xl p-5 bg-[var(--color-card)]/60 border border-purple-100 shadow-sm"
+            className="rounded-3xl p-5 flow-card"
           >
             <Icon size={28} className="mx-auto mb-3 text-purple-400" />
             <h3 className="font-medium text-purple-700 mb-1">{title}</h3>

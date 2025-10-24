@@ -22,7 +22,7 @@ export function ReviewStep({ onNext, onBack }: OnboardingStepProps) {
     <div className="space-y-8">
 
       {/* hero */}
-      < div
+      <div
         className="text-center"
       >
         <div 
@@ -45,7 +45,7 @@ export function ReviewStep({ onNext, onBack }: OnboardingStepProps) {
       </ div>
 
       {/* summary grid */}
-      < div
+      <div
         className="grid grid-cols-1 gap-4"
       >
         {/* features */}
@@ -143,7 +143,7 @@ export function ReviewStep({ onNext, onBack }: OnboardingStepProps) {
       </ div>
 
       {/* edit text */}
-      < div
+      <div
         className="text-center"
       >
         <p className="text-sm opacity-50 mt-4">

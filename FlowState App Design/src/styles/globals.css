@@ -1,5 +1,4 @@
 /* src/styles/globals.css */
-
 @import "tailwindcss";
 
 /* theme tokens */
@@ -16,7 +15,7 @@
   --color-primary-light: #c4b5fd;
   --color-primary: #a78bfa;
   --color-primary-dark: #6d28d9;
-  --color-accent-light: #f5d0fe; 
+  --color-accent-light: #f5d0fe;
 
   /* peach palette */
   --color-peach-50: #fff7ed;
@@ -26,70 +25,21 @@
   --color-peach-400: #fb923c;
   --color-peach-500: #f97316;
 
-  /* mood tokens */
-  --mood-low-bg: #dbeafe;
-  --mood-low-border: #93c5fd;
-  --mood-low-text: #1e3a8a;
-  --mood-low-accent: #3b82f6;
-
-  --mood-moderate-bg: #fed7aa;
-  --mood-moderate-border: #fb923c;
-  --mood-moderate-text: #9a3412;
-  --mood-moderate-accent: #f97316;
-
-  --mood-good-bg: #d1fae5;
-  --mood-good-border: #6ee7b7;
-  --mood-good-text: #065f46;
-  --mood-good-accent: #10b981;
-
-  /* life areas */
-  --life-health-bg: #fef3c7;
-  --life-health-border: #fbbf24;
-  --life-health-text: #92400e;
-  --life-health-accent: #f59e0b;
-
-  --life-work-bg: #ddd6fe;
-  --life-work-border: #a78bfa;
-  --life-work-text: #5b21b6;
-  --life-work-accent: #8b5cf6;
-
-  --life-social-bg: #fce7f3;
-  --life-social-border: #f9a8d4;
-  --life-social-text: #9f1239;
-  --life-social-accent: #ec4899;
-
-  --life-personal-bg: #d1fae5;
-  --life-personal-border: #6ee7b7;
-  --life-personal-text: #065f46;
-  --life-personal-accent: #10b981;
-
-  --life-creative-bg: #fae8ff;
-  --life-creative-border: #e879f9;
-  --life-creative-text: #701a75;
-  --life-creative-accent: #d946ef;
-
-  --life-learning-bg: #dbeafe;
-  --life-learning-border: #60a5fa;
-  --life-learning-text: #1e3a8a;
-  --life-learning-accent: #3b82f6;
-
-  /* general ui tokens */
+  /* general UI tokens */
   --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --radius-md: 0.5rem;
-
-  /* base colors */
-  --color-switch-background: #e5e7eb;
   --color-card: #ffffff;
-  --color-card-foreground: #1f2937;
   --color-background: #ffffff;
+  --color-card-foreground: #1f2937;
   --color-muted-foreground: #6b7280;
   --color-accent: #f3f4f6;
   --color-input: #e5e7eb;
   --color-ring: #a78bfa;
   --color-ring-offset-background: #ffffff;
+  --color-switch-background: #e5e7eb;
 }
 
-/* global base styles */
+/* base light mode */
 :root {
   --color-background: #ffffff;
   --color-card: #ffffff;
@@ -100,7 +50,7 @@
   --color-accent: #f3f4f6;
   --color-ring-offset-background: #ffffff;
   --color-switch-background: #e5e7eb;
-  --color-accent-light: #f5d0fe; /* synced variable */
+  --color-accent-light: #f5d0fe;
 }
 
 html {
@@ -127,7 +77,7 @@ body {
   transition: background-color 0.3s, color 0.3s;
 }
 
-/* typography */
+/* typography & components */
 h1, h2, h3 {
   color: var(--color-card-foreground);
 }
@@ -144,7 +94,7 @@ select {
   font-family: inherit;
 }
 
-/* components obey theme vars */
+/* global containers */
 .card,
 .dialog,
 section,
@@ -155,7 +105,7 @@ footer {
   border-color: var(--color-accent);
 }
 
-/* form inputs */
+/* inputs */
 input,
 textarea,
 select {
@@ -168,25 +118,44 @@ select {
 html.dark,
 :root.dark,
 .dark {
-  --color-background: #0f172a;
-  --color-card: #1e293b;
-  --color-input: #273449;
-  --color-card-foreground: #f1f5f9;
+  --color-background: #0b0d14;
+  --color-surface-low: #11131c;
+  --color-card: #181b25;
+  --color-input: #1e2230;
+  --color-surface-high: #23283a;
+
+  --color-card-foreground: #f5f3ff;
   --color-primary-foreground: #ffffff;
-  --color-muted-foreground: #cbd5e1;
-  --color-accent: #334155;
-  --color-accent-light: #475569; /* subtle accent tone in dark mode */
-  --color-ring-offset-background: #334155;
-  --color-switch-background: #475569;
+  --color-muted-foreground: #b3b8d0;
+  --color-accent: #292d3e;
+  --color-accent-light: #3b3f56;
+
+  --color-ring-offset-background: #11131c;
+  --color-switch-background: #343a4f;
+  --color-ring: #a78bfa;
+  --color-highlight: #f5d0fe;
+  --color-warm: #fbbf24;
+
+  --shadow-low: 0 2px 6px rgba(0, 0, 0, 0.3);
+  --shadow-high: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
-/* ensure dark mode applies to body */
 html.dark body {
   background-color: var(--color-background);
   color: var(--color-card-foreground);
 }
 
-/* optional dark-specific tweaks */
+.dark .card,
+.dark section,
+.dark nav,
+.dark footer {
+  background-color: var(--color-card);
+  color: var(--color-card-foreground);
+  border: 1px solid var(--color-accent);
+  box-shadow: var(--shadow-low);
+  border-radius: 1rem;
+}
+
 .dark h1,
 .dark h2,
 .dark h3 {
@@ -203,12 +172,70 @@ html.dark body {
   background-color: var(--color-input);
   color: var(--color-card-foreground);
   border-color: var(--color-accent);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4);
 }
 
-.dark .gentle-nudge-toast {
-  background-color: var(--color-card);
-  color: var(--color-card-foreground);
-  border-color: var(--color-accent);
+.dark .dashboard-card,
+.dark .bg-\[var\(--color-card\)\] {
+  background-color: #181b25 !important;
+  border-color: rgba(255, 255, 255, 0.06) !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* card utilities */
+.flow-card {
+  position: relative;
+  background: var(--color-card);
+  border-radius: 1.25rem;
+  border: 1px solid var(--color-ring-offset-background);
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.flow-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+}
+
+.flow-card-content {
+  position: relative;
+  z-index: 10;
+}
+
+.dark .flow-card {
+  background: #181b25;
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.dark .flow-card:hover {
+  box-shadow: 0 4px 16px rgba(167, 139, 250, 0.25);
+}
+
+.flow-card-glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.18;
+  border-radius: inherit;
+  background: radial-gradient(circle at 30% 30%, var(--color-primary), transparent 70%);
+  z-index: 0;
+  transition: opacity 0.3s ease;
+}
+
+.flow-card-glow:hover::before {
+  opacity: 0.3;
+}
+
+/* text contrast in dark cards */
+.dark .flow-card h2,
+.dark .flow-card h3 {
+  color: #f5f3ff;
+}
+
+.dark .flow-card p {
+  color: #b3b8d0;
 }
 
 /* utilities */

@@ -62,7 +62,7 @@ export function NotificationsStep({}: OnboardingStepProps) {
 
       {/* notification types */}
       {config.notifications.enabled && (
-        < div
+        <div
           className="space-y-2"
         >
           {[
@@ -75,7 +75,7 @@ export function NotificationsStep({}: OnboardingStepProps) {
             const isEnabled = config.notifications[item.key as keyof typeof config.notifications];
 
             return (
-              < div
+              <div
                 key={item.key}
                 className="rounded-2xl p-4 flex items-center gap-4"
                 style={{
@@ -99,7 +99,7 @@ export function NotificationsStep({}: OnboardingStepProps) {
 
       {/* frequency */}
       {config.notifications.enabled && (
-        < div
+        <div
         >
           <h4 className="mb-3" style={{ fontSize: '15px', fontWeight: '500' }}>
             Notification Frequency

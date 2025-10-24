@@ -59,7 +59,7 @@ export function DashboardSkeleton() {
       </div>
 
       {/* momentum ring card */}
-      <div className="bg-[var(--color-card)] rounded-3xl p-6 shadow-sm border-2 border-lavender-100 mb-4">
+      <div className="flow-card">
         <div className="flex items-center justify-between mb-4">
           <div className="flex-1">
             <Skeleton className="h-6 w-32 mb-2" />
@@ -95,7 +95,7 @@ export function DashboardSkeleton() {
         <Skeleton className="h-6 w-32 mb-3" />
         <div className="space-y-2">
           {[1, 2, 3].map((i) => (
-            <div key={i} className="bg-[var(--color-card)] rounded-2xl p-4 shadow-sm border-2 border-[var(--color-ring-offset-background)]">
+            <div key={i} className="flow-card">
               <div className="flex items-start gap-3">
                 <SkeletonCircle size="sm" />
                 <div className="flex-1">
@@ -191,7 +191,7 @@ export function CoachChatSkeleton() {
 // todos skeleton
 export function TodosSkeleton() {
   return (
-    <div className="min-h-screen bg-[var(--color-card)] p-4 pb-24">
+    <div className="min-h-screen flow-card">
 
       {/* header */}
       <div className="mb-6">
@@ -209,7 +209,7 @@ export function TodosSkeleton() {
       {/* to-do list */}
       <div className="space-y-3">
         {[1, 2, 3, 4, 5].map((i) => (
-          <div key={i} className="bg-[var(--color-card)] rounded-2xl p-4 shadow-sm border-2 border-[var(--color-ring-offset-background)]">
+          <div key={i} className="flow-card">
             <div className="flex items-start gap-3">
               <SkeletonCircle size="sm" />
               <div className="flex-1">
@@ -230,7 +230,7 @@ export function TodosSkeleton() {
 // calendar skeleton
 export function CalendarSkeleton() {
   return (
-    <div className="min-h-screen bg-[var(--color-card)] p-4 pb-24">
+    <div className="min-h-screen flow-card">
 
       {/* header */}
       <div className="flex items-center justify-between mb-6">
@@ -278,13 +278,13 @@ export function ReflectionSkeleton() {
       </div>
 
       {/* prompt card */}
-      <div className="bg-[var(--color-card)] rounded-3xl p-6 shadow-sm border-2 border-peach-200 mb-4">
+      <div className="flow-card">
         <Skeleton className="h-5 w-32 mb-4" />
         <SkeletonText lines={2} />
       </div>
 
       {/* reflection input */}
-      <div className="bg-[var(--color-card)] rounded-3xl p-6 shadow-sm border-2 border-[var(--color-ring-offset-background)] mb-4">
+      <div className="flow-card">
         <Skeleton className="h-5 w-40 mb-4" />
         <Skeleton className="h-32 w-full rounded-2xl" />
       </div>
@@ -305,7 +305,7 @@ export function ReflectionSkeleton() {
 // settings skeleton
 export function SettingsSkeleton() {
   return (
-    <div className="min-h-screen bg-[var(--color-card)] p-4 pb-24">
+    <div className="min-h-screen flow-card">
 
       {/* header */}
       <Skeleton className="h-8 w-32 mb-6" />
@@ -361,7 +361,7 @@ export function HabitBuilderSkeleton() {
       </div>
 
       {/* content card */}
-      <div className="bg-[var(--color-card)] rounded-3xl p-6 shadow-sm border-2 border-lavender-100 mb-4">
+      <div className="flow-card">
         <Skeleton className="h-6 w-48 mb-4" />
         <SkeletonText lines={2} className="mb-6" />
         
@@ -382,19 +382,18 @@ export function HabitBuilderSkeleton() {
 // generic card skeleton
 export function CardSkeleton({ className = '' }: { className?: string }) {
   return (
-    <div className={`bg-[var(--color-card)] rounded-2xl p-4 shadow-sm border-2 border-[var(--color-ring-offset-background)] ${className}`}>
+    <div className={`flow-card ${className}`}>
       <Skeleton className="h-5 w-3/4 mb-3" />
       <SkeletonText lines={2} />
     </div>
   );
 }
 
-// list skeleton
-export function ListSkeleton({ 
-  items = 5, 
-  className = '' 
-}: { 
-  items?: number; 
+export function ListSkeleton({
+  items = 5,
+  className = '',
+}: {
+  items?: number;
   className?: string;
 }) {
   return (

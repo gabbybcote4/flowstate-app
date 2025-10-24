@@ -195,7 +195,7 @@ export function HabitStackingScreen() {
         {!isCreating && (
           <button
             onClick={startNewStack}
-            className="w-full bg-[var(--color-card)] rounded-3xl p-6 shadow-md mb-8 flex items-center justify-center gap-3 hover:shadow-lg border-2 border-dashed transition-all"
+            className="w-full flow-card"
             style={{ borderColor: themeColors.primary }}
           >
             <Plus size={20} style={{ color: themeColors.primary }} />
@@ -206,7 +206,7 @@ export function HabitStackingScreen() {
         {/* stack builder */}
         {isCreating && (
           <div
-            className="bg-[var(--color-card)] rounded-3xl shadow-lg p-6 mb-6 border"
+            className="flow-card"
             style={{ borderColor: themeColors.primary }}
           >
             <label className="block text-sm opacity-60 mb-2">Stack Name</label>
@@ -321,7 +321,7 @@ export function HabitStackingScreen() {
                   {stackedHabits.map((habit, idx) => (
                     <div
                       key={habit.id}
-                      className="flex items-center gap-3 bg-[var(--color-card)] border rounded-xl p-3 shadow-sm"
+                      className="flex items-center gap-3 flow-card"
                       style={{ borderColor: themeColors.primary }}
                     >
                       <GripVertical
@@ -390,7 +390,7 @@ export function HabitStackingScreen() {
             {stacks.map((stack) => (
               <div
                 key={stack.id}
-                className="bg-[var(--color-card)] rounded-3xl shadow-md p-6 border"
+                className="flow-card"
                 style={{ borderColor: "var(--color-ring-offset-background)" }}
               >
                 <div className="flex items-start justify-between mb-4">

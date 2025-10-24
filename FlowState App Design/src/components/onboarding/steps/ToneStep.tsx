@@ -132,10 +132,10 @@ export function ToneStep({ }: OnboardingStepProps) {
 
               {/* selection indicator */}
               {isSelected && (
-                < div
+                <div
                   className="mt-4 flex items-center gap-2"
                 >
-                  <div className="w-5 h-5 rounded-full bg-[var(--color-card)] flex items-center justify-center">
+                  <div className="w-5 h-5 rounded-full flow-card">
                     <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#A78BFA' }} />
                   </div>
                   <span style={{ fontSize: '14px', fontWeight: '500' }}>Selected</span>
@@ -147,7 +147,7 @@ export function ToneStep({ }: OnboardingStepProps) {
       </div>
 
       {/* helper text */}
-      < div
+      <div
         className="text-center"
       >
         <p className="text-sm opacity-50">

@@ -94,7 +94,7 @@ export function CorrelationCard({
 
         {/* from */}
         <div className="flex items-center gap-2 flex-1">
-          <div className="w-10 h-10 rounded-xl bg-[var(--color-card)]/80 flex items-center justify-center">
+          <div className="w-10 h-10 rounded-xl flow-card">
             {from.icon || <span className="text-xl">{from.emoji}</span>}
           </div>
           <span className={`text-sm ${colors.text}`}>{from.label}</span>
@@ -111,7 +111,7 @@ export function CorrelationCard({
         {/* to */}
         <div className="flex items-center gap-2 flex-1 justify-end">
           <span className={`text-sm ${colors.text} text-right`}>{to.label}</span>
-          <div className="w-10 h-10 rounded-xl bg-[var(--color-card)]/80 flex items-center justify-center">
+          <div className="w-10 h-10 rounded-xl flow-card">
             {to.icon || <span className="text-xl">{to.emoji}</span>}
           </div>
         </div>
@@ -119,7 +119,7 @@ export function CorrelationCard({
 
       {/* strength bar */}
       <div className="mb-3">
-        <div className="h-2 bg-[var(--color-card)]/60 rounded-full overflow-hidden">
+        <div className="h-2 flow-card">
           <motion.div
             initial={{ width: 0 }}
             animate={{ width: `${strengthPercentage}%` }}

@@ -37,10 +37,10 @@ import { motion, AnimatePresence } from "framer-motion";
 //   if (habits.length === 0) return null;
 
 //   return (
-//     < div
+//     <div
 //       initial={{ opacity: 0, y: -10 }}
 //       animate={{ opacity: 1, y: 0 }}
-//       className="bg-[var(--color-card)] rounded-2xl shadow-md p-5 mb-6"
+//       className="flow-card"
 //     >
 //       {/* Header */}
 //       <div className="flex items-center justify-between mb-4">
@@ -68,7 +68,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 //       {/* Progress Bar */}
 //       <div className="relative w-full h-3 bg-gray-100 rounded-full overflow-hidden mb-4">
-//         < div
+//         <div
 //           initial={{ width: 0 }}
 //           animate={{ width: `${completionPercentage}%` }}
 //           transition={{ duration: 1, ease: 'easeOut', delay: 0.2 }}
@@ -78,14 +78,14 @@ import { motion, AnimatePresence } from "framer-motion";
 //           }}
 //         />
 //         {/* Milestone markers */}
-//         <div className="absolute top-0 left-1/4 w-0.5 h-full bg-[var(--color-card)]/40" />
-//         <div className="absolute top-0 left-1/2 w-0.5 h-full bg-[var(--color-card)]/40" />
-//         <div className="absolute top-0 left-3/4 w-0.5 h-full bg-[var(--color-card)]/40" />
+//         <div className="absolute top-0 left-1/4 w-0.5 h-full flow-card" />
+//         <div className="absolute top-0 left-1/2 w-0.5 h-full flow-card" />
+//         <div className="absolute top-0 left-3/4 w-0.5 h-full flow-card" />
 //       </div>
 
 //       {/* Stats Grid */}
 //       <div className="grid grid-cols-2 gap-3">
-//         < div
+//         <div
 //           initial={{ opacity: 0, scale: 0.95 }}
 //           animate={{ opacity: 1, scale: 1 }}
 //           transition={{ delay: 0.3 }}
@@ -102,7 +102,7 @@ import { motion, AnimatePresence } from "framer-motion";
 //           </div>
 //         </ div>
 
-//         < div
+//         <div
 //           initial={{ opacity: 0, scale: 0.95 }}
 //           animate={{ opacity: 1, scale: 1 }}
 //           transition={{ delay: 0.4 }}
@@ -130,7 +130,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 //       {/* Motivational Message */}
 //       {completionPercentage === 100 && (
-//         < div
+//         <div
 //           initial={{ opacity: 0, y: 5 }}
 //           animate={{ opacity: 1, y: 0 }}
 //           transition={{ delay: 0.6 }}
@@ -142,7 +142,7 @@ import { motion, AnimatePresence } from "framer-motion";
 //         </ div>
 //       )}
 //       {completionPercentage >= 75 && completionPercentage < 100 && (
-//         < div
+//         <div
 //           initial={{ opacity: 0, y: 5 }}
 //           animate={{ opacity: 1, y: 0 }}
 //           transition={{ delay: 0.6 }}
@@ -154,7 +154,7 @@ import { motion, AnimatePresence } from "framer-motion";
 //         </ div>
 //       )}
 //       {completionPercentage >= 50 && completionPercentage < 75 && (
-//         < div
+//         <div
 //           initial={{ opacity: 0, y: 5 }}
 //           animate={{ opacity: 1, y: 0 }}
 //           transition={{ delay: 0.6 }}

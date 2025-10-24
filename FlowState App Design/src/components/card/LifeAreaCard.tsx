@@ -25,7 +25,7 @@ export function LifeAreaCard({
         LIFE AREA CARD
       </div>
       <div
-        className="bg-[var(--color-card)] rounded-3xl shadow-sm p-5 border border-[var(--color-ring-offset-background)] hover:shadow-md transition-all duration-200 cursor-pointer"
+        className="flow-card"
         onClick={onClick}
       >
         {/* Header */}

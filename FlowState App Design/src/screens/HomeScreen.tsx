@@ -118,7 +118,7 @@ export function HomeScreen() {
           {/* add to-do button */}
           <button
             onClick={() => setIsModalOpen(true)}
-            className="w-full py-4 rounded-3xl bg-[var(--color-card)] shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2 border border-[var(--color-ring-offset-background)]"
+            className="w-full py-4 rounded-3xl flow-card"
           >
             <Plus size={20} className="text-[var(--color-primary)]" />
             <span className="text-[var(--color-card-foreground)]">Add To-Do</span>
@@ -128,7 +128,7 @@ export function HomeScreen() {
 
       {/* add to-do modal */}
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogContent className="sm:max-w-[425px] bg-[var(--color-card)] text-[var(--color-card-foreground)] rounded-3xl border border-[var(--color-ring-offset-background)] shadow-xl">
+        <DialogContent className="sm:max-w-[425px] flow-card">
           <DialogHeader>
             <DialogTitle>Add New To-Do</DialogTitle>
             <DialogDescription>Create a gentle task for your day</DialogDescription>

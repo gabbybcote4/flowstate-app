@@ -1,10 +1,24 @@
-// EnhancedNotificationSystem.tsx
-
+// src/components/system/EnhancedNotificationSystem.tsx
+// Enhanced Notification System for FlowState App Design
 import { useState, useEffect, useRef, createContext, useContext } from 'react';
-import { useTheme } from '../ThemeContext';
-import {Sparkles, Wind, Calendar, Brain, Bell, Plus, MessageCircleHeart, Target, X} from 'lucide-react';
+import { useTheme } from './ThemeContext';
+import {
+  Sparkles,
+  Wind,
+  Calendar,
+  Brain,
+  Bell,
+  Plus,
+  MessageCircleHeart,
+  Target,
+  X,
+} from 'lucide-react';
 
-export type NotificationType = 'micro-win' | 'breathe' | 'gentle-plan' | 'focus-window';
+export type NotificationType =
+  | 'micro-win'
+  | 'breathe'
+  | 'gentle-plan'
+  | 'focus-window';
 
 export interface EnhancedNotification {
   id: string;
@@ -27,7 +41,9 @@ export interface NotificationAction {
 
 interface NotificationContextType {
   notifications: EnhancedNotification[];
-  showNotification: (notification: Omit<EnhancedNotification, 'id' | 'timestamp'>) => void;
+  showNotification: (
+    notification: Omit<EnhancedNotification, 'id' | 'timestamp'>
+  ) => void;
   dismissNotification: (id: string) => void;
   snoozeNotification: (id: string, duration?: number) => void;
   clearAll: () => void;
@@ -37,40 +53,39 @@ const NotificationContext = createContext<NotificationContextType | null>(null);
 
 export function useNotifications() {
   const context = useContext(NotificationContext);
-  if (!context) {
+  if (!context)
     throw new Error('useNotifications must be used within NotificationProvider');
-  }
   return context;
 }
 
 // notification provider
-export function NotificationProvider({ children }: { children: React.ReactNode }) {
+export function NotificationProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const [notifications, setNotifications] = useState<EnhancedNotification[]>([]);
-  //const [snoozedNotifications, setSnoozedNotifications] = useState<Map<string, number>>(new Map());
   const timeoutRefs = useRef<Map<string, NodeJS.Timeout>>(new Map());
 
-  const showNotification = (notification: Omit<EnhancedNotification, 'id' | 'timestamp'>) => {
+  const showNotification = (
+    notification: Omit<EnhancedNotification, 'id' | 'timestamp'>
+  ) => {
     const id = `${notification.type}-${Date.now()}`;
     const newNotification: EnhancedNotification = {
       ...notification,
       id,
       timestamp: Date.now(),
-      duration: notification.duration || 12000, // 12 seconds default
+      duration: notification.duration || 12000,
     };
 
-    setNotifications(prev => [...prev, newNotification]);
+    setNotifications((prev) => [...prev, newNotification]);
 
-    // auto-dismiss after duration
-    const timeout = setTimeout(() => {
-      dismissNotification(id);
-    }, newNotification.duration);
-
+    const timeout = setTimeout(() => dismissNotification(id), newNotification.duration);
     timeoutRefs.current.set(id, timeout);
   };
 
   const dismissNotification = (id: string) => {
-    setNotifications(prev => prev.filter(n => n.id !== id));
-    
+    setNotifications((prev) => prev.filter((n) => n.id !== id));
     const timeout = timeoutRefs.current.get(id);
     if (timeout) {
       clearTimeout(timeout);
@@ -78,14 +93,10 @@ export function NotificationProvider({ children }: { children: React.ReactNode }
     }
   };
 
-  const snoozeNotification = (id: string, duration = 1200000) => { // 20 minutes default
-    const notification = notifications.find(n => n.id === id);
+  const snoozeNotification = (id: string, duration = 1200000) => {
+    const notification = notifications.find((n) => n.id === id);
     if (!notification) return;
-
     dismissNotification(id);
-   //setSnoozedNotifications(prev => new Map(prev).set(notification.type, Date.now() + duration));
-
-    // re-show after snooze duration
     setTimeout(() => {
       showNotification({
         type: notification.type,
@@ -94,24 +105,19 @@ export function NotificationProvider({ children }: { children: React.ReactNode }
         actions: notification.actions,
         metadata: notification.metadata,
       });
-      //setSnoozedNotifications(prev => {
-      //  const newMap = new Map(prev);
-      //  newMap.delete(notification.type);
-      //  return newMap;
-      //});
     }, duration);
   };
 
   const clearAll = () => {
-    notifications.forEach(n => dismissNotification(n.id));
+    notifications.forEach((n) => dismissNotification(n.id));
   };
 
-  useEffect(() => {
-    return () => {
-      // cleanup all timeouts
-      timeoutRefs.current.forEach(timeout => clearTimeout(timeout));
-    };
-  }, []);
+  useEffect(
+    () => () => {
+      timeoutRefs.current.forEach((t) => clearTimeout(t));
+    },
+    []
+  );
 
   return (
     <NotificationContext.Provider
@@ -321,25 +327,25 @@ export function useSmartNotifications(onNavigate?: (screen: string) => void) {
 
 // enhanced notification display
 export function EnhancedNotificationDisplay() {
-  const { notifications, dismissNotification, snoozeNotification } = useNotifications();
+  const { notifications, dismissNotification, snoozeNotification } =
+    useNotifications();
   const { themeColors } = useTheme();
 
   return (
     <div className="fixed top-20 right-4 z-50 space-y-3 max-w-md pointer-events-none">
-        {notifications.map((notification) => (
-          <NotificationCard
-            key={notification.id}
-            notification={notification}
-            onDismiss={() => dismissNotification(notification.id)}
-            onSnooze={() => snoozeNotification(notification.id)}
-            themeColors={themeColors}
-          />
-        ))}
+      {notifications.map((notification) => (
+        <NotificationCard
+          key={notification.id}
+          notification={notification}
+          onDismiss={() => dismissNotification(notification.id)}
+          onSnooze={() => snoozeNotification(notification.id)}
+          themeColors={themeColors}
+        />
+      ))}
     </div>
   );
 }
 
-// individual notification card
 interface NotificationCardProps {
   notification: EnhancedNotification;
   onDismiss: () => void;
@@ -347,22 +353,19 @@ interface NotificationCardProps {
   themeColors: any;
 }
 
-function NotificationCard({ notification, onDismiss, onSnooze,  }: NotificationCardProps) {
+function NotificationCard({ notification, onDismiss, onSnooze }: NotificationCardProps) {
   const [progress, setProgress] = useState(100);
 
   useEffect(() => {
     const duration = notification.duration || 12000;
-    const interval = 50; // update every 50ms
+    const interval = 50;
     const steps = duration / interval;
     let currentStep = 0;
 
     const timer = setInterval(() => {
       currentStep++;
       setProgress(((steps - currentStep) / steps) * 100);
-      
-      if (currentStep >= steps) {
-        clearInterval(timer);
-      }
+      if (currentStep >= steps) clearInterval(timer);
     }, interval);
 
     return () => clearInterval(timer);
@@ -417,169 +420,90 @@ function NotificationCard({ notification, onDismiss, onSnooze,  }: NotificationC
   const IconComponent = styles.icon;
 
   return (
-    < div
-      className="pointer-events-auto"
-    >
+    <div className="pointer-events-auto">
       <div
         className={`bg-gradient-to-br ${styles.gradient} backdrop-blur-sm rounded-3xl shadow-2xl border-2 ${styles.border} overflow-hidden`}
-        style={{ 
-          boxShadow: '0 20px 40px -10px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.5) inset',
+        style={{
+          boxShadow:
+            '0 20px 40px -10px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255,255,255,0.5) inset',
         }}
       >
-        {/* main content */}
         <div className="p-5">
           <div className="flex items-start gap-4">
-            {/* icon */}
-            < div
+            <div
               className="flex-shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center"
               style={{ backgroundColor: styles.iconBg }}
             >
               <IconComponent size={24} style={{ color: styles.iconColor }} />
-            </ div>
+            </div>
 
-            {/* text content */}
             <div className="flex-1 min-w-0">
-              <h4
-                className="text-gray-900 mb-1.5"
-              >
-                {notification.title}
-              </h4>
-              <p
-                className="text-sm text-[var(--color-card-foreground)] leading-relaxed mb-4"
-              >
+              <h4 className="text-gray-900 mb-1.5">{notification.title}</h4>
+              <p className="text-sm text-[var(--color-card-foreground)] leading-relaxed mb-4">
                 {notification.message}
               </p>
 
-              {/* action buttons */}
               {notification.actions && notification.actions.length > 0 && (
-                < div
-                  className="flex flex-wrap gap-2"
-                >
-                  {notification.actions.map((action, ) => {
+                <div className="flex flex-wrap gap-2">
+                  {notification.actions.map((action) => {
                     const ActionIcon = action.icon;
                     const isPrimary = action.variant === 'primary';
                     const isGhost = action.variant === 'ghost';
-                    
-                    // handle snooze action
+
                     const handleClick = () => {
-                      if (action.id === 'snooze') {
-                        onSnooze();
-                      } else {
+                      if (action.id === 'snooze') onSnooze();
+                      else {
                         action.handler();
                         onDismiss();
                       }
                     };
 
                     return (
-                      < button
+                      <button
                         key={action.id}
                         onClick={handleClick}
-                        className={`
-                          px-4 py-2 rounded-xl text-xs flex items-center gap-2 transition-all
-                          ${isPrimary ? 'bg-[var(--color-card)]/90 hover:bg-[var(--color-card)] shadow-sm' : ''}
-                          ${isGhost ? 'bg-[var(--color-card)]/40 hover:bg-[var(--color-card)]/60' : ''}
-                          ${!isPrimary && !isGhost ? 'bg-[var(--color-card)]/60 hover:bg-[var(--color-card)]/80' : ''}
-                        `}
+                        className={`px-4 py-2 rounded-xl text-xs flex items-center gap-2 transition-all ${
+                          isPrimary
+                            ? 'flow-card'
+                            : isGhost
+                              ? 'flow-card'
+                              : !isPrimary && !isGhost
+                                ? 'flow-card'
+                                : ''
+                        }`}
                         style={{
                           color: isPrimary ? styles.iconColor : '#374151',
                         }}
                       >
                         {ActionIcon && <ActionIcon size={14} />}
                         {action.label}
-                      </ button>
+                      </button>
                     );
                   })}
-                </ div>
+                </div>
               )}
             </div>
 
-            {/* dismiss button */}
-            < button
+            <button
               onClick={onDismiss}
-              className="flex-shrink-0 w-8 h-8 rounded-full bg-[var(--color-card)]/70 hover:bg-[var(--color-card)] transition-colors flex items-center justify-center group"
+              className="flex-shrink-0 w-8 h-8 rounded-full flow-card"
             >
-              <X size={14} className="text-gray-600 group-hover:text-gray-900 transition-colors" />
-            </ button>
+              <X
+                size={14}
+                className="text-gray-600 group-hover:text-gray-900 transition-colors"
+              />
+            </button>
           </div>
         </div>
 
         {/* progress bar */}
-        <div className="h-1 bg-[var(--color-card)]/30 relative overflow-hidden">
-          < div
-            className="absolute inset-y-0 left-0 bg-[var(--color-card)]/60"
+        <div className="h-1 bg-[var(--color-card)] relative overflow-hidden">
+          <div
+            className="absolute inset-y-0 left-0 bg-[var(--color-accent)]"
             style={{ width: `${progress}%` }}
           />
         </div>
       </div>
-    </ div>
+    </div>
   );
-}
-
-// quick trigger functions for easy use
-export function triggerMicroWinNotification(showNotification: NotificationContextType['showNotification'], onNavigate?: (screen: string) => void) {
-  showNotification({
-    type: 'micro-win',
-    title: '✨ Micro-win time!',
-    message: 'You just completed something. Ride that momentum!',
-    actions: [
-      {
-        id: 'add-to-plan',
-        label: 'Add to Plan',
-        icon: Plus,
-        variant: 'primary',
-        handler: () => onNavigate?.('timeflow'),
-      },
-    ],
-  });
-}
-
-export function triggerBreatheNotification(showNotification: NotificationContextType['showNotification'], onNavigate?: (screen: string) => void) {
-  showNotification({
-    type: 'breathe',
-    title: '🫁 Time to breathe',
-    message: 'Pause. Three deep breaths. You\'ve got this.',
-    actions: [
-      {
-        id: 'start-breathing',
-        label: 'Start Breathing',
-        icon: Wind,
-        variant: 'primary',
-        handler: () => onNavigate?.('focus'),
-      },
-    ],
-  });
-}
-
-export function triggerGentlePlanNotification(showNotification: NotificationContextType['showNotification'], onNavigate?: (screen: string) => void) {
-  showNotification({
-    type: 'gentle-plan',
-    title: '📋 Gentle plan available',
-    message: 'A realistic plan for today, built around your energy.',
-    actions: [
-      {
-        id: 'view-plan',
-        label: 'View Plan',
-        icon: Calendar,
-        variant: 'primary',
-        handler: () => onNavigate?.('timeflow'),
-      },
-    ],
-  });
-}
-
-export function triggerFocusWindowNotification(showNotification: NotificationContextType['showNotification'], onNavigate?: (screen: string) => void) {
-  showNotification({
-    type: 'focus-window',
-    title: '⚡ Focus window open',
-    message: 'Your mind is sharp right now. Use this wisely.',
-    actions: [
-      {
-        id: 'start-timer',
-        label: 'Start Timer',
-        icon: Brain,
-        variant: 'primary',
-        handler: () => onNavigate?.('focus'),
-      },
-    ],
-  });
 }

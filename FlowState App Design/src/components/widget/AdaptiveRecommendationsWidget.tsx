@@ -66,7 +66,7 @@ export function AdaptiveRecommendationsWidget() {
 
   // if (isLoading) {
   //   return (
-  //     <div className="bg-[var(--color-card)] rounded-2xl shadow-md p-6">
+  //     <div className="flow-card">
   //       <div className="flex items-center gap-3 mb-4">
   //         <div className="w-10 h-10 rounded-xl bg-purple-100 animate-pulse" />
   //         <div className="flex-1">
@@ -84,7 +84,7 @@ export function AdaptiveRecommendationsWidget() {
 
   // if (error || !recommendations) {
   //   return (
-  //     <div className="bg-[var(--color-card)] rounded-2xl shadow-md p-6">
+  //     <div className="flow-card">
   //       <div className="flex items-center gap-3 text-orange-600">
   //         <AlertCircle size={20} />
   //         <p className="text-sm">Unable to generate recommendations right now</p>
@@ -135,7 +135,7 @@ export function AdaptiveRecommendationsWidget() {
   // };
 
   return (
-    <div className="bg-[var(--color-card)] rounded-2xl shadow-md overflow-hidden">
+    <div className="flow-card">
       {/* Header */}
       <div 
         className="p-6 text-white"
@@ -145,7 +145,7 @@ export function AdaptiveRecommendationsWidget() {
       >
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-[var(--color-card)]/20 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-xl flow-card">
               <Brain size={20} />
             </div>
             <div>
@@ -155,7 +155,7 @@ export function AdaptiveRecommendationsWidget() {
           </div>
           <button
             onClick={() => setShowDetails(!showDetails)}
-            className="w-8 h-8 rounded-full bg-[var(--color-card)]/20 hover:bg-[var(--color-card)]/30 flex items-center justify-center transition-colors"
+            className="w-8 h-8 rounded-full flow-card"
           >
             <ChevronRight 
               size={18} 
@@ -177,7 +177,7 @@ export function AdaptiveRecommendationsWidget() {
         <div className="mt-3 pt-3 border-t border-white/20">
           <div className="text-xs opacity-80 mb-1">Recommended Approach</div>
           <div className="flex items-center gap-2">
-            {/* <Badge className="bg-[var(--color-card)]/20 text-white border-white/30">
+            {/* <Badge className="flow-card">
               {recommendations.recommendedRoutine} routine
             </Badge> */}
           </div>
@@ -191,7 +191,7 @@ export function AdaptiveRecommendationsWidget() {
           <div className="text-xs opacity-60 mb-3">Key Recommendations</div>
           <div className="space-y-2">
             {/* {recommendations.topSuggestions.map((suggestion: string, index: number) => (
-              < div
+              <div
                 key={index}
                 className="flex items-start gap-3 p-3 rounded-xl bg-gray-50"
               >
@@ -232,7 +232,7 @@ export function AdaptiveRecommendationsWidget() {
 
       {/* Detailed Insights (Expandable) */}
         {/* {showDetails && recommendations.insights.length > 0 && (
-          < div
+          <div
             className="border-t border-gray-200 overflow-hidden"
           >
             <div className="p-6 bg-gray-50 space-y-3">
@@ -241,9 +241,9 @@ export function AdaptiveRecommendationsWidget() {
                 const InsightIcon = getInsightIcon(insight.type);
                 
                 return (
-                  < div
+                  <div
                     key={index}
-                    className="bg-[var(--color-card)] rounded-xl p-4 shadow-sm"
+                    className="flow-card"
                   >
                     <div className="flex items-start gap-3">
                       {/* <div 

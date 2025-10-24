@@ -41,7 +41,7 @@ export function LifeAreasStep({}: OnboardingStepProps) {
             <div className="text-3xl mb-2">{area.icon}</div>
             <div style={{ fontSize: '14px', fontWeight: '500' }}>{area.label}</div>
             {area.enabled && (
-              < div
+              <div
                 className="mt-2 mx-auto w-5 h-5 rounded-full flex items-center justify-center"
                 style={{ backgroundColor: area.color }}
               >

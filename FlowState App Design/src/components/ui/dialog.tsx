@@ -69,7 +69,7 @@ function DialogContent({
           // layout and animation
           "fixed top-1/2 left-1/2 z-50 grid w-full max-w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 gap-4 rounded-2xl border shadow-xl transition-all duration-300 ease-in-out sm:max-w-lg",
           // theme integration
-          "bg-[var(--color-card)] text-[var(--color-card-foreground)] border-[var(--color-ring-offset-background)]",
+          "flow-card",
           // animation states
           "data-[state=open]:animate-in data-[state=open]:zoom-in-95 data-[state=closed]:zoom-out-95",
           className

@@ -231,7 +231,7 @@ export function ThemeStep({}: OnboardingStepProps) {
       </div>
 
       {/* helper text */}
-      < div
+      <div
         className="text-center"
       >
         <p className="text-sm opacity-50">

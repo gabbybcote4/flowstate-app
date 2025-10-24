@@ -1,8 +1,8 @@
 // src/context/AppProviders.tsx
-
+// Application-wide Context Providers for FlowState App Design
 import React, { memo } from 'react';
 import { ThemeProvider } from '../components/ThemeContext';
-import { NotificationProvider } from '../components/system/EnhancedNotificationSystem';
+import { NotificationProvider } from '../components/EnhancedNotificationSystem';
 import { NavigationProvider } from '../components/context/NavigationContext';
 import { UserConfigProvider } from '../config/UserConfigContext';
 import { DataStoreProvider } from '../components/context/DataStoreContext'; 

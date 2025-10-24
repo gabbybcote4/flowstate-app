@@ -40,7 +40,7 @@
 
 //   return (
 //     <AnimatePresence>
-//       < div
+//       <div
 //         initial={{ opacity: 0 }}
 //         animate={{ opacity: 1 }}
 //         exit={{ opacity: 0 }}
@@ -68,7 +68,7 @@
 //   return (
 //     <div className="relative w-full h-full flex items-center justify-center">
 //       {/* Radial glow */}
-//       < div
+//       <div
 //         initial={{ scale: 0, opacity: 0 }}
 //         animate={{ 
 //           scale: [0, 2, 2.5],
@@ -84,14 +84,14 @@
 //       />
 
 //       {/* Center affirmation card */}
-//       < div
+//       <div
 //         initial={{ scale: 0.8, opacity: 0, y: 20 }}
 //         animate={{ scale: 1, opacity: 1, y: 0 }}
 //         exit={{ scale: 0.9, opacity: 0 }}
 //         transition={{ delay: 0.3, duration: 0.5, ease: 'easeOut' }}
-//         className="bg-[var(--color-card)] rounded-3xl shadow-2xl p-8 max-w-md mx-4 pointer-events-auto"
+//         className="flow-card"
 //       >
-//         < div
+//         <div
 //           initial={{ scale: 0 }}
 //           animate={{ scale: 1 }}
 //           transition={{ delay: 0.5, type: 'spring', stiffness: 200 }}
@@ -122,7 +122,7 @@
 
 //         {/* Gentle particles */}
 //         {[...Array(6)].map((_, i) => (
-//           < div
+//           <div
 //             key={i}
 //             initial={{ opacity: 0, scale: 0 }}
 //             animate={{ 
@@ -154,7 +154,7 @@
 //   return (
 //     <div className="relative w-full h-full flex items-center justify-center">
 //       {/* Background bloom */}
-//       < div
+//       <div
 //         initial={{ scale: 0, opacity: 0 }}
 //         animate={{ 
 //           scale: [0, 1.2, 1],
@@ -168,7 +168,7 @@
 //       />
 
 //       {/* Flower center */}
-//       < div
+//       <div
 //         initial={{ scale: 0, rotate: -90 }}
 //         animate={{ scale: 1, rotate: 0 }}
 //         transition={{ duration: 1, ease: 'easeOut' }}
@@ -178,7 +178,7 @@
 //         {[...Array(8)].map((_, i) => {
 //           const angle = (i * 360) / 8;
 //           return (
-//             < div
+//             <div
 //               key={i}
 //               initial={{ scale: 0, opacity: 0 }}
 //               animate={{ scale: 1, opacity: 1 }}
@@ -199,17 +199,17 @@
 //         })}
 
 //         {/* Center */}
-//         < div
+//         <div
 //           initial={{ scale: 0 }}
 //           animate={{ scale: 1 }}
 //           transition={{ delay: 1, type: 'spring', stiffness: 200 }}
-//           className="relative z-10 w-32 h-32 rounded-full bg-[var(--color-card)] shadow-xl flex items-center justify-center"
+//           className="relative z-10 w-32 h-32 rounded-full flow-card"
 //         >
 //           <Flower2 size={48} style={{ color: themeColors.primary }} />
 //         </ div>
 
 //         {/* Completion message */}
-//         < div
+//         <div
 //           initial={{ opacity: 0, y: 20 }}
 //           animate={{ opacity: 1, y: 0 }}
 //           transition={{ delay: 1.5 }}
@@ -231,7 +231,7 @@
 //     <div className="relative w-full h-full flex items-center justify-center">
 //       {/* Ripples */}
 //       {[...Array(4)].map((_, i) => (
-//         < div
+//         <div
 //           key={i}
 //           initial={{ scale: 0, opacity: 0.6 }}
 //           animate={{ 
@@ -253,15 +253,15 @@
 //       ))}
 
 //       {/* Center badge */}
-//       < div
+//       <div
 //         initial={{ scale: 0, rotate: -180 }}
 //         animate={{ scale: 1, rotate: 0 }}
 //         transition={{ delay: 0.2, type: 'spring', stiffness: 150 }}
-//         className="relative z-10 bg-[var(--color-card)] rounded-full shadow-2xl p-8 pointer-events-auto"
+//         className="relative z-10 flow-card"
 //       >
 //         <CheckCircle size={64} style={{ color: themeColors.primary }} />
         
-//         < div
+//         <div
 //           initial={{ opacity: 0, y: 10 }}
 //           animate={{ opacity: 1, y: 0 }}
 //           transition={{ delay: 0.8 }}
@@ -274,7 +274,7 @@
 
 //       {/* Floating particles */}
 //       {[...Array(12)].map((_, i) => (
-//         < div
+//         <div
 //           key={i}
 //           initial={{ opacity: 0, scale: 0 }}
 //           animate={{ 
@@ -310,7 +310,7 @@
 //         const distance = 150 + Math.random() * 100;
         
 //         return (
-//           < div
+//           <div
 //             key={i}
 //             initial={{ opacity: 0, scale: 0 }}
 //             animate={{ 
@@ -335,13 +335,13 @@
 //       })}
 
 //       {/* Center message */}
-//       < div
+//       <div
 //         initial={{ scale: 0.8, opacity: 0 }}
 //         animate={{ scale: 1, opacity: 1 }}
 //         transition={{ delay: 0.3, type: 'spring' }}
-//         className="bg-[var(--color-card)] rounded-3xl shadow-2xl p-8 max-w-sm mx-4 pointer-events-auto text-center"
+//         className="flow-card"
 //       >
-//         < div
+//         <div
 //           animate={{ rotate: [0, 10, -10, 0] }}
 //           transition={{ delay: 0.8, duration: 0.5 }}
 //         >
@@ -362,7 +362,7 @@
 // // Affirmation toast for smaller wins
 // export function AffirmationToast({ message, icon = '💜' }: { message: string; icon?: string }) {
 //   return (
-//     < div
+//     <div
 //       initial={{ opacity: 0, y: 20, scale: 0.9 }}
 //       animate={{ opacity: 1, y: 0, scale: 1 }}
 //       exit={{ opacity: 0, scale: 0.9 }}

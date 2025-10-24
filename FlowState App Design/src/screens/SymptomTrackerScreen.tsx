@@ -317,9 +317,9 @@ export function SymptomTrackerScreen({ onNavigate }: SymptomTrackerScreenProps) 
   return (
     <div className="min-h-screen pb-24" >
       {/* Header */}
-      < div
+      <div
 
-        className="sticky top-0 z-20 bg-[var(--color-card)] border-b border-[var(--color-ring-offset-background)] px-6 py-4"
+        className="sticky top-0 z-20 flow-card"
       >
         <div className="max-w-4xl mx-auto">
           <div className="flex items-center justify-between mb-2">
@@ -353,7 +353,7 @@ export function SymptomTrackerScreen({ onNavigate }: SymptomTrackerScreenProps) 
         {viewMode === 'track' ? (
           <>
             {/* Today's Summary */}
-            < div
+            <div
 
               className="bg-gradient-to-br from-lavender-50 to-purple-50 rounded-3xl p-6 mb-6 border border-lavender-200"
             >
@@ -376,7 +376,7 @@ export function SymptomTrackerScreen({ onNavigate }: SymptomTrackerScreenProps) 
                     const category = SYMPTOM_CATEGORIES.find(c => c.id === catId);
                     const avgSeverity = catEntries.reduce((sum, e) => sum + e.severity, 0) / catEntries.length;
                     return category ? (
-                      <div key={catId} className="bg-[var(--color-card)] rounded-2xl p-3">
+                      <div key={catId} className="flow-card">
                         <div className="flex items-center gap-2 mb-1">
                           <category.icon size={16} style={{ color: category.color }} />
                           <span className="text-xs opacity-70">{category.name}</span>
@@ -399,10 +399,10 @@ export function SymptomTrackerScreen({ onNavigate }: SymptomTrackerScreenProps) 
                 const CategoryIcon = category.icon;
 
                 return (
-                  < div
+                  <div
                     key={category.id}
 
-                    className="bg-[var(--color-card)] rounded-3xl shadow-sm border border-[var(--color-ring-offset-background)] overflow-hidden"
+                    className="flow-card"
                   >
                     {/* Category Header */}
                     <button
@@ -421,7 +421,7 @@ export function SymptomTrackerScreen({ onNavigate }: SymptomTrackerScreenProps) 
                           <p className="text-xs opacity-50">{category.symptoms.length} symptoms</p>
                         </div>
                       </div>
-                      < div
+                      <div
 
                       >
                         <ChevronDown size={20} className="text-gray-400" />
@@ -430,7 +430,7 @@ export function SymptomTrackerScreen({ onNavigate }: SymptomTrackerScreenProps) 
 
                     {/* Symptoms List */}
                       {isExpanded && (
-                        < div
+                        <div
 
                           className="border-t border-[var(--color-ring-offset-background)]"
                         >
@@ -519,7 +519,7 @@ export function SymptomTrackerScreen({ onNavigate }: SymptomTrackerScreenProps) 
         ) : (
           <>
             {/* Insights View */}
-            < div
+            <div
 
               className="space-y-4"
             >
@@ -532,10 +532,10 @@ export function SymptomTrackerScreen({ onNavigate }: SymptomTrackerScreenProps) 
                   </h2>
 
                   {insights.map((insight, index) => (
-                    < div
+                    <div
                       key={index}
 
-                      className="bg-[var(--color-card)] rounded-3xl p-5 shadow-sm border border-[var(--color-ring-offset-background)]"
+                      className="flow-card"
                     >
                       <div className="flex items-start gap-4">
                         <div
@@ -564,9 +564,9 @@ export function SymptomTrackerScreen({ onNavigate }: SymptomTrackerScreenProps) 
 
               {/* Weekly Overview */}
               {entries.length > 0 && (
-                < div
+                <div
 
-                  className="bg-[var(--color-card)] rounded-3xl p-6 shadow-sm border border-[var(--color-ring-offset-background)] mt-6"
+                  className="flow-card"
                 >
                   <h3 className="text-gray-900 mb-4 flex items-center gap-2">
                     <Calendar size={20} style={{ color: themeColors.primary }} />
@@ -612,7 +612,7 @@ export function SymptomTrackerScreen({ onNavigate }: SymptomTrackerScreenProps) 
               )}
 
               {/* Tips */}
-              < div
+              <div
 
                 className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-3xl p-5 border border-blue-200"
               >

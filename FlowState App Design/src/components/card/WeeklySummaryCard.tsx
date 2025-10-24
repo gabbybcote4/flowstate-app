@@ -171,7 +171,7 @@ export function WeeklySummaryCard({ onViewDetails }: WeeklySummaryCardProps) {
   return (
     <div style={{ position: 'relative' }}>
       <div 
-        className="bg-[var(--color-card)] rounded-3xl shadow-sm p-5 border border-[var(--color-ring-offset-background)] hover:shadow-md transition-shadow duration-200"
+        className="flow-card"
       >
 
         {/* header */}

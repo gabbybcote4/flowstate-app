@@ -265,7 +265,7 @@ export function CommunityScreen({ onNavigate }: CommunityScreenProps) {
 
   // 🪞 Render single post
   const PostCard = ({ post }: { post: CommunityPost }) => (
-    <div className="bg-[var(--color-card)] rounded-3xl p-5 shadow-sm border">
+    <div className="flow-card">
       <div className="flex items-center gap-3 mb-3">
         <div
           className="w-10 h-10 rounded-full flex items-center justify-center text-white"
@@ -306,7 +306,7 @@ export function CommunityScreen({ onNavigate }: CommunityScreenProps) {
       style={{ backgroundColor: themeColors.background }}
     >
       {/* Header */}
-      <div className="sticky top-0 bg-[var(--color-card)] border-b px-6 py-4 z-20">
+      <div className="sticky top-0 flow-card">
         <div className="max-w-4xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
             <button
@@ -362,7 +362,7 @@ export function CommunityScreen({ onNavigate }: CommunityScreenProps) {
       <div className="max-w-4xl mx-auto px-6 py-6 space-y-4">
         {/* New post box */}
         {showNewPost && activeTab === "feed" && (
-          <div className="bg-[var(--color-card)] p-5 rounded-3xl border">
+          <div className="flow-card">
             <textarea
               value={newPost}
               onChange={(e) => setNewPost(e.target.value)}
@@ -397,7 +397,7 @@ export function CommunityScreen({ onNavigate }: CommunityScreenProps) {
           circles.map((circle) => (
             <div
               key={circle.id}
-              className="bg-[var(--color-card)] p-5 rounded-3xl border"
+              className="flow-card"
             >
               <div className="flex items-center gap-3 mb-3">
                 <div

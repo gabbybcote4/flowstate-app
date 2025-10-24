@@ -143,23 +143,23 @@
 //   const progress = (step / 4) * 100;
 
 //   return (
-//     < div
+//     <div
 //       initial={{ opacity: 0 }}
 //       animate={{ opacity: 1 }}
 //       exit={{ opacity: 0 }}
 //       className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
 //       onClick={onClose}
 //     >
-//       < div
+//       <div
 //         initial={{ scale: 0.9, opacity: 0 }}
 //         animate={{ scale: 1, opacity: 1 }}
 //         exit={{ scale: 0.9, opacity: 0 }}
 //         onClick={(e) => e.stopPropagation()}
-//         className="bg-[var(--color-card)] rounded-3xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+//         className="flow-card"
 //       >
 //         {/* Header */}
 //         <div 
-//           className="p-6 border-b border-[var(--color-ring-offset-background)] sticky top-0 bg-[var(--color-card)] z-10 rounded-t-3xl"
+//           className="p-6 border-b border-[var(--color-ring-offset-background)] sticky top-0 flow-card"
 //         >
 //           <div className="flex items-center justify-between mb-4">
 //             <div className="flex items-center gap-3">
@@ -184,7 +184,7 @@
 
 //           {/* Progress Bar */}
 //           <div className="relative h-2 bg-gray-100 rounded-full overflow-hidden">
-//             < div
+//             <div
 //               className="absolute inset-y-0 left-0 rounded-full"
 //               style={{ backgroundColor: themeColors.primary }}
 //               initial={{ width: 0 }}
@@ -203,7 +203,7 @@
 //           <AnimatePresence mode="wait">
 //             {/* Step 1: Define Goal */}
 //             {step === 1 && (
-//               < div
+//               <div
 //                 key="step1"
 //                 initial={{ opacity: 0, x: 20 }}
 //                 animate={{ opacity: 1, x: 0 }}
@@ -211,7 +211,7 @@
 //                 className="space-y-6"
 //               >
 //                 <div className="text-center mb-6">
-//                   < div
+//                   <div
 //                     initial={{ scale: 0 }}
 //                     animate={{ scale: 1 }}
 //                     transition={{ type: 'spring', delay: 0.2 }}
@@ -263,7 +263,7 @@
 //                 </div>
 
 //                 {/* Affirmation */}
-//                 < div
+//                 <div
 //                   initial={{ opacity: 0 }}
 //                   animate={{ opacity: 1 }}
 //                   transition={{ delay: 0.5 }}
@@ -279,7 +279,7 @@
 
 //             {/* Step 2: Choose Action */}
 //             {step === 2 && (
-//               < div
+//               <div
 //                 key="step2"
 //                 initial={{ opacity: 0, x: 20 }}
 //                 animate={{ opacity: 1, x: 0 }}
@@ -287,7 +287,7 @@
 //                 className="space-y-6"
 //               >
 //                 <div className="text-center mb-6">
-//                   < div
+//                   <div
 //                     initial={{ scale: 0 }}
 //                     animate={{ scale: 1 }}
 //                     transition={{ type: 'spring', delay: 0.2 }}
@@ -350,7 +350,7 @@
 //                 )}
 
 //                 {/* Affirmation */}
-//                 < div
+//                 <div
 //                   initial={{ opacity: 0 }}
 //                   animate={{ opacity: 1 }}
 //                   transition={{ delay: 0.5 }}
@@ -366,7 +366,7 @@
 
 //             {/* Step 3: Add Trigger & Reward */}
 //             {step === 3 && (
-//               < div
+//               <div
 //                 key="step3"
 //                 initial={{ opacity: 0, x: 20 }}
 //                 animate={{ opacity: 1, x: 0 }}
@@ -374,7 +374,7 @@
 //                 className="space-y-6"
 //               >
 //                 <div className="text-center mb-6">
-//                   < div
+//                   <div
 //                     initial={{ scale: 0 }}
 //                     animate={{ scale: 1 }}
 //                     transition={{ type: 'spring', delay: 0.2 }}
@@ -491,7 +491,7 @@
 //                 </div>
 
 //                 {/* Affirmation */}
-//                 < div
+//                 <div
 //                   initial={{ opacity: 0 }}
 //                   animate={{ opacity: 1 }}
 //                   transition={{ delay: 0.5 }}
@@ -507,7 +507,7 @@
 
 //             {/* Step 4: Choose Life Area */}
 //             {step === 4 && (
-//               < div
+//               <div
 //                 key="step4"
 //                 initial={{ opacity: 0, x: 20 }}
 //                 animate={{ opacity: 1, x: 0 }}
@@ -515,7 +515,7 @@
 //                 className="space-y-6"
 //               >
 //                 <div className="text-center mb-6">
-//                   < div
+//                   <div
 //                     initial={{ scale: 0 }}
 //                     animate={{ scale: [0, 1.2, 1] }}
 //                     transition={{ type: 'spring', delay: 0.2 }}
@@ -531,7 +531,7 @@
 //                 </div>
 
 //                 {/* Full Summary */}
-//                 < div 
+//                 <div 
 //                   initial={{ opacity: 0, y: 10 }}
 //                   animate={{ opacity: 1, y: 0 }}
 //                   className="p-5 rounded-2xl bg-gradient-to-br from-green-50 to-blue-50 border-2 border-green-200"
@@ -590,7 +590,7 @@
 //                 </div>
 
 //                 {/* Final Affirmation */}
-//                 < div
+//                 <div
 //                   initial={{ opacity: 0, scale: 0.9 }}
 //                   animate={{ opacity: 1, scale: 1 }}
 //                   transition={{ delay: 0.5 }}

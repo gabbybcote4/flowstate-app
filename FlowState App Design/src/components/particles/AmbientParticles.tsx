@@ -57,7 +57,7 @@ import { motion, AnimatePresence } from "framer-motion";
 //   return (
 //     <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 1 }}>
 //       {particles.map((particle) => (
-//         < div
+//         <div
 //           key={particle.id}
 //           className="absolute rounded-full"
 //           style={{
@@ -90,7 +90,7 @@ import { motion, AnimatePresence } from "framer-motion";
 //         <>
 //           {/* Morning light rays */}
 //           {[...Array(3)].map((_, i) => (
-//             < div
+//             <div
 //               key={`ray-${i}`}
 //               className="absolute"
 //               style={{

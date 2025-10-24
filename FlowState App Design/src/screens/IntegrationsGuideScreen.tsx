@@ -377,7 +377,7 @@
 //           </div>
 
 //           {/* Code Reference */}
-//           <div className="bg-[var(--color-card)] rounded-2xl shadow-md p-6 mb-8">
+//           <div className="flow-card">
 //             <div className="flex items-center gap-2 mb-3">
 //               <Code size={18} style={{ color: themeColors.primary }} />
 //               <h3>Implementation Reference</h3>
@@ -416,9 +416,9 @@
 //                   const isExpanded = expandedId === guide.id;
 
 //                   return (
-//                     < div
+//                     <div
 //                       key={guide.id}
-//                       className="bg-[var(--color-card)] rounded-2xl shadow-md overflow-hidden"
+//                       className="flow-card"
 //                       initial={false}
 //                     >
 //                       {/* Header - Always visible */}
@@ -461,7 +461,7 @@
 //                       {/* Expanded Content */}
 //                       <AnimatePresence>
 //                         {isExpanded && (
-//                           < div
+//                           <div
 //                             initial={{ height: 0, opacity: 0 }}
 //                             animate={{ height: 'auto', opacity: 1 }}
 //                             exit={{ height: 0, opacity: 0 }}

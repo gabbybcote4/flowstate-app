@@ -49,7 +49,7 @@ import { motion, AnimatePresence } from "framer-motion";
 //             >
 //               {/* Hover background */}
 //               {!isSelected && (
-//                 < div
+//                 <div
 //                   className="absolute inset-0"
 //                   style={{ backgroundColor: themeColors.gradientTo }}
 //                   initial={{ opacity: 0 }}
@@ -66,7 +66,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 //               {/* Selection indicator */}
 //               {isSelected && (
-//                 < div
+//                 <div
 //                   layoutId="selectedAreaIndicator"
 //                   className="absolute inset-0 rounded-full"
 //                   style={{ 

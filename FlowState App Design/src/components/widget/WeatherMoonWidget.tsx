@@ -176,7 +176,7 @@ export function WeatherMoonWidget() {
   //if (!weather || !moonPhase) return null;
 
   return (
-    <div className="bg-[var(--color-card)] rounded-3xl shadow-md p-5 relative">
+    <div className="flow-card">
       <div className="absolute top-0 right-0 bg-black/75 text-white px-2 py-1 text-[10px] rounded-bl z-50">WEATHER & MOON</div>
       <div className="flex items-center justify-between mb-4">
         {/* Weather Section */}

@@ -64,7 +64,7 @@ export function SettingsScreen({ onNavigate }: SettingsScreenProps) {
           {/* appearance section */}
           <div className="mb-8">
             <h2 className="mb-4 text-[var(--color-card-foreground)]">Appearance</h2>
-            <div className="bg-[var(--color-card)] rounded-2xl shadow-sm p-5 space-y-4 border border-[var(--color-ring-offset-background)]">
+            <div className="flow-card">
               <FontSizeSelector currentSize={fontSize} onSelect={setFontSize} />
 
               <div className="border-t border-[var(--color-ring-offset-background)]"></div>
@@ -83,7 +83,7 @@ export function SettingsScreen({ onNavigate }: SettingsScreenProps) {
           {/* dashboard layout section */}
           <div className="mb-8">
             <h2 className="mb-4 text-[var(--color-card-foreground)]">Dashboard Layout</h2>
-            <div className="bg-[var(--color-card)] rounded-2xl shadow-sm p-5 space-y-4 border border-[var(--color-ring-offset-background)]">
+            <div className="flow-card">
               <p className="text-sm opacity-70 text-[var(--color-card-foreground)]">
                 Customize which widgets appear on your dashboard.
               </p>
@@ -144,7 +144,7 @@ export function SettingsScreen({ onNavigate }: SettingsScreenProps) {
           {/* privacy & data section */}
           <div className="mb-8">
             <h2 className="mb-4 text-[var(--color-card-foreground)]">Privacy & Data</h2>
-            <div className="bg-[var(--color-card)] rounded-2xl shadow-sm p-5 border border-[var(--color-ring-offset-background)]">
+            <div className="flow-card">
               <AlertDialog>
                 <AlertDialogTrigger asChild>
                   <button className="flex items-center justify-between w-full text-red-500 hover:text-red-600 transition-colors">
@@ -166,7 +166,7 @@ export function SettingsScreen({ onNavigate }: SettingsScreenProps) {
                   </button>
                 </AlertDialogTrigger>
 
-                <AlertDialogContent className="bg-[var(--color-card)] text-[var(--color-card-foreground)] border border-[var(--color-ring-offset-background)] rounded-2xl p-6">
+                <AlertDialogContent className="flow-card">
                   <AlertDialogHeader>
                     <AlertDialogTitle>Confirm Reset</AlertDialogTitle>
                     <AlertDialogDescription>

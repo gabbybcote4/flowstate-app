@@ -149,7 +149,7 @@ export function DailyMomentumRing() {
 
   // render
   return (
-    <div className="bg-[var(--color-card)] rounded-3xl shadow-md p-6">
+    <div className="flow-card">
       <div className="flex items-center justify-between mb-4">
         <div>
           <h3 className="opacity-60 text-sm mb-1">Today's Momentum</h3>

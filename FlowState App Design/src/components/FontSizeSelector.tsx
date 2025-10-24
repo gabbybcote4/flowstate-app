@@ -40,7 +40,7 @@ export function FontSizeSelector({
       </DialogTrigger>
 
       {/* dialog content */}
-      <DialogContent className="max-w-sm bg-[var(--color-card)] text-[var(--color-card-foreground)]">
+      <DialogContent className="max-w-sm flow-card">
         <DialogHeader>
           <DialogTitle>Font Size</DialogTitle>
           <DialogDescription>

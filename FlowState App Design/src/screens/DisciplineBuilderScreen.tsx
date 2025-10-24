@@ -279,7 +279,7 @@ export function DisciplineBuilderScreen() {
 
         {/* daily show up */}
         {!todayShownUp ? (
-          <div className="bg-[var(--color-card)] rounded-3xl shadow-md p-8 mb-6 text-center">
+          <div className="flow-card">
             <Sparkles size={48} className="mx-auto mb-3" style={{ color: themeColors.primary }} />
             <h2>Show up today</h2>
             <p className="opacity-70 mb-6">
@@ -331,7 +331,7 @@ export function DisciplineBuilderScreen() {
                     setSelectedModule(m.id);
                     setCurrentLesson(0);
                   }}
-                  className="bg-[var(--color-card)] rounded-2xl shadow-md p-5 flex justify-between hover:shadow-lg transition-all"
+                  className="flow-card"
                 >
                   <div className="flex items-center gap-3">
                     <div
@@ -391,7 +391,7 @@ export function DisciplineBuilderScreen() {
 // small components
 function Stat({ label, value, color }: { label: string; value: number; color: string }) {
   return (
-    <div className="bg-[var(--color-card)] rounded-2xl shadow-md p-4 text-center">
+    <div className="flow-card">
       <div className="text-2xl mb-1 font-medium" style={{ color }}>
         {value}
       </div>
@@ -422,7 +422,7 @@ function ModuleModal({
 
   return (
     <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4">
-      <div className="bg-[var(--color-card)] rounded-3xl max-w-2xl w-full overflow-hidden shadow-xl">
+      <div className="flow-card">
         <div className="p-6 text-white" style={{ backgroundColor: module.color }}>
           <div className="flex items-center gap-3 mb-2">
             <Icon size={28} />
@@ -482,7 +482,7 @@ function ReflectionModal({
   const prompt = REFLECTION_PROMPTS[Math.floor(Math.random() * REFLECTION_PROMPTS.length)];
   return (
     <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4">
-      <div className="bg-[var(--color-card)] rounded-3xl max-w-lg w-full p-6 shadow-xl">
+      <div className="flow-card">
         <div className="text-center mb-6">
           <Heart size={48} className="mx-auto mb-3" style={{ color: theme.primary }} />
           <h3 className="mb-2">quick reflection</h3>

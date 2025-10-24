@@ -333,7 +333,7 @@ export function CoachingScreen({ onNavigate }: CoachingScreenProps) {
 
   // Render tabs component
   const renderTabs = () => (
-    <div className="sticky top-0 z-40 bg-[var(--color-card)] border-b border-gray-200">
+    <div className="sticky top-0 z-40 flow-card">
       <div className="max-w-2xl mx-auto px-2 sm:px-6">
         <div className="flex gap-1 overflow-x-auto scrollbar-hide">
           <button
@@ -506,12 +506,12 @@ export function CoachingScreen({ onNavigate }: CoachingScreenProps) {
       >
         {/* Floating Timer */}
         {activeTimer && timerSeconds > 0 && (
-          < div
+          <div
 
             className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50"
           >
             <div
-              className="bg-[var(--color-card)] shadow-lg rounded-2xl px-6 py-3 flex items-center gap-3 border-2"
+              className="flow-card"
               style={{ borderColor: themeColors.primary }}
             >
               <div className="text-sm opacity-60">Timer:</div>
@@ -569,9 +569,9 @@ export function CoachingScreen({ onNavigate }: CoachingScreenProps) {
 
           {/* Step 1: Mood */}
           {step === 1 && (
-            < div
+            <div
 
-              className="bg-[var(--color-card)] rounded-3xl shadow-lg p-8"
+              className="flow-card"
             >
               <h2 className="mb-6 text-center">How's your mood right now?</h2>
               <div className="mb-8">
@@ -606,9 +606,9 @@ export function CoachingScreen({ onNavigate }: CoachingScreenProps) {
 
           {/* Step 2: Energy */}
           {step === 2 && (
-            < div
+            <div
 
-              className="bg-[var(--color-card)] rounded-3xl shadow-lg p-8"
+              className="flow-card"
             >
               <h2 className="mb-6 text-center">What's your energy level?</h2>
               <div className="mb-8">
@@ -643,9 +643,9 @@ export function CoachingScreen({ onNavigate }: CoachingScreenProps) {
 
           {/* Step 3: Focus */}
           {step === 3 && (
-            < div
+            <div
 
-              className="bg-[var(--color-card)] rounded-3xl shadow-lg p-8"
+              className="flow-card"
             >
               <h2 className="mb-6 text-center">How clear is your focus?</h2>
               <div className="mb-8">
@@ -680,7 +680,7 @@ export function CoachingScreen({ onNavigate }: CoachingScreenProps) {
 
           {/* Step 4: Reflection & Suggestions */}
           {step === 4 && (
-            < div
+            <div
 
               className="space-y-6"
             >
@@ -698,7 +698,7 @@ export function CoachingScreen({ onNavigate }: CoachingScreenProps) {
               </div>
 
               {/* Three Suggestions */}
-              <div className="bg-[var(--color-card)] rounded-3xl shadow-lg p-8">
+              <div className="flow-card">
                 <h3 className="mb-6 text-center">Your personalized suggestions</h3>
                 
                 <div className="space-y-4">
@@ -728,7 +728,7 @@ export function CoachingScreen({ onNavigate }: CoachingScreenProps) {
                             </div>
                           ) : activeTimer !== null && activeTimer.type === 'smallWin' && suggestions.smallWin.action === 'timer' ? (
                             <div className="flex items-center gap-3">
-                              <div className="flex-1 bg-[var(--color-card)] rounded-xl p-3 text-center">
+                              <div className="flex-1 flow-card">
                                 <div className="text-2xl text-[var(--color-card-foreground)]">{formatTime(timerSeconds)}</div>
                               </div>
                               <button

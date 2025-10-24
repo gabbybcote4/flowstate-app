@@ -125,7 +125,7 @@ export function ConfigOnboardingWizard({ onComplete, editMode }: ConfigOnboardin
       </div>
 
       {/* footer navigation */}
-      <div className="border-t border-gray-200 bg-[var(--color-card)]/80 backdrop-blur-sm">
+      <div className="border-t border-gray-200 flow-card">
         <div className="max-w-3xl mx-auto px-6 py-4 flex items-center justify-between">
           <Button
             variant="ghost"

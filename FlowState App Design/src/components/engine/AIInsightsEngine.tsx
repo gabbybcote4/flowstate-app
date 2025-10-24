@@ -475,7 +475,7 @@ export function AIInsightsEngine() {
   if (!chartData || insights.length === 0) {
     return (
       <div
-        className="bg-[var(--color-card)] rounded-3xl shadow-lg p-8 text-center"
+        className="flow-card"
       >
         <div 
           className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4"
@@ -499,7 +499,7 @@ export function AIInsightsEngine() {
       <div className="space-y-4">
         {/* Main Insights Card */}
         <div
-          className="bg-[var(--color-card)] rounded-3xl shadow-lg overflow-hidden"
+          className="flow-card"
         >
           {/* Header */}
           <div 
@@ -525,7 +525,7 @@ export function AIInsightsEngine() {
                 //whileHover={{ scale: 1.05 }}
                 //whileTap={{ scale: 0.95 }}
                 onClick={analyzeData}
-                className="w-10 h-10 rounded-xl flex items-center justify-center transition-colors hover:bg-[var(--color-card)]/50"
+                className="w-10 h-10 rounded-xl flex items-center justify-center transition-colors hover:flow-card"
                 title="Refresh insights"
               >
                 <div>
@@ -599,7 +599,7 @@ export function AIInsightsEngine() {
           >
             {/* Energy & Mood Trends */}
             <div
-              className="bg-[var(--color-card)] rounded-3xl shadow-lg p-6"
+              className="flow-card"
             >
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
@@ -663,7 +663,7 @@ export function AIInsightsEngine() {
             {/* Sleep Correlation */}
             {chartData.sleepCorrelation.length > 0 && (
               <div
-                className="bg-[var(--color-card)] rounded-3xl shadow-lg p-6"
+                className="flow-card"
               >
                 <div className="flex items-center gap-2 mb-4">
                   <Moon size={20} style={{ color: '#8b5cf6' }} />
@@ -701,7 +701,7 @@ export function AIInsightsEngine() {
 
             {/* Productivity Peaks - Radial Chart */}
             <div
-              className="bg-[var(--color-card)] rounded-3xl shadow-lg p-6"
+              className="flow-card"
             >
               <div className="flex items-center gap-2 mb-4">
                 <Sun size={20} style={{ color: '#f59e0b' }} />

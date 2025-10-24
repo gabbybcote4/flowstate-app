@@ -266,7 +266,7 @@ export function IntegrationsScreen({ onBack }: IntegrationsScreenProps) {
         </div>
 
         {/* coming soon */}
-        <div className="bg-[var(--color-card)] rounded-2xl shadow-sm p-6 text-center border">
+        <div className="flow-card">
           <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gray-100 mb-3">
             <ExternalLink size={24} className="text-gray-400" />
           </div>
@@ -298,7 +298,7 @@ function IntegrationCard({
   const isActive = integration.status !== "disconnected";
 
   return (
-    <div className="bg-[var(--color-card)] rounded-2xl shadow-sm border p-5 flex gap-4 hover:shadow-md transition-all">
+    <div className="flow-card">
       <div
         className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
         style={{ backgroundColor: integration.iconBg }}
@@ -348,7 +348,7 @@ function ScopesModal({
   const Icon = integration.icon;
   return (
     <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4">
-      <div className="bg-[var(--color-card)] rounded-3xl max-w-2xl w-full p-6 shadow-xl overflow-y-auto max-h-[80vh]">
+      <div className="flow-card">
         <div className="flex items-center gap-3 mb-4">
           <div
             className="w-12 h-12 rounded-xl flex items-center justify-center"

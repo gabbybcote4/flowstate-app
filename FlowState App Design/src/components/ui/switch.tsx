@@ -29,7 +29,7 @@ function Switch({
           // thumb position + color transition
           "pointer-events-none block size-4 rounded-full ring-0 transition-transform",
           // background color logic
-          "bg-[var(--color-card)] dark:bg-[var(--color-card-foreground)] data-[state=checked]:translate-x-[calc(100%-2px)] data-[state=unchecked]:translate-x-0"
+          "flow-card"
         )}
       />
     </SwitchPrimitive.Root>

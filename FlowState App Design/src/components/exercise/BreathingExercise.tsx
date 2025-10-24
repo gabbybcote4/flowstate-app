@@ -48,8 +48,8 @@
 //     <div className="flex flex-col items-center">
 //       {/* Cycles Counter */}
 //       {cycles > 0 && (
-//         < div
-//           className="mb-6 px-6 py-3 bg-[var(--color-card)] rounded-2xl shadow-md"
+//         <div
+//           className="mb-6 px-6 py-3 flow-card"
 //         >
 //           <p className="text-lavender-600">
 //             <span className="text-2xl">{cycles}</span> {cycles === 1 ? 'cycle' : 'cycles'} completed
@@ -60,22 +60,22 @@
 //       {/* Breathing Circle */}
 //       <div className="relative w-80 h-80 flex items-center justify-center mb-12">
 //         {/* Animated breathing circle */}
-//         < div
+//         <div
 
 
 //           className={`absolute w-48 h-48 rounded-full bg-gradient-to-br ${currentConfig.color} shadow-2xl`}
 //         >
 //           {/* Inner glow effect */}
-//           < div
+//           <div
 
-//             className="absolute inset-0 rounded-full bg-[var(--color-card)]/30 blur-xl"
+//             className="absolute inset-0 rounded-full flow-card"
 //           />
 //         </ div>
 
 //         {/* Instruction text */}
 
 //         {isActive && (
-//           < div
+//           <div
 //             key={phase}
 
 //             className="absolute text-center z-10"
@@ -83,7 +83,7 @@
 //             <p className="text-3xl text-lavender-700 mb-2">
 //               {currentConfig.text}
 //             </p>
-//             < div
+//             <div
 
 //               className="text-sm opacity-60"
 //             >
@@ -95,7 +95,7 @@
 
 //         {/* Start prompt */}
 //         {!isActive && (
-//           < div
+//           <div
 
 //             className="absolute text-center z-10"
 //           >
@@ -108,7 +108,7 @@
 //         {isActive && (
 //           <>
 //             {[...Array(3)].map((_, i) => (
-//               < div
+//               <div
 //                 key={i}
 
 //                 className={`absolute w-48 h-48 rounded-full border-2 border-lavender-300`}
@@ -125,14 +125,14 @@
 //         className="w-24 h-24 rounded-full bg-gradient-to-br from-lavender-400 to-purple-500 text-white shadow-2xl hover:shadow-3xl transition-all duration-300 flex items-center justify-center"
 //       >
 //         {isActive ? (
-//           < div
+//           <div
 //             key="pause"
 
 //           >
 //             <Pause size={36} fill="white" />
 //           </ div>
 //         ) : (
-//           < div
+//           <div
 //             key="play"
 
 //           >

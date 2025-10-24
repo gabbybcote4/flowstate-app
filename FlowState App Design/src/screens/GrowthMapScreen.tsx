@@ -299,13 +299,13 @@
 //         </div>
 
 //         {/* Overall Growth Score */}
-//         < div
+//         <div
 //           initial={{ opacity: 0, scale: 0.9 }}
 //           animate={{ opacity: 1, scale: 1 }}
-//           className="max-w-xs mx-auto mb-12 bg-[var(--color-card)] rounded-3xl p-6 shadow-lg text-center"
+//           className="max-w-xs mx-auto mb-12 flow-card"
 //         >
 //           <div className="text-sm opacity-60 mb-2">Overall Growth</div>
-//           < div 
+//           <div 
 //             className="relative w-32 h-32 mx-auto mb-3"
 //             animate={overallGrowth >= 70 ? { 
 //               scale: [1, 1.05, 1],
@@ -367,7 +367,7 @@
 //         <div className="max-w-2xl mx-auto mb-12">
 //           <div className="relative h-96 flex items-center justify-center">
 //             {/* Center Hub */}
-//             < div
+//             <div
 //               initial={{ scale: 0 }}
 //               animate={{ 
 //                 scale: 1,
@@ -379,7 +379,7 @@
 //                 boxShadow: `0 0 30px ${themeColors.primary}40`,
 //               }}
 //             >
-//               < div
+//               <div
 //                 animate={{ 
 //                   scale: [1, 1.1, 1],
 //                 }}
@@ -445,7 +445,7 @@
 //                     {area.icon}
 //                   </motion.span>
 //                   {data && data.growthTrend === 'up' && (
-//                     < div 
+//                     <div 
 //                       initial={{ scale: 0 }}
 //                       animate={{ scale: 1 }}
 //                       transition={{ delay: 0.5 + index * 0.1 }}
@@ -455,7 +455,7 @@
 //                     </ div>
 //                   )}
 //                   {data && completionRate === 100 && data.activeHabits > 0 && (
-//                     < div 
+//                     <div 
 //                       initial={{ scale: 0, rotate: -180 }}
 //                       animate={{ scale: 1, rotate: 0 }}
 //                       transition={{ delay: 0.6 + index * 0.1, type: 'spring' }}
@@ -528,7 +528,7 @@
 //             <div className="flex items-center justify-center gap-3">
 //               <button
 //                 onClick={() => setTimelineZoom(Math.max(0.5, timelineZoom - 0.5))}
-//                 className="p-2 rounded-xl bg-[var(--color-card)] shadow-sm hover:shadow-md transition-all"
+//                 className="p-2 rounded-xl flow-card"
 //                 disabled={timelineZoom <= 0.5}
 //               >
 //                 <ZoomOut size={20} style={{ color: themeColors.primary }} />
@@ -538,7 +538,7 @@
 //               </span>
 //               <button
 //                 onClick={() => setTimelineZoom(Math.min(2, timelineZoom + 0.5))}
-//                 className="p-2 rounded-xl bg-[var(--color-card)] shadow-sm hover:shadow-md transition-all"
+//                 className="p-2 rounded-xl flow-card"
 //                 disabled={timelineZoom >= 2}
 //               >
 //                 <ZoomIn size={20} style={{ color: themeColors.primary }} />
@@ -547,7 +547,7 @@
 //           </div>
 
 //           {/* Timeline */}
-//           <div className="bg-[var(--color-card)] rounded-3xl shadow-lg p-8 relative">
+//           <div className="flow-card">
 //             {timelineEvents.length === 0 ? (
 //               <div className="text-center py-12 opacity-60">
 //                 <Clock size={48} className="mx-auto mb-4" style={{ color: themeColors.primary }} />
@@ -578,7 +578,7 @@
 //                     >
 //                       {/* Date dot */}
 //                       <div className="relative flex-shrink-0">
-//                         < div
+//                         <div
 //                           whileHover={{ scale: 1.3 }}
 //                           className="w-16 h-16 rounded-full flex items-center justify-center shadow-lg relative z-10 transition-all"
 //                           style={{ 
@@ -592,7 +592,7 @@
 //                         </ div>
                         
 //                         {/* Connection pulse */}
-//                         < div
+//                         <div
 //                           initial={{ scale: 0.8, opacity: 0 }}
 //                           animate={{ 
 //                             scale: [0.8, 1.2, 0.8],
@@ -612,7 +612,7 @@
 //                       </div>
 
 //                       {/* Event content */}
-//                       < div 
+//                       <div 
 //                         className="flex-1 bg-gray-50 rounded-2xl p-5 group-hover:bg-gray-100 transition-all"
 //                         whileHover={{ x: 5 }}
 //                       >
@@ -677,7 +677,7 @@
 //                 </div>
 
 //                 {/* End marker */}
-//                 < div
+//                 <div
 //                   initial={{ opacity: 0 }}
 //                   animate={{ opacity: 1 }}
 //                   transition={{ delay: timelineEvents.length * 0.05 + 0.5 }}
@@ -703,20 +703,20 @@
 //       {/* Expanded Detail Panel */}
 //       <AnimatePresence>
 //         {selectedArea && selectedData && selectedAreaConfig && (
-//           < div
+//           <div
 //             initial={{ opacity: 0 }}
 //             animate={{ opacity: 1 }}
 //             exit={{ opacity: 0 }}
 //             className="fixed inset-0 bg-black/50 z-50 flex items-end md:items-center justify-center p-4"
 //             onClick={() => setSelectedArea(null)}
 //           >
-//             < div
+//             <div
 //               initial={{ y: '100%', opacity: 0 }}
 //               animate={{ y: 0, opacity: 1 }}
 //               exit={{ y: '100%', opacity: 0 }}
 //               transition={{ type: 'spring', damping: 30, stiffness: 300 }}
 //               onClick={(e) => e.stopPropagation()}
-//               className="bg-[var(--color-card)] rounded-3xl shadow-2xl max-w-lg w-full max-h-[85vh] overflow-y-auto"
+//               className="flow-card"
 //             >
 //               {/* Header */}
 //               <div 
@@ -725,7 +725,7 @@
 //               >
 //                 <button
 //                   onClick={() => setSelectedArea(null)}
-//                   className="absolute top-4 right-4 w-8 h-8 rounded-full bg-[var(--color-card)]/20 hover:bg-[var(--color-card)]/30 flex items-center justify-center transition-colors"
+//                   className="absolute top-4 right-4 w-8 h-8 rounded-full flow-card"
 //                 >
 //                   <X size={18} />
 //                 </button>
@@ -873,20 +873,20 @@
 //       {/* Timeline Event Detail Modal */}
 //       <AnimatePresence>
 //         {selectedEvent && (
-//           < div
+//           <div
 //             initial={{ opacity: 0 }}
 //             animate={{ opacity: 1 }}
 //             exit={{ opacity: 0 }}
 //             className="fixed inset-0 bg-black/50 z-50 flex items-end md:items-center justify-center p-4"
 //             onClick={() => setSelectedEvent(null)}
 //           >
-//             < div
+//             <div
 //               initial={{ scale: 0.9, opacity: 0 }}
 //               animate={{ scale: 1, opacity: 1 }}
 //               exit={{ scale: 0.9, opacity: 0 }}
 //               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
 //               onClick={(e) => e.stopPropagation()}
-//               className="bg-[var(--color-card)] rounded-3xl shadow-2xl max-w-md w-full overflow-hidden"
+//               className="flow-card"
 //             >
 //               {/* Header */}
 //               <div 
@@ -895,18 +895,18 @@
 //               >
 //                 <button
 //                   onClick={() => setSelectedEvent(null)}
-//                   className="absolute top-4 right-4 w-8 h-8 rounded-full bg-[var(--color-card)]/20 hover:bg-[var(--color-card)]/30 flex items-center justify-center transition-colors"
+//                   className="absolute top-4 right-4 w-8 h-8 rounded-full flow-card"
 //                 >
 //                   <X size={18} />
 //                 </button>
                 
 //                 <div className="flex items-center gap-4 mb-3">
-//                   <div className="w-16 h-16 bg-[var(--color-card)]/20 rounded-2xl flex items-center justify-center text-3xl">
+//                   <div className="w-16 h-16 flow-card">
 //                     {selectedEvent.icon}
 //                   </div>
 //                   <div className="flex-1">
 //                     <div 
-//                       className="inline-block px-3 py-1 rounded-full text-xs mb-2 bg-[var(--color-card)]/20"
+//                       className="inline-block px-3 py-1 rounded-full text-xs mb-2 flow-card"
 //                     >
 //                       {selectedEvent.type === 'milestone' && '🏆 Milestone'}
 //                       {selectedEvent.type === 'habit' && '✨ Routine Started'}

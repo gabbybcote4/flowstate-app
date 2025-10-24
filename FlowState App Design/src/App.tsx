@@ -8,7 +8,7 @@ import { ThemeProvider } from "./components/ThemeContext";
 import {
   NotificationProvider,
   EnhancedNotificationDisplay,
-} from "./components/system/EnhancedNotificationSystem";
+} from "./components/EnhancedNotificationSystem";
 import {
   NavigationProvider,
   useNavigation,

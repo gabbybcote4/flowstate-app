@@ -518,7 +518,7 @@ const BottomSheet = () => {
       <div className="min-h-screen pb-24">
 
         {/* header */}
-        <div className="bg-[var(--color-card)] border-b border-[var(--color-ring-offset-background)] px-4 sm:px-6 py-3 sm:py-4 sticky top-0 z-20">
+        <div className="flow-card">
           <div className="flex items-center justify-between gap-2">
             <div className="flex items-center gap-3">
               {onNavigate && (
@@ -583,7 +583,7 @@ const BottomSheet = () => {
           {showSidebar && (
             <div className="hidden sm:block w-80 flex-shrink-0 space-y-4">
               {!!habits.length && (
-                <div className="bg-[var(--color-card)] rounded-3xl p-4 shadow-sm border border-[var(--color-ring-offset-background)]">
+                <div className="flow-card">
                   <h3 className="text-sm opacity-70 mb-3 flex items-center gap-2">
                     <Sparkles size={16} style={{ color: themeColors.primary }} />
                     Your Habits
@@ -597,7 +597,7 @@ const BottomSheet = () => {
               )}
 
               {!!todos.length && (
-                <div className="bg-[var(--color-card)] rounded-3xl p-4 shadow-sm border border-[var(--color-ring-offset-background)]">
+                <div className="flow-card">
                   <h3 className="text-sm opacity-70 mb-3 flex items-center gap-2">
                     <Calendar size={16} style={{ color: themeColors.primary }} />
                     Today’s Tasks
@@ -622,7 +622,7 @@ const BottomSheet = () => {
           )}
 
           {/* timeline */}
-          <div className="flex-1 bg-[var(--color-card)] rounded-3xl p-3 sm:p-6 shadow-sm border border-[var(--color-ring-offset-background)] overflow-hidden">
+          <div className="flex-1 flow-card">
             <div className="space-y-1">
               {/* {SLOTS.map((slot) => (
                 <TimeSlot

@@ -634,10 +634,10 @@
 //   return (
 //     <div className="min-h-screen pb-24" style={{ backgroundColor: themeColors.background }}>
 //       {/* Header */}
-//       < div
+//       <div
 //         initial={{ opacity: 0, y: -20 }}
 //         animate={{ opacity: 1, y: 0 }}
-//         className="sticky top-0 z-20 bg-[var(--color-card)] border-b border-[var(--color-ring-offset-background)] px-6 py-4"
+//         className="sticky top-0 z-20 flow-card"
 //       >
 //         <div className="max-w-4xl mx-auto">
 //           <div className="flex items-center justify-between mb-3">
@@ -713,7 +713,7 @@
 //               {insightChips.map(chip => {
 //                 const Icon = chip.icon;
 //                 return (
-//                   < div
+//                   <div
 //                     key={chip.id}
 //                     initial={{ opacity: 0, scale: 0.9 }}
 //                     animate={{ opacity: 1, scale: 1 }}
@@ -738,7 +738,7 @@
 //       <div className="max-w-4xl mx-auto px-4 md:px-6 py-6 space-y-4">
 //         <AnimatePresence>
 //           {messages.map((message, index) => (
-//             < div
+//             <div
 //               key={message.id}
 //               initial={{ opacity: 0, y: 20 }}
 //               animate={{ opacity: 1, y: 0 }}
@@ -767,7 +767,7 @@
 //                         whileHover={{ scale: 1.05 }}
 //                         whileTap={{ scale: 0.95 }}
 //                         onClick={() => handleQuickReply(reply)}
-//                         className="px-4 py-2 rounded-2xl text-sm transition-all bg-[var(--color-card)] hover:bg-gray-50 border border-gray-200"
+//                         className="px-4 py-2 rounded-2xl text-sm transition-all flow-card"
 //                       >
 //                         {reply.text}
 //                       </ button>
@@ -781,24 +781,24 @@
 
 //         {/* Typing Indicator */}
 //         {isTyping && (
-//           < div
+//           <div
 //             initial={{ opacity: 0, y: 20 }}
 //             animate={{ opacity: 1, y: 0 }}
 //             className="flex justify-start"
 //           >
 //             <div className="bg-gradient-to-br from-white to-gray-50 rounded-3xl px-5 py-4 shadow-sm border border-[var(--color-ring-offset-background)]">
 //               <div className="flex gap-2">
-//                 < div
+//                 <div
 //                   animate={{ scale: [1, 1.2, 1] }}
 //                   transition={{ repeat: Infinity, duration: 0.8, delay: 0 }}
 //                   className="w-2 h-2 rounded-full bg-gray-400"
 //                 />
-//                 < div
+//                 <div
 //                   animate={{ scale: [1, 1.2, 1] }}
 //                   transition={{ repeat: Infinity, duration: 0.8, delay: 0.2 }}
 //                   className="w-2 h-2 rounded-full bg-gray-400"
 //                 />
-//                 < div
+//                 <div
 //                   animate={{ scale: [1, 1.2, 1] }}
 //                   transition={{ repeat: Infinity, duration: 0.8, delay: 0.4 }}
 //                   className="w-2 h-2 rounded-full bg-gray-400"
@@ -823,7 +823,7 @@
 //                   whileHover={{ scale: 1.05 }}
 //                   whileTap={{ scale: 0.95 }}
 //                   onClick={() => handleQuickAction(action.action)}
-//                   className="flex items-center gap-2 px-4 py-2.5 rounded-2xl text-sm bg-[var(--color-card)] shadow-md border border-gray-200 hover:border-lavender-300 transition-all"
+//                   className="flex items-center gap-2 px-4 py-2.5 rounded-2xl text-sm flow-card"
 //                 >
 //                   <Icon size={16} style={{ color: themeColors.primary }} />
 //                   {action.text}
@@ -833,7 +833,7 @@
 //           </div>
 
 //           {/* Input */}
-//           <div className="bg-[var(--color-card)] rounded-3xl shadow-lg border border-gray-200 p-3 flex items-center gap-3">
+//           <div className="flow-card">
 //             <input
 //               type="text"
 //               value={inputValue}
