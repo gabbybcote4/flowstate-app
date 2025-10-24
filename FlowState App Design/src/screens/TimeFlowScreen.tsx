@@ -1,8 +1,8 @@
+// TimeFlowScreen.tsx
+
 import { useState, useEffect } from 'react';
-import { useTheme } from '../components/context/ThemeContext';
+import { useTheme } from '../components/ThemeContext';
 import { Clock, Calendar, AlertCircle, TrendingUp, Heart, Briefcase, Users, Sparkles, Home as HomeIcon, Palette, X, ArrowLeft } from 'lucide-react';
-//  from 'motion/react';
-//import { toast } from 'sonner@2.0.3';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
@@ -80,7 +80,7 @@ const LIFE_AREAS: LifeArea[] = [
   },
 ];
 
-// Generate time slots for the day
+// generate time slots for day
 const generateTimeSlots = () => {
   const slots = [];
   for (let hour = 6; hour < 23; hour++) {
@@ -93,7 +93,7 @@ const generateTimeSlots = () => {
 
 const TIME_SLOTS = generateTimeSlots();
 
-// Draggable Habit Item
+// draggable habit item
 function DraggableHabit({ habit }: { habit: Habit }) {
   //const { themeColors } = useTheme();
   const lifeArea = LIFE_AREAS.find(area => area.name === habit.lifeArea);
@@ -127,7 +127,7 @@ function DraggableHabit({ habit }: { habit: Habit }) {
   );
 }
 
-// Draggable Todo Item
+// draggable todo item
 function DraggableTodo({ todo }: { todo: Todo }) {
   //const { themeColors } = useTheme();
   const lifeArea = LIFE_AREAS.find(area => area.name === todo.lifeArea);
@@ -165,7 +165,7 @@ function DraggableTodo({ todo }: { todo: Todo }) {
   );
 }
 
-// Droppable Time Slot
+// droppable time slot
 function TimeSlot({ 
   slot, 
   blocks, 
@@ -193,12 +193,13 @@ function TimeSlot({
 
   return (
     <div className="flex gap-0">
-      {/* Time label - Always visible on the left */}
+
+      {/* time label */}
       <div className="w-16 flex-shrink-0 flex items-start justify-center pt-3">
         <span className="text-xs opacity-50">{slot.startTime}</span>
       </div>
 
-      {/* Timeline bar - Visual representation */}
+      {/* timeline bar */}
       <div className="w-2 flex-shrink-0 relative">
         {hasBlocks ? (
           // Colored bar by life area
@@ -210,7 +211,6 @@ function TimeSlot({
               return (
                 < div
                   key={block.id}
-
                   className="flex-1 rounded-sm"
                   style={{
                     backgroundColor: bgColor,
@@ -221,12 +221,12 @@ function TimeSlot({
             })}
           </div>
         ) : (
-          // Empty state - subtle line
+          // empty state - subtle line
           <div className="absolute inset-0 bg-gray-200 rounded-sm" />
         )}
       </div>
 
-      {/* Drop zone and blocks */}
+      {/* drop zone and blocks */}
       <div 
         // ref={drop}
         // className={`flex-1 min-h-[60px] p-2 rounded-xl transition-all ${
@@ -242,7 +242,6 @@ function TimeSlot({
               return (
                 < div
                   key={block.id}
-
                   className={`p-3 rounded-lg bg-gradient-to-r ${bgGradient} relative group`}
                 >
                   <div className="flex items-start justify-between gap-2">
@@ -261,17 +260,17 @@ function TimeSlot({
                     </div>
                     <button
                       onClick={() => onRemove(block.id)}
-                      className="opacity-0 group-hover:opacity-100 transition-opacity p-1 hover:bg-white/30 rounded"
+                      className="opacity-0 group-hover:opacity-100 transition-opacity p-1 hover:bg-[var(--color-card)]/30 rounded"
                     >
                       <X size={14} />
                     </button>
                   </div>
                   <div className="mt-1 text-xs opacity-70 flex items-center gap-1">
-                    <span className="px-2 py-0.5 bg-white/40 rounded">
+                    <span className="px-2 py-0.5 bg-[var(--color-card)]/40 rounded">
                       {block.lifeArea}
                     </span>
                     {block.isFlexible && (
-                      <span className="px-2 py-0.5 bg-white/40 rounded">Flexible</span>
+                      <span className="px-2 py-0.5 bg-[var(--color-card)]/40 rounded">Flexible</span>
                     )}
                   </div>
                 </ div>
@@ -299,22 +298,22 @@ export function TimeFlowScreen({ onNavigate }: TimeFlowScreenProps) {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [showSidebar, setShowSidebar] = useState(true);
 
-  // Load data from localStorage
+  // load data from localStorage
   useEffect(() => {
-    // Load time blocks
+    // load time blocks
     const savedBlocks = localStorage.getItem('flowstate-timeblocks');
     if (savedBlocks) {
       setTimeBlocks(JSON.parse(savedBlocks));
     }
 
-    // Load habits
+    // load habits
     const savedHabits = localStorage.getItem('flowstate-habits');
     if (savedHabits) {
       const habitsList = JSON.parse(savedHabits);
       setHabits(habitsList.filter((h: any) => h.isActive));
     }
 
-    // Load todos from routine templates
+    // load todos from routine templates
     const savedTemplates = localStorage.getItem('flowstate-routine-templates');
     if (savedTemplates) {
       const templates = JSON.parse(savedTemplates);
@@ -337,14 +336,14 @@ export function TimeFlowScreen({ onNavigate }: TimeFlowScreenProps) {
     }
   }, []);
 
-  // Save time blocks
+  // save time blocks
   useEffect(() => {
     if (timeBlocks.length > 0 || localStorage.getItem('flowstate-timeblocks')) {
       localStorage.setItem('flowstate-timeblocks', JSON.stringify(timeBlocks));
     }
   }, [timeBlocks]);
 
-  // Infer life area from todo title (simple heuristic)
+  // infer life area from todo title
   const inferLifeArea = (title: string): string => {
     const lower = title.toLowerCase();
     if (lower.includes('work') || lower.includes('project') || lower.includes('meeting')) return 'Work';
@@ -388,10 +387,10 @@ export function TimeFlowScreen({ onNavigate }: TimeFlowScreenProps) {
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="min-h-screen pb-24" >
-        {/* Header */}
-        < div
 
-          className="bg-white border-b border-gray-100 px-6 py-4 sticky top-0 z-20"
+        {/* header */}
+        < div
+          className="bg-[var(--color-card)] border-b border-[var(--color-ring-offset-background)] px-6 py-4 sticky top-0 z-20"
         >
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
@@ -423,7 +422,7 @@ export function TimeFlowScreen({ onNavigate }: TimeFlowScreenProps) {
             </button>
           </div>
 
-          {/* Life Area Legend */}
+          {/* life area legend */}
           <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
             {LIFE_AREAS.map(area => (
               <div
@@ -441,17 +440,18 @@ export function TimeFlowScreen({ onNavigate }: TimeFlowScreenProps) {
           </div>
         </ div>
 
-        {/* Main Content */}
+        {/* main content */}
         <div className="flex gap-6 p-6">
-          {/* Sidebar - Draggable Items */}
+
+          {/* sidebar - draggable items */}
             {showSidebar && (
               < div
-
                 className="w-80 flex-shrink-0 space-y-4"
               >
-                {/* Habits */}
+
+                {/* habits */}
                 {habits.length > 0 && (
-                  <div className="bg-white rounded-3xl p-4 shadow-sm border border-gray-100">
+                  <div className="bg-[var(--color-card)] rounded-3xl p-4 shadow-sm border border-[var(--color-ring-offset-background)]">
                     <h3 className="text-sm opacity-70 mb-3 flex items-center gap-2">
                       <Sparkles size={16} style={{ color: themeColors.primary }} />
                       Your Habits
@@ -464,9 +464,9 @@ export function TimeFlowScreen({ onNavigate }: TimeFlowScreenProps) {
                   </div>
                 )}
 
-                {/* Todos */}
+                {/* todos */}
                 {todos.length > 0 && (
-                  <div className="bg-white rounded-3xl p-4 shadow-sm border border-gray-100">
+                  <div className="bg-[var(--color-card)] rounded-3xl p-4 shadow-sm border border-[var(--color-ring-offset-background)]">
                     <h3 className="text-sm opacity-70 mb-3 flex items-center gap-2">
                       <Calendar size={16} style={{ color: themeColors.primary }} />
                       Today's Tasks
@@ -479,7 +479,7 @@ export function TimeFlowScreen({ onNavigate }: TimeFlowScreenProps) {
                   </div>
                 )}
 
-                {/* Instructions */}
+                {/* instructions */}
                 <div className="bg-gradient-to-br from-lavender-50 to-purple-50 rounded-3xl p-4 border border-lavender-200">
                   <div className="flex items-start gap-2">
                     <AlertCircle size={16} className="text-lavender-600 mt-0.5 flex-shrink-0" />
@@ -492,8 +492,8 @@ export function TimeFlowScreen({ onNavigate }: TimeFlowScreenProps) {
               </ div>
             )}
 
-          {/* Timeline */}
-          <div className="flex-1 bg-white rounded-3xl p-6 shadow-sm border border-gray-100 overflow-hidden">
+          {/* timeline */}
+          <div className="flex-1 bg-[var(--color-card)] rounded-3xl p-6 shadow-sm border border-[var(--color-ring-offset-background)] overflow-hidden">
             <div className="space-y-0">
               {TIME_SLOTS.map(slot => (
                 <TimeSlot

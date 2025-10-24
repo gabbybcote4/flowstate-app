@@ -1,33 +1,45 @@
+// src/components/ui/alert-dialog.tsx
+// accessible confirmation dialog built with radix primitives and flowstate theme support
+
 "use client";
 
 import * as React from "react";
-import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog@1.1.6";
-
+import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog";
 import { cn } from "./utils";
 import { buttonVariants } from "./button";
 
-function AlertDialog({
-  ...props
-}: React.ComponentProps<typeof AlertDialogPrimitive.Root>) {
+// root container
+function AlertDialog(
+  props: React.ComponentProps<typeof AlertDialogPrimitive.Root>
+) {
   return <AlertDialogPrimitive.Root data-slot="alert-dialog" {...props} />;
 }
 
-function AlertDialogTrigger({
-  ...props
-}: React.ComponentProps<typeof AlertDialogPrimitive.Trigger>) {
+// trigger element
+function AlertDialogTrigger(
+  props: React.ComponentProps<typeof AlertDialogPrimitive.Trigger>
+) {
   return (
-    <AlertDialogPrimitive.Trigger data-slot="alert-dialog-trigger" {...props} />
+    <AlertDialogPrimitive.Trigger
+      data-slot="alert-dialog-trigger"
+      {...props}
+    />
   );
 }
 
-function AlertDialogPortal({
-  ...props
-}: React.ComponentProps<typeof AlertDialogPrimitive.Portal>) {
+// portal wrapper
+function AlertDialogPortal(
+  props: React.ComponentProps<typeof AlertDialogPrimitive.Portal>
+) {
   return (
-    <AlertDialogPrimitive.Portal data-slot="alert-dialog-portal" {...props} />
+    <AlertDialogPrimitive.Portal
+      data-slot="alert-dialog-portal"
+      {...props}
+    />
   );
 }
 
+// background overlay with fade animation
 function AlertDialogOverlay({
   className,
   ...props
@@ -36,14 +48,18 @@ function AlertDialogOverlay({
     <AlertDialogPrimitive.Overlay
       data-slot="alert-dialog-overlay"
       className={cn(
-        "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50",
-        className,
+        "fixed inset-0 z-50 bg-black/50 backdrop-blur-[2px]",
+        "data-[state=open]:animate-in data-[state=closed]:animate-out",
+        "data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0",
+        "transition-all duration-200 ease-out",
+        className
       )}
       {...props}
     />
   );
 }
 
+// main content area with scale and fade animation
 function AlertDialogContent({
   className,
   ...props
@@ -54,8 +70,13 @@ function AlertDialogContent({
       <AlertDialogPrimitive.Content
         data-slot="alert-dialog-content"
         className={cn(
-          "bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border p-6 shadow-lg duration-200 sm:max-w-lg",
-          className,
+          "fixed top-1/2 left-1/2 z-50 grid w-full max-w-md -translate-x-1/2 -translate-y-1/2 gap-4 rounded-2xl border shadow-xl",
+          "bg-[var(--color-card)] text-[var(--color-card-foreground)] border-[var(--color-ring-offset-background)]",
+          "data-[state=open]:animate-in data-[state=closed]:animate-out",
+          "data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0",
+          "data-[state=open]:zoom-in-95 data-[state=closed]:zoom-out-95",
+          "duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] p-6",
+          className
         )}
         {...props}
       />
@@ -63,6 +84,7 @@ function AlertDialogContent({
   );
 }
 
+// dialog header
 function AlertDialogHeader({
   className,
   ...props
@@ -76,6 +98,7 @@ function AlertDialogHeader({
   );
 }
 
+// dialog footer
 function AlertDialogFooter({
   className,
   ...props
@@ -85,13 +108,14 @@ function AlertDialogFooter({
       data-slot="alert-dialog-footer"
       className={cn(
         "flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
-        className,
+        className
       )}
       {...props}
     />
   );
 }
 
+// title text
 function AlertDialogTitle({
   className,
   ...props
@@ -99,12 +123,16 @@ function AlertDialogTitle({
   return (
     <AlertDialogPrimitive.Title
       data-slot="alert-dialog-title"
-      className={cn("text-lg font-semibold", className)}
+      className={cn(
+        "text-lg font-semibold text-[var(--color-card-foreground)]",
+        className
+      )}
       {...props}
     />
   );
 }
 
+// description text
 function AlertDialogDescription({
   className,
   ...props
@@ -112,12 +140,16 @@ function AlertDialogDescription({
   return (
     <AlertDialogPrimitive.Description
       data-slot="alert-dialog-description"
-      className={cn("text-muted-foreground text-sm", className)}
+      className={cn(
+        "text-sm text-[var(--color-muted-foreground)] leading-relaxed",
+        className
+      )}
       {...props}
     />
   );
 }
 
+// confirm action button
 function AlertDialogAction({
   className,
   ...props
@@ -130,6 +162,7 @@ function AlertDialogAction({
   );
 }
 
+// cancel button
 function AlertDialogCancel({
   className,
   ...props

@@ -1,4 +1,5 @@
-import { motion } from 'motion/react';
+// src/components/onboarding/steps/NotificationsStep.tsx
+
 import { OnboardingStepProps } from '../ConfigOnboardingWizard';
 import { useUserConfig } from '../../../config/UserConfigContext';
 import { Switch } from '../../ui/switch';
@@ -30,7 +31,7 @@ export function NotificationsStep({}: OnboardingStepProps) {
         </p>
       </div>
 
-      {/* Main Toggle */}
+      {/* main toggle */}
       <div
         className="rounded-2xl p-6"
         style={{
@@ -59,11 +60,9 @@ export function NotificationsStep({}: OnboardingStepProps) {
         </div>
       </div>
 
-      {/* Notification Types */}
+      {/* notification types */}
       {config.notifications.enabled && (
         < div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
           className="space-y-2"
         >
           {[
@@ -78,9 +77,6 @@ export function NotificationsStep({}: OnboardingStepProps) {
             return (
               < div
                 key={item.key}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.05 }}
                 className="rounded-2xl p-4 flex items-center gap-4"
                 style={{
                   background: isEnabled ? 'rgba(167, 139, 250, 0.05)' : 'white',
@@ -101,17 +97,14 @@ export function NotificationsStep({}: OnboardingStepProps) {
         </ div>
       )}
 
-      {/* Frequency */}
+      {/* frequency */}
       {config.notifications.enabled && (
         < div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
         >
           <h4 className="mb-3" style={{ fontSize: '15px', fontWeight: '500' }}>
             Notification Frequency
           </h4>
-          <div className="flex gap-2">
+          <div className="flex flex-col gap-2">
             {(['minimal', 'moderate', 'frequent'] as const).map((freq) => (
               <button
                 key={freq}

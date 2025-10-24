@@ -1,16 +1,8 @@
-/**
- * NavigationContext
- * 
- * Centralized navigation state management with screen history,
- * restore last screen functionality, and navigation stack
- */
+// NavigationContext.tsx
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
-// ============================================================================
-// TYPE DEFINITIONS
-// ============================================================================
-
+// type definitions
 export type ScreenName =
   | 'home'
   | 'checkin'
@@ -33,7 +25,8 @@ export type ScreenName =
   | 'integrations'
   | 'integrations-guide'
   | 'community'
-  | 'symptom-tracker';
+  | 'symptom-tracker'
+  | 'onboarding-layout';
 
 interface NavigationState {
   currentScreen: ScreenName;
@@ -43,52 +36,45 @@ interface NavigationState {
 }
 
 interface NavigationContextType {
-  /** Current active screen */
+  /** current active screen */
   currentScreen: ScreenName;
   
-  /** Previous screen in history */
+  /** previous screen in history */
   previousScreen: ScreenName | null;
   
-  /** Full navigation history stack */
+  /** full navigation history stack */
   history: ScreenName[];
   
-  /** Current screen parameters */
+  /** current screen parameters */
   params: Record<string, any>;
   
-  /** Navigate to a screen */
+  /** navigate to screen */
   navigate: (screen: ScreenName, params?: Record<string, any>) => void;
   
-  /** Go back to previous screen */
+  /** go back to previous screen */
   goBack: () => void;
   
-  /** Replace current screen (no history entry) */
+  /** replace current screen (no history entry) */
   replace: (screen: ScreenName, params?: Record<string, any>) => void;
   
-  /** Reset navigation to home */
+  /** reset navigation to home */
   reset: () => void;
   
-  /** Check if can go back */
+  /** check if can go back */
   canGoBack: boolean;
 }
 
-// ============================================================================
-// CONTEXT CREATION
-// ============================================================================
-
+// context creation
 const NavigationContext = createContext<NavigationContextType | undefined>(undefined);
-
 const STORAGE_KEY = 'flowstate-navigation-state';
 const DEFAULT_SCREEN: ScreenName = 'home';
 
-// ============================================================================
-// NAVIGATION PROVIDER
-// ============================================================================
-
+// navigation provider component
 interface NavigationProviderProps {
   children: ReactNode;
-  /** Initial screen (defaults to last saved or home) */
+  /** initial screen (defaults to last saved or home) */
   initialScreen?: ScreenName;
-  /** Enable persistence to localStorage */
+  /** enable persistence to localStorage */
   persist?: boolean;
 }
 
@@ -97,7 +83,7 @@ export function NavigationProvider({
   initialScreen,
   persist = true,
 }: NavigationProviderProps) {
-  // Initialize from localStorage or defaults
+  // initialize from localStorage or defaults
   const [state, setState] = useState<NavigationState>(() => {
     if (persist && typeof window !== 'undefined') {
       try {
@@ -119,7 +105,7 @@ export function NavigationProvider({
     };
   });
 
-  // Persist state to localStorage
+  // persist state to localStorage
   useEffect(() => {
     if (persist && typeof window !== 'undefined') {
       try {
@@ -130,7 +116,7 @@ export function NavigationProvider({
     }
   }, [state, persist]);
 
-  // Navigate to a new screen
+  // navigate to new screen
   const navigate = (screen: ScreenName, params: Record<string, any> = {}) => {
     setState((prev) => ({
       currentScreen: screen,
@@ -140,16 +126,16 @@ export function NavigationProvider({
     }));
   };
 
-  // Go back to previous screen
+  // go back to previous screen
   const goBack = () => {
     setState((prev) => {
       if (prev.history.length <= 1) {
-        // Can't go back, stay on current screen
+        // can't go back, stay on current screen
         return prev;
       }
 
       const newHistory = [...prev.history];
-      newHistory.pop(); // Remove current
+      newHistory.pop(); // remove current
       const previousScreen = newHistory[newHistory.length - 1];
 
       return {
@@ -161,11 +147,11 @@ export function NavigationProvider({
     });
   };
 
-  // Replace current screen (no history entry)
+  // replace current screen (no history entry)
   const replace = (screen: ScreenName, params: Record<string, any> = {}) => {
     setState((prev) => {
       const newHistory = [...prev.history];
-      newHistory[newHistory.length - 1] = screen; // Replace last entry
+      newHistory[newHistory.length - 1] = screen; // replace last entry
 
       return {
         currentScreen: screen,
@@ -176,7 +162,7 @@ export function NavigationProvider({
     });
   };
 
-  // Reset to home screen
+  // reset to home screen
   const reset = () => {
     setState({
       currentScreen: DEFAULT_SCREEN,
@@ -207,13 +193,7 @@ export function NavigationProvider({
   );
 }
 
-// ============================================================================
-// HOOKS
-// ============================================================================
-
-/**
- * Use navigation context
- */
+// hooks for using navigation context
 export function useNavigation(): NavigationContextType {
   const context = useContext(NavigationContext);
   if (!context) {
@@ -222,26 +202,16 @@ export function useNavigation(): NavigationContextType {
   return context;
 }
 
-/**
- * Use screen-specific navigation
- * Returns true if the specified screen is currently active
- */
 export function useIsScreen(screen: ScreenName): boolean {
   const { currentScreen } = useNavigation();
   return currentScreen === screen;
 }
 
-/**
- * Use navigation params
- */
 export function useNavigationParams<T = Record<string, any>>(): T {
   const { params } = useNavigation();
   return params as T;
 }
 
-/**
- * Restore last screen on app mount
- */
 export function useRestoreLastScreen() {
   const { currentScreen } = useNavigation();
 
@@ -252,22 +222,13 @@ export function useRestoreLastScreen() {
   return currentScreen;
 }
 
-// ============================================================================
-// UTILITY FUNCTIONS
-// ============================================================================
-
-/**
- * Clear navigation history from localStorage
- */
+// utility functions
 export function clearNavigationHistory() {
   if (typeof window !== 'undefined') {
     localStorage.removeItem(STORAGE_KEY);
   }
 }
 
-/**
- * Get navigation state from localStorage
- */
 export function getStoredNavigationState(): NavigationState | null {
   if (typeof window !== 'undefined') {
     try {
@@ -282,23 +243,20 @@ export function getStoredNavigationState(): NavigationState | null {
   return null;
 }
 
-/**
- * Navigation history analytics
- */
 export function useNavigationAnalytics() {
   const { history, currentScreen } = useNavigation();
 
   return {
-    /** Total screens visited */
+    /** total screens visited */
     totalScreens: history.length,
     
-    /** Current screen */
+    /** current screen */
     current: currentScreen,
     
-    /** Most visited screen */
+    /** most visited screen */
     mostVisited: getMostVisited(history),
     
-    /** Navigation path */
+    /** navigation path */
     path: history.join(' → '),
   };
 }
@@ -316,13 +274,7 @@ function getMostVisited(history: ScreenName[]): ScreenName | null {
   )[0] as ScreenName;
 }
 
-// ============================================================================
-// HELPER COMPONENTS
-// ============================================================================
-
-/**
- * Back button component
- */
+// helper components
 interface BackButtonProps {
   fallback?: ScreenName;
   children?: ReactNode;
@@ -347,9 +299,6 @@ export function BackButton({ fallback = 'home', children, className = '' }: Back
   );
 }
 
-/**
- * Navigation guard - redirect if condition not met
- */
 interface NavigationGuardProps {
   condition: boolean;
   redirectTo: ScreenName;
@@ -374,9 +323,6 @@ export function NavigationGuard({
   return <>{children}</>;
 }
 
-/**
- * Screen component wrapper with auto-tracking
- */
 interface ScreenProps {
   name: ScreenName;
   children: ReactNode;

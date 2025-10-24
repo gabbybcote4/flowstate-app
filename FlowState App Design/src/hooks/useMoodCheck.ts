@@ -1,8 +1,4 @@
-/**
- * useMoodCheck Hook
- * 
- * Manages daily mood check-in state
- */
+// useMoodCheck.ts
 
 import { useState, useEffect, useCallback } from 'react';
 import { getLocalStorageItem, setLocalStorageItem } from './useLocalStorage';
@@ -20,7 +16,7 @@ export function useMoodCheck() {
   const [moodState, setMoodState] = useState<MoodCheckState>(() => {
     const savedDate = getLocalStorageItem(MOOD_DATE_KEY, null);
     const savedMood = getLocalStorageItem(MOOD_KEY, null);
-    const today = new Date().toDateString();
+    const today = new Date().toISOString().split('T')[0]; 
     
     if (savedDate === today && savedMood) {
       return {
@@ -38,8 +34,7 @@ export function useMoodCheck() {
   });
 
   const setMood = useCallback((mood: string) => {
-    const today = new Date().toDateString();
-    console.log('📝 setMood called:', { mood, today });
+  const today = new Date().toISOString().split('T')[0]; 
     setLocalStorageItem(MOOD_KEY, mood);
     setLocalStorageItem(MOOD_DATE_KEY, today);
     
@@ -48,11 +43,10 @@ export function useMoodCheck() {
       mood,
       date: today,
     });
-    console.log('✅ Mood state updated to hasSetMood: true');
   }, []);
 
   const resetMoodForNewDay = useCallback(() => {
-    const today = new Date().toDateString();
+  const today = new Date().toISOString().split('T')[0]; 
     const savedDate = getLocalStorageItem(MOOD_DATE_KEY, null);
     
     if (savedDate !== today) {
@@ -64,11 +58,11 @@ export function useMoodCheck() {
     }
   }, []);
 
-  // Check on mount and when date changes
+  // check on mount and when date changes
   useEffect(() => {
     resetMoodForNewDay();
     
-    // Check every minute if we've crossed into a new day
+    // check every minute if we've crossed into a new day
     const interval = setInterval(resetMoodForNewDay, 60000);
     
     return () => clearInterval(interval);

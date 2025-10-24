@@ -25,7 +25,7 @@
 //         duration: 0.4,
 //         ease: [0.25, 0.46, 0.45, 0.94]
 //       }}
-//       className="sticky top-0 z-20 bg-white border-b border-gray-100 px-6 py-4"
+//       className="sticky top-0 z-20 bg-[var(--color-card)] border-b border-[var(--color-ring-offset-background)] px-6 py-4"
 //     >
 //       <div className="max-w-md mx-auto">
 //         <div className="flex items-center justify-between">

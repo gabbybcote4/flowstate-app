@@ -248,7 +248,7 @@
 //         {!isCreating && (
 //           < button
 //             onClick={startNewStack}
-//             className="w-full bg-white rounded-3xl p-6 shadow-md mb-6 flex items-center justify-center gap-3 hover:shadow-lg transition-shadow border-2 border-dashed"
+//             className="w-full bg-[var(--color-card)] rounded-3xl p-6 shadow-md mb-6 flex items-center justify-center gap-3 hover:shadow-lg transition-shadow border-2 border-dashed"
 //             style={{ borderColor: themeColors.primary }}
 //             whileHover={{ scale: 1.01 }}
 //             whileTap={{ scale: 0.99 }}
@@ -265,7 +265,7 @@
 //               initial={{ opacity: 0, scale: 0.95 }}
 //               animate={{ opacity: 1, scale: 1 }}
 //               exit={{ opacity: 0, scale: 0.95 }}
-//               className="bg-white rounded-3xl shadow-lg p-6 mb-6 border-2"
+//               className="bg-[var(--color-card)] rounded-3xl shadow-lg p-6 mb-6 border-2"
 //               style={{ borderColor: themeColors.primary }}
 //             >
 //               {/* Stack Name */}
@@ -397,7 +397,7 @@
 //                             <button
 //                               key={habit.id}
 //                               onClick={() => addHabitToStack(habit)}
-//                               className="w-full text-left px-3 py-2 rounded-xl bg-white hover:bg-gray-100 transition-colors text-sm flex items-center justify-between group"
+//                               className="w-full text-left px-3 py-2 rounded-xl bg-[var(--color-card)] hover:bg-gray-100 transition-colors text-sm flex items-center justify-between group"
 //                             >
 //                               <span>{habit.name}</span>
 //                               <span className="text-xs opacity-0 group-hover:opacity-100 transition-opacity">
@@ -459,7 +459,7 @@
 //                           {/* Actions */}
 //                           <button
 //                             onClick={() => toggleOptional(habit.id)}
-//                             className="p-2 rounded-lg hover:bg-white/50 transition-colors text-xs opacity-60 hover:opacity-100"
+//                             className="p-2 rounded-lg hover:bg-[var(--color-card)]/50 transition-colors text-xs opacity-60 hover:opacity-100"
 //                           >
 //                             {habit.isOptional ? 'Required' : 'Optional'}
 //                           </button>
@@ -626,7 +626,7 @@
 //                 initial={{ opacity: 0, y: 20 }}
 //                 animate={{ opacity: 1, y: 0 }}
 //                 transition={{ delay: index * 0.1 }}
-//                 className="bg-white rounded-3xl shadow-md p-6"
+//                 className="bg-[var(--color-card)] rounded-3xl shadow-md p-6"
 //               >
 //                 <div className="flex items-start justify-between mb-4">
 //                   <div className="flex-1">
@@ -695,7 +695,7 @@
 
 //                 {/* Conditions */}
 //                 {stack.conditions.length > 0 && (
-//                   <div className="mt-4 pt-4 border-t border-gray-100">
+//                   <div className="mt-4 pt-4 border-t border-[var(--color-ring-offset-background)]">
 //                     <p className="text-xs opacity-60 mb-2 flex items-center gap-1">
 //                       <AlertCircle size={12} />
 //                       Smart Swaps
@@ -713,7 +713,7 @@
 //                 )}
 
 //                 {/* Quick Actions */}
-//                 <div className="mt-4 pt-4 border-t border-gray-100 flex gap-2">
+//                 <div className="mt-4 pt-4 border-t border-[var(--color-ring-offset-background)] flex gap-2">
 //                   <button
 //                     className="flex-1 py-2 rounded-xl text-sm flex items-center justify-center gap-2"
 //                     style={{

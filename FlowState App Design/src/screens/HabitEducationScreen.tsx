@@ -338,7 +338,7 @@
 //           </div>
 
 //           {/* Progress */}
-//           <div className="bg-white rounded-2xl shadow-md p-5 mb-6">
+//           <div className="bg-[var(--color-card)] rounded-2xl shadow-md p-5 mb-6">
 //             <div className="flex items-center justify-between mb-3">
 //               <div className="text-sm opacity-60">Your Progress</div>
 //               <div className="text-sm" style={{ color: themeColors.primary }}>
@@ -368,7 +368,7 @@
 //                   initial={{ opacity: 0, y: 20 }}
 //                   animate={{ opacity: 1, y: 0 }}
 //                   transition={{ delay: index * 0.05 }}
-//                   className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+//                   className="bg-[var(--color-card)] rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition-shadow"
 //                 >
 //                   {/* Visual */}
 //                   <div 
@@ -425,7 +425,7 @@
 //               animate={{ opacity: 1, scale: 1 }}
 //               className="mt-6 bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl shadow-md p-6 border border-purple-200 text-center"
 //             >
-//               <p className="text-gray-700">
+//               <p className="text-[var(--color-card-foreground)]">
 //                 {completedCards.length === HABIT_CARDS.length 
 //                   ? "🎉 Amazing! You've completed all the habit lessons!"
 //                   : `Great work! You've applied ${completedCards.length} concept${completedCards.length > 1 ? 's' : ''} to your habits. Keep going! 🌟`
@@ -444,7 +444,7 @@
 //               initial={{ scale: 0.9, opacity: 0 }}
 //               animate={{ scale: 1, opacity: 1 }}
 //               exit={{ scale: 0.9, opacity: 0 }}
-//               className="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col"
+//               className="bg-[var(--color-card)] rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col"
 //             >
 //               {/* Header */}
 //               <div 
@@ -456,7 +456,7 @@
 //                     setSelectedCard(null);
 //                     setUserInput('');
 //                   }}
-//                   className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors"
+//                   className="absolute top-4 right-4 w-8 h-8 rounded-full bg-[var(--color-card)]/20 hover:bg-[var(--color-card)]/30 flex items-center justify-center transition-colors"
 //                 >
 //                   <X size={18} />
 //                 </button>
@@ -501,7 +501,7 @@
 //                   }}
 //                 >
 //                   <div className="text-xs opacity-60 mb-1">Example:</div>
-//                   <p className="text-sm text-gray-700">{selectedCard.tryItExample}</p>
+//                   <p className="text-sm text-[var(--color-card-foreground)]">{selectedCard.tryItExample}</p>
 //                 </div>
 //               </div>
 

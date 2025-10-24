@@ -10,7 +10,7 @@ export function PageLoadingState() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 flex items-center justify-center bg-white/80 z-50"
+      className="fixed inset-0 flex items-center justify-center bg-[var(--color-card)]/80 z-50"
     >
       < div
         className="flex flex-col items-center gap-4"

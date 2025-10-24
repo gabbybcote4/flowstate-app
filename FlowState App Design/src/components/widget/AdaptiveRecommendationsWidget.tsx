@@ -66,7 +66,7 @@ export function AdaptiveRecommendationsWidget() {
 
   // if (isLoading) {
   //   return (
-  //     <div className="bg-white rounded-2xl shadow-md p-6">
+  //     <div className="bg-[var(--color-card)] rounded-2xl shadow-md p-6">
   //       <div className="flex items-center gap-3 mb-4">
   //         <div className="w-10 h-10 rounded-xl bg-purple-100 animate-pulse" />
   //         <div className="flex-1">
@@ -84,7 +84,7 @@ export function AdaptiveRecommendationsWidget() {
 
   // if (error || !recommendations) {
   //   return (
-  //     <div className="bg-white rounded-2xl shadow-md p-6">
+  //     <div className="bg-[var(--color-card)] rounded-2xl shadow-md p-6">
   //       <div className="flex items-center gap-3 text-orange-600">
   //         <AlertCircle size={20} />
   //         <p className="text-sm">Unable to generate recommendations right now</p>
@@ -135,7 +135,7 @@ export function AdaptiveRecommendationsWidget() {
   // };
 
   return (
-    <div className="bg-white rounded-2xl shadow-md overflow-hidden">
+    <div className="bg-[var(--color-card)] rounded-2xl shadow-md overflow-hidden">
       {/* Header */}
       <div 
         className="p-6 text-white"
@@ -145,7 +145,7 @@ export function AdaptiveRecommendationsWidget() {
       >
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-xl bg-[var(--color-card)]/20 flex items-center justify-center">
               <Brain size={20} />
             </div>
             <div>
@@ -155,7 +155,7 @@ export function AdaptiveRecommendationsWidget() {
           </div>
           <button
             onClick={() => setShowDetails(!showDetails)}
-            className="w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors"
+            className="w-8 h-8 rounded-full bg-[var(--color-card)]/20 hover:bg-[var(--color-card)]/30 flex items-center justify-center transition-colors"
           >
             <ChevronRight 
               size={18} 
@@ -177,7 +177,7 @@ export function AdaptiveRecommendationsWidget() {
         <div className="mt-3 pt-3 border-t border-white/20">
           <div className="text-xs opacity-80 mb-1">Recommended Approach</div>
           <div className="flex items-center gap-2">
-            {/* <Badge className="bg-white/20 text-white border-white/30">
+            {/* <Badge className="bg-[var(--color-card)]/20 text-white border-white/30">
               {recommendations.recommendedRoutine} routine
             </Badge> */}
           </div>
@@ -201,7 +201,7 @@ export function AdaptiveRecommendationsWidget() {
                 >
                   <Sparkles size={14} style={{ color: themeColors.primary }} />
                 </div>
-                <p className="text-sm text-gray-700 leading-relaxed">{suggestion}</p>
+                <p className="text-sm text-[var(--color-card-foreground)] leading-relaxed">{suggestion}</p>
               </ div>
             ))} */}
           </div>
@@ -243,7 +243,7 @@ export function AdaptiveRecommendationsWidget() {
                 return (
                   < div
                     key={index}
-                    className="bg-white rounded-xl p-4 shadow-sm"
+                    className="bg-[var(--color-card)] rounded-xl p-4 shadow-sm"
                   >
                     <div className="flex items-start gap-3">
                       {/* <div 
@@ -267,7 +267,7 @@ export function AdaptiveRecommendationsWidget() {
                         {/* <p className="text-sm text-gray-600 mb-2">{insight.message}</p>
                         
                         {insight.suggestedAction && (
-                          <div className="flex items-center gap-2 mt-2 pt-2 border-t border-gray-100">
+                          <div className="flex items-center gap-2 mt-2 pt-2 border-t border-[var(--color-ring-offset-background)]">
                             <Zap size={12} className="text-purple-600" />
                             <span className="text-xs text-purple-600">
                               {insight.suggestedAction}

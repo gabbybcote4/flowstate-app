@@ -1,4 +1,4 @@
-// Core UserConfig types that drive the entire FlowState app
+// UserConfig.types.ts
 
 export type ThemeMode = 'light' | 'dark' | 'minimal' | 'auto';
 export type TonePreference = 'gentle' | 'motivating' | 'practical' | 'playful';
@@ -57,7 +57,7 @@ export interface JournalingConfig {
 export interface UserConfig {
   version: number;
   
-  // Core preferences
+  // core preferences
   tone: TonePreference;
   theme: {
     mode: ThemeMode;
@@ -65,20 +65,20 @@ export interface UserConfig {
     fontSize: 'small' | 'medium' | 'large';
   };
   
-  // Life areas
+  // life areas
   lifeAreas: LifeArea[];
   
-  // Features
+  // features
   enabledFeatures: Record<string, boolean>;
   
-  // Navigation
+  // navigation
   navOrder: string[];
   
-  // Dashboard
+  // dashboard
   dashboardLayout: DashboardWidget[];
   dashboardTemplate: DashboardTemplate;
   
-  // Widgets
+  // widgets
   widgets: {
     weather: boolean;
     moon: boolean;
@@ -91,21 +91,21 @@ export interface UserConfig {
     momentum: boolean;
   };
   
-  // Journaling
+  // journaling
   journaling: JournalingConfig;
   
-  // Notifications
+  // notifications
   notifications: NotificationConfig;
   
-  // Integrations
+  // integrations
   integrations: IntegrationConfig[];
   
-  // Routines by mood
+  // routines by mood
   routines: {
     byMood: RoutineByMood;
   };
   
-  // Onboarding
+  // onboarding
   onboardingCompleted: boolean;
   onboardingStep: number;
 }

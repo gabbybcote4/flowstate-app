@@ -395,7 +395,7 @@
 //           className={`mb-8 p-8 rounded-3xl bg-gradient-to-br ${selectedTrack.gradient} shadow-xl relative overflow-hidden`}
 //         >
 //           {/* Subtle background glow */}
-//           <div className="absolute -top-10 -right-10 w-40 h-40 bg-white opacity-30 rounded-full blur-3xl" />
+//           <div className="absolute -top-10 -right-10 w-40 h-40 bg-[var(--color-card)] opacity-30 rounded-full blur-3xl" />
 
 //           <div className="relative z-10 text-center">
 //             <div className="text-6xl mb-4">
@@ -412,7 +412,7 @@
 //                   e.preventDefault();
 //                   setIsPlaying(!isPlaying);
 //                 }}
-//                 className="w-20 h-20 rounded-full bg-white text-lavender-600 shadow-lg flex items-center justify-center touch-manipulation active:scale-95 transition-transform"
+//                 className="w-20 h-20 rounded-full bg-[var(--color-card)] text-lavender-600 shadow-lg flex items-center justify-center touch-manipulation active:scale-95 transition-transform"
 //               >
 //                 {isPlaying ? (
 //                   <Pause size={32} fill="currentColor" />

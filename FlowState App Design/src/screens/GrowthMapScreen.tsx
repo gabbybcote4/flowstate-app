@@ -300,7 +300,7 @@
 //         < div
 //           initial={{ opacity: 0, scale: 0.9 }}
 //           animate={{ opacity: 1, scale: 1 }}
-//           className="max-w-xs mx-auto mb-12 bg-white rounded-3xl p-6 shadow-lg text-center"
+//           className="max-w-xs mx-auto mb-12 bg-[var(--color-card)] rounded-3xl p-6 shadow-lg text-center"
 //         >
 //           <div className="text-sm opacity-60 mb-2">Overall Growth</div>
 //           < div 
@@ -526,7 +526,7 @@
 //             <div className="flex items-center justify-center gap-3">
 //               <button
 //                 onClick={() => setTimelineZoom(Math.max(0.5, timelineZoom - 0.5))}
-//                 className="p-2 rounded-xl bg-white shadow-sm hover:shadow-md transition-all"
+//                 className="p-2 rounded-xl bg-[var(--color-card)] shadow-sm hover:shadow-md transition-all"
 //                 disabled={timelineZoom <= 0.5}
 //               >
 //                 <ZoomOut size={20} style={{ color: themeColors.primary }} />
@@ -536,7 +536,7 @@
 //               </span>
 //               <button
 //                 onClick={() => setTimelineZoom(Math.min(2, timelineZoom + 0.5))}
-//                 className="p-2 rounded-xl bg-white shadow-sm hover:shadow-md transition-all"
+//                 className="p-2 rounded-xl bg-[var(--color-card)] shadow-sm hover:shadow-md transition-all"
 //                 disabled={timelineZoom >= 2}
 //               >
 //                 <ZoomIn size={20} style={{ color: themeColors.primary }} />
@@ -545,7 +545,7 @@
 //           </div>
 
 //           {/* Timeline */}
-//           <div className="bg-white rounded-3xl shadow-lg p-8 relative">
+//           <div className="bg-[var(--color-card)] rounded-3xl shadow-lg p-8 relative">
 //             {timelineEvents.length === 0 ? (
 //               <div className="text-center py-12 opacity-60">
 //                 <Clock size={48} className="mx-auto mb-4" style={{ color: themeColors.primary }} />
@@ -714,7 +714,7 @@
 //               exit={{ y: '100%', opacity: 0 }}
 //               transition={{ type: 'spring', damping: 30, stiffness: 300 }}
 //               onClick={(e) => e.stopPropagation()}
-//               className="bg-white rounded-3xl shadow-2xl max-w-lg w-full max-h-[85vh] overflow-y-auto"
+//               className="bg-[var(--color-card)] rounded-3xl shadow-2xl max-w-lg w-full max-h-[85vh] overflow-y-auto"
 //             >
 //               {/* Header */}
 //               <div 
@@ -723,7 +723,7 @@
 //               >
 //                 <button
 //                   onClick={() => setSelectedArea(null)}
-//                   className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors"
+//                   className="absolute top-4 right-4 w-8 h-8 rounded-full bg-[var(--color-card)]/20 hover:bg-[var(--color-card)]/30 flex items-center justify-center transition-colors"
 //                 >
 //                   <X size={18} />
 //                 </button>
@@ -746,7 +746,7 @@
 //               </div>
 
 //               {/* Stats */}
-//               <div className="p-6 border-b border-gray-100">
+//               <div className="p-6 border-b border-[var(--color-ring-offset-background)]">
 //                 <div className="grid grid-cols-3 gap-4">
 //                   <div className="text-center">
 //                     <div className="text-2xl mb-1">{selectedData.activeHabits}</div>
@@ -764,7 +764,7 @@
 //               </div>
 
 //               {/* Growth Trend */}
-//               <div className="p-6 border-b border-gray-100">
+//               <div className="p-6 border-b border-[var(--color-ring-offset-background)]">
 //                 <div className="flex items-center gap-3 mb-3">
 //                   <div 
 //                     className="w-10 h-10 rounded-full flex items-center justify-center"
@@ -787,7 +787,7 @@
 
 //               {/* Insights */}
 //               {selectedData.insights.length > 0 && (
-//                 <div className="p-6 border-b border-gray-100">
+//                 <div className="p-6 border-b border-[var(--color-ring-offset-background)]">
 //                   <h3 className="mb-3 flex items-center gap-2">
 //                     <Sparkles size={18} style={{ color: selectedAreaConfig.color }} />
 //                     Insights
@@ -807,7 +807,7 @@
 //               )}
 
 //               {/* Next Actions */}
-//               <div className="p-6 border-b border-gray-100">
+//               <div className="p-6 border-b border-[var(--color-ring-offset-background)]">
 //                 <h3 className="mb-3 flex items-center gap-2">
 //                   <Target size={18} style={{ color: selectedAreaConfig.color }} />
 //                   Next Steps
@@ -858,7 +858,7 @@
 //                     setSelectedArea(null);
 //                     onNavigate('timeflow');
 //                   }}
-//                   className="w-full py-3 rounded-2xl bg-gray-100 hover:bg-gray-200 transition-colors text-gray-700"
+//                   className="w-full py-3 rounded-2xl bg-gray-100 hover:bg-gray-200 transition-colors text-[var(--color-card-foreground)]"
 //                 >
 //                   Schedule in Time Flow
 //                 </button>
@@ -884,7 +884,7 @@
 //               exit={{ scale: 0.9, opacity: 0 }}
 //               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
 //               onClick={(e) => e.stopPropagation()}
-//               className="bg-white rounded-3xl shadow-2xl max-w-md w-full overflow-hidden"
+//               className="bg-[var(--color-card)] rounded-3xl shadow-2xl max-w-md w-full overflow-hidden"
 //             >
 //               {/* Header */}
 //               <div 
@@ -893,18 +893,18 @@
 //               >
 //                 <button
 //                   onClick={() => setSelectedEvent(null)}
-//                   className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors"
+//                   className="absolute top-4 right-4 w-8 h-8 rounded-full bg-[var(--color-card)]/20 hover:bg-[var(--color-card)]/30 flex items-center justify-center transition-colors"
 //                 >
 //                   <X size={18} />
 //                 </button>
                 
 //                 <div className="flex items-center gap-4 mb-3">
-//                   <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center text-3xl">
+//                   <div className="w-16 h-16 bg-[var(--color-card)]/20 rounded-2xl flex items-center justify-center text-3xl">
 //                     {selectedEvent.icon}
 //                   </div>
 //                   <div className="flex-1">
 //                     <div 
-//                       className="inline-block px-3 py-1 rounded-full text-xs mb-2 bg-white/20"
+//                       className="inline-block px-3 py-1 rounded-full text-xs mb-2 bg-[var(--color-card)]/20"
 //                     >
 //                       {selectedEvent.type === 'milestone' && '🏆 Milestone'}
 //                       {selectedEvent.type === 'habit' && '✨ Routine Started'}
@@ -939,7 +939,7 @@
 //                 {selectedEvent.description && (
 //                   <div className="mb-6">
 //                     <h4 className="mb-2 text-gray-900">Details</h4>
-//                     <p className="text-gray-700 leading-relaxed">{selectedEvent.description}</p>
+//                     <p className="text-[var(--color-card-foreground)] leading-relaxed">{selectedEvent.description}</p>
 //                   </div>
 //                 )}
 

@@ -112,7 +112,7 @@ export function SupportCircleBadge({
       {/* Avatar */}
       <div className="relative">
         <div
-          className={`${sizes.avatar} rounded-full flex items-center justify-center overflow-hidden bg-white`}
+          className={`${sizes.avatar} rounded-full flex items-center justify-center overflow-hidden bg-[var(--color-card)]`}
           style={{
             borderWidth: active ? '2px' : '0',
             borderColor: config.color,
@@ -322,13 +322,13 @@ export function SupportCircleStats({
       </div>
       
       <div className="grid grid-cols-2 gap-3">
-        <div className="bg-white/60 rounded-xl p-3">
+        <div className="bg-[var(--color-card)]/60 rounded-xl p-3">
           <p className="text-2xl text-purple-900">{totalMembers}</p>
           <p className="text-xs text-purple-600">Members</p>
         </div>
         
         {encouragementCount !== undefined && (
-          <div className="bg-white/60 rounded-xl p-3">
+          <div className="bg-[var(--color-card)]/60 rounded-xl p-3">
             <p className="text-2xl text-pink-600">{encouragementCount}</p>
             <p className="text-xs text-purple-600">Cheers</p>
           </div>

@@ -63,7 +63,7 @@ export function FocusTimer() {
               className={`px-6 py-3 rounded-2xl transition-all duration-300 ${
                 selectedDuration === duration.value
                   ? 'bg-lavender-400 text-white shadow-lg scale-105'
-                  : 'bg-white text-lavender-600 shadow-md hover:shadow-lg'
+                  : 'bg-[var(--color-card)] text-lavender-600 shadow-md hover:shadow-lg'
               }`}
             >
               {duration.label}
@@ -169,7 +169,7 @@ export function FocusTimer() {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={handleReset}
-          className="w-20 h-20 rounded-full bg-white text-lavender-600 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center"
+          className="w-20 h-20 rounded-full bg-[var(--color-card)] text-lavender-600 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center"
         >
           <RotateCcw size={28} />
         </ button>

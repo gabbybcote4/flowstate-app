@@ -1,24 +1,18 @@
-import { useState } from 'react';
-import { useUserConfig } from '../../config/UserConfigContext';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { Button } from '../ui/button';
+// src/components/onboarding/ConfigOnboardingWizard.tsx
+import { useState, useEffect } from "react";
+import { useUserConfig } from "../../config/UserConfigContext";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Button } from "../ui/button";
 
-// Step components
-import { WelcomeStep } from './steps/WelcomeStep';
-import { ToneStep } from './steps/ToneStep';
-import { ThemeStep } from './steps/ThemeStep';
-import { LifeAreasStep } from './steps/LifeAreasStep';
-import { FeaturesStep } from './steps/FeaturesStep';
-import { NavigationStep } from './steps/NavigationStep';
-import { DashboardLayoutStep } from './steps/DashboardLayoutStep';
-import { WidgetsStep } from './steps/WidgetsStep';
-import { JournalingStep } from './steps/JournalingStep';
-import { NotificationsStep } from './steps/NotificationsStep';
-import { IntegrationsStep } from './steps/IntegrationsStep';
-import { ReviewStep } from './steps/ReviewStep';
-
-// Live preview
-import { LivePreviewPanel } from './LivePreviewPanel';
+// step imports
+import { WelcomeStep } from "./steps/WelcomeStep";
+import { ToneStep } from "./steps/ToneStep";
+import { ThemeStep } from "./steps/ThemeStep";
+import { LifeAreasStep } from "./steps/LifeAreasStep";
+import { FeaturesStep } from "./steps/FeaturesStep";
+import { DashboardLayoutStep } from "./steps/DashboardLayoutStep";
+import { NotificationsStep } from "./steps/NotificationsStep";
+import { ReviewStep } from "./steps/ReviewStep";
 
 export interface OnboardingStepProps {
   onNext: () => void;
@@ -28,137 +22,111 @@ export interface OnboardingStepProps {
 }
 
 const ONBOARDING_STEPS = [
-  { id: 'welcome', title: 'Welcome', component: WelcomeStep, showPreview: false },
-  { id: 'tone', title: 'Your Tone', component: ToneStep, showPreview: true },
-  { id: 'theme', title: 'Theme', component: ThemeStep, showPreview: true },
-  { id: 'lifeAreas', title: 'Life Areas', component: LifeAreasStep, showPreview: true },
-  { id: 'features', title: 'Features', component: FeaturesStep, showPreview: true },
-  { id: 'navigation', title: 'Navigation', component: NavigationStep, showPreview: true },
-  { id: 'layout', title: 'Dashboard Layout', component: DashboardLayoutStep, showPreview: true },
-  { id: 'widgets', title: 'Widgets', component: WidgetsStep, showPreview: true },
-  { id: 'journaling', title: 'Journaling', component: JournalingStep, showPreview: false },
-  { id: 'notifications', title: 'Notifications', component: NotificationsStep, showPreview: false },
-  { id: 'integrations', title: 'Integrations', component: IntegrationsStep, showPreview: false },
-  { id: 'review', title: 'Review & Apply', component: ReviewStep, showPreview: false },
+  { id: "welcome", title: "Welcome to FlowState", component: WelcomeStep },
+  { id: "tone", title: "Your Tone", component: ToneStep },
+  { id: "theme", title: "Theme", component: ThemeStep },
+  { id: "lifeAreas", title: "Focus Areas", component: LifeAreasStep },
+  { id: "features", title: "Features You’ll Use", component: FeaturesStep },
+  { id: "layout", title: "Dashboard Setup", component: DashboardLayoutStep },
+  { id: "notifications", title: "Reminders & Journaling", component: NotificationsStep },
+  { id: "review", title: "Review & Apply", component: ReviewStep },
 ];
 
 interface ConfigOnboardingWizardProps {
   onComplete: () => void;
+  editMode?: string;
 }
 
-export function ConfigOnboardingWizard({ onComplete }: ConfigOnboardingWizardProps) {
-  const [currentStepIndex, setCurrentStepIndex] = useState(0);
-  //const [direction, setDirection] = useState(1);
+export function ConfigOnboardingWizard({ onComplete, editMode }: ConfigOnboardingWizardProps) {
   const { config, updateConfig } = useUserConfig();
+  const [currentStepIndex, setCurrentStepIndex] = useState(0);
+
+  useEffect(() => {
+  if (editMode === "layout") {
+    const layoutIndex = ONBOARDING_STEPS.findIndex((s) => s.id === "layout");
+    if (layoutIndex !== -1) setCurrentStepIndex(layoutIndex);
+  }
+}, [editMode]);
+
+
+  // restore saved step from config
+  useEffect(() => {
+    if (config.onboardingStep && config.onboardingStep < ONBOARDING_STEPS.length) {
+      setCurrentStepIndex(config.onboardingStep);
+    }
+  }, [config.onboardingStep]);
 
   const currentStep = ONBOARDING_STEPS[currentStepIndex];
   const StepComponent = currentStep.component;
-  const showPreview = currentStep.showPreview && currentStepIndex > 0;
 
   const handleNext = () => {
     if (currentStepIndex === ONBOARDING_STEPS.length - 1) {
-      // Complete onboarding
-      console.log('🎉 Completing onboarding with config:', config);
-      updateConfig({ 
+      updateConfig({
         onboardingCompleted: true,
-        onboardingStep: ONBOARDING_STEPS.length 
+        onboardingStep: ONBOARDING_STEPS.length,
       });
-      console.log('✅ Onboarding marked as complete');
       onComplete();
     } else {
-      //setDirection(1);
-      setCurrentStepIndex(prev => prev + 1);
-      updateConfig({ onboardingStep: currentStepIndex + 1 });
+      const next = currentStepIndex + 1;
+      setCurrentStepIndex(next);
+      updateConfig({ onboardingStep: next });
     }
   };
 
   const handleBack = () => {
     if (currentStepIndex > 0) {
-      //setDirection(-1);
-      setCurrentStepIndex(prev => prev - 1);
-      updateConfig({ onboardingStep: currentStepIndex - 1 });
+      const prev = currentStepIndex - 1;
+      setCurrentStepIndex(prev);
+      updateConfig({ onboardingStep: prev });
     }
   };
 
-//  const slideVariants = {
-//    enter: (direction: number) => ({
-//      x: direction > 0 ? 300 : -300,
-//      opacity: 0,
-//    }),
-//    center: {
-//      x: 0,
-//      opacity: 1,
-//    },
-//    exit: (direction: number) => ({
-//      x: direction < 0 ? 300 : -300,
-//      opacity: 0,
-//    }),
-//  };
+  const handleSkip = () => {
+    updateConfig({
+      onboardingCompleted: true,
+      onboardingStep: ONBOARDING_STEPS.length,
+    });
+    onComplete();
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-peach-50 flex flex-col">
-      {/* Progress Bar */}
+      
+      {/* progress bar */}
       <div className="w-full h-1 bg-gray-100">
-        < div
-          className="h-full rounded-r-full"
-          style={{ background: 'linear-gradient(90deg, #A78BFA 0%, #C084FC 100%)' }}
+        <div
+          className="h-full rounded-r-full transition-none"
+          style={{
+            width: `${((currentStepIndex + 1) / ONBOARDING_STEPS.length) * 100}%`,
+            background: "linear-gradient(90deg, #A78BFA 0%, #C084FC 100%)",
+          }}
         />
       </div>
 
-      {/* Main Content Area */}
-      <div className="flex-1 flex overflow-hidden">
-        {/* Left Side - Step Content */}
-        <div className={`flex-1 ${showPreview ? 'lg:w-3/5' : 'w-full'} overflow-y-auto`}>
-          <div className="max-w-3xl mx-auto px-6 py-8">
-            {/* Step Counter */}
-            < div
-              className="mb-6"
-            >
-              <p className="text-sm opacity-50">
-                Step {currentStepIndex + 1} of {ONBOARDING_STEPS.length}
-              </p>
-              <h2 
-                className="mt-1"
-                style={{
-                  fontSize: '28px',
-                  fontWeight: '600',
-                  color: '#6B21A8'
-                }}
-              >
-                {currentStep.title}
-              </h2>
-            </ div>
+      {/* step content */}
+      <div className="flex-1 overflow-y-auto">
+        <div className="max-w-3xl mx-auto px-6 py-8">
+          <p className="text-sm opacity-50">
+            Step {currentStepIndex + 1} of {ONBOARDING_STEPS.length}
+          </p>
+          <h2 className="mt-1 text-2xl font-semibold text-purple-700">
+            {currentStep.title}
+          </h2>
 
-            {/* Step Component */}
-              < div
-                key={currentStepIndex}
-                //custom={direction}
-                //variants={slideVariants}
-              >
-                <StepComponent
-                  onNext={handleNext}
-                  onBack={handleBack}
-                  isFirst={currentStepIndex === 0}
-                  isLast={currentStepIndex === ONBOARDING_STEPS.length - 1}
-                />
-              </ div>
+          <div className="mt-6">
+            <StepComponent
+              onNext={handleNext}
+              onBack={handleBack}
+              isFirst={currentStepIndex === 0}
+              isLast={currentStepIndex === ONBOARDING_STEPS.length - 1}
+            />
           </div>
         </div>
-
-        {/* Right Side - Live Preview (desktop only) */}
-        {showPreview && (
-          < div
-            className="hidden lg:flex lg:w-2/5 border-l border-gray-200 bg-white/50 backdrop-blur-sm"
-          >
-            <LivePreviewPanel />
-          </ div>
-        )}
       </div>
 
-      {/* Navigation Footer */}
-      <div className="border-t border-gray-200 bg-white/80 backdrop-blur-sm">
+      {/* footer navigation */}
+      <div className="border-t border-gray-200 bg-[var(--color-card)]/80 backdrop-blur-sm">
         <div className="max-w-3xl mx-auto px-6 py-4 flex items-center justify-between">
-          {/* Back Button */}
           <Button
             variant="ghost"
             onClick={handleBack}
@@ -169,33 +137,41 @@ export function ConfigOnboardingWizard({ onComplete }: ConfigOnboardingWizardPro
             Back
           </Button>
 
-          {/* Progress Dots */}
           <div className="flex items-center gap-2">
             {ONBOARDING_STEPS.map((_, index) => (
-              < div
+              <div
                 key={index}
-                className="rounded-full"
-                style={{
-                  width: currentStepIndex === index ? '32px' : '8px',
-                  height: '8px',
-                  backgroundColor: '#A78BFA',
-                }}
+                className={`rounded-full ${
+                  index === currentStepIndex ? "w-8 bg-purple-400" : "w-2 bg-purple-200"
+                }`}
+                style={{ height: "8px" }}
               />
             ))}
           </div>
 
-          {/* Next/Complete Button */}
-          <Button
-            onClick={handleNext}
-            className="rounded-2xl"
-            style={{
-              background: 'linear-gradient(135deg, #A78BFA 0%, #C084FC 100%)',
-              color: 'white',
-            }}
-          >
-            {currentStepIndex === ONBOARDING_STEPS.length - 1 ? 'Build My Flow' : 'Next'}
-            <ChevronRight size={20} />
-          </Button>
+          <div className="flex gap-2">
+            <Button
+              variant="outline"
+              onClick={handleSkip}
+              className="rounded-2xl text-gray-600"
+            >
+              Skip for now
+            </Button>
+
+            <Button
+              onClick={handleNext}
+              className="rounded-2xl"
+              style={{
+                background: "linear-gradient(135deg, #A78BFA 0%, #C084FC 100%)",
+                color: "white",
+              }}
+            >
+              {currentStepIndex === ONBOARDING_STEPS.length - 1
+                ? "Build My Flow"
+                : "Next"}
+              <ChevronRight size={20} />
+            </Button>
+          </div>
         </div>
       </div>
     </div>

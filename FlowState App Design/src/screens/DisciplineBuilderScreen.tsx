@@ -297,7 +297,7 @@
 //                 <div className="text-sm opacity-90 mb-1">Your Growth Level</div>
 //                 <div className="flex items-center gap-3">
 //                   <h2 className="text-white">{levelInfo.title}</h2>
-//                   <div className="px-3 py-1 bg-white/20 rounded-full text-sm">
+//                   <div className="px-3 py-1 bg-[var(--color-card)]/20 rounded-full text-sm">
 //                     Level {levelInfo.level}
 //                   </div>
 //                 </div>
@@ -307,12 +307,12 @@
 
 //             {/* Progress bar */}
 //             <div className="mb-3">
-//               <div className="bg-white/20 rounded-full h-3 overflow-hidden">
+//               <div className="bg-[var(--color-card)]/20 rounded-full h-3 overflow-hidden">
 //                 < div
 //                   initial={{ width: 0 }}
 //                   animate={{ width: `${progressToNextLevel}%` }}
 //                   transition={{ duration: 1, ease: 'easeOut' }}
-//                   className="bg-white h-full rounded-full"
+//                   className="bg-[var(--color-card)] h-full rounded-full"
 //                 />
 //               </div>
 //             </div>
@@ -328,7 +328,7 @@
 //             < div
 //               initial={{ opacity: 0, scale: 0.95 }}
 //               animate={{ opacity: 1, scale: 1 }}
-//               className="bg-white rounded-3xl shadow-lg p-8 mb-6"
+//               className="bg-[var(--color-card)] rounded-3xl shadow-lg p-8 mb-6"
 //             >
 //               <div className="text-center mb-6">
 //                 <Sparkles size={48} className="mx-auto mb-3" style={{ color: themeColors.primary }} />
@@ -380,7 +380,7 @@
 //               <Zap size={24} className="flex-shrink-0 mt-1 text-blue-600" />
 //               <div>
 //                 <div className="text-sm opacity-60 mb-1">Today's Focus</div>
-//                 <p className="text-gray-800">{dailyReminder}</p>
+//                 <p className="text-[var(--color-card-foreground)]">{dailyReminder}</p>
 //               </div>
 //             </div>
 //           </ div>
@@ -406,7 +406,7 @@
 //                       setSelectedModule(module.id);
 //                       setCurrentLesson(0);
 //                     }}
-//                     className="bg-white rounded-2xl shadow-md p-5 text-left transition-all hover:shadow-lg"
+//                     className="bg-[var(--color-card)] rounded-2xl shadow-md p-5 text-left transition-all hover:shadow-lg"
 //                   >
 //                     <div className="flex items-center justify-between">
 //                       <div className="flex items-center gap-3 flex-1">
@@ -447,7 +447,7 @@
 //                     initial={{ opacity: 0, y: 10 }}
 //                     animate={{ opacity: 1, y: 0 }}
 //                     transition={{ delay: index * 0.05 }}
-//                     className="bg-white rounded-2xl shadow-md p-5"
+//                     className="bg-[var(--color-card)] rounded-2xl shadow-md p-5"
 //                   >
 //                     <div className="flex items-start gap-3">
 //                       <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: `${themeColors.primary}20` }}>
@@ -460,7 +460,7 @@
 //                             day: 'numeric' 
 //                           })}
 //                         </div>
-//                         <p className="text-sm text-gray-700">{reflection.whatMadeItEasier}</p>
+//                         <p className="text-sm text-[var(--color-card-foreground)]">{reflection.whatMadeItEasier}</p>
 //                       </div>
 //                     </div>
 //                   </ div>
@@ -471,19 +471,19 @@
 
 //           {/* Stats */}
 //           <div className="grid grid-cols-3 gap-3">
-//             <div className="bg-white rounded-2xl shadow-md p-4 text-center">
+//             <div className="bg-[var(--color-card)] rounded-2xl shadow-md p-4 text-center">
 //               <div className="text-2xl mb-1" style={{ color: themeColors.primary }}>
 //                 {progress.totalShowUps}
 //               </div>
 //               <div className="text-xs opacity-60">Show Ups</div>
 //             </div>
-//             <div className="bg-white rounded-2xl shadow-md p-4 text-center">
+//             <div className="bg-[var(--color-card)] rounded-2xl shadow-md p-4 text-center">
 //               <div className="text-2xl mb-1" style={{ color: themeColors.primary }}>
 //                 {progress.completedModules.length}
 //               </div>
 //               <div className="text-xs opacity-60">Modules</div>
 //             </div>
-//             <div className="bg-white rounded-2xl shadow-md p-4 text-center">
+//             <div className="bg-[var(--color-card)] rounded-2xl shadow-md p-4 text-center">
 //               <div className="text-2xl mb-1" style={{ color: themeColors.primary }}>
 //                 {progress.reflections.length}
 //               </div>
@@ -501,7 +501,7 @@
 //               initial={{ scale: 0.9, opacity: 0 }}
 //               animate={{ scale: 1, opacity: 1 }}
 //               exit={{ scale: 0.9, opacity: 0 }}
-//               className="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col"
+//               className="bg-[var(--color-card)] rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col"
 //             >
 //               {(() => {
 //                 const module = DISCIPLINE_MODULES.find(m => m.id === selectedModule);
@@ -530,7 +530,7 @@
 //                     {/* Content */}
 //                     <div className="flex-1 overflow-y-auto p-6">
 //                       <h3 className="mb-4">{lesson.title}</h3>
-//                       <p className="text-gray-700 leading-relaxed text-lg">
+//                       <p className="text-[var(--color-card-foreground)] leading-relaxed text-lg">
 //                         {lesson.content}
 //                       </p>
 //                     </div>
@@ -583,7 +583,7 @@
 //               initial={{ scale: 0.9, opacity: 0 }}
 //               animate={{ scale: 1, opacity: 1 }}
 //               exit={{ scale: 0.9, opacity: 0 }}
-//               className="bg-white rounded-3xl max-w-lg w-full p-6"
+//               className="bg-[var(--color-card)] rounded-3xl max-w-lg w-full p-6"
 //             >
 //               <div className="text-center mb-6">
 //                 <Heart size={48} className="mx-auto mb-3" style={{ color: themeColors.primary }} />

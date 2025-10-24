@@ -1,16 +1,40 @@
-import { motion } from 'motion/react';
+// src/components/onboarding/steps/FeaturesStep.tsx
+
+import { useEffect } from 'react';
 import { OnboardingStepProps } from '../ConfigOnboardingWizard';
 import { useUserConfig } from '../../../config/UserConfigContext';
 import { FEATURE_REGISTRY, FEATURE_CATEGORIES } from '../../../config/featureRegistry';
 import { Switch } from '../../ui/switch';
+import { Lock } from 'lucide-react';
 
 export function FeaturesStep({}: OnboardingStepProps) {
   const { config, updateConfig } = useUserConfig();
 
+  // ensure all core features are always enabled in config
+  useEffect(() => {
+    const coreKeys = Object.keys(FEATURE_REGISTRY).filter(
+      (key) => FEATURE_REGISTRY[key].category === 'core'
+    );
+
+    const updated = { ...config.enabledFeatures };
+    let changed = false;
+
+    coreKeys.forEach((key) => {
+      if (!updated[key]) {
+        updated[key] = true;
+        changed = true;
+      }
+    });
+
+    if (changed) {
+      updateConfig({ enabledFeatures: updated });
+    }
+  }, [config.enabledFeatures, updateConfig]);
+
   const toggleFeature = (featureKey: string) => {
-    // Don't allow disabling core features
-    if (FEATURE_REGISTRY[featureKey]?.category === 'core') return;
-    
+    const feature = FEATURE_REGISTRY[featureKey];
+    if (!feature || feature.category === 'core') return;
+
     updateConfig({
       enabledFeatures: {
         ...config.enabledFeatures,
@@ -19,63 +43,73 @@ export function FeaturesStep({}: OnboardingStepProps) {
     });
   };
 
-  const categories = ['productivity', 'wellness', 'growth', 'advanced'];
+  const categories = ['core', 'productivity', 'wellness', 'growth', 'advanced'];
+
+  // compute enabled count directly from config
+  const enabledCount = Object.entries(config.enabledFeatures).filter(
+    ([key, value]) => value && FEATURE_REGISTRY[key]
+  ).length;
 
   return (
-    <div className="space-y-6">
-      <div>
-        <p className="opacity-70 mb-6" style={{ fontSize: '16px', lineHeight: '1.6' }}>
-          Choose which features to enable. You can always add more later. Core features are always enabled.
-        </p>
-      </div>
+    <div className="space-y-8">
 
-      <div className="space-y-6">
-        {categories.map((category, catIndex) => {
+      {/* intro */}
+      <p className="opacity-70 mb-4 text-[16px] leading-relaxed">
+        Choose which features to enable. Core features are always active and cannot be turned off.
+      </p>
+
+      {/* category layout */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {categories.map((category) => {
           const features = Object.values(FEATURE_REGISTRY).filter(
-            f => f.category === category
+            (f) => f.category === category
           );
-          
+
           if (features.length === 0) return null;
 
+          const categoryInfo =
+            FEATURE_CATEGORIES[category as keyof typeof FEATURE_CATEGORIES];
+
           return (
-            < div
-              key={category}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: catIndex * 0.1 }}
-            >
-              <h3 
-                className="mb-3"
-                style={{ 
-                  fontSize: '16px',
-                  fontWeight: '600',
-                  color: FEATURE_CATEGORIES[category as keyof typeof FEATURE_CATEGORIES]?.color 
+            <div key={category}>
+              {/* Category Header */}
+              <h3
+                className="mb-3 font-semibold text-[16px] flex items-center gap-2"
+                style={{
+                  color:
+                    category === 'core'
+                      ? '#6B21A8'
+                      : categoryInfo?.color || '#4B5563',
                 }}
               >
-                {FEATURE_CATEGORIES[category as keyof typeof FEATURE_CATEGORIES]?.label}
+                {category === 'core' && <Lock size={16} />}
+                {category === 'core'
+                  ? 'Core Features'
+                  : categoryInfo?.label}
               </h3>
 
-              <div className="space-y-2">
-                {features.map((feature, index) => {
+              <div className="space-y-3">
+                {features.map((feature) => {
                   const Icon = feature.icon;
                   const isEnabled = config.enabledFeatures[feature.key];
                   const isCore = feature.category === 'core';
 
                   return (
-                    < div
+                    <div
                       key={feature.key}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: catIndex * 0.1 + index * 0.05 }}
                       className="rounded-2xl p-4 flex items-center gap-4 transition-all"
                       style={{
-                        background: isEnabled ? 'rgba(167, 139, 250, 0.05)' : 'white',
+                        background: isEnabled
+                          ? 'rgba(167, 139, 250, 0.05)'
+                          : 'white',
                         border: isEnabled
                           ? '2px solid rgba(167, 139, 250, 0.2)'
                           : '2px solid rgba(0, 0, 0, 0.05)',
+                        opacity: isCore ? 0.8 : 1,
                       }}
                     >
-                      <div 
+                      {/* icon */}
+                      <div
                         className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
                         style={{
                           background: isEnabled
@@ -83,21 +117,22 @@ export function FeaturesStep({}: OnboardingStepProps) {
                             : 'rgba(167, 139, 250, 0.1)',
                         }}
                       >
-                        <Icon 
-                          size={20} 
+                        <Icon
+                          size={20}
                           style={{ color: isEnabled ? 'white' : '#A78BFA' }}
                         />
                       </div>
 
+                      {/* label + description */}
                       <div className="flex-1 min-w-0">
-                        <h4 style={{ fontSize: '15px', fontWeight: '500' }}>
+                        <h4 className="text-[15px] font-medium">
                           {feature.label}
                           {isCore && (
-                            <span 
+                            <span
                               className="ml-2 text-xs px-2 py-0.5 rounded-full"
-                              style={{ 
+                              style={{
                                 background: 'rgba(167, 139, 250, 0.1)',
-                                color: '#6B21A8'
+                                color: '#6B21A8',
                               }}
                             >
                               Core
@@ -109,22 +144,24 @@ export function FeaturesStep({}: OnboardingStepProps) {
                         </p>
                       </div>
 
+                      {/* toggle */}
                       <Switch
                         checked={isEnabled}
                         onCheckedChange={() => toggleFeature(feature.key)}
                         disabled={isCore}
                       />
-                    </ div>
+                    </div>
                   );
                 })}
               </div>
-            </ div>
+            </div>
           );
         })}
       </div>
 
-      <p className="text-sm opacity-50 text-center">
-        {Object.values(config.enabledFeatures).filter(Boolean).length} features enabled
+      {/* footer summary */}
+      <p className="text-sm opacity-50 text-center mt-6">
+        {enabledCount} features enabled
       </p>
     </div>
   );

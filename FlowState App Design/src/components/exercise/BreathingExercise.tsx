@@ -49,7 +49,7 @@
 //       {/* Cycles Counter */}
 //       {cycles > 0 && (
 //         < div
-//           className="mb-6 px-6 py-3 bg-white rounded-2xl shadow-md"
+//           className="mb-6 px-6 py-3 bg-[var(--color-card)] rounded-2xl shadow-md"
 //         >
 //           <p className="text-lavender-600">
 //             <span className="text-2xl">{cycles}</span> {cycles === 1 ? 'cycle' : 'cycles'} completed
@@ -68,7 +68,7 @@
 //           {/* Inner glow effect */}
 //           < div
 
-//             className="absolute inset-0 rounded-full bg-white/30 blur-xl"
+//             className="absolute inset-0 rounded-full bg-[var(--color-card)]/30 blur-xl"
 //           />
 //         </ div>
 

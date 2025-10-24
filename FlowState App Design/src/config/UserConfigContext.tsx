@@ -1,3 +1,5 @@
+// UserConfigContext.tsx
+
 import { createContext, useContext, useReducer, useEffect, ReactNode } from 'react';
 import { UserConfig, DEFAULT_USER_CONFIG } from './userConfig.types';
 
@@ -27,13 +29,12 @@ function configReducer(state: UserConfig, action: ConfigAction): UserConfig {
   }
 }
 
-// Load config from localStorage
+// load config from localStorage
 function loadConfig(): UserConfig {
   try {
     const stored = localStorage.getItem('flowstate-user-config');
     if (stored) {
       const parsed = JSON.parse(stored);
-      // TODO: Add migration logic here for version updates
       return { ...DEFAULT_USER_CONFIG, ...parsed };
     }
   } catch (error) {
@@ -42,7 +43,7 @@ function loadConfig(): UserConfig {
   return DEFAULT_USER_CONFIG;
 }
 
-// Save config to localStorage
+// save config to localStorage
 function saveConfig(config: UserConfig) {
   try {
     localStorage.setItem('flowstate-user-config', JSON.stringify(config));
@@ -54,7 +55,7 @@ function saveConfig(config: UserConfig) {
 export function UserConfigProvider({ children }: { children: ReactNode }) {
   const [config, dispatch] = useReducer(configReducer, DEFAULT_USER_CONFIG, loadConfig);
 
-  // Save to localStorage whenever config changes
+  // save to localStorage whenever config changes
   useEffect(() => {
     saveConfig(config);
   }, [config]);

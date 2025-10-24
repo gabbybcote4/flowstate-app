@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 //import { motion } from '../lib/motion-shim';
-import { useTheme } from '../context/ThemeContext';
+import { useTheme } from '../ThemeContext';
 import { Sparkles, ArrowRight } from 'lucide-react';
 //import { toast } from 'sonner@2.0.3';
 import { getLocalStorageItem, setLocalStorageItem } from '../../hooks/useLocalStorage';
@@ -44,7 +44,7 @@ export function MoodCheckInWidget() {
     return (
       < button
         onClick={() => setIsExpanded(true)}
-        className="w-full bg-white rounded-2xl shadow-md p-4 mb-6 text-left"
+        className="w-full bg-[var(--color-card)] rounded-2xl shadow-md p-4 mb-6 text-left"
         //whileHover={{ scale: 1.01 }}
         //whileTap={{ scale: 0.99 }}
       >
@@ -66,7 +66,7 @@ export function MoodCheckInWidget() {
 
   return (
     < div 
-      className="bg-white rounded-3xl shadow-md p-5 mb-6 relative"
+      className="bg-[var(--color-card)] rounded-3xl shadow-md p-5 mb-6 relative"
     >
       <div className="absolute top-0 right-0 bg-black/75 text-white px-2 py-1 text-[10px] rounded-bl z-50">MOOD CHECK-IN</div>
       <div className="flex items-center gap-2 mb-4">

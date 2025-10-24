@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { MessageCircle, Send, Sparkles } from 'lucide-react';
-import { useTheme } from '../context/ThemeContext';
+import { useTheme } from '../ThemeContext';
 
 export function QuickReflectionCard() {
   const { themeColors } = useTheme();
@@ -47,7 +47,7 @@ export function QuickReflectionCard() {
         QUICK REFLECTION CARD
       </div>
       <div 
-        className="bg-white rounded-3xl shadow-md p-5 mb-6"
+        className="bg-[var(--color-card)] rounded-3xl shadow-md p-5 mb-6"
         style={{ 
           boxShadow: isFocused 
             ? `0 10px 40px -10px ${themeColors.primary}40` 

@@ -175,7 +175,7 @@ export function NotificationTestPanel({ onNavigate }: { onNavigate?: (screen: st
   ];
 
   return (
-    <div className="bg-white rounded-3xl shadow-sm p-6 border border-gray-100">
+    <div className="bg-[var(--color-card)] rounded-3xl shadow-sm p-6 border border-[var(--color-ring-offset-background)]">
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div>

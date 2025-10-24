@@ -344,7 +344,7 @@
 //     < div
 //       initial={{ opacity: 0, y: 20 }}
 //       animate={{ opacity: 1, y: 0 }}
-//       className="bg-white rounded-3xl p-5 shadow-sm border border-gray-100"
+//       className="bg-[var(--color-card)] rounded-3xl p-5 shadow-sm border border-[var(--color-ring-offset-background)]"
 //     >
 //       {/* Author */}
 //       <div className="flex items-center gap-3 mb-3">
@@ -373,7 +373,7 @@
 //       </div>
 
 //       {/* Content */}
-//       <p className="text-gray-700 mb-3 leading-relaxed">{post.content}</p>
+//       <p className="text-[var(--color-card-foreground)] mb-3 leading-relaxed">{post.content}</p>
 
 //       {/* Tags */}
 //       {post.tags && post.tags.length > 0 && (
@@ -390,7 +390,7 @@
 //       )}
 
 //       {/* Reactions */}
-//       <div className="flex items-center gap-4 pt-3 border-t border-gray-100">
+//       <div className="flex items-center gap-4 pt-3 border-t border-[var(--color-ring-offset-background)]">
 //         <button
 //           onClick={() => handleReaction(post.id, 'heart')}
 //           className="flex items-center gap-1.5 px-3 py-2 rounded-full hover:bg-pink-50 transition-colors"
@@ -431,7 +431,7 @@
 //       < div
 //         initial={{ opacity: 0, y: -20 }}
 //         animate={{ opacity: 1, y: 0 }}
-//         className="sticky top-0 z-20 bg-white border-b border-gray-100 px-6 py-4"
+//         className="sticky top-0 z-20 bg-[var(--color-card)] border-b border-[var(--color-ring-offset-background)] px-6 py-4"
 //       >
 //         <div className="max-w-4xl mx-auto">
 //           <div className="flex items-center justify-between mb-4">
@@ -508,7 +508,7 @@
 //               initial={{ opacity: 0, height: 0 }}
 //               animate={{ opacity: 1, height: 'auto' }}
 //               exit={{ opacity: 0, height: 0 }}
-//               className="bg-white rounded-3xl p-5 shadow-sm border border-gray-100 mb-6"
+//               className="bg-[var(--color-card)] rounded-3xl p-5 shadow-sm border border-[var(--color-ring-offset-background)] mb-6"
 //             >
 //               <textarea
 //                 value={newPost}
@@ -582,7 +582,7 @@
 //                 initial={{ opacity: 0, y: 20 }}
 //                 animate={{ opacity: 1, y: 0 }}
 //                 transition={{ delay: index * 0.1 }}
-//                 className="bg-white rounded-3xl p-6 shadow-sm border border-gray-100"
+//                 className="bg-[var(--color-card)] rounded-3xl p-6 shadow-sm border border-[var(--color-ring-offset-background)]"
 //               >
 //                 <div className="flex items-start gap-4 mb-4">
 //                   <div
@@ -608,7 +608,7 @@
 //                     <span className="text-sm opacity-70">Collective Growth</span>
 //                     <Flower2 size={16} style={{ color: circle.color }} />
 //                   </div>
-//                   <div className="w-full bg-white rounded-full h-3 mb-2">
+//                   <div className="w-full bg-[var(--color-card)] rounded-full h-3 mb-2">
 //                     <div
 //                       className="h-full rounded-full transition-all"
 //                       style={{
@@ -671,12 +671,12 @@
 //                   initial={{ opacity: 0, y: 20 }}
 //                   animate={{ opacity: 1, y: 0 }}
 //                   transition={{ delay: index * 0.05 }}
-//                   className="bg-white rounded-3xl p-5 shadow-sm border border-gray-100"
+//                   className="bg-[var(--color-card)] rounded-3xl p-5 shadow-sm border border-[var(--color-ring-offset-background)]"
 //                   style={{ backgroundColor: template.color }}
 //                 >
 //                   <div className="flex items-start justify-between mb-3">
 //                     <div className="text-3xl">{template.emoji}</div>
-//                     <div className="text-xs px-3 py-1 rounded-full bg-white text-gray-600">
+//                     <div className="text-xs px-3 py-1 rounded-full bg-[var(--color-card)] text-gray-600">
 //                       {template.category}
 //                     </div>
 //                   </div>
@@ -692,7 +692,7 @@
 //                   </div>
 
 //                   {/* Activities */}
-//                   <div className="bg-white/80 rounded-2xl p-3 mb-3">
+//                   <div className="bg-[var(--color-card)]/80 rounded-2xl p-3 mb-3">
 //                     <div className="text-xs opacity-60 mb-2">Includes:</div>
 //                     <ul className="text-sm space-y-1">
 //                       {template.activities.slice(0, 3).map((activity, i) => (
@@ -714,7 +714,7 @@
 //                     {template.tags.map(tag => (
 //                       <span
 //                         key={tag}
-//                         className="text-xs px-2 py-1 rounded-full bg-white/80 text-gray-600"
+//                         className="text-xs px-2 py-1 rounded-full bg-[var(--color-card)]/80 text-gray-600"
 //                       >
 //                         #{tag}
 //                       </span>
@@ -724,7 +724,7 @@
 //                   {/* Import Button */}
 //                   <button
 //                     onClick={() => handleImportTemplate(template.id)}
-//                     className="w-full py-3 rounded-2xl transition-all flex items-center justify-center gap-2 bg-white hover:bg-gray-50"
+//                     className="w-full py-3 rounded-2xl transition-all flex items-center justify-center gap-2 bg-[var(--color-card)] hover:bg-gray-50"
 //                   >
 //                     <Download size={16} />
 //                     <span>Import Template</span>

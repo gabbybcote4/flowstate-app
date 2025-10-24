@@ -153,11 +153,11 @@
 //         animate={{ scale: 1, opacity: 1 }}
 //         exit={{ scale: 0.9, opacity: 0 }}
 //         onClick={(e) => e.stopPropagation()}
-//         className="bg-white rounded-3xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+//         className="bg-[var(--color-card)] rounded-3xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
 //       >
 //         {/* Header */}
 //         <div 
-//           className="p-6 border-b border-gray-100 sticky top-0 bg-white z-10 rounded-t-3xl"
+//           className="p-6 border-b border-[var(--color-ring-offset-background)] sticky top-0 bg-[var(--color-card)] z-10 rounded-t-3xl"
 //         >
 //           <div className="flex items-center justify-between mb-4">
 //             <div className="flex items-center gap-3">
@@ -301,7 +301,7 @@
 //                 </div>
 
 //                 {/* Show the goal */}
-//                 <div className="p-4 rounded-2xl bg-gray-50 border-2 border-gray-100">
+//                 <div className="p-4 rounded-2xl bg-gray-50 border-2 border-[var(--color-ring-offset-background)]">
 //                   <div className="text-xs opacity-60 mb-1">Your goal</div>
 //                   <div className="flex items-center gap-2">
 //                     <Target size={16} className="opacity-60" />
@@ -606,7 +606,7 @@
 //         </div>
 
 //         {/* Footer Actions */}
-//         <div className="p-6 border-t border-gray-100 bg-gray-50 rounded-b-3xl">
+//         <div className="p-6 border-t border-[var(--color-ring-offset-background)] bg-gray-50 rounded-b-3xl">
 //           <div className="flex gap-3">
 //             {step > 1 && (
 //               < button

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import { useTheme } from '../components/context/ThemeContext';
+import { useTheme } from '../components/ThemeContext';
 import { Plus, Calendar as CalendarIcon, GripVertical, Edit2, Trash2, ChevronLeft, ChevronRight, AlertTriangle, ArrowRight, Heart, Briefcase, Users, TrendingUp, Palette, Home as HomeIcon, CheckCircle2 } from 'lucide-react';
 import { motion } from 'motion/react';
 import {
@@ -195,7 +195,7 @@ function DraggableEvent({ event, onDrop, onToggleComplete, onEdit, onDelete, onC
                   e.stopPropagation();
                   onConvertToEvent(event.id);
                 }}
-                className="p-1 hover:bg-white/50 rounded transition-colors"
+                className="p-1 hover:bg-[var(--color-card)]/50 rounded transition-colors"
                 title="Convert to Event"
               >
                 <ArrowRight size={12} className="opacity-60" />
@@ -206,7 +206,7 @@ function DraggableEvent({ event, onDrop, onToggleComplete, onEdit, onDelete, onC
                 e.stopPropagation();
                 onEdit(event);
               }}
-              className="p-1 hover:bg-white/50 rounded transition-colors"
+              className="p-1 hover:bg-[var(--color-card)]/50 rounded transition-colors"
             >
               <Edit2 size={12} className="opacity-60" />
             </button>
@@ -215,7 +215,7 @@ function DraggableEvent({ event, onDrop, onToggleComplete, onEdit, onDelete, onC
                 e.stopPropagation();
                 onDelete(event.id);
               }}
-              className="p-1 hover:bg-white/50 rounded transition-colors"
+              className="p-1 hover:bg-[var(--color-card)]/50 rounded transition-colors"
             >
               <Trash2 size={12} className="opacity-60" />
             </button>
@@ -257,11 +257,11 @@ function TimeSlot({ hour, minute, onDrop, date, showLabel = true }: TimeSlotProp
     <div
       ref={drop}
       className={`relative h-5 border-b transition-colors ${
-        minute === 0 ? 'border-gray-300' : 'border-gray-100'
+        minute === 0 ? 'border-gray-300' : 'border-[var(--color-ring-offset-background)]'
       } ${isOver ? 'bg-lavender-50' : ''}`}
     >
       {showTimeLabel && (
-        <div className="absolute left-0 -top-2.5 text-xs opacity-60 w-14 pr-2 text-right bg-white z-10">
+        <div className="absolute left-0 -top-2.5 text-xs opacity-60 w-14 pr-2 text-right bg-[var(--color-card)] z-10">
           {hour.toString().padStart(2, '0')}:00
         </div>
       )}
@@ -492,7 +492,7 @@ export function CalendarScreen() {
     <DndProvider backend={HTML5Backend}>
       <div className="min-h-screen pb-24" style={{ backgroundColor: themeColors.background }}>
         {/* Header */}
-        <div className="bg-white border-b border-gray-100 px-6 py-4 sticky top-0 z-10">
+        <div className="bg-[var(--color-card)] border-b border-[var(--color-ring-offset-background)] px-6 py-4 sticky top-0 z-10">
           <div className="flex items-center justify-between mb-4">
             <div>
               <h1 className="text-gray-900 flex items-center gap-2">
@@ -608,7 +608,7 @@ export function CalendarScreen() {
                   const date = new Date(currentDate.getTime() + offset * 86400000);
                   return (
                     <div key={offset}>
-                      <h3 className="text-sm mb-2 sticky top-0 bg-white py-2">
+                      <h3 className="text-sm mb-2 sticky top-0 bg-[var(--color-card)] py-2">
                         {date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}
                       </h3>
                       {renderDayView(date, true)}
@@ -628,7 +628,7 @@ export function CalendarScreen() {
 
                   return (
                     <div key={i} className="min-h-[200px]">
-                      <h3 className="text-sm mb-2 sticky top-0 bg-white py-2">
+                      <h3 className="text-sm mb-2 sticky top-0 bg-[var(--color-card)] py-2">
                         {date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}
                       </h3>
                       <div className="space-y-1">

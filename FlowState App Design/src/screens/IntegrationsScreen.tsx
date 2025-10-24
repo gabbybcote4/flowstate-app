@@ -283,7 +283,7 @@
 //     < div
 //       initial={{ opacity: 0, y: 20 }}
 //       animate={{ opacity: 1, y: 0 }}
-//       className="bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all overflow-hidden"
+//       className="bg-[var(--color-card)] rounded-2xl shadow-sm border border-[var(--color-ring-offset-background)] hover:shadow-md transition-all overflow-hidden"
 //     >
 //       <div className="p-5">
 //         <div className="flex items-start gap-4">
@@ -624,7 +624,7 @@
 //           < div
 //             initial={{ opacity: 0, y: 20 }}
 //             animate={{ opacity: 1, y: 0 }}
-//             className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 text-center"
+//             className="bg-[var(--color-card)] rounded-2xl shadow-sm border border-[var(--color-ring-offset-background)] p-6 text-center"
 //           >
 //             <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gray-100 mb-3">
 //               <ExternalLink size={24} className="text-gray-400" />

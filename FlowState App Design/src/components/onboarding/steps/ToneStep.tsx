@@ -1,4 +1,5 @@
-import { motion } from 'motion/react';
+// ToneStep.tsx
+
 import { OnboardingStepProps } from '../ConfigOnboardingWizard';
 import { useUserConfig } from '../../../config/UserConfigContext';
 import { TonePreference } from '../../../config/userConfig.types';
@@ -64,9 +65,6 @@ export function ToneStep({ }: OnboardingStepProps) {
           return (
             < button
               key={option.value}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
               onClick={() => handleSelectTone(option.value)}
               className="rounded-3xl p-6 text-left transition-all duration-300 hover:shadow-lg"
               style={{
@@ -83,7 +81,7 @@ export function ToneStep({ }: OnboardingStepProps) {
                   : '0 4px 20px rgba(0, 0, 0, 0.05)',
               }}
             >
-              {/* Icon */}
+              {/* icon */}
               <div className="mb-4">
                 <Icon 
                   size={32} 
@@ -94,7 +92,7 @@ export function ToneStep({ }: OnboardingStepProps) {
                 />
               </div>
 
-              {/* Title */}
+              {/* title */}
               <h3 
                 className="mb-2"
                 style={{
@@ -106,7 +104,7 @@ export function ToneStep({ }: OnboardingStepProps) {
                 {option.label}
               </h3>
 
-              {/* Description */}
+              {/* description */}
               <p 
                 className="mb-3"
                 style={{
@@ -118,7 +116,7 @@ export function ToneStep({ }: OnboardingStepProps) {
                 {option.description}
               </p>
 
-              {/* Example */}
+              {/* example */}
               <div 
                 className="rounded-2xl p-3 text-sm italic"
                 style={{
@@ -132,14 +130,12 @@ export function ToneStep({ }: OnboardingStepProps) {
                 {option.example}
               </div>
 
-              {/* Selection Indicator */}
+              {/* selection indicator */}
               {isSelected && (
                 < div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
                   className="mt-4 flex items-center gap-2"
                 >
-                  <div className="w-5 h-5 rounded-full bg-white flex items-center justify-center">
+                  <div className="w-5 h-5 rounded-full bg-[var(--color-card)] flex items-center justify-center">
                     <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#A78BFA' }} />
                   </div>
                   <span style={{ fontSize: '14px', fontWeight: '500' }}>Selected</span>
@@ -150,11 +146,8 @@ export function ToneStep({ }: OnboardingStepProps) {
         })}
       </div>
 
-      {/* Helper Text */}
+      {/* helper text */}
       < div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.4 }}
         className="text-center"
       >
         <p className="text-sm opacity-50">

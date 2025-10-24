@@ -360,10 +360,10 @@
 //               <BookOpen size={20} className="text-blue-600 mt-1 flex-shrink-0" />
 //               <div>
 //                 <h3 className="mb-2">Making FlowState Truly Adaptive</h3>
-//                 <p className="text-sm text-gray-700 leading-relaxed mb-3">
+//                 <p className="text-sm text-[var(--color-card-foreground)] leading-relaxed mb-3">
 //                   FlowState becomes more powerful when connected to real user data. These integrations allow the app to:
 //                 </p>
-//                 <ul className="text-sm text-gray-700 space-y-1 list-disc list-inside">
+//                 <ul className="text-sm text-[var(--color-card-foreground)] space-y-1 list-disc list-inside">
 //                   <li>Predict energy levels based on sleep and health data</li>
 //                   <li>Suggest optimal task timing using calendar and focus patterns</li>
 //                   <li>Warn about migraine triggers from weather patterns</li>
@@ -375,7 +375,7 @@
 //           </div>
 
 //           {/* Code Reference */}
-//           <div className="bg-white rounded-2xl shadow-md p-6 mb-8">
+//           <div className="bg-[var(--color-card)] rounded-2xl shadow-md p-6 mb-8">
 //             <div className="flex items-center gap-2 mb-3">
 //               <Code size={18} style={{ color: themeColors.primary }} />
 //               <h3>Implementation Reference</h3>
@@ -384,7 +384,7 @@
 //               All integration utilities are available in <code className="bg-gray-100 px-2 py-1 rounded text-xs">/components/api-integrations.ts</code>
 //             </p>
 //             <div className="bg-gray-50 rounded-xl p-4 border border-gray-200">
-//               <code className="text-xs text-gray-700 block">
+//               <code className="text-xs text-[var(--color-card-foreground)] block">
 //                 {`import { AdaptiveEngine } from './api-integrations';
 
 // const engine = new AdaptiveEngine({
@@ -416,7 +416,7 @@
 //                   return (
 //                     < div
 //                       key={guide.id}
-//                       className="bg-white rounded-2xl shadow-md overflow-hidden"
+//                       className="bg-[var(--color-card)] rounded-2xl shadow-md overflow-hidden"
 //                       initial={false}
 //                     >
 //                       {/* Header - Always visible */}
@@ -558,7 +558,7 @@
 //               <Shield size={20} className="text-purple-600 mt-1 flex-shrink-0" />
 //               <div>
 //                 <h3 className="mb-2">Privacy & Security Best Practices</h3>
-//                 <ul className="text-sm text-gray-700 space-y-2 list-disc list-inside">
+//                 <ul className="text-sm text-[var(--color-card-foreground)] space-y-2 list-disc list-inside">
 //                   <li>Always request minimal necessary permissions</li>
 //                   <li>Store API keys securely (environment variables, never commit to repo)</li>
 //                   <li>Use read-only scopes when possible</li>

@@ -255,7 +255,7 @@
 //                 <span className="opacity-70">Life Balance Progress</span>
 //                 <span style={{ color: area.color }}>{progress}%</span>
 //               </div>
-//               <div className="bg-white/50 rounded-full h-3 overflow-hidden">
+//               <div className="bg-[var(--color-card)]/50 rounded-full h-3 overflow-hidden">
 //                 < div
 //                   initial={{ width: 0 }}
 //                   animate={{ width: `${progress}%` }}
@@ -272,7 +272,7 @@
 //             initial={{ opacity: 0, y: 20 }}
 //             animate={{ opacity: 1, y: 0 }}
 //             transition={{ delay: 0.1 }}
-//             className="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 mb-6"
+//             className="bg-[var(--color-card)] rounded-2xl p-6 shadow-sm border border-gray-200 mb-6"
 //           >
 //             <div className="flex items-start gap-3">
 //               <div 
@@ -283,7 +283,7 @@
 //               </div>
 //               <div>
 //                 <h3 className="mb-2 text-gray-900">Reflection Prompt</h3>
-//                 <p className="text-gray-700 leading-relaxed italic">
+//                 <p className="text-[var(--color-card-foreground)] leading-relaxed italic">
 //                   "{area.reflectionPrompt}"
 //                 </p>
 //               </div>
@@ -295,7 +295,7 @@
 //             initial={{ opacity: 0, y: 20 }}
 //             animate={{ opacity: 1, y: 0 }}
 //             transition={{ delay: 0.2 }}
-//             className="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 mb-6"
+//             className="bg-[var(--color-card)] rounded-2xl p-6 shadow-sm border border-gray-200 mb-6"
 //           >
 //             <div className="flex items-center justify-between mb-4">
 //               <div className="flex items-center gap-2">
@@ -342,7 +342,7 @@
 //                     className="flex items-start gap-3 p-3 rounded-xl bg-gray-50"
 //                   >
 //                     <CheckCircle2 size={18} className="flex-shrink-0 mt-0.5" style={{ color: area.color }} />
-//                     <span className="text-gray-700">{goal.text}</span>
+//                     <span className="text-[var(--color-card-foreground)]">{goal.text}</span>
 //                   </div>
 //                 ))}
 //               </div>
@@ -358,7 +358,7 @@
 //             initial={{ opacity: 0, y: 20 }}
 //             animate={{ opacity: 1, y: 0 }}
 //             transition={{ delay: 0.3 }}
-//             className="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 mb-6"
+//             className="bg-[var(--color-card)] rounded-2xl p-6 shadow-sm border border-gray-200 mb-6"
 //           >
 //             <div className="flex items-center gap-2 mb-4">
 //               <CheckCircle2 size={20} style={{ color: area.color }} />
@@ -377,7 +377,7 @@
 //                       className="w-2 h-2 rounded-full"
 //                       style={{ backgroundColor: area.color }}
 //                     />
-//                     <span className="text-gray-700">{habit.name}</span>
+//                     <span className="text-[var(--color-card-foreground)]">{habit.name}</span>
 //                   </div>
 //                 ))}
 //               </div>
@@ -406,7 +406,7 @@
 //               {area.aiSuggestions.map((suggestion, index) => (
 //                 <div
 //                   key={index}
-//                   className="bg-white rounded-xl p-4 flex items-start gap-3 hover:shadow-sm transition-shadow"
+//                   className="bg-[var(--color-card)] rounded-xl p-4 flex items-start gap-3 hover:shadow-sm transition-shadow"
 //                 >
 //                   <div 
 //                     className="w-6 h-6 rounded-full flex items-center justify-center text-white text-xs flex-shrink-0"
@@ -414,7 +414,7 @@
 //                   >
 //                     {index + 1}
 //                   </div>
-//                   <p className="text-gray-700 text-sm leading-relaxed">{suggestion}</p>
+//                   <p className="text-[var(--color-card-foreground)] text-sm leading-relaxed">{suggestion}</p>
 //                 </div>
 //               ))}
 //             </div>
@@ -446,7 +446,7 @@
 //         < div
 //           initial={{ opacity: 0, scale: 0.95 }}
 //           animate={{ opacity: 1, scale: 1 }}
-//           className="bg-white rounded-3xl p-8 shadow-sm border border-gray-200 mb-8"
+//           className="bg-[var(--color-card)] rounded-3xl p-8 shadow-sm border border-gray-200 mb-8"
 //         >
 //           <h3 className="text-center mb-6 text-gray-900">Your Life Balance</h3>
 //           <div className="grid grid-cols-4 gap-4">

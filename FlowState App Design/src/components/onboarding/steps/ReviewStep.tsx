@@ -1,9 +1,9 @@
-import { motion } from 'motion/react';
+// ReviewStep.tsx
+
 import { OnboardingStepProps } from '../ConfigOnboardingWizard';
 import { useUserConfig } from '../../../config/UserConfigContext';
 import { FEATURE_REGISTRY } from '../../../config/featureRegistry';
-import { Sparkles, Check, Edit } from 'lucide-react';
-import { Button } from '../../ui/button';
+import { Check } from 'lucide-react';
 
 export function ReviewStep({ onNext, onBack }: OnboardingStepProps) {
   const { config } = useUserConfig();
@@ -20,20 +20,14 @@ export function ReviewStep({ onNext, onBack }: OnboardingStepProps) {
 
   return (
     <div className="space-y-8">
-      {/* Hero */}
+
+      {/* hero */}
       < div
-        initial={{ scale: 0.9, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
         className="text-center"
       >
         <div 
           className="w-20 h-20 mx-auto mb-4 rounded-full flex items-center justify-center"
-          style={{
-            background: 'linear-gradient(135deg, #A78BFA 0%, #C084FC 100%)',
-            boxShadow: '0 20px 60px rgba(167, 139, 250, 0.3)'
-          }}
         >
-          <Sparkles size={40} className="text-white" />
         </div>
         <h1 
           className="mb-2"
@@ -50,55 +44,11 @@ export function ReviewStep({ onNext, onBack }: OnboardingStepProps) {
         </p>
       </ div>
 
-      {/* Phone Mock Preview */}
+      {/* summary grid */}
       < div
-        initial={{ y: 20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.2 }}
-        className="max-w-sm mx-auto"
+        className="grid grid-cols-1 gap-4"
       >
-        <div 
-          className="rounded-[48px] p-3 shadow-2xl"
-          style={{
-            background: config.theme.mode === 'dark' 
-              ? 'linear-gradient(135deg, #1F2937 0%, #111827 100%)'
-              : 'linear-gradient(135deg, #FFFFFF 0%, #F9FAFB 100%)',
-            border: '8px solid #1F2937',
-          }}
-        >
-          <div 
-            className="h-96 rounded-[40px] overflow-hidden p-4"
-            style={{
-              background: config.theme.mode === 'dark' ? '#111827' : '#FFFFFF',
-            }}
-          >
-            <p className="text-xs opacity-60 mb-3">Your FlowState</p>
-            <div className="space-y-2">
-              {config.dashboardLayout.slice(0, 3).map((widget, i) => (
-                <div
-                  key={i}
-                  className="rounded-2xl p-3"
-                  style={{
-                    background: config.theme.mode === 'dark' 
-                      ? 'rgba(255, 255, 255, 0.05)' 
-                      : 'rgba(167, 139, 250, 0.05)',
-                    height: widget.size === 'L' ? '100px' : widget.size === 'M' ? '60px' : '40px',
-                  }}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      </ div>
-
-      {/* Summary Grid */}
-      < div
-        initial={{ y: 20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.4 }}
-        className="grid grid-cols-1 md:grid-cols-2 gap-4"
-      >
-        {/* Features */}
+        {/* features */}
         <div 
           className="rounded-2xl p-4"
           style={{
@@ -130,7 +80,7 @@ export function ReviewStep({ onNext, onBack }: OnboardingStepProps) {
           </div>
         </div>
 
-        {/* Widgets */}
+        {/* widgets */}
         <div 
           className="rounded-2xl p-4"
           style={{
@@ -157,7 +107,7 @@ export function ReviewStep({ onNext, onBack }: OnboardingStepProps) {
           </div>
         </div>
 
-        {/* Theme */}
+        {/* theme */}
         <div 
           className="rounded-2xl p-4"
           style={{
@@ -174,7 +124,7 @@ export function ReviewStep({ onNext, onBack }: OnboardingStepProps) {
           </p>
         </div>
 
-        {/* Notifications */}
+        {/* notifications */}
         <div 
           className="rounded-2xl p-4"
           style={{
@@ -192,21 +142,10 @@ export function ReviewStep({ onNext, onBack }: OnboardingStepProps) {
         </div>
       </ div>
 
-      {/* Edit Button */}
+      {/* edit text */}
       < div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.6 }}
         className="text-center"
       >
-        <Button
-          variant="ghost"
-          onClick={onBack}
-          className="rounded-2xl"
-        >
-          <Edit size={16} />
-          Edit Choices
-        </Button>
         <p className="text-sm opacity-50 mt-4">
           You can customize everything later in Settings
         </p>

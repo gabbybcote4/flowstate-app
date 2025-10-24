@@ -546,7 +546,7 @@
 //     return (
 //       <div className="min-h-screen" style={{ backgroundColor: `${themeColors.background}` }}>
 //         {/* Tab Navigation */}
-//         <div className="sticky top-0 z-40 bg-white border-b border-gray-200">
+//         <div className="sticky top-0 z-40 bg-[var(--color-card)] border-b border-gray-200">
 //           <div className="max-w-4xl mx-auto px-4 md:px-6">
 //             <div className="flex gap-1 py-3">
 //               <button
@@ -583,7 +583,7 @@
 //   return (
 //     <div className="min-h-screen" style={{ backgroundColor: `${themeColors.background}` }}>
 //       {/* Tab Navigation */}
-//       <div className="sticky top-0 z-40 bg-white border-b border-gray-200">
+//       <div className="sticky top-0 z-40 bg-[var(--color-card)] border-b border-gray-200">
 //         <div className="max-w-4xl mx-auto px-4 md:px-6">
 //           <div className="flex gap-1 py-3">
 //             <button
@@ -691,7 +691,7 @@
 //                     className={`px-3 py-1.5 rounded-lg text-sm whitespace-nowrap transition-all flex-shrink-0 ${
 //                       selectedArea === area
 //                         ? 'text-white shadow-md'
-//                         : 'bg-white/50 hover:bg-white'
+//                         : 'bg-[var(--color-card)]/50 hover:bg-[var(--color-card)]'
 //                     }`}
 //                     style={
 //                       selectedArea === area
@@ -711,7 +711,7 @@
 //             < div
 //               initial={{ opacity: 0 }}
 //               animate={{ opacity: 1 }}
-//               className="bg-white rounded-2xl shadow-lg p-8 text-center"
+//               className="bg-[var(--color-card)] rounded-2xl shadow-lg p-8 text-center"
 //             >
 //               <Target size={48} className="mx-auto mb-3 text-gray-300" />
 //               <h3 className="mb-2">Plant Your First Habit</h3>
@@ -796,7 +796,7 @@
 //                   layout
 //                   initial={{ opacity: 0, y: 20 }}
 //                   animate={{ opacity: 1, y: 0 }}
-//                   className="bg-white rounded-3xl shadow-lg p-6 group hover:shadow-xl transition-all"
+//                   className="bg-[var(--color-card)] rounded-3xl shadow-lg p-6 group hover:shadow-xl transition-all"
 //                 >
 //                   <div className="flex gap-6">
 //                     {/* Left: Constellation Visualization */}
@@ -947,7 +947,7 @@
 //               < div
 //                 initial={{ scale: 0.9, opacity: 0 }}
 //                 animate={{ scale: 1, opacity: 1 }}
-//                 className="bg-white rounded-3xl max-w-4xl w-full h-[90vh] overflow-hidden flex flex-col"
+//                 className="bg-[var(--color-card)] rounded-3xl max-w-4xl w-full h-[90vh] overflow-hidden flex flex-col"
 //               >
 //                 {/* Header */}
 //                 <div className="p-6 border-b border-gray-200 flex items-center justify-between flex-shrink-0">

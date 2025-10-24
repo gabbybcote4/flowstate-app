@@ -239,7 +239,7 @@
 //                         repeatType: 'reverse',
 //                         repeatDelay: 3
 //                       }}
-//                       className="w-10 h-10 bg-white rounded-2xl shadow-sm flex items-center justify-center"
+//                       className="w-10 h-10 bg-[var(--color-card)] rounded-2xl shadow-sm flex items-center justify-center"
 //                     >
 //                       {isAdded ? (
 //                         < div
@@ -262,7 +262,7 @@
 //                   </div>
 //                   <button
 //                     onClick={handleMinimize}
-//                     className="p-2 rounded-full hover:bg-white/50 transition-colors"
+//                     className="p-2 rounded-full hover:bg-[var(--color-card)]/50 transition-colors"
 //                     aria-label="Minimize suggestion"
 //                   >
 //                     <X size={18} className="opacity-60" />
@@ -290,7 +290,7 @@
 //                     </button>
 //                     <button
 //                       onClick={handleMinimize}
-//                       className="w-full px-4 py-2 rounded-2xl bg-white/80 text-lavender-700 hover:bg-white transition-colors text-sm"
+//                       className="w-full px-4 py-2 rounded-2xl bg-[var(--color-card)]/80 text-lavender-700 hover:bg-[var(--color-card)] transition-colors text-sm"
 //                     >
 //                       Maybe later
 //                     </button>

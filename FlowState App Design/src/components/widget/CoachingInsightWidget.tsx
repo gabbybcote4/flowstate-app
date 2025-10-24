@@ -50,7 +50,7 @@ export function CoachingInsightWidget({ onNavigateToCoaching }: CoachingInsightW
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-3">
           <MessageCircleHeart size={20} className="text-lavender-600" />
-          <h3 className="text-gray-700">Daily Coach</h3>
+          <h3 className="text-[var(--color-card-foreground)]">Daily Coach</h3>
         </div>
         <ArrowRight size={18} className="opacity-40" />
       </div>

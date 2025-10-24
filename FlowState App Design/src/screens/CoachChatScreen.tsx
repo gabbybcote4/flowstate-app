@@ -635,7 +635,7 @@
 //       < div
 //         initial={{ opacity: 0, y: -20 }}
 //         animate={{ opacity: 1, y: 0 }}
-//         className="sticky top-0 z-20 bg-white border-b border-gray-100 px-6 py-4"
+//         className="sticky top-0 z-20 bg-[var(--color-card)] border-b border-[var(--color-ring-offset-background)] px-6 py-4"
 //       >
 //         <div className="max-w-4xl mx-auto">
 //           <div className="flex items-center justify-between mb-3">
@@ -748,7 +748,7 @@
 //                 className={`max-w-[85%] md:max-w-[75%] rounded-3xl px-5 py-4 ${
 //                   message.type === 'user'
 //                     ? 'bg-gradient-to-br from-lavender-100 to-purple-100 text-gray-900'
-//                     : 'bg-gradient-to-br from-white to-gray-50 text-gray-800 shadow-sm border border-gray-100'
+//                     : 'bg-gradient-to-br from-white to-gray-50 text-[var(--color-card-foreground)] shadow-sm border border-[var(--color-ring-offset-background)]'
 //                 }`}
 //                 style={{
 //                   marginBottom: message.quickReplies && message.quickReplies.length > 0 ? '8px' : '0',
@@ -765,7 +765,7 @@
 //                         whileHover={{ scale: 1.05 }}
 //                         whileTap={{ scale: 0.95 }}
 //                         onClick={() => handleQuickReply(reply)}
-//                         className="px-4 py-2 rounded-2xl text-sm transition-all bg-white hover:bg-gray-50 border border-gray-200"
+//                         className="px-4 py-2 rounded-2xl text-sm transition-all bg-[var(--color-card)] hover:bg-gray-50 border border-gray-200"
 //                       >
 //                         {reply.text}
 //                       </ button>
@@ -784,7 +784,7 @@
 //             animate={{ opacity: 1, y: 0 }}
 //             className="flex justify-start"
 //           >
-//             <div className="bg-gradient-to-br from-white to-gray-50 rounded-3xl px-5 py-4 shadow-sm border border-gray-100">
+//             <div className="bg-gradient-to-br from-white to-gray-50 rounded-3xl px-5 py-4 shadow-sm border border-[var(--color-ring-offset-background)]">
 //               <div className="flex gap-2">
 //                 < div
 //                   animate={{ scale: [1, 1.2, 1] }}
@@ -821,7 +821,7 @@
 //                   whileHover={{ scale: 1.05 }}
 //                   whileTap={{ scale: 0.95 }}
 //                   onClick={() => handleQuickAction(action.action)}
-//                   className="flex items-center gap-2 px-4 py-2.5 rounded-2xl text-sm bg-white shadow-md border border-gray-200 hover:border-lavender-300 transition-all"
+//                   className="flex items-center gap-2 px-4 py-2.5 rounded-2xl text-sm bg-[var(--color-card)] shadow-md border border-gray-200 hover:border-lavender-300 transition-all"
 //                 >
 //                   <Icon size={16} style={{ color: themeColors.primary }} />
 //                   {action.text}
@@ -831,7 +831,7 @@
 //           </div>
 
 //           {/* Input */}
-//           <div className="bg-white rounded-3xl shadow-lg border border-gray-200 p-3 flex items-center gap-3">
+//           <div className="bg-[var(--color-card)] rounded-3xl shadow-lg border border-gray-200 p-3 flex items-center gap-3">
 //             <input
 //               type="text"
 //               value={inputValue}

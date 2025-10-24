@@ -1,34 +1,9 @@
+// WeeklyInsightsDashboard.tsx
+
 import { useState, useEffect } from 'react';
-import { useTheme } from '../components/context/ThemeContext';
-import { motion } from 'motion/react';
-import {
-  TrendingUp,
-  TrendingDown,
-  Sparkles,
-  Moon,
-  Heart,
-  Briefcase,
-  Users,
-  Palette,
-  Home as HomeIcon,
-  Calendar,
-  RefreshCw,
-  ArrowLeft,
-  Info,
-} from 'lucide-react';
-import {
-  LineChart,
-  Line,
-  PieChart,
-  Pie,
-  Cell,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-  Legend,
-} from 'recharts';
+import { useTheme } from '../components/ThemeContext';
+import {TrendingUp, Sparkles, Moon, Heart, Briefcase, Users, Palette, Home as HomeIcon, Calendar, RefreshCw, ArrowLeft, Info } from 'lucide-react';
+import {LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 interface MoodSleepData {
   day: string;
@@ -79,15 +54,15 @@ export function WeeklyInsightsDashboard({ onNavigate }: WeeklyInsightsDashboardP
     setIsLoading(true);
     
     setTimeout(() => {
-      // Load Mood vs Sleep data
+      // load mood vs sleep data
       const moodSleep = generateMoodSleepData();
       setMoodSleepData(moodSleep);
 
-      // Load Life Area distribution
+      // load life area distribution
       const lifeAreas = generateLifeAreaData();
       setLifeAreaData(lifeAreas);
 
-      // Generate insight of the week
+      // generate insight of week
       const weeklyInsight = generateWeeklyInsight(moodSleep, lifeAreas);
       setInsight(weeklyInsight);
 
@@ -99,34 +74,34 @@ export function WeeklyInsightsDashboard({ onNavigate }: WeeklyInsightsDashboardP
     const data: MoodSleepData[] = [];
     const today = new Date();
     
-    // Load check-in data
+    // load check-in data
     const checkInData = JSON.parse(localStorage.getItem('flowstate-coaching-data') || '{}');
     const reflections = JSON.parse(localStorage.getItem('flowstate-reflections') || '{}');
 
-    // Last 7 days
+    // last 7 days
     for (let i = 6; i >= 0; i--) {
       const date = new Date(today);
       date.setDate(date.getDate() - i);
       const dateStr = date.toISOString().split('T')[0];
       const dayName = date.toLocaleDateString('en-US', { weekday: 'short' });
 
-      // Get mood from check-in (1-5 scale)
+      // get mood from check-in (1-5 scale)
       let mood = 3; // default
       if (checkInData && checkInData.mood !== undefined) {
         mood = checkInData.mood;
       } else {
-        // Random for demo
+        // andom for demo
         mood = 2 + Math.random() * 2;
       }
 
-      // Get sleep from reflections
+      // get sleep from reflections
       let sleep = 0;
       if (reflections[dateStr]?.sleepQuality) {
-        // Convert sleep quality (1-5) to approximate hours (4-9)
+        // convert sleep quality (1-5) to approximate hours (4-9)
         const quality = reflections[dateStr].sleepQuality;
         sleep = 4 + (quality * 1.0);
       } else {
-        // Random for demo
+        // random for demo
         sleep = 5 + Math.random() * 3;
       }
 
@@ -142,23 +117,23 @@ export function WeeklyInsightsDashboard({ onNavigate }: WeeklyInsightsDashboardP
   };
 
   const generateLifeAreaData = (): LifeAreaData[] => {
-    // Load time blocks from calendar/timeflow
+    // load time blocks from calendar/timeflow
     const timeBlocks = JSON.parse(localStorage.getItem('flowstate-timeblocks') || '[]');
     const calendarEvents = JSON.parse(localStorage.getItem('flowstate-calendar-events') || '[]');
     
     const areaHours = new Map<string, number>();
     let totalHours = 0;
 
-    // Count from time blocks
+    // count from time blocks
     timeBlocks.forEach((block: any) => {
       if (block.lifeArea) {
         const current = areaHours.get(block.lifeArea) || 0;
-        areaHours.set(block.lifeArea, current + 1); // Assume 1 hour blocks
+        areaHours.set(block.lifeArea, current + 1); // assume 1 hour blocks
         totalHours += 1;
       }
     });
 
-    // Count from calendar events
+    // count from calendar events
     calendarEvents.forEach((event: any) => {
       if (event.lifeArea && event.duration) {
         const current = areaHours.get(event.lifeArea) || 0;
@@ -168,7 +143,7 @@ export function WeeklyInsightsDashboard({ onNavigate }: WeeklyInsightsDashboardP
       }
     });
 
-    // If no data, generate demo data
+    // if no data, generate demo data
     if (totalHours === 0) {
       const demoData = [
         { area: 'Work', hours: 35 },
@@ -182,7 +157,7 @@ export function WeeklyInsightsDashboard({ onNavigate }: WeeklyInsightsDashboardP
       demoData.forEach(d => areaHours.set(d.area, d.hours));
     }
 
-    // Convert to array with percentages
+    // convert to array with percentages
     const data: LifeAreaData[] = LIFE_AREAS.map(area => {
       const hours = areaHours.get(area.name) || 0;
       const percentage = totalHours > 0 ? Math.round((hours / totalHours) * 100) : 0;
@@ -199,7 +174,7 @@ export function WeeklyInsightsDashboard({ onNavigate }: WeeklyInsightsDashboardP
   };
 
   const generateWeeklyInsight = (moodData: MoodSleepData[], lifeData: LifeAreaData[]): WeeklyInsight => {
-    // Calculate trends
+    // calculate trends
     const avgMood = moodData.reduce((sum, d) => sum + d.mood, 0) / moodData.length;
     const avgSleep = moodData.reduce((sum, d) => sum + d.sleep, 0) / moodData.length;
     
@@ -211,13 +186,13 @@ export function WeeklyInsightsDashboard({ onNavigate }: WeeklyInsightsDashboardP
       ? (moodData[moodData.length - 1].sleep - moodData[0].sleep)
       : 0;
 
-    // Find dominant life area
+    // find dominant life area
     const topArea = lifeData.sort((a, b) => b.hours - a.hours)[0];
 
-    // Generate contextual insight
+    // generate contextual insight
     const insights: WeeklyInsight[] = [];
 
-    // Sleep-based insights
+    // sleep-based insights
     if (avgSleep >= 7.5) {
       insights.push({
         title: 'Beautiful Sleep Rhythm',
@@ -234,7 +209,7 @@ export function WeeklyInsightsDashboard({ onNavigate }: WeeklyInsightsDashboardP
       });
     }
 
-    // Mood-based insights
+    // mood-based insights
     if (moodTrend > 0.5) {
       insights.push({
         title: 'Upward Momentum',
@@ -258,7 +233,7 @@ export function WeeklyInsightsDashboard({ onNavigate }: WeeklyInsightsDashboardP
       });
     }
 
-    // Balance-based insights
+    // balance-based insights
     if (topArea && topArea.percentage > 60) {
       insights.push({
         title: 'Time for Balance',
@@ -275,7 +250,7 @@ export function WeeklyInsightsDashboard({ onNavigate }: WeeklyInsightsDashboardP
       });
     }
 
-    // Sleep-mood correlation
+    // sleep-mood correlation
     const sleepMoodCorrelation = calculateCorrelation(
       moodData.map(d => d.sleep),
       moodData.map(d => d.mood)
@@ -290,12 +265,12 @@ export function WeeklyInsightsDashboard({ onNavigate }: WeeklyInsightsDashboardP
       });
     }
 
-    // Return random insight or default
+    // return random insight or default
     if (insights.length > 0) {
       return insights[Math.floor(Math.random() * insights.length)];
     }
 
-    // Default gentle insight
+    // default gentle insight
     return {
       title: 'You Showed Up',
       message: 'Another week of trying, learning, and being human. That\'s enough. You don\'t have to be perfect — you just have to be present. And you were. 💜',
@@ -323,7 +298,7 @@ export function WeeklyInsightsDashboard({ onNavigate }: WeeklyInsightsDashboardP
   const CustomTooltip = ({ active, payload }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-white px-4 py-3 rounded-xl shadow-lg border border-gray-100">
+        <div className="bg-[var(--color-card)] px-4 py-3 rounded-xl shadow-lg border border-[var(--color-ring-offset-background)]">
           <p className="text-sm mb-2 opacity-70">{payload[0].payload.day}</p>
           <div className="space-y-1">
             <p className="text-sm flex items-center gap-2">
@@ -344,7 +319,7 @@ export function WeeklyInsightsDashboard({ onNavigate }: WeeklyInsightsDashboardP
   const PieTooltip = ({ active, payload }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-white px-4 py-3 rounded-xl shadow-lg border border-gray-100">
+        <div className="bg-[var(--color-card)] px-4 py-3 rounded-xl shadow-lg border border-[var(--color-ring-offset-background)]">
           <p className="text-sm mb-1">{payload[0].name}</p>
           <p className="text-sm opacity-70">{payload[0].value}h ({payload[0].payload.percentage}%)</p>
         </div>
@@ -355,10 +330,8 @@ export function WeeklyInsightsDashboard({ onNavigate }: WeeklyInsightsDashboardP
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: themeColors.background }}>
+      <div className="min-h-screen flex items-center justify-center">
         < div
-          animate={{ rotate: 360 }}
-          transition={{ repeat: Infinity, duration: 1, ease: 'linear' }}
         >
           <RefreshCw size={32} style={{ color: themeColors.primary }} />
         </ div>
@@ -367,12 +340,10 @@ export function WeeklyInsightsDashboard({ onNavigate }: WeeklyInsightsDashboardP
   }
 
   return (
-    <div className="min-h-screen pb-24" style={{ backgroundColor: themeColors.background }}>
-      {/* Header */}
+    <div className="min-h-screen pb-24">
+      {/* header */}
       < div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="bg-white border-b border-gray-100 px-6 py-4 sticky top-0 z-10"
+        className="bg-[var(--color-card)] border-b border-[var(--color-ring-offset-background)] px-6 py-4 sticky top-0 z-10"
       >
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-3">
@@ -402,11 +373,10 @@ export function WeeklyInsightsDashboard({ onNavigate }: WeeklyInsightsDashboardP
       </ div>
 
       <div className="px-6 py-6 space-y-6 max-w-6xl mx-auto">
-        {/* Insight of the Week */}
+
+        {/* insight of week */}
         {insight && (
           < div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
             className="bg-gradient-to-br from-lavender-50 to-purple-50 rounded-3xl p-6 border-2"
             style={{ borderColor: themeColors.primary }}
           >
@@ -423,18 +393,15 @@ export function WeeklyInsightsDashboard({ onNavigate }: WeeklyInsightsDashboardP
                   <span className="text-xs uppercase tracking-wide opacity-70">Insight of the Week</span>
                 </div>
                 <h2 className="mb-2">{insight.title}</h2>
-                <p className="text-gray-700 leading-relaxed">{insight.message}</p>
+                <p className="text-[var(--color-card-foreground)] leading-relaxed">{insight.message}</p>
               </div>
             </div>
           </ div>
         )}
 
-        {/* Mood vs Sleep Chart */}
+        {/* mood vs sleep chart */}
         < div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="bg-white rounded-3xl p-6 shadow-sm border border-gray-100"
+          className="bg-[var(--color-card)] rounded-3xl p-6 shadow-sm border border-[var(--color-ring-offset-background)]"
         >
           <div className="flex items-center justify-between mb-6">
             <div>
@@ -496,12 +463,9 @@ export function WeeklyInsightsDashboard({ onNavigate }: WeeklyInsightsDashboardP
           </div>
         </ div>
 
-        {/* Life Area Distribution */}
+        {/* life area distribution */}
         < div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="bg-white rounded-3xl p-6 shadow-sm border border-gray-100"
+          className="bg-[var(--color-card)] rounded-3xl p-6 shadow-sm border border-[var(--color-ring-offset-background)]"
         >
           <div className="mb-6">
             <h3 className="mb-1">Life Area Balance</h3>
@@ -509,7 +473,8 @@ export function WeeklyInsightsDashboard({ onNavigate }: WeeklyInsightsDashboardP
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
-            {/* Pie Chart */}
+
+            {/* pie chart */}
             <div>
               <ResponsiveContainer width="100%" height={280}>
                 <PieChart>
@@ -532,16 +497,13 @@ export function WeeklyInsightsDashboard({ onNavigate }: WeeklyInsightsDashboardP
               </ResponsiveContainer>
             </div>
 
-            {/* Legend */}
+            {/* legend */}
             <div className="space-y-3">
               {lifeAreaData.map((area, index) => {
                 const AreaIcon = LIFE_AREAS.find(a => a.name === area.area)?.icon || Calendar;
                 return (
                   < div
                     key={area.area}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.3 + index * 0.05 }}
                     className="flex items-center justify-between p-3 bg-gray-50 rounded-2xl"
                   >
                     <div className="flex items-center gap-3">

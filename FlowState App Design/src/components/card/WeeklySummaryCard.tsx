@@ -1,6 +1,7 @@
+// WeeklySummaryCard.tsx
+
 import { useState, useEffect } from 'react';
-import { TrendingUp, TrendingDown, Minus, Sparkles, ChevronRight } from 'lucide-react';
-//import { motion } from 'motion/react';
+import { TrendingUp, TrendingDown, Minus, Sparkles } from 'lucide-react';
 
 interface WeeklySummary {
   averageMood: number;
@@ -36,28 +37,28 @@ export function WeeklySummaryCard({ onViewDetails }: WeeklySummaryCardProps) {
     const oneWeekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
     const twoWeeksAgo = new Date(now.getTime() - 14 * 24 * 60 * 60 * 1000);
 
-    // Load data
+    // load data
     const checkInData = JSON.parse(localStorage.getItem('flowstate-coaching-data') || '{}');
     const reflections = JSON.parse(localStorage.getItem('flowstate-reflections') || '{}');
     const habits = JSON.parse(localStorage.getItem('flowstate-habits') || '[]');
 
-    // Calculate current week mood from check-in
+    // calculate current week mood from check-in
     let avgMoodCurrent = 3;
     let avgMoodPrevious = 3;
     
     if (checkInData && checkInData.mood !== undefined) {
       avgMoodCurrent = checkInData.mood;
-      avgMoodPrevious = checkInData.mood; // Would need historical data
+      avgMoodPrevious = checkInData.mood; 
     }
 
-    // Get sleep data from reflections
+    // get sleep data from reflections
     const currentWeekSleep: number[] = [];
     const previousWeekSleep: number[] = [];
     
     Object.entries(reflections).forEach(([date, data]: [string, any]) => {
       const entryDate = new Date(date);
       const sleepQuality = data.sleepQuality || 0;
-      // Convert quality (1-5) to hours (4-9)
+      // convert quality (1-5) to hours (4-9)
       const sleepHours = sleepQuality > 0 ? 4 + (sleepQuality * 1.0) : 0;
       
       if (entryDate >= oneWeekAgo && entryDate <= now) {
@@ -75,7 +76,7 @@ export function WeeklySummaryCard({ onViewDetails }: WeeklySummaryCardProps) {
       ? previousWeekSleep.reduce((a, b) => a + b, 0) / previousWeekSleep.length
       : 0;
 
-    // Count completed habits this week
+    // count completed habits this week
     let completedThisWeek = 0;
     let completedLastWeek = 0;
 
@@ -94,12 +95,12 @@ export function WeeklySummaryCard({ onViewDetails }: WeeklySummaryCardProps) {
       }
     });
 
-    // Calculate trends
+    // calculate trends
     const moodTrend = avgMoodCurrent > avgMoodPrevious ? 'up' : avgMoodCurrent < avgMoodPrevious ? 'down' : 'same';
     const sleepTrend = avgSleepCurrent > avgSleepPrevious ? 'up' : avgSleepCurrent < avgSleepPrevious ? 'down' : 'same';
     const todosTrend = completedThisWeek > completedLastWeek ? 'up' : completedThisWeek < completedLastWeek ? 'down' : 'same';
 
-    // Generate gentle insight
+    // generate gentle insight
     const insight = generateWeekInsight(avgMoodCurrent, avgSleepCurrent, completedThisWeek, moodTrend, sleepTrend);
 
     setSummary({
@@ -122,7 +123,7 @@ export function WeeklySummaryCard({ onViewDetails }: WeeklySummaryCardProps) {
   ): string => {
     const insights: string[] = [];
 
-    // Positive insights
+    // positive insights
     if (moodTrend === 'up') {
       insights.push("Your energy is rising — something's working! 🌸");
     }
@@ -133,7 +134,7 @@ export function WeeklySummaryCard({ onViewDetails }: WeeklySummaryCardProps) {
       insights.push(`${completed} habits this week — you're showing up! ✨`);
     }
     
-    // Gentle insights
+    // gentle insights
     if (sleep < 6 && sleep > 0) {
       insights.push("Rest has been light. Be extra gentle with yourself. 💜");
     }
@@ -141,12 +142,12 @@ export function WeeklySummaryCard({ onViewDetails }: WeeklySummaryCardProps) {
       insights.push("This week was heavy. You're still here. That counts. 💙");
     }
     
-    // Growth insights
+    // growth insights
     if (sleepTrend === 'up' && moodTrend === 'up') {
       insights.push("Better sleep, better mood — the connection is real. 🌙");
     }
 
-    // Default
+    // default
     if (insights.length === 0) {
       insights.push("You showed up this week. That's what matters. 💜");
     }
@@ -169,23 +170,22 @@ export function WeeklySummaryCard({ onViewDetails }: WeeklySummaryCardProps) {
 
   return (
     <div style={{ position: 'relative' }}>
-      <div className="absolute top-0 right-0 bg-black/75 text-white px-2 py-1 text-[10px] rounded-bl z-50">
-        WEEKLY SUMMARY CARD
-      </div>
       <div 
-        className="bg-white rounded-3xl shadow-sm p-5 border border-gray-100 hover:shadow-md transition-shadow duration-200"
+        className="bg-[var(--color-card)] rounded-3xl shadow-sm p-5 border border-[var(--color-ring-offset-background)] hover:shadow-md transition-shadow duration-200"
       >
-        {/* Header */}
+
+        {/* header */}
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-gray-700 flex items-center gap-2">
+          <h3 className="text-[var(--color-card-foreground)] flex items-center gap-2">
             <span>📊</span>
             <span>This Week</span>
           </h3>
           <div className="text-xs opacity-50">Last 7 days</div>
         </div>
 
-        {/* Stats Grid */}
+        {/* stats grid */}
         <div className="grid grid-cols-3 gap-4 mb-4">
+
           {/* Mood */}
           <div className="flex flex-col items-center p-3 bg-gray-50 rounded-2xl">
             <div className="text-2xl mb-1.5">🌤️</div>
@@ -196,7 +196,7 @@ export function WeeklySummaryCard({ onViewDetails }: WeeklySummaryCardProps) {
             </div>
           </div>
 
-          {/* Sleep */}
+          {/* sleep */}
           <div className="flex flex-col items-center p-3 bg-gray-50 rounded-2xl">
             <div className="text-2xl mb-1.5">💤</div>
             <div className="text-xs opacity-60 mb-1.5">Sleep</div>
@@ -208,7 +208,7 @@ export function WeeklySummaryCard({ onViewDetails }: WeeklySummaryCardProps) {
             </div>
           </div>
 
-          {/* Habits */}
+          {/* habits */}
           <div className="flex flex-col items-center p-3 bg-gray-50 rounded-2xl">
             <div className="text-2xl mb-1.5">✅</div>
             <div className="text-xs opacity-60 mb-1.5">Habits</div>
@@ -219,25 +219,14 @@ export function WeeklySummaryCard({ onViewDetails }: WeeklySummaryCardProps) {
           </div>
         </div>
 
-        {/* Insight */}
+        {/* insight */}
         {summary.weekInsight && (
           <div className="p-3 bg-gradient-to-br from-lavender-50 to-purple-50 rounded-2xl mb-3 border border-lavender-200">
             <div className="flex items-start gap-2">
               <Sparkles size={14} className="text-lavender-600 mt-0.5 flex-shrink-0" />
-              <p className="text-sm text-gray-700 leading-relaxed">{summary.weekInsight}</p>
+              <p className="text-sm text-[var(--color-card-foreground)] leading-relaxed">{summary.weekInsight}</p>
             </div>
           </div>
-        )}
-
-        {/* View Details Button */}
-        {onViewDetails && (
-          <button
-            onClick={onViewDetails}
-            className="w-full py-2 px-4 bg-gray-50 hover:bg-gray-100 rounded-2xl text-sm flex items-center justify-center gap-2 transition-colors"
-          >
-            View Full Insights
-            <ChevronRight size={14} />
-          </button>
         )}
       </div>
     </div>

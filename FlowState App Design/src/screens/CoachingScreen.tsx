@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useTheme } from '../components/context/ThemeContext';
+import { useTheme } from '../components/ThemeContext';
 import { Sparkles, ArrowRight, CheckCircle2, MessageCircle, TrendingUp, ClipboardList, Lightbulb, BookOpen, Compass, Bot } from 'lucide-react';
 // import { motion } from 'motion/react';
 // import { toast } from 'sonner@2.0.3';
@@ -333,7 +333,7 @@ export function CoachingScreen({ onNavigate }: CoachingScreenProps) {
 
   // Render tabs component
   const renderTabs = () => (
-    <div className="sticky top-0 z-40 bg-white border-b border-gray-200">
+    <div className="sticky top-0 z-40 bg-[var(--color-card)] border-b border-gray-200">
       <div className="max-w-2xl mx-auto px-2 sm:px-6">
         <div className="flex gap-1 overflow-x-auto scrollbar-hide">
           <button
@@ -511,7 +511,7 @@ export function CoachingScreen({ onNavigate }: CoachingScreenProps) {
             className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50"
           >
             <div
-              className="bg-white shadow-lg rounded-2xl px-6 py-3 flex items-center gap-3 border-2"
+              className="bg-[var(--color-card)] shadow-lg rounded-2xl px-6 py-3 flex items-center gap-3 border-2"
               style={{ borderColor: themeColors.primary }}
             >
               <div className="text-sm opacity-60">Timer:</div>
@@ -571,7 +571,7 @@ export function CoachingScreen({ onNavigate }: CoachingScreenProps) {
           {step === 1 && (
             < div
 
-              className="bg-white rounded-3xl shadow-lg p-8"
+              className="bg-[var(--color-card)] rounded-3xl shadow-lg p-8"
             >
               <h2 className="mb-6 text-center">How's your mood right now?</h2>
               <div className="mb-8">
@@ -608,7 +608,7 @@ export function CoachingScreen({ onNavigate }: CoachingScreenProps) {
           {step === 2 && (
             < div
 
-              className="bg-white rounded-3xl shadow-lg p-8"
+              className="bg-[var(--color-card)] rounded-3xl shadow-lg p-8"
             >
               <h2 className="mb-6 text-center">What's your energy level?</h2>
               <div className="mb-8">
@@ -645,7 +645,7 @@ export function CoachingScreen({ onNavigate }: CoachingScreenProps) {
           {step === 3 && (
             < div
 
-              className="bg-white rounded-3xl shadow-lg p-8"
+              className="bg-[var(--color-card)] rounded-3xl shadow-lg p-8"
             >
               <h2 className="mb-6 text-center">How clear is your focus?</h2>
               <div className="mb-8">
@@ -690,7 +690,7 @@ export function CoachingScreen({ onNavigate }: CoachingScreenProps) {
                   <CheckCircle2 size={28} className="text-lavender-600 flex-shrink-0 mt-1" />
                   <div>
                     <h3 className="mb-3 text-lavender-700">Here's what I see</h3>
-                    <p className="leading-relaxed text-gray-700">
+                    <p className="leading-relaxed text-[var(--color-card-foreground)]">
                       {getReflection()}
                     </p>
                   </div>
@@ -698,7 +698,7 @@ export function CoachingScreen({ onNavigate }: CoachingScreenProps) {
               </div>
 
               {/* Three Suggestions */}
-              <div className="bg-white rounded-3xl shadow-lg p-8">
+              <div className="bg-[var(--color-card)] rounded-3xl shadow-lg p-8">
                 <h3 className="mb-6 text-center">Your personalized suggestions</h3>
                 
                 <div className="space-y-4">
@@ -708,7 +708,7 @@ export function CoachingScreen({ onNavigate }: CoachingScreenProps) {
                       <span className="text-2xl flex-shrink-0">🧠</span>
                       <div className="flex-1">
                         <div className="text-sm opacity-60 mb-1">Mindset</div>
-                        <p className="text-gray-700">{suggestions.mindset.text}</p>
+                        <p className="text-[var(--color-card-foreground)]">{suggestions.mindset.text}</p>
                       </div>
                     </div>
                   </div>
@@ -719,7 +719,7 @@ export function CoachingScreen({ onNavigate }: CoachingScreenProps) {
                       <span className="text-2xl flex-shrink-0">✨</span>
                       <div className="flex-1">
                         <div className="text-sm opacity-60 mb-1">Small Win</div>
-                        <p className="text-gray-700 mb-3">{suggestions.smallWin.text}</p>
+                        <p className="text-[var(--color-card-foreground)] mb-3">{suggestions.smallWin.text}</p>
                         {suggestions.smallWin.action && (
                           completedActions.includes('smallWin') ? (
                             <div className="flex items-center gap-2 text-green-600 text-sm">
@@ -728,8 +728,8 @@ export function CoachingScreen({ onNavigate }: CoachingScreenProps) {
                             </div>
                           ) : activeTimer !== null && activeTimer.type === 'smallWin' && suggestions.smallWin.action === 'timer' ? (
                             <div className="flex items-center gap-3">
-                              <div className="flex-1 bg-white rounded-xl p-3 text-center">
-                                <div className="text-2xl text-gray-700">{formatTime(timerSeconds)}</div>
+                              <div className="flex-1 bg-[var(--color-card)] rounded-xl p-3 text-center">
+                                <div className="text-2xl text-[var(--color-card-foreground)]">{formatTime(timerSeconds)}</div>
                               </div>
                               <button
                                 onClick={() => setActiveTimer(null)}
@@ -760,7 +760,7 @@ export function CoachingScreen({ onNavigate }: CoachingScreenProps) {
                       <span className="text-2xl flex-shrink-0">🎯</span>
                       <div className="flex-1">
                         <div className="text-sm opacity-60 mb-1">Task Focus</div>
-                        <p className="text-gray-700 mb-3">{suggestions.taskFocus.text}</p>
+                        <p className="text-[var(--color-card-foreground)] mb-3">{suggestions.taskFocus.text}</p>
                         {suggestions.taskFocus.action && (
                           < button
                             // whileHover={{ scale: 1.02 }}

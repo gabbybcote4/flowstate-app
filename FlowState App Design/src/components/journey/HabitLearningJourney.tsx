@@ -226,9 +226,9 @@
 //             className="space-y-6"
 //           >
 //             {/* Main concept */}
-//             <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+//             <div className="bg-[var(--color-card)] rounded-2xl p-6 shadow-sm border border-[var(--color-ring-offset-background)]">
 //               <h3 className="mb-3 text-gray-900">💡 Main Concept</h3>
-//               <p className="text-gray-700 leading-relaxed">{module.content.mainConcept}</p>
+//               <p className="text-[var(--color-card-foreground)] leading-relaxed">{module.content.mainConcept}</p>
 //             </div>
 
 //             {/* Why it matters */}
@@ -238,7 +238,7 @@
 //             </div>
 
 //             {/* How to do it */}
-//             <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+//             <div className="bg-[var(--color-card)] rounded-2xl p-6 shadow-sm border border-[var(--color-ring-offset-background)]">
 //               <h3 className="mb-4 text-gray-900">✨ How To Do It</h3>
 //               <ol className="space-y-3">
 //                 {module.content.howToDo.map((step, index) => (
@@ -249,7 +249,7 @@
 //                     >
 //                       {index + 1}
 //                     </span>
-//                     <span className="text-gray-700 leading-relaxed">{step}</span>
+//                     <span className="text-[var(--color-card-foreground)] leading-relaxed">{step}</span>
 //                   </li>
 //                 ))}
 //               </ol>
@@ -286,7 +286,7 @@
 //                 whileHover={{ scale: 1.02 }}
 //                 whileTap={{ scale: 0.98 }}
 //                 onClick={handleApplyToLife}
-//                 className="w-full py-4 rounded-2xl border-2 flex items-center justify-center gap-2 bg-white hover:bg-gray-50 transition-colors"
+//                 className="w-full py-4 rounded-2xl border-2 flex items-center justify-center gap-2 bg-[var(--color-card)] hover:bg-gray-50 transition-colors"
 //                 style={{ borderColor: themeColors.primary, color: themeColors.primary }}
 //               >
 //                 <Sparkles size={20} />
@@ -351,7 +351,7 @@
 //                   <button
 //                     onClick={() => isUnlocked && setCurrentModule(module.id)}
 //                     disabled={!isUnlocked}
-//                     className={`w-full bg-white rounded-2xl p-6 shadow-sm border-2 transition-all text-left ${
+//                     className={`w-full bg-[var(--color-card)] rounded-2xl p-6 shadow-sm border-2 transition-all text-left ${
 //                       isUnlocked ? 'hover:shadow-md hover:scale-[1.02]' : 'opacity-50 cursor-not-allowed'
 //                     }`}
 //                     style={{

@@ -1,159 +1,58 @@
-import { motion } from 'motion/react';
+// src/components/onboarding/steps/WelcomeStep.tsx
+
 import { OnboardingStepProps } from '../ConfigOnboardingWizard';
 import { Sparkles, Zap, Heart, Shield } from 'lucide-react';
 
 export function WelcomeStep({ onNext }: OnboardingStepProps) {
   return (
-    <div className="space-y-8">
-      {/* Hero Section */}
-      < div
-        initial={{ scale: 0.9, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        className="text-center"
+    <div className="space-y-8 text-center">
+
+      {/* hero */}
+      <div
       >
-        <div 
+        <div
           className="w-24 h-24 mx-auto mb-6 rounded-full flex items-center justify-center"
           style={{
             background: 'linear-gradient(135deg, #A78BFA 0%, #C084FC 100%)',
-            boxShadow: '0 20px 60px rgba(167, 139, 250, 0.3)'
+            boxShadow: '0 12px 40px rgba(167, 139, 250, 0.3)',
           }}
         >
           <Sparkles size={48} className="text-white" />
         </div>
-
-        <h1 
-          className="mb-4"
-          style={{
-            fontSize: '36px',
-            fontWeight: '600',
-            color: '#6B21A8',
-            lineHeight: '1.2'
-          }}
-        >
-          Let's Build Your Perfect Flow
-        </h1>
-
-        <p 
-          className="opacity-70 max-w-xl mx-auto"
-          style={{
-            fontSize: '18px',
-            lineHeight: '1.6'
-          }}
-        >
-          In the next few steps, we'll customize FlowState to match your needs, energy patterns, and preferences. Your choices will shape your entire experience.
+        <p className="text-base text-gray-600 max-w-lg mx-auto leading-relaxed">
+          Let’s create a gentle, personalized routine that flexes with your mood
+          and energy. 
         </p>
-      </ div>
+      </div>
 
-      {/* Feature Highlights */}
-      < div
-        initial={{ y: 20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.2, duration: 0.5 }}
-        className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto"
+      {/* highlights */}
+      <div
+        className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto"
       >
-        <div 
-          className="rounded-3xl p-6 text-center"
-          style={{
-            background: 'linear-gradient(135deg, rgba(167, 139, 250, 0.1) 0%, rgba(192, 132, 252, 0.05) 100%)',
-            border: '1px solid rgba(167, 139, 250, 0.1)'
-          }}
-        >
-          <Zap size={32} className="mx-auto mb-3 text-purple-400" />
-          <h3 className="mb-2" style={{ fontSize: '16px', fontWeight: '500' }}>
-            Fully Customizable
-          </h3>
-          <p className="text-sm opacity-60">
-            Enable only the features you need, arrange them your way
-          </p>
-        </div>
+        {[
+          { icon: Zap, title: 'Customizable', text: 'Tailor everything to your pace' },
+          { icon: Heart, title: 'Energy-Aware', text: 'Flow adjusts to how you feel' },
+          { icon: Shield, title: 'Private', text: 'Your data stays with you' },
+        ].map(({ icon: Icon, title, text }) => (
+          <div
+            key={title}
+            className="rounded-3xl p-5 bg-[var(--color-card)]/60 border border-purple-100 shadow-sm"
+          >
+            <Icon size={28} className="mx-auto mb-3 text-purple-400" />
+            <h3 className="font-medium text-purple-700 mb-1">{title}</h3>
+            <p className="text-sm text-gray-500">{text}</p>
+          </div>
+        ))}
+      </div>
 
-        <div 
-          className="rounded-3xl p-6 text-center"
-          style={{
-            background: 'linear-gradient(135deg, rgba(167, 139, 250, 0.1) 0%, rgba(192, 132, 252, 0.05) 100%)',
-            border: '1px solid rgba(167, 139, 250, 0.1)'
-          }}
-        >
-          <Heart size={32} className="mx-auto mb-3 text-purple-400" />
-          <h3 className="mb-2" style={{ fontSize: '16px', fontWeight: '500' }}>
-            Energy-Aware
-          </h3>
-          <p className="text-sm opacity-60">
-            Everything adapts to how you're feeling today
-          </p>
-        </div>
-
-        <div 
-          className="rounded-3xl p-6 text-center"
-          style={{
-            background: 'linear-gradient(135deg, rgba(167, 139, 250, 0.1) 0%, rgba(192, 132, 252, 0.05) 100%)',
-            border: '1px solid rgba(167, 139, 250, 0.1)'
-          }}
-        >
-          <Shield size={32} className="mx-auto mb-3 text-purple-400" />
-          <h3 className="mb-2" style={{ fontSize: '16px', fontWeight: '500' }}>
-            Your Data, Your Control
-          </h3>
-          <p className="text-sm opacity-60">
-            Everything stays on your device unless you choose to sync
-          </p>
-        </div>
-      </ div>
-
-      {/* What We'll Cover */}
-      < div
-        initial={{ y: 20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.4, duration: 0.5 }}
-        className="rounded-3xl p-6 max-w-2xl mx-auto"
-        style={{
-          background: 'white',
-          border: '1px solid rgba(167, 139, 250, 0.1)'
-        }}
+      {/* action */}
+      <div
+        className="pt-4"
       >
-        <h3 className="mb-4" style={{ fontSize: '18px', fontWeight: '500' }}>
-          What we'll set up together:
-        </h3>
-        <div className="space-y-3">
-          {[
-            'Your preferred coaching tone and theme',
-            'Life areas you want to focus on',
-            'Features and tools you will use',
-            'Your personalized navigation',
-            'Dashboard layout and widgets',
-            'Journaling and reflection preferences',
-            'Notification settings',
-            'App integrations',
-          ].map((item, index) => (
-            < div
-              key={index}
-              initial={{ x: -20, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ delay: 0.5 + index * 0.05 }}
-              className="flex items-center gap-3"
-            >
-              <div 
-                className="w-2 h-2 rounded-full flex-shrink-0"
-                style={{ backgroundColor: '#A78BFA' }}
-              />
-              <span className="opacity-70">{item}</span>
-            </ div>
-          ))}
-        </div>
-      </ div>
-
-      {/* Privacy Note */}
-      < div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.8 }}
-        className="text-center max-w-xl mx-auto"
-      >
-        <p className="text-sm opacity-50">
-          💜 This should take about 3-5 minutes. You can change any of these settings later in your preferences.
+        <p className="text-xs text-gray-400 mt-3">
+          Takes less than 2 minutes — you can adjust anything later.
         </p>
-      </ div>
+      </div>
     </div>
   );
 }

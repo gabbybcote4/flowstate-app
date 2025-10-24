@@ -70,7 +70,7 @@ export function DashboardSkeleton() {
       </div>
 
       {/* Momentum Ring Card */}
-      <div className="bg-white rounded-3xl p-6 shadow-sm border-2 border-lavender-100 mb-4">
+      <div className="bg-[var(--color-card)] rounded-3xl p-6 shadow-sm border-2 border-lavender-100 mb-4">
         <div className="flex items-center justify-between mb-4">
           <div className="flex-1">
             <Skeleton className="h-6 w-32 mb-2" />
@@ -106,7 +106,7 @@ export function DashboardSkeleton() {
         <Skeleton className="h-6 w-32 mb-3" />
         <div className="space-y-2">
           {[1, 2, 3].map((i) => (
-            <div key={i} className="bg-white rounded-2xl p-4 shadow-sm border-2 border-gray-100">
+            <div key={i} className="bg-[var(--color-card)] rounded-2xl p-4 shadow-sm border-2 border-[var(--color-ring-offset-background)]">
               <div className="flex items-start gap-3">
                 <SkeletonCircle size="sm" />
                 <div className="flex-1">
@@ -206,7 +206,7 @@ export function CoachChatSkeleton() {
 
 export function TodosSkeleton() {
   return (
-    <div className="min-h-screen bg-white p-4 pb-24">
+    <div className="min-h-screen bg-[var(--color-card)] p-4 pb-24">
       {/* Header */}
       <div className="mb-6">
         <Skeleton className="h-8 w-32 mb-4" />
@@ -223,7 +223,7 @@ export function TodosSkeleton() {
       {/* Todo List */}
       <div className="space-y-3">
         {[1, 2, 3, 4, 5].map((i) => (
-          <div key={i} className="bg-white rounded-2xl p-4 shadow-sm border-2 border-gray-100">
+          <div key={i} className="bg-[var(--color-card)] rounded-2xl p-4 shadow-sm border-2 border-[var(--color-ring-offset-background)]">
             <div className="flex items-start gap-3">
               <SkeletonCircle size="sm" />
               <div className="flex-1">
@@ -247,7 +247,7 @@ export function TodosSkeleton() {
 
 export function CalendarSkeleton() {
   return (
-    <div className="min-h-screen bg-white p-4 pb-24">
+    <div className="min-h-screen bg-[var(--color-card)] p-4 pb-24">
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <Skeleton className="h-8 w-32" />
@@ -296,13 +296,13 @@ export function ReflectionSkeleton() {
       </div>
 
       {/* Prompt Card */}
-      <div className="bg-white rounded-3xl p-6 shadow-sm border-2 border-peach-200 mb-4">
+      <div className="bg-[var(--color-card)] rounded-3xl p-6 shadow-sm border-2 border-peach-200 mb-4">
         <Skeleton className="h-5 w-32 mb-4" />
         <SkeletonText lines={2} />
       </div>
 
       {/* Reflection Input */}
-      <div className="bg-white rounded-3xl p-6 shadow-sm border-2 border-gray-100 mb-4">
+      <div className="bg-[var(--color-card)] rounded-3xl p-6 shadow-sm border-2 border-[var(--color-ring-offset-background)] mb-4">
         <Skeleton className="h-5 w-40 mb-4" />
         <Skeleton className="h-32 w-full rounded-2xl" />
       </div>
@@ -326,7 +326,7 @@ export function ReflectionSkeleton() {
 
 export function SettingsSkeleton() {
   return (
-    <div className="min-h-screen bg-white p-4 pb-24">
+    <div className="min-h-screen bg-[var(--color-card)] p-4 pb-24">
       {/* Header */}
       <Skeleton className="h-8 w-32 mb-6" />
 
@@ -383,7 +383,7 @@ export function HabitBuilderSkeleton() {
       </div>
 
       {/* Content Card */}
-      <div className="bg-white rounded-3xl p-6 shadow-sm border-2 border-lavender-100 mb-4">
+      <div className="bg-[var(--color-card)] rounded-3xl p-6 shadow-sm border-2 border-lavender-100 mb-4">
         <Skeleton className="h-6 w-48 mb-4" />
         <SkeletonText lines={2} className="mb-6" />
         
@@ -407,7 +407,7 @@ export function HabitBuilderSkeleton() {
 
 export function CardSkeleton({ className = '' }: { className?: string }) {
   return (
-    <div className={`bg-white rounded-2xl p-4 shadow-sm border-2 border-gray-100 ${className}`}>
+    <div className={`bg-[var(--color-card)] rounded-2xl p-4 shadow-sm border-2 border-[var(--color-ring-offset-background)] ${className}`}>
       <Skeleton className="h-5 w-3/4 mb-3" />
       <SkeletonText lines={2} />
     </div>

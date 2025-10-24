@@ -1,22 +1,17 @@
-import { useState } from 'react';
-//import { Button } from './ui/button';
-import { useLocalStorage } from '../hooks/useLocalStorage';
-//  from 'motion/react';
-import { AuthScreen } from '../screens/AuthScreen';
-import { WelcomeScreen } from '../screens/WelcomeScreen';
-import { ConfigOnboardingWizard } from '../components/onboarding/ConfigOnboardingWizard';
-import { useNavigation } from '../components/context/NavigationContext';
-import { useUserConfig } from '../config/UserConfigContext';
-import { 
-  Sparkles, 
-  Activity, 
-  Target, 
-  Zap, 
-  UserPlus,
- // ArrowRight,
-  ChevronRight
-} from 'lucide-react';
+// src/screens/OnboardingScreen.tsx
+// adaptive onboarding flow using theme colors and dark mode background
 
+import { useState } from "react";
+import { useLocalStorage } from "../hooks/useLocalStorage";
+import { AuthScreen } from "../screens/AuthScreen";
+import { WelcomeScreen } from "../screens/WelcomeScreen";
+import { ConfigOnboardingWizard } from "../components/onboarding/ConfigOnboardingWizard";
+import { useNavigation } from "../components/context/NavigationContext";
+import { useUserConfig } from "../config/UserConfigContext";
+import { useTheme } from "../components/ThemeContext";
+import { Sparkles, Activity, Target, Zap, UserPlus, ChevronRight } from "lucide-react";
+
+// types
 interface OnboardingStep {
   id: number;
   icon: React.ReactNode;
@@ -26,63 +21,73 @@ interface OnboardingStep {
   illustration: string;
 }
 
-const onboardingSteps: OnboardingStep[] = [
-  {
-    id: 1,
-    icon: <Sparkles size={48} className="text-purple-300" />,
-    title: "Welcome to FlowState",
-    description: "Your compassionate companion for navigating life with fluctuating energy",
-    buttonText: "Let's Begin",
-    illustration: "✨"
-  },
-  {
-    id: 2,
-    icon: <Activity size={48} className="text-purple-300" />,
-    title: "Track Your Energy Patterns",
-    description: "Understand your unique rhythms and work with them, not against them",
-    buttonText: "Continue",
-    illustration: "🌊"
-  },
-  {
-    id: 3,
-    icon: <Target size={48} className="text-purple-300" />,
-    title: "Set Wellness Goals",
-    description: "Create meaningful goals that adapt to how you're feeling each day",
-    buttonText: "Next",
-    illustration: "🎯"
-  },
-  {
-    id: 4,
-    icon: <Zap size={48} className="text-purple-300" />,
-    title: "Connect Your Tools",
-    description: "Sync calendars, habits, and health data for a complete picture",
-    buttonText: "Almost There",
-    illustration: "🔗"
-  },
-  {
-    id: 5,
-    icon: <UserPlus size={48} className="text-purple-300" />,
-    title: "You're All Set!",
-    description: "Let's start building sustainable routines that honor your energy",
-    buttonText: "Get Started",
-    illustration: "🌱"
-  }
-];
+interface OnboardingWrapperProps {
+  editMode?: string;
+  children?: React.ReactNode;
+}
 
 interface OnboardingScreenProps {
   onComplete: () => void;
 }
 
+// intro slides
+const onboardingSteps: OnboardingStep[] = [
+  {
+    id: 1,
+    icon: <Sparkles size={48} className="text-[var(--color-primary)]" />,
+    title: "welcome to flowstate",
+    description: "your gentle companion for navigating life with fluctuating energy",
+    buttonText: "let’s begin",
+    illustration: "✨",
+  },
+  {
+    id: 2,
+    icon: <Activity size={48} className="text-[var(--color-primary)]" />,
+    title: "track your energy patterns",
+    description: "understand your natural rhythms and work with them, not against them",
+    buttonText: "continue",
+    illustration: "🌊",
+  },
+  {
+    id: 3,
+    icon: <Target size={48} className="text-[var(--color-primary)]" />,
+    title: "set wellness goals",
+    description: "create meaningful goals that adapt to how you’re feeling each day",
+    buttonText: "next",
+    illustration: "🎯",
+  },
+  {
+    id: 4,
+    icon: <Zap size={48} className="text-[var(--color-primary)]" />,
+    title: "connect your tools",
+    description: "sync calendars, habits, and health data for a complete picture",
+    buttonText: "almost there",
+    illustration: "🔗",
+  },
+  {
+    id: 5,
+    icon: <UserPlus size={48} className="text-[var(--color-primary)]" />,
+    title: "you’re all set",
+    description: "let’s start building routines that honor your energy, not fight it",
+    buttonText: "get started",
+    illustration: "🌱",
+  },
+];
+
+// main onboarding intro
 export function OnboardingScreen({ onComplete }: OnboardingScreenProps) {
   const [currentStep, setCurrentStep] = useState(0);
   const [, setDirection] = useState(1);
+  const { themeColors, darkMode } = useTheme();
+
+  const step = onboardingSteps[currentStep];
 
   const handleNext = () => {
     if (currentStep === onboardingSteps.length - 1) {
       onComplete();
     } else {
       setDirection(1);
-      setCurrentStep(prev => prev + 1);
+      setCurrentStep((prev) => prev + 1);
     }
   };
 
@@ -90,129 +95,78 @@ export function OnboardingScreen({ onComplete }: OnboardingScreenProps) {
     onComplete();
   };
 
-  const step = onboardingSteps[currentStep];
-
-  // const slideVariants = {
-  //   enter: (direction: number) => ({
-  //     x: direction > 0 ? 300 : -300,
-  //     opacity: 0
-  //   }),
-  //   center: {
-  //     x: 0,
-  //     opacity: 1
-  //   },
-  //   exit: (direction: number) => ({
-  //     x: direction < 0 ? 300 : -300,
-  //     opacity: 0
-  //   })
-  // };
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-peach-50 flex flex-col">
-      {/* Skip Button */}
+    <div
+      className="min-h-screen flex flex-col transition-colors duration-700"
+      style={{
+        background: darkMode
+          ? themeColors.background
+          : `linear-gradient(to bottom right, ${themeColors.gradientFrom}, ${themeColors.gradientTo})`,
+      }}
+    >
+      {/* skip button */}
       <div className="absolute top-6 right-6 z-10">
         <button
           onClick={handleSkip}
-          className="text-sm opacity-50 hover:opacity-100 transition-opacity px-4 py-2"
+          className="text-sm opacity-60 hover:opacity-100 transition-opacity px-4 py-2 text-[var(--color-card-foreground)]"
         >
-          Skip
+          skip
         </button>
       </div>
 
-      {/* Main Content */}
+      {/* content */}
       <div className="flex-1 flex flex-col items-center justify-center px-6 pb-12">
-        <div className="w-full max-w-md">
-            < div
-              key={currentStep}
-             // custom={direction}
-              //variants={slideVariants}
-
-              className="flex flex-col items-center text-center"
+        <div className="w-full max-w-md text-center">
+          {/* illustration circle */}
+          <div className="mb-8">
+            <div
+              className="w-32 h-32 rounded-full flex items-center justify-center text-7xl mx-auto"
+              style={{
+                background: `linear-gradient(135deg, ${themeColors.primaryLight} 0%, ${themeColors.primary} 100%)`,
+                boxShadow: `0 20px 60px ${themeColors.primaryLight}33`,
+              }}
             >
-              {/* Illustration */}
-              < div
+              {step.illustration}
+            </div>
+          </div>
 
-                className="mb-8"
-              >
-                <div 
-                  className="w-32 h-32 rounded-full flex items-center justify-center text-7xl"
-                  style={{
-                    background: 'linear-gradient(135deg, #E9D5FF 0%, #FED7AA 100%)',
-                    boxShadow: '0 20px 60px rgba(167, 139, 250, 0.15)'
-                  }}
-                >
-                  {step.illustration}
-                </div>
-              </ div>
+          <div className="mb-4">{step.icon}</div>
 
-              {/* Icon */}
-              < div
+          <h1 className="mb-4 text-2xl font-semibold text-[var(--color-card-foreground)] capitalize">
+            {step.title}
+          </h1>
 
-                className="mb-4"
-              >
-                {step.icon}
-              </ div>
+          <p className="mb-12 opacity-80 text-base leading-relaxed text-[var(--color-card-foreground)]">
+            {step.description}
+          </p>
 
-              {/* Title */}
-              <h1
-
-                className="mb-4"
-                style={{
-                  color: '#6B21A8',
-                  fontSize: '28px',
-                  fontWeight: '600',
-                  lineHeight: '1.2'
-                }}
-              >
-                {step.title}
-              </h1>
-
-              {/* Description */}
-              <p
-  
-                className="mb-12 opacity-70 max-w-sm"
-                style={{
-                  fontSize: '16px',
-                  lineHeight: '1.6'
-                }}
-              >
-                {step.description}
-              </p>
-
-              {/* CTA Button */}
-              < div
-
-                className="w-full"
-              >
-                <button
-                  onClick={handleNext}
-                  className="w-full py-4 px-8 rounded-2xl transition-all duration-300 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl"
-                  style={{
-                    background: 'linear-gradient(135deg, #A78BFA 0%, #C084FC 100%)',
-                    color: 'white',
-                    fontSize: '16px',
-                    fontWeight: '500'
-                  }}
-                >
-                  {step.buttonText}
-                  <ChevronRight size={20} />
-                </button>
-              </ div>
-            </ div>
+          <button
+            onClick={handleNext}
+            className="w-full py-4 px-8 rounded-2xl transition-all duration-300 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl text-white font-medium"
+            style={{
+              background: `linear-gradient(90deg, ${themeColors.primaryLight}, ${themeColors.primaryDark})`,
+            }}
+          >
+            {step.buttonText}
+            <ChevronRight size={20} />
+          </button>
         </div>
       </div>
 
-      {/* Progress Dots */}
+      {/* progress dots */}
       <div className="pb-8 flex items-center justify-center gap-2">
         {onboardingSteps.map((_, index) => (
-          < div
+          <div
             key={index}
-
             className="rounded-full transition-all"
             style={{
-              width: currentStep === index ? '32px' : '8px',
-              height: '8px',
-              backgroundColor: '#A78BFA'
+              width: currentStep === index ? "32px" : "8px",
+              height: "8px",
+              backgroundColor:
+                currentStep === index
+                  ? themeColors.primary
+                  : `${themeColors.primaryLight}`,
+              opacity: currentStep === index ? 1 : 0.5,
             }}
           />
         ))}
@@ -221,66 +175,62 @@ export function OnboardingScreen({ onComplete }: OnboardingScreenProps) {
   );
 }
 
-// Wrapper component to handle onboarding completion state
-export function OnboardingWrapper({ children }: { children: React.ReactNode }) {
+// unified wrapper
+export function OnboardingWrapper({ children, editMode }: OnboardingWrapperProps) {
   const { navigate } = useNavigation();
   const { config } = useUserConfig();
+
   const [hasCompletedOnboarding, setHasCompletedOnboarding] = useLocalStorage(
-    'flowstate-onboarding-complete',
+    "flowstate-onboarding-complete",
     false
   );
   const [hasCompletedAuth, setHasCompletedAuth] = useLocalStorage(
-    'flowstate-auth-complete',
+    "flowstate-auth-complete",
     false
   );
   const [hasCompletedWelcome, setHasCompletedWelcome] = useLocalStorage(
-    'flowstate-welcome-complete',
+    "flowstate-welcome-complete",
     false
   );
-  const [userName, ] = useLocalStorage('flowstate-user-name', 'Friend');
+  const [userName] = useLocalStorage("flowstate-user-name", "Friend");
 
-  const handleOnboardingComplete = () => {
-    setHasCompletedOnboarding(true);
-  };
-
-  const handleAuthComplete = () => {
-    setHasCompletedAuth(true);
-    // TODO: Get user name from auth and store it
-    // For now, using default
-  };
-
+  const handleOnboardingComplete = () => setHasCompletedOnboarding(true);
+  const handleAuthComplete = () => setHasCompletedAuth(true);
   const handleWelcomeComplete = () => {
     setHasCompletedWelcome(true);
-    // Navigate to check-in screen
-    navigate('checkin');
+    navigate("checkin");
   };
-
   const handleConfigComplete = () => {
-    // Config wizard will update config.onboardingCompleted
-    // Just navigate to home
-    navigate('home');
+    if (editMode === "layout") navigate("settings");
+    else navigate("home");
   };
 
-  // Show onboarding first
+  // layout edit mode
+  if (editMode === "layout") {
+    return (
+      <ConfigOnboardingWizard onComplete={handleConfigComplete} editMode="layout" />
+    );
+  }
+
+  // onboarding flow
   if (!hasCompletedOnboarding) {
     return <OnboardingScreen onComplete={handleOnboardingComplete} />;
   }
 
-  // Then show auth
   if (!hasCompletedAuth) {
     return <AuthScreen onAuthComplete={handleAuthComplete} />;
   }
 
-  // Then show welcome screen
   if (!hasCompletedWelcome) {
-    return <WelcomeScreen userName={userName} onStartCheckIn={handleWelcomeComplete} />;
+    return (
+      <WelcomeScreen userName={userName} onStartCheckIn={handleWelcomeComplete} />
+    );
   }
 
-  // Then show config wizard (12-step onboarding)
   if (!config.onboardingCompleted) {
     return <ConfigOnboardingWizard onComplete={handleConfigComplete} />;
   }
 
-  // Finally show the main app
+  // main app
   return <>{children}</>;
 }

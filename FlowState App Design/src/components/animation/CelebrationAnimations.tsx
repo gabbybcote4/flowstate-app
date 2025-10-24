@@ -88,7 +88,7 @@
 //         animate={{ scale: 1, opacity: 1, y: 0 }}
 //         exit={{ scale: 0.9, opacity: 0 }}
 //         transition={{ delay: 0.3, duration: 0.5, ease: 'easeOut' }}
-//         className="bg-white rounded-3xl shadow-2xl p-8 max-w-md mx-4 pointer-events-auto"
+//         className="bg-[var(--color-card)] rounded-3xl shadow-2xl p-8 max-w-md mx-4 pointer-events-auto"
 //       >
 //         < div
 //           initial={{ scale: 0 }}
@@ -202,7 +202,7 @@
 //           initial={{ scale: 0 }}
 //           animate={{ scale: 1 }}
 //           transition={{ delay: 1, type: 'spring', stiffness: 200 }}
-//           className="relative z-10 w-32 h-32 rounded-full bg-white shadow-xl flex items-center justify-center"
+//           className="relative z-10 w-32 h-32 rounded-full bg-[var(--color-card)] shadow-xl flex items-center justify-center"
 //         >
 //           <Flower2 size={48} style={{ color: themeColors.primary }} />
 //         </ div>
@@ -256,7 +256,7 @@
 //         initial={{ scale: 0, rotate: -180 }}
 //         animate={{ scale: 1, rotate: 0 }}
 //         transition={{ delay: 0.2, type: 'spring', stiffness: 150 }}
-//         className="relative z-10 bg-white rounded-full shadow-2xl p-8 pointer-events-auto"
+//         className="relative z-10 bg-[var(--color-card)] rounded-full shadow-2xl p-8 pointer-events-auto"
 //       >
 //         <CheckCircle size={64} style={{ color: themeColors.primary }} />
         
@@ -338,7 +338,7 @@
 //         initial={{ scale: 0.8, opacity: 0 }}
 //         animate={{ scale: 1, opacity: 1 }}
 //         transition={{ delay: 0.3, type: 'spring' }}
-//         className="bg-white rounded-3xl shadow-2xl p-8 max-w-sm mx-4 pointer-events-auto text-center"
+//         className="bg-[var(--color-card)] rounded-3xl shadow-2xl p-8 max-w-sm mx-4 pointer-events-auto text-center"
 //       >
 //         < div
 //           animate={{ rotate: [0, 10, -10, 0] }}
@@ -368,7 +368,7 @@
 //       className="flex items-center gap-3 bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl p-4 shadow-lg border border-purple-200"
 //     >
 //       <span className="text-2xl">{icon}</span>
-//       <p className="text-sm text-gray-700">{message}</p>
+//       <p className="text-sm text-[var(--color-card-foreground)]">{message}</p>
 //     </ div>
 //   );
 // }

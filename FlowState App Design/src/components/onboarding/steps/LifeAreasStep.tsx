@@ -1,4 +1,5 @@
-import { motion } from 'motion/react';
+// src/components/onboarding/steps/LifeAreasStep.tsx
+
 import { OnboardingStepProps } from '../ConfigOnboardingWizard';
 import { useUserConfig } from '../../../config/UserConfigContext';
 import { Check } from 'lucide-react';
@@ -21,13 +22,10 @@ export function LifeAreasStep({}: OnboardingStepProps) {
         </p>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+      <div className="grid grid-cols-2 gap-3">
         {config.lifeAreas.map((area, index) => (
           < button
             key={area.id}
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: index * 0.05 }}
             onClick={() => toggleLifeArea(area.id)}
             className="rounded-2xl p-4 text-center transition-all"
             style={{
@@ -44,8 +42,6 @@ export function LifeAreasStep({}: OnboardingStepProps) {
             <div style={{ fontSize: '14px', fontWeight: '500' }}>{area.label}</div>
             {area.enabled && (
               < div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
                 className="mt-2 mx-auto w-5 h-5 rounded-full flex items-center justify-center"
                 style={{ backgroundColor: area.color }}
               >

@@ -37,7 +37,7 @@ export function EncouragementMessage() {
           </div>
           <div className="flex-1">
             <h3 className="text-lavender-700 mb-2">A gentle reminder</h3>
-            <p className="text-gray-700 leading-relaxed">{message}</p>
+            <p className="text-[var(--color-card-foreground)] leading-relaxed">{message}</p>
           </div>
         </div>
       </div>

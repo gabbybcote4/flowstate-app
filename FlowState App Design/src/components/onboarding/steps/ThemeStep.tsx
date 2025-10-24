@@ -1,8 +1,9 @@
-import { motion } from 'motion/react';
+// ThemeStep.tsx
+
 import { OnboardingStepProps } from '../ConfigOnboardingWizard';
 import { useUserConfig } from '../../../config/UserConfigContext';
 import { ThemeMode } from '../../../config/userConfig.types';
-import { Sun, Moon, Minimize2, Sparkles } from 'lucide-react';
+import { Sun, Moon, Sparkles } from 'lucide-react';
 
 const THEME_OPTIONS: Array<{
   value: ThemeMode;
@@ -37,17 +38,7 @@ const THEME_OPTIONS: Array<{
       text: '#F9FAFB',
     },
   },
-  {
-    value: 'minimal',
-    label: 'Minimal Mode',
-    icon: Minimize2,
-    description: 'Ultra-clean for migraine-friendly focus',
-    preview: {
-      background: '#FFFFFF',
-      cardBg: '#F9FAFB',
-      text: '#374151',
-    },
-  },
+
   {
     value: 'auto',
     label: 'Auto (System)',
@@ -63,11 +54,8 @@ const THEME_OPTIONS: Array<{
 
 const COLOR_OPTIONS = [
   { value: '#A78BFA', label: 'Lavender', color: '#A78BFA' },
-  { value: '#C084FC', label: 'Purple', color: '#C084FC' },
-  { value: '#FBCFE8', label: 'Pink', color: '#FBCFE8' },
   { value: '#FED7AA', label: 'Peach', color: '#FED7AA' },
   { value: '#A7F3D0', label: 'Mint', color: '#A7F3D0' },
-  { value: '#93C5FD', label: 'Sky', color: '#93C5FD' },
 ];
 
 export function ThemeStep({}: OnboardingStepProps) {
@@ -87,7 +75,8 @@ export function ThemeStep({}: OnboardingStepProps) {
 
   return (
     <div className="space-y-8">
-      {/* Theme Mode Selection */}
+
+      {/* theme mode selection */}
       <div>
         <h3 className="mb-4" style={{ fontSize: '20px', fontWeight: '600' }}>
           Choose Your Theme
@@ -104,9 +93,6 @@ export function ThemeStep({}: OnboardingStepProps) {
             return (
               < button
                 key={option.value}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
                 onClick={() => handleSelectTheme(option.value)}
                 className="rounded-3xl overflow-hidden transition-all duration-300"
                 style={{
@@ -119,7 +105,7 @@ export function ThemeStep({}: OnboardingStepProps) {
                     : '0 4px 20px rgba(0, 0, 0, 0.05)',
                 }}
               >
-                {/* Preview */}
+                {/* preview */}
                 <div 
                   className="h-32 p-4 flex items-center justify-center"
                   style={{ background: option.preview.background }}
@@ -167,7 +153,7 @@ export function ThemeStep({}: OnboardingStepProps) {
                   </div>
                 </div>
 
-                {/* Info */}
+                {/* info */}
                 <div 
                   className="p-4 text-left"
                   style={{
@@ -198,7 +184,7 @@ export function ThemeStep({}: OnboardingStepProps) {
         </div>
       </div>
 
-      {/* Color Selection */}
+      {/* color selection */}
       <div>
         <h3 className="mb-4" style={{ fontSize: '20px', fontWeight: '600' }}>
           Choose Your Accent Color
@@ -214,9 +200,6 @@ export function ThemeStep({}: OnboardingStepProps) {
             return (
               < button
                 key={option.value}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.4 + index * 0.05 }}
                 onClick={() => handleSelectColor(option.value)}
                 className="flex flex-col items-center gap-2 p-3 rounded-2xl transition-all"
                 style={{
@@ -247,11 +230,8 @@ export function ThemeStep({}: OnboardingStepProps) {
         </div>
       </div>
 
-      {/* Helper Text */}
+      {/* helper text */}
       < div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.6 }}
         className="text-center"
       >
         <p className="text-sm opacity-50">

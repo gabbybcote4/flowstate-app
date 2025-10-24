@@ -25,7 +25,7 @@ export function LifeAreaCard({
         LIFE AREA CARD
       </div>
       <div
-        className="bg-white rounded-3xl shadow-sm p-5 border border-gray-100 hover:shadow-md transition-all duration-200 cursor-pointer"
+        className="bg-[var(--color-card)] rounded-3xl shadow-sm p-5 border border-[var(--color-ring-offset-background)] hover:shadow-md transition-all duration-200 cursor-pointer"
         onClick={onClick}
       >
         {/* Header */}
@@ -33,7 +33,7 @@ export function LifeAreaCard({
           <div className="flex items-center gap-3">
             <div className="text-2xl">{icon}</div>
             <div>
-              <h3 className="text-gray-800">{title}</h3>
+              <h3 className="text-[var(--color-card-foreground)]">{title}</h3>
               <div className="text-xs opacity-60 mt-0.5">{progress}% this week</div>
             </div>
           </div>

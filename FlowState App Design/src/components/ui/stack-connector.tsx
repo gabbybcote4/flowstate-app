@@ -304,7 +304,7 @@ export function HabitStackVisualizer({
             transition={{ delay: index * 0.1 }}
             className={`
               p-4 rounded-2xl border-2 flex items-center gap-3
-              ${habit.completed ? 'bg-green-50 border-green-200' : 'bg-white border-gray-200'}
+              ${habit.completed ? 'bg-green-50 border-green-200' : 'bg-[var(--color-card)] border-gray-200'}
             `}
           >
             {habit.emoji && <span className="text-2xl">{habit.emoji}</span>}

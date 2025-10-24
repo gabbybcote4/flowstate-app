@@ -1,77 +1,57 @@
+// src/hooks/useConfigSync.ts
+
 import { useEffect, useRef } from 'react';
 import { useUserConfig } from '../config/UserConfigContext';
-import { useTheme } from '../components/context/ThemeContext';
+import { useTheme } from '../components/ThemeContext';
 
-/**
- * Hook to synchronize UserConfig with ThemeContext and apply configuration on app load
- * This ensures that all onboarding selections are properly applied throughout the app
- * Only syncs ONCE on initial load to avoid overriding manual user changes in Settings
- */
 export function useConfigSync() {
   const { config } = useUserConfig();
-  const { setTheme, setFontSize, setMinimalMode, setDarkMode } = useTheme();
+  const { setTheme, setFontSize, setDarkMode } = useTheme();
   const hasInitialized = useRef(false);
 
-  // Sync theme settings from config to ThemeContext
-  // Only run ONCE on initial load to avoid overriding manual Settings changes
+  // sync theme settings from config to ThemeContext
   useEffect(() => {
-    // Skip if already initialized
+    // skip if already initialized
     if (hasInitialized.current) {
       return;
     }
 
-    console.log('🔄 useConfigSync running (initial sync only)...', {
-      onboardingCompleted: config.onboardingCompleted,
-      themeMode: config.theme.mode,
-      primaryColor: config.theme.primaryColor,
-      fontSize: config.theme.fontSize,
-    });
-
-    // Check if user has manually changed settings in ThemeContext
-    // If localStorage has explicit overrides, respect those instead of config
+    // check if user manually changed settings in ThemeContext
     const manualDarkMode = localStorage.getItem('flowstate-darkmode');
-    const manualMinimalMode = localStorage.getItem('flowstate-minimal');
     const manualFontSize = localStorage.getItem('flowstate-fontsize');
     const manualTheme = localStorage.getItem('flowstate-theme');
 
-    // Apply dark mode (check for manual override first)
+    // apply dark mode
     if (manualDarkMode !== null) {
-      // User has manually set dark mode in Settings, respect that
+      // user  manually set dark mode in settings
       setDarkMode(manualDarkMode === 'true');
-      if (manualMinimalMode !== null) {
-        setMinimalMode(manualMinimalMode === 'true');
-      }
+ 
     } else {
-      // No manual override, apply from config
+      // no manual override, apply from config
       switch (config.theme.mode) {
         case 'light':
           setDarkMode(false);
-          setMinimalMode(false);
           break;
         case 'dark':
           setDarkMode(true);
-          setMinimalMode(false);
           break;
         case 'minimal':
           setDarkMode(false);
-          setMinimalMode(true);
           break;
         case 'auto':
-          // Detect system preference
+          // detect system preference
           const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
           setDarkMode(prefersDark);
-          setMinimalMode(false);
           break;
       }
     }
 
-    // Apply primary color (check for manual override first)
+    // apply primary color
     if (manualTheme !== null) {
-      // User has manually selected a theme in Settings
+      // user  manually selected theme in Settings
       setTheme(manualTheme as 'Lavender' | 'Mint' | 'Peach');
     } else {
-      // Apply primary color to ThemeContext
-      // Map hex colors to theme names
+      // apply primary color to ThemeContext
       const colorToThemeMap: Record<string, 'Lavender' | 'Mint' | 'Peach'> = {
         '#A78BFA': 'Lavender',
         '#C084FC': 'Lavender',
@@ -85,9 +65,9 @@ export function useConfigSync() {
       setTheme(themeName);
     }
 
-    // Apply font size (check for manual override first)
+    // apply font size
     if (manualFontSize !== null) {
-      // User has manually changed font size in Settings
+      // user has manually changed font size in settings
       setFontSize(manualFontSize as 'Small' | 'Medium' | 'Large');
     } else {
       const fontSizeMap = {
@@ -98,13 +78,12 @@ export function useConfigSync() {
       setFontSize(fontSizeMap[config.theme.fontSize]);
     }
 
-    // Apply custom primary color to CSS variables directly
-    // This overrides the ThemeContext's color with the exact user selection
+    // apply custom primary color to css variables directly
     const root = document.documentElement;
     root.style.setProperty('--color-primary', config.theme.primaryColor);
     root.style.setProperty('--color-ring', config.theme.primaryColor);
     
-    // Also update related color shades for consistency
+    // update related color shades for consistency
     const lightenColor = (color: string, amount: number = 40) => {
       const hex = color.replace('#', '');
       const r = parseInt(hex.substring(0, 2), 16);
@@ -134,7 +113,6 @@ export function useConfigSync() {
     root.style.setProperty('--color-primary-light', lightenColor(config.theme.primaryColor, 40));
     root.style.setProperty('--color-primary-dark', darkenColor(config.theme.primaryColor, 40));
 
-    console.log('✅ Config sync complete!');
     hasInitialized.current = true;
   }, [
     config.theme.mode,
@@ -142,7 +120,6 @@ export function useConfigSync() {
     config.theme.fontSize,
     setTheme,
     setFontSize,
-    setMinimalMode,
     setDarkMode,
   ]);
 }

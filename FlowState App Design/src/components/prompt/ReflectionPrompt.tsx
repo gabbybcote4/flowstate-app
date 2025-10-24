@@ -14,7 +14,7 @@ export function ReflectionPrompt({ text, selected = false, onClick }: Reflection
         px-6 py-4 rounded-2xl transition-all duration-200
         ${selected 
           ? 'bg-lavender-100 border-2 border-lavender-300 shadow-md' 
-          : 'bg-white border-2 border-gray-100 hover:border-lavender-200'
+          : 'bg-[var(--color-card)] border-2 border-[var(--color-ring-offset-background)] hover:border-lavender-200'
         }
       `}
     >

@@ -40,7 +40,7 @@
 //     < div
 //       initial={{ opacity: 0, y: -10 }}
 //       animate={{ opacity: 1, y: 0 }}
-//       className="bg-white rounded-2xl shadow-md p-5 mb-6"
+//       className="bg-[var(--color-card)] rounded-2xl shadow-md p-5 mb-6"
 //     >
 //       {/* Header */}
 //       <div className="flex items-center justify-between mb-4">
@@ -78,9 +78,9 @@
 //           }}
 //         />
 //         {/* Milestone markers */}
-//         <div className="absolute top-0 left-1/4 w-0.5 h-full bg-white/40" />
-//         <div className="absolute top-0 left-1/2 w-0.5 h-full bg-white/40" />
-//         <div className="absolute top-0 left-3/4 w-0.5 h-full bg-white/40" />
+//         <div className="absolute top-0 left-1/4 w-0.5 h-full bg-[var(--color-card)]/40" />
+//         <div className="absolute top-0 left-1/2 w-0.5 h-full bg-[var(--color-card)]/40" />
+//         <div className="absolute top-0 left-3/4 w-0.5 h-full bg-[var(--color-card)]/40" />
 //       </div>
 
 //       {/* Stats Grid */}

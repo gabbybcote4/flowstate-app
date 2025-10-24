@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 //  from 'motion/react';
-import { useTheme } from '../components/context/ThemeContext';
+import { useTheme } from '../components/ThemeContext';
 import {
   ArrowLeft,
   //Plus,
@@ -319,7 +319,7 @@ export function SymptomTrackerScreen({ onNavigate }: SymptomTrackerScreenProps) 
       {/* Header */}
       < div
 
-        className="sticky top-0 z-20 bg-white border-b border-gray-100 px-6 py-4"
+        className="sticky top-0 z-20 bg-[var(--color-card)] border-b border-[var(--color-ring-offset-background)] px-6 py-4"
       >
         <div className="max-w-4xl mx-auto">
           <div className="flex items-center justify-between mb-2">
@@ -376,7 +376,7 @@ export function SymptomTrackerScreen({ onNavigate }: SymptomTrackerScreenProps) 
                     const category = SYMPTOM_CATEGORIES.find(c => c.id === catId);
                     const avgSeverity = catEntries.reduce((sum, e) => sum + e.severity, 0) / catEntries.length;
                     return category ? (
-                      <div key={catId} className="bg-white rounded-2xl p-3">
+                      <div key={catId} className="bg-[var(--color-card)] rounded-2xl p-3">
                         <div className="flex items-center gap-2 mb-1">
                           <category.icon size={16} style={{ color: category.color }} />
                           <span className="text-xs opacity-70">{category.name}</span>
@@ -402,7 +402,7 @@ export function SymptomTrackerScreen({ onNavigate }: SymptomTrackerScreenProps) 
                   < div
                     key={category.id}
 
-                    className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden"
+                    className="bg-[var(--color-card)] rounded-3xl shadow-sm border border-[var(--color-ring-offset-background)] overflow-hidden"
                   >
                     {/* Category Header */}
                     <button
@@ -432,7 +432,7 @@ export function SymptomTrackerScreen({ onNavigate }: SymptomTrackerScreenProps) 
                       {isExpanded && (
                         < div
 
-                          className="border-t border-gray-100"
+                          className="border-t border-[var(--color-ring-offset-background)]"
                         >
                           <div className="p-5 space-y-4">
                             {category.symptoms.map(symptom => {
@@ -535,7 +535,7 @@ export function SymptomTrackerScreen({ onNavigate }: SymptomTrackerScreenProps) 
                     < div
                       key={index}
 
-                      className="bg-white rounded-3xl p-5 shadow-sm border border-gray-100"
+                      className="bg-[var(--color-card)] rounded-3xl p-5 shadow-sm border border-[var(--color-ring-offset-background)]"
                     >
                       <div className="flex items-start gap-4">
                         <div
@@ -566,7 +566,7 @@ export function SymptomTrackerScreen({ onNavigate }: SymptomTrackerScreenProps) 
               {entries.length > 0 && (
                 < div
 
-                  className="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 mt-6"
+                  className="bg-[var(--color-card)] rounded-3xl p-6 shadow-sm border border-[var(--color-ring-offset-background)] mt-6"
                 >
                   <h3 className="text-gray-900 mb-4 flex items-center gap-2">
                     <Calendar size={20} style={{ color: themeColors.primary }} />
@@ -582,7 +582,7 @@ export function SymptomTrackerScreen({ onNavigate }: SymptomTrackerScreenProps) 
                       const CategoryIcon = category.icon;
 
                       return (
-                        <div key={category.id} className="border-b border-gray-100 pb-4 last:border-0">
+                        <div key={category.id} className="border-b border-[var(--color-ring-offset-background)] pb-4 last:border-0">
                           <div className="flex items-center justify-between mb-3">
                             <div className="flex items-center gap-2">
                               <CategoryIcon size={16} style={{ color: category.color }} />

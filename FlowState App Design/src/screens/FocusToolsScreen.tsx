@@ -3,7 +3,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs'
 import { FocusTimer } from '../components/timer/FocusTimer';
 //import { BreathingExercise } from '../components/exercise/BreathingExercise';
 //import { MusicPlayer } from '../components/player/MusicPlayer';
-import { useTheme } from '../components/context/ThemeContext';
+import { useTheme } from '../components/ThemeContext';
 
 export function FocusToolsScreen() {
   const { themeColors } = useTheme();
@@ -32,7 +32,7 @@ export function FocusToolsScreen() {
 
           {/* Tabs */}
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid w-full grid-cols-3 bg-white p-1.5 rounded-3xl mb-8 shadow-md">
+            <TabsList className="grid w-full grid-cols-3 bg-[var(--color-card)] p-1.5 rounded-3xl mb-8 shadow-md">
               <TabsTrigger 
                 value="timer" 
                 className="rounded-2xl data-[state=active]:bg-gradient-to-br data-[state=active]:from-lavender-400 data-[state=active]:to-purple-400 data-[state=active]:text-white data-[state=active]:shadow-lg transition-all duration-300"

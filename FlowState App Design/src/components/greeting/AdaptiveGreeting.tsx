@@ -1,6 +1,5 @@
+// AdaptiveGreeting.tsx
 import { useEffect, useState } from 'react';
-//import { motion } from '../lib/motion-shim';
-//import { useTheme } from '../components/context/ThemeContext';
 import { Sunrise, Sun, Sunset, Moon, Heart } from 'lucide-react';
 
 interface GreetingData {
@@ -11,126 +10,107 @@ interface GreetingData {
 }
 
 export function AdaptiveGreeting() {
-  //const { themeColors } = useTheme();
   const [greeting, setGreeting] = useState<GreetingData | null>(null);
 
   useEffect(() => {
-    updateGreeting();
-    // update every minute to keep time-based greetings fresh
-    const interval = setInterval(updateGreeting, 60000);
-    return () => clearInterval(interval);
-  }, []);
+    let timeoutId: ReturnType<typeof setTimeout>;
 
-  const updateGreeting = () => {
-    const hour = new Date().getHours();
-    const userName = localStorage.getItem('flowstate-username') || 'friend';
-    
-    // get today's check-in data for energy-aware messaging
-    const today = new Date().toDateString();
-    const savedData = localStorage.getItem('flowstate-coaching-data');
-    let energy = 3; // default
-    
-    if (savedData) {
-      try {
-        const data = JSON.parse(savedData);
-        const savedDate = localStorage.getItem('flowstate-coaching-date');
-        if (savedDate === today) {
-          energy = data.energy;
+    const updateGreeting = () => {
+      const hour = new Date().getHours();
+      const userName = localStorage.getItem('flowstate-username') || 'friend';
+      const today = new Date().toDateString();
+      const savedData = localStorage.getItem('flowstate-coaching-data');
+      let energy = 3;
+
+      if (savedData) {
+        try {
+          const data = JSON.parse(savedData);
+          const savedDate = localStorage.getItem('flowstate-coaching-date');
+          if (savedDate === today) {
+            energy = data.energy;
+          }
+        } catch {
+          console.error('Error parsing check-in data');
         }
-      } catch (e) {
-        console.error('Error parsing check-in data');
       }
-    }
 
-    let greetingData: GreetingData;
+      let greetingData: GreetingData;
+      if (hour >= 5 && hour < 7) {
+        greetingData = {
+          message: `Early bird, ${userName}`,
+          submessage: energy <= 2
+            ? "Take it slow. The day will wait for you."
+            : "The quiet morning is yours to savor.",
+          icon: Sunrise,
+          gradient: ['#FEF3C7', '#FCD34D']
+        };
+      } else if (hour >= 7 && hour < 12) {
+        greetingData = {
+          message: `Good morning, ${userName}`,
+          submessage: energy <= 2
+            ? "One gentle step at a time today."
+            : "Let's make today meaningful, at your pace.",
+          icon: Sun,
+          gradient: ['#FBBF24', '#F59E0B']
+        };
+      } else if (hour >= 12 && hour < 17) {
+        greetingData = {
+          message: `Good afternoon, ${userName}`,
+          submessage: energy <= 2
+            ? "It's okay to rest. Progress isn't always visible."
+            : "You're doing great. Keep your rhythm steady.",
+          icon: Sun,
+          gradient: ['#FDE68A', '#FCD34D']
+        };
+      } else if (hour >= 17 && hour < 21) {
+        greetingData = {
+          message: `Good evening, ${userName}`,
+          submessage: "You did enough today. Time to wind down.",
+          icon: Sunset,
+          gradient: ['#FBCFE8', '#F9A8D4']
+        };
+      } else {
+        greetingData = {
+          message: `Good night, ${userName}`,
+          submessage: "Rest is productive. Tomorrow is a new beginning.",
+          icon: Moon,
+          gradient: ['#DDD6FE', '#C4B5FD']
+        };
+      }
 
-    // early morning (5-7 am)
-    if (hour >= 5 && hour < 7) {
-      greetingData = {
-        message: `Early bird, ${userName} 🌅`,
-        submessage: energy <= 2 
-          ? "Take it slow. The day will wait for you."
-          : "The quiet morning is yours to savor.",
-        icon: Sunrise,
-        gradient: ['#FEF3C7', '#FCD34D']
-      };
-    }
-    // morning (7-12 pm)
-    else if (hour >= 7 && hour < 12) {
-      greetingData = {
-        message: `Good morning, ${userName} ☀️`,
-        submessage: energy <= 2
-          ? "One gentle step at a time today."
-          : "Let's make today meaningful, at your pace.",
-        icon: Sun,
-        gradient: ['#FBBF24', '#F59E0B']
-      };
-    }
-    // afternoon (12-5 pm)
-    else if (hour >= 12 && hour < 17) {
-      greetingData = {
-        message: `Good afternoon, ${userName} 🌤️`,
-        submessage: energy <= 2
-          ? "It's okay to rest. Progress isn't always visible."
-          : "You're doing great. Keep your rhythm steady.",
-        icon: Sun,
-        gradient: ['#FDE68A', '#FCD34D']
-      };
-    }
-    // evening (5-9 pm)
-    else if (hour >= 17 && hour < 21) {
-      greetingData = {
-        message: `Good evening, ${userName} 🌅`,
-        submessage: "You did enough today. Time to wind down.",
-        icon: Sunset,
-        gradient: ['#FBCFE8', '#F9A8D4']
-      };
-    }
-    // night (9 pm - 5 am)
-    else {
-      greetingData = {
-        message: `Good night, ${userName} 🌙`,
-        submessage: "Rest is productive. Tomorrow is a new beginning.",
-        icon: Moon,
-        gradient: ['#DDD6FE', '#C4B5FD']
-      };
-    }
+      setGreeting(greetingData);
 
-    setGreeting(greetingData);
-  };
+      // 🔁 Schedule next update exactly at the next hour mark
+      const now = new Date();
+      const nextHour = new Date();
+      nextHour.setHours(now.getHours() + 1, 0, 0, 0);
+      const timeUntilNextHour = nextHour.getTime() - now.getTime();
 
+      timeoutId = setTimeout(updateGreeting, timeUntilNextHour);
+    };
+
+    updateGreeting();
+    return () => clearTimeout(timeoutId);
+  }, []);
+  
   if (!greeting) return null;
 
   const Icon = greeting.icon;
 
   return (
     <div style={{ position: 'relative' }}>
-      <div className="absolute top-0 right-0 bg-black/75 text-white px-2 py-1 text-[10px] rounded-bl z-50">
-        ADAPTIVE GREETING
-      </div>
       <div 
         className="mb-6 p-6 rounded-3xl shadow-lg relative overflow-hidden"
         style={{
           background: `linear-gradient(135deg, ${greeting.gradient[0]}, ${greeting.gradient[1]})`
         }}
       >
-        {/* decorative background elements */}
         <div className="absolute top-0 right-0 w-32 h-32 opacity-10">
           <Icon size={128} />
         </div>
-
         <div className="relative z-10">
-          <div className="flex items-center gap-3 mb-2">
-            <div className="w-10 h-10 rounded-full bg-white/40 flex items-center justify-center">
-              <Icon size={20} />
-            </div>
-            <h2 className="text-gray-800">{greeting.message}</h2>
-          </div>
-          <p className="text-gray-700 opacity-80 leading-relaxed">
-            {greeting.submessage}
-          </p>
-          
-          {/* Mood indicator */}
+          <h2 className="text-[var(--color-card-foreground)] mb-2">{greeting.message}</h2>
+          <p className="text-[var(--color-card-foreground)] opacity-80 leading-relaxed">{greeting.submessage}</p>
           <div className="mt-4 flex items-center gap-2 text-sm">
             <Heart size={14} className="text-red-500" />
             <span className="opacity-70">Your energy matters more than your output</span>

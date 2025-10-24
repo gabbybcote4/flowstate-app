@@ -71,7 +71,7 @@ export function CorrelationCard({
         return {
           bg: 'bg-gray-50',
           border: 'border-gray-200',
-          text: 'text-gray-700',
+          text: 'text-[var(--color-card-foreground)]',
           icon: 'text-gray-600',
           accent: '#6b7280',
         };
@@ -98,7 +98,7 @@ export function CorrelationCard({
       <div className="flex items-center justify-between mb-4">
         {/* From */}
         <div className="flex items-center gap-2 flex-1">
-          <div className="w-10 h-10 rounded-xl bg-white/80 flex items-center justify-center">
+          <div className="w-10 h-10 rounded-xl bg-[var(--color-card)]/80 flex items-center justify-center">
             {from.icon || <span className="text-xl">{from.emoji}</span>}
           </div>
           <span className={`text-sm ${colors.text}`}>{from.label}</span>
@@ -115,7 +115,7 @@ export function CorrelationCard({
         {/* To */}
         <div className="flex items-center gap-2 flex-1 justify-end">
           <span className={`text-sm ${colors.text} text-right`}>{to.label}</span>
-          <div className="w-10 h-10 rounded-xl bg-white/80 flex items-center justify-center">
+          <div className="w-10 h-10 rounded-xl bg-[var(--color-card)]/80 flex items-center justify-center">
             {to.icon || <span className="text-xl">{to.emoji}</span>}
           </div>
         </div>
@@ -123,7 +123,7 @@ export function CorrelationCard({
 
       {/* Strength Bar */}
       <div className="mb-3">
-        <div className="h-2 bg-white/60 rounded-full overflow-hidden">
+        <div className="h-2 bg-[var(--color-card)]/60 rounded-full overflow-hidden">
           < div
             initial={{ width: 0 }}
             animate={{ width: `${strengthPercentage}%` }}
@@ -206,7 +206,7 @@ export function CorrelationCardCompact({
       case 'negative':
         return 'bg-red-50 border-red-200 text-red-700';
       default:
-        return 'bg-gray-50 border-gray-200 text-gray-700';
+        return 'bg-gray-50 border-gray-200 text-[var(--color-card-foreground)]';
     }
   };
 

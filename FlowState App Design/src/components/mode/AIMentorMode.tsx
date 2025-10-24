@@ -335,7 +335,7 @@
 //             //whileHover={{ scale: 1.02 }}
 //             //whileTap={{ scale: 0.98 }}
 //             onClick={() => setShowSettings(!showSettings)}
-//             className="w-full mb-6 bg-white rounded-2xl shadow-md p-4 flex items-center justify-between"
+//             className="w-full mb-6 bg-[var(--color-card)] rounded-2xl shadow-md p-4 flex items-center justify-between"
 //           >
 //             <div className="flex items-center gap-3">
 //               <Settings size={20}  />
@@ -352,7 +352,7 @@
 //               < div
 //                 className="overflow-hidden mb-6"
 //               >
-//                 <div className="bg-white rounded-2xl shadow-md p-6 space-y-6">
+//                 <div className="bg-[var(--color-card)] rounded-2xl shadow-md p-6 space-y-6">
 //                   {/* Voice Toggle */}
 //                   <div>
 //                     <div className="flex items-center justify-between mb-4">
@@ -377,7 +377,7 @@
 //                         }}
 //                       >
 //                         < div
-//                           className="absolute top-1 w-6 h-6 bg-white rounded-full shadow-md"
+//                           className="absolute top-1 w-6 h-6 bg-[var(--color-card)] rounded-full shadow-md"
 //                         />
 //                       </button>
 //                     </div>
@@ -462,7 +462,7 @@
 //           {/* Current Message Card */}
 //           {currentMessage && (
 //             < div
-//               className="mb-6 bg-white rounded-3xl shadow-lg overflow-hidden"
+//               className="mb-6 bg-[var(--color-card)] rounded-3xl shadow-lg overflow-hidden"
 //             >
 //               <div 
 //                 className="p-6 text-white"
@@ -470,7 +470,7 @@
 //               >
 //                 <div className="flex items-center justify-between mb-3">
 //                   <div className="flex items-center gap-3">
-//                     <div className="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center">
+//                     <div className="w-12 h-12 bg-[var(--color-card)]/20 rounded-2xl flex items-center justify-center">
 //                       <currentMessage.icon size={24} />
 //                     </div>
 //                     <h3 className="text-white">{currentMessage.title}</h3>
@@ -482,7 +482,7 @@
 //                           ? stopSpeaking() 
 //                           : speakMessage(currentMessage.message)
 //                       }
-//                       className="w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors"
+//                       className="w-10 h-10 rounded-full bg-[var(--color-card)]/20 hover:bg-[var(--color-card)]/30 flex items-center justify-center transition-colors"
 //                     >
 //                       {isSpeaking ? <VolumeX size={18} /> : <Volume2 size={18} />}
 //                     </button>
@@ -491,7 +491,7 @@
 //               </div>
 
 //               <div className="p-6">
-//                 <p className="leading-relaxed mb-6 text-gray-700">
+//                 <p className="leading-relaxed mb-6 text-[var(--color-card-foreground)]">
 //                   {currentMessage.message}
 //                 </p>
 
@@ -532,7 +532,7 @@
 //             </h3>
 
 //             {proactiveMessages.length === 0 ? (
-//               <div className="bg-white rounded-2xl shadow-md p-8 text-center">
+//               <div className="bg-[var(--color-card)] rounded-2xl shadow-md p-8 text-center">
 //                 <Bot size={48} className="mx-auto mb-4 opacity-20" />
 //                 <p className="opacity-60">No insights right now. Keep building your routine!</p>
 //               </div>
@@ -552,7 +552,7 @@
 //                      //   speakMessage(message.message);
 //                      // }
 //                    // }}
-//                //     className="w-full bg-white rounded-2xl shadow-md p-5 flex items-center gap-4 text-left transition-all"
+//                //     className="w-full bg-[var(--color-card)] rounded-2xl shadow-md p-5 flex items-center gap-4 text-left transition-all"
 //                //     style={{
 //               //        borderLeft: isActive ? `4px solid ${message.color}` : '4px solid transparent',
 //               //        backgroundColor: isActive ? `${message.color}10` : 'white'
@@ -588,7 +588,7 @@
 //              // analyzeUserState();
 //               //toast.success('Refreshed insights!', { duration: 2000 });
 //        //     }}
-//        //     className="w-full mt-6 py-4 rounded-2xl bg-white shadow-md flex items-center justify-center gap-2"
+//        //     className="w-full mt-6 py-4 rounded-2xl bg-[var(--color-card)] shadow-md flex items-center justify-center gap-2"
 //            // style={{ color: themeColors.primary }}
 //        //   >
 //       //      <Sparkles size={20} />

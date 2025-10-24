@@ -1,40 +1,8 @@
-import { useState, useEffect, useRef, createContext, useContext } from 'react';
-//  from '../lib/motion-shim';
-//import { useEmotionalState } from './EmotionalStateManager';
-import { useTheme } from '../context/ThemeContext';
-import {
-  Sparkles,
-  Wind,
-  Calendar,
-  Brain,
-  Bell,
-  Plus,
- // Clock,
-  MessageCircleHeart,
-  Target,
-  X,
-  //Check,
- // TrendingUp,
- // Coffee,
-//  Moon,
-} from 'lucide-react';
+// EnhancedNotificationSystem.tsx
 
-/**
- * Enhanced Notification System
- * 
- * Four notification types:
- * 1. Micro-win time - Celebrate small achievements
- * 2. Breathe - Mindful breathing prompts
- * 3. Gentle plan available - AI-generated adaptive plans
- * 4. Focus window - Optimal productivity periods
- * 
- * Actions:
- * - Add to Plan
- * - Snooze 20m
- * - Open Coach
- * 
- * Design: Rounded, translucent toast cards with slow fade
- */
+import { useState, useEffect, useRef, createContext, useContext } from 'react';
+import { useTheme } from '../ThemeContext';
+import {Sparkles, Wind, Calendar, Brain, Bell, Plus, MessageCircleHeart, Target, X} from 'lucide-react';
 
 export type NotificationType = 'micro-win' | 'breathe' | 'gentle-plan' | 'focus-window';
 
@@ -75,10 +43,10 @@ export function useNotifications() {
   return context;
 }
 
-// Notification Provider
+// notification provider
 export function NotificationProvider({ children }: { children: React.ReactNode }) {
   const [notifications, setNotifications] = useState<EnhancedNotification[]>([]);
- // const [snoozedNotifications, setSnoozedNotifications] = useState<Map<string, number>>(new Map());
+  //const [snoozedNotifications, setSnoozedNotifications] = useState<Map<string, number>>(new Map());
   const timeoutRefs = useRef<Map<string, NodeJS.Timeout>>(new Map());
 
   const showNotification = (notification: Omit<EnhancedNotification, 'id' | 'timestamp'>) => {
@@ -92,7 +60,7 @@ export function NotificationProvider({ children }: { children: React.ReactNode }
 
     setNotifications(prev => [...prev, newNotification]);
 
-    // Auto-dismiss after duration
+    // auto-dismiss after duration
     const timeout = setTimeout(() => {
       dismissNotification(id);
     }, newNotification.duration);
@@ -115,9 +83,9 @@ export function NotificationProvider({ children }: { children: React.ReactNode }
     if (!notification) return;
 
     dismissNotification(id);
-   // setSnoozedNotifications(prev => new Map(prev).set(notification.type, Date.now() + duration));
+   //setSnoozedNotifications(prev => new Map(prev).set(notification.type, Date.now() + duration));
 
-    // Re-show after snooze duration
+    // re-show after snooze duration
     setTimeout(() => {
       showNotification({
         type: notification.type,
@@ -126,11 +94,11 @@ export function NotificationProvider({ children }: { children: React.ReactNode }
         actions: notification.actions,
         metadata: notification.metadata,
       });
-      // setSnoozedNotifications(prev => {
-      //   const newMap = new Map(prev);
-      //   newMap.delete(notification.type);
-      //   return newMap;
-      // });
+      //setSnoozedNotifications(prev => {
+      //  const newMap = new Map(prev);
+      //  newMap.delete(notification.type);
+      //  return newMap;
+      //});
     }, duration);
   };
 
@@ -140,7 +108,7 @@ export function NotificationProvider({ children }: { children: React.ReactNode }
 
   useEffect(() => {
     return () => {
-      // Cleanup all timeouts
+      // cleanup all timeouts
       timeoutRefs.current.forEach(timeout => clearTimeout(timeout));
     };
   }, []);
@@ -160,20 +128,19 @@ export function NotificationProvider({ children }: { children: React.ReactNode }
   );
 }
 
-// Smart Notification Generator Hook
+// smart notification generator hook
 export function useSmartNotifications(onNavigate?: (screen: string) => void) {
   const { showNotification } = useNotifications();
-  //const { currentState, isGentleMode } = useEmotionalState();
   const lastCheckRef = useRef<Map<string, number>>(new Map());
 
-  // Micro-win detection
+  // micro-win detection
   useEffect(() => {
     const checkMicroWins = () => {
       const habits = JSON.parse(localStorage.getItem('flowstate-habits') || '[]');
       const todos = JSON.parse(localStorage.getItem('flowstate-todos') || '[]');
       const today = new Date().toDateString();
       
-      // Check if user just completed a habit
+      // check if user just completed a habit
       const recentHabitCompletion = habits.some((habit: any) => {
         const completedToday = (habit.completedSlots || []).some(
           (slot: any) => new Date(slot.date).toDateString() === today
@@ -181,7 +148,7 @@ export function useSmartNotifications(onNavigate?: (screen: string) => void) {
         return completedToday;
       });
 
-      // Check if user just completed a todo
+      // check if user just completed a todo
       const recentTodoCompletion = todos.some((todo: any) => {
         if (!todo.completedAt) return false;
         const completedDate = new Date(todo.completedAt);
@@ -224,71 +191,13 @@ export function useSmartNotifications(onNavigate?: (screen: string) => void) {
       }
     };
 
-    const interval = setInterval(checkMicroWins, 60000); // Check every minute
+    const interval = setInterval(checkMicroWins, 60000); // check every minute
     checkMicroWins();
     
     return () => clearInterval(interval);
   }, [showNotification, onNavigate]);
 
-  // Breathing prompts
-  useEffect(() => {
-    const checkBreathingPrompts = () => {
-      //const hour = new Date().getHours();
-      //const lastBreath = lastCheckRef.current.get('breathe') || 0;
-     // const timeSinceLastBreath = Date.now() - lastBreath;
-      
-      // Afternoon breathing prompt (2-4 PM)
-     // const isAfternoonSlump = hour >= 14 && hour <= 16;
-      
-      // Anxious/overwhelmed state
-     // const needsCalming = currentState === 'anxious' || currentState === 'overwhelmed';
-      
-      // if ((isAfternoonSlump || needsCalming) && timeSinceLastBreath > 1800000) { // 30 min cooldown
-      //   const messages = [
-      //     'Your mind needs a reset. Three deep breaths can shift everything.',
-      //     'Notice your breathing right now. Is it shallow? Let\'s fix that together.',
-      //     'Pause. Breathe in for 4, hold for 4, out for 6. You\'ve got this.',
-      //   ];
-        
-      //   showNotification({
-      //     type: 'breathe',
-      //     title: '🫁 Time to breathe',
-      //     message: messages[Math.floor(Math.random() * messages.length)],
-      //     actions: [
-      //       {
-      //         id: 'open-breathing',
-      //         label: 'Start Breathing',
-      //         icon: Wind,
-      //         variant: 'primary',
-      //         handler: () => {
-      //           onNavigate?.('focus');
-      //           // Could trigger breathing exercise specifically
-      //         },
-      //       },
-      //       {
-      //         id: 'snooze',
-      //         label: 'Snooze 20m',
-      //         icon: Clock,
-      //         variant: 'ghost',
-      //         handler: () => {
-      //           // Will be handled by NotificationCard
-      //         },
-      //       },
-      //     ],
-      //     duration: 14000,
-      //   });
-        
-      //   lastCheckRef.current.set('breathe', Date.now());
-      // }
-    };
-
-    const interval = setInterval(checkBreathingPrompts, 120000); // Check every 2 minutes
-    checkBreathingPrompts();
-    
-    return () => clearInterval(interval);
-  }, [showNotification, , onNavigate]);
-
-  // Gentle plan suggestions
+  // gentle plan suggestions
   useEffect(() => {
     const checkGentlePlan = () => {
       const checkInData = JSON.parse(localStorage.getItem('flowstate-coaching-data') || '{}');
@@ -296,7 +205,7 @@ export function useSmartNotifications(onNavigate?: (screen: string) => void) {
       const lastPlan = lastCheckRef.current.get('gentle-plan') || 0;
       const timeSinceLastPlan = Date.now() - lastPlan;
       
-      // Check if low energy and no time blocks planned
+      // check if low energy and no time blocks planned
       const hasLowEnergy = checkInData.energy <= 2;
       const hasNoPlannedBlocks = timeBlocks.length === 0;
       const hour = new Date().getHours();
@@ -342,13 +251,13 @@ export function useSmartNotifications(onNavigate?: (screen: string) => void) {
       }
     };
 
-    const interval = setInterval(checkGentlePlan, 180000); // Check every 3 minutes
+    const interval = setInterval(checkGentlePlan, 180000); // check every 3 minutes
     checkGentlePlan();
     
     return () => clearInterval(interval);
   }, [showNotification, onNavigate]);
 
-  // Focus window detection
+  // focus window detection
   useEffect(() => {
     const checkFocusWindow = () => {
       const checkInData = JSON.parse(localStorage.getItem('flowstate-coaching-data') || '{}');
@@ -359,7 +268,7 @@ export function useSmartNotifications(onNavigate?: (screen: string) => void) {
       const hasHighEnergy = checkInData.energy >= 4;
       const hasHighFocus = checkInData.focus >= 4;
       
-      // Morning peak (9-11 AM) or high energy/focus
+      // morning peak (9-11 AM) or high energy/focus
       const isMorningPeak = hour >= 9 && hour <= 11;
       const isInFlowState = hasHighEnergy && hasHighFocus;
       
@@ -403,14 +312,14 @@ export function useSmartNotifications(onNavigate?: (screen: string) => void) {
       }
     };
 
-    const interval = setInterval(checkFocusWindow, 300000); // Check every 5 minutes
+    const interval = setInterval(checkFocusWindow, 300000); // check every 5 minutes
     checkFocusWindow();
     
     return () => clearInterval(interval);
   }, [showNotification, onNavigate]);
 }
 
-// Enhanced Notification Display
+// enhanced notification display
 export function EnhancedNotificationDisplay() {
   const { notifications, dismissNotification, snoozeNotification } = useNotifications();
   const { themeColors } = useTheme();
@@ -430,7 +339,7 @@ export function EnhancedNotificationDisplay() {
   );
 }
 
-// Individual Notification Card
+// individual notification card
 interface NotificationCardProps {
   notification: EnhancedNotification;
   onDismiss: () => void;
@@ -443,7 +352,7 @@ function NotificationCard({ notification, onDismiss, onSnooze,  }: NotificationC
 
   useEffect(() => {
     const duration = notification.duration || 12000;
-    const interval = 50; // Update every 50ms
+    const interval = 50; // update every 50ms
     const steps = duration / interval;
     let currentStep = 0;
 
@@ -517,10 +426,10 @@ function NotificationCard({ notification, onDismiss, onSnooze,  }: NotificationC
           boxShadow: '0 20px 40px -10px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.5) inset',
         }}
       >
-        {/* Main Content */}
+        {/* main content */}
         <div className="p-5">
           <div className="flex items-start gap-4">
-            {/* Icon */}
+            {/* icon */}
             < div
               className="flex-shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center"
               style={{ backgroundColor: styles.iconBg }}
@@ -528,25 +437,22 @@ function NotificationCard({ notification, onDismiss, onSnooze,  }: NotificationC
               <IconComponent size={24} style={{ color: styles.iconColor }} />
             </ div>
 
-            {/* Text Content */}
+            {/* text content */}
             <div className="flex-1 min-w-0">
               <h4
                 className="text-gray-900 mb-1.5"
               >
                 {notification.title}
               </h4>
-              
               <p
-   
-                className="text-sm text-gray-700 leading-relaxed mb-4"
+                className="text-sm text-[var(--color-card-foreground)] leading-relaxed mb-4"
               >
                 {notification.message}
               </p>
 
-              {/* Action Buttons */}
+              {/* action buttons */}
               {notification.actions && notification.actions.length > 0 && (
                 < div
-
                   className="flex flex-wrap gap-2"
                 >
                   {notification.actions.map((action, ) => {
@@ -554,7 +460,7 @@ function NotificationCard({ notification, onDismiss, onSnooze,  }: NotificationC
                     const isPrimary = action.variant === 'primary';
                     const isGhost = action.variant === 'ghost';
                     
-                    // Handle snooze action
+                    // handle snooze action
                     const handleClick = () => {
                       if (action.id === 'snooze') {
                         onSnooze();
@@ -567,13 +473,12 @@ function NotificationCard({ notification, onDismiss, onSnooze,  }: NotificationC
                     return (
                       < button
                         key={action.id}
-
                         onClick={handleClick}
                         className={`
                           px-4 py-2 rounded-xl text-xs flex items-center gap-2 transition-all
-                          ${isPrimary ? 'bg-white/90 hover:bg-white shadow-sm' : ''}
-                          ${isGhost ? 'bg-white/40 hover:bg-white/60' : ''}
-                          ${!isPrimary && !isGhost ? 'bg-white/60 hover:bg-white/80' : ''}
+                          ${isPrimary ? 'bg-[var(--color-card)]/90 hover:bg-[var(--color-card)] shadow-sm' : ''}
+                          ${isGhost ? 'bg-[var(--color-card)]/40 hover:bg-[var(--color-card)]/60' : ''}
+                          ${!isPrimary && !isGhost ? 'bg-[var(--color-card)]/60 hover:bg-[var(--color-card)]/80' : ''}
                         `}
                         style={{
                           color: isPrimary ? styles.iconColor : '#374151',
@@ -588,21 +493,20 @@ function NotificationCard({ notification, onDismiss, onSnooze,  }: NotificationC
               )}
             </div>
 
-            {/* Dismiss Button */}
+            {/* dismiss button */}
             < button
-
               onClick={onDismiss}
-              className="flex-shrink-0 w-8 h-8 rounded-full bg-white/70 hover:bg-white transition-colors flex items-center justify-center group"
+              className="flex-shrink-0 w-8 h-8 rounded-full bg-[var(--color-card)]/70 hover:bg-[var(--color-card)] transition-colors flex items-center justify-center group"
             >
               <X size={14} className="text-gray-600 group-hover:text-gray-900 transition-colors" />
             </ button>
           </div>
         </div>
 
-        {/* Progress Bar */}
-        <div className="h-1 bg-white/30 relative overflow-hidden">
+        {/* progress bar */}
+        <div className="h-1 bg-[var(--color-card)]/30 relative overflow-hidden">
           < div
-            className="absolute inset-y-0 left-0 bg-white/60"
+            className="absolute inset-y-0 left-0 bg-[var(--color-card)]/60"
             style={{ width: `${progress}%` }}
           />
         </div>
@@ -611,7 +515,7 @@ function NotificationCard({ notification, onDismiss, onSnooze,  }: NotificationC
   );
 }
 
-// Quick trigger functions for easy use
+// quick trigger functions for easy use
 export function triggerMicroWinNotification(showNotification: NotificationContextType['showNotification'], onNavigate?: (screen: string) => void) {
   showNotification({
     type: 'micro-win',

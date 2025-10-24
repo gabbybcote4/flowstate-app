@@ -1,10 +1,8 @@
+// ReflectionScreen.tsx
+
 import React, { useState, useEffect } from 'react';
-import { useTheme } from '../components/context/ThemeContext';
-import { useEmotionalState } from '../components/manager/EmotionalStateManager';
-//import { CelebrationAnimation } from '../components/animation/CelebrationAnimations';
-//  from 'motion/react';
+import { useTheme } from '../components/ThemeContext';
 import { Sparkles, TrendingUp, Heart, Target, CheckCircle } from 'lucide-react';
-//import { toast } from 'sonner@2.0.3';
 
 interface ReflectionData {
   date: string;
@@ -16,17 +14,14 @@ interface ReflectionData {
 
 export function ReflectionScreen() {
   const { themeColors } = useTheme();
-  const { triggerCelebration } = useEmotionalState();
   const today = new Date().toISOString().split('T')[0];
-  
   const [whatFeltRight, setWhatFeltRight] = useState<string[]>([]);
   const [whatChallenged, setWhatChallenged] = useState<string[]>([]);
   const [sleepHours, setSleepHours] = useState<number>(7);
   const [showCelebration, setShowCelebration] = useState(false);
   const [hasCompletedToday, setHasCompletedToday] = useState(false);
-  //const [ setAffirmation] = useState<string>('');
 
-  // Load today's reflection if exists
+  // load today's reflection if exists
   useEffect(() => {
     const reflections = JSON.parse(localStorage.getItem('flowstate-reflections') || '{}');
     const todayReflection = reflections[today];
@@ -75,7 +70,7 @@ export function ReflectionScreen() {
       .sort(([dateA], [dateB]) => dateB.localeCompare(dateA))
       .slice(0, 7) as [string, ReflectionData][];
 
-    // Calculate patterns
+    // calculate patterns
     const allChallenges: string[] = [];
     const allWins: string[] = [];
     let totalSleep = 0;
@@ -88,14 +83,14 @@ export function ReflectionScreen() {
 
     const avgSleep = recentReflections.length > 0 ? (totalSleep / recentReflections.length).toFixed(1) : '0';
 
-    // Find most common challenge
+    // find most common challenge
     const challengeCounts: Record<string, number> = {};
     allChallenges.forEach(challenge => {
       challengeCounts[challenge] = (challengeCounts[challenge] || 0) + 1;
     });
     const topChallenge = Object.entries(challengeCounts).sort(([, a], [, b]) => b - a)[0];
 
-    // Find most common win
+    // find most common win
     const winCounts: Record<string, number> = {};
     allWins.forEach(win => {
       winCounts[win] = (winCounts[win] || 0) + 1;
@@ -150,37 +145,19 @@ export function ReflectionScreen() {
     localStorage.setItem('flowstate-reflections', JSON.stringify(reflections));
     setHasCompletedToday(true);
     
-    // Generate personalized affirmation
-    // const affirmations = [
-    //   "You took time to reflect. That's beautiful growth. 🌱",
-    //   "Self-awareness is your superpower. Well done. ✨",
-    //   "Every reflection is a step forward. Proud of you. 💜",
-    //   "You're building wisdom with each day. 🌸",
-    //   "Pausing to reflect takes courage. You did it. 🌙",
-    // ];
-    //const randomAffirmation = affirmations[Math.floor(Math.random() * affirmations.length)];
-    //setAffirmation(randomAffirmation);
-    
-    // Check if this completes a week
+    // check if this completes week
     const completedDays = Object.keys(reflections).length;
     const isWeekComplete = completedDays % 7 === 0 && completedDays > 0;
     
     if (isWeekComplete) {
-      // Week complete celebration
+      // week complete celebration
       setShowCelebration(true);
-      setTimeout(() => {
-        triggerCelebration('week-complete');
-        // toast.success('🌸 Week of reflections complete!', {
-        //   description: "You've bloomed beautifully this week",
-        // });
-      }, 500);
     } else {
-      // Regular reflection celebration
+      // regular reflection celebration
       setShowCelebration(true);
-      triggerCelebration('reflection-complete');
     }
     
-    // Hide celebration after 4 seconds
+    // hide celebration after 4 seconds
     setTimeout(() => setShowCelebration(false), 4000);
   };
 
@@ -196,13 +173,14 @@ export function ReflectionScreen() {
       <div className="absolute top-0 left-0 bg-black/75 text-white px-2 py-1 text-sm rounded-br z-50">REFLECTION SCREEN</div>
       <div className="p-4 md:p-6 pt-8 md:pt-12 pb-32">
         <div className="max-w-md mx-auto">
-          {/* Header */}
+
+          {/* header */}
           <div className="mb-8">
             <h1 className="mb-2">End of Day Reflection</h1>
             <p className="opacity-70">Take a breath. Notice without judgment.</p>
           </div>
 
-          {/* What felt right today? */}
+          {/* what felt right today */}
           <div className="mb-8">
             <div className="flex items-center gap-2 mb-4">
               <Heart className="w-5 h-5 text-lavender-400" />
@@ -213,12 +191,11 @@ export function ReflectionScreen() {
                 < button
                   key={option}
                   onClick={() => toggleOption(option, whatFeltRight, setWhatFeltRight)}
-                  //whileTap={{ scale: 0.95 }}
                   className={`
                     px-4 py-2 rounded-full transition-all duration-200
                     ${whatFeltRight.includes(option)
                       ? 'bg-lavender-200 text-lavender-900 shadow-md'
-                      : 'bg-white text-gray-700 hover:bg-lavender-50 shadow-sm'
+                      : 'bg-[var(--color-card)] text-[var(--color-card-foreground)] hover:bg-lavender-50 shadow-sm'
                     }
                   `}
                 >
@@ -228,7 +205,7 @@ export function ReflectionScreen() {
             </div>
           </div>
 
-          {/* What challenged you? */}
+          {/* what challenged you */}
           <div className="mb-8">
             <div className="flex items-center gap-2 mb-4">
               <Target className="w-5 h-5 text-peach-400" />
@@ -239,12 +216,11 @@ export function ReflectionScreen() {
                 < button
                   key={option}
                   onClick={() => toggleOption(option, whatChallenged, setWhatChallenged)}
-                  //whileTap={{ scale: 0.95 }}
                   className={`
                     px-4 py-2 rounded-full transition-all duration-200
                     ${whatChallenged.includes(option)
                       ? 'bg-peach-200 text-peach-900 shadow-md'
-                      : 'bg-white text-gray-700 hover:bg-peach-50 shadow-sm'
+                      : 'bg-[var(--color-card)] text-[var(--color-card-foreground)] hover:bg-peach-50 shadow-sm'
                     }
                   `}
                 >
@@ -254,10 +230,10 @@ export function ReflectionScreen() {
             </div>
           </div>
 
-          {/* Sleep Hours */}
+          {/* sleep hours */}
           <div className="mb-8">
             <h2 className="mb-4">How much sleep did you get?</h2>
-            <div className="bg-white rounded-3xl shadow-sm p-5">
+            <div className="bg-[var(--color-card)] rounded-3xl shadow-sm p-5">
               <div className="flex items-center gap-4">
                 <span className="text-2xl">💤</span>
                 <input
@@ -284,7 +260,7 @@ export function ReflectionScreen() {
             </div>
           </div>
 
-          {/* AI Insights Section */}
+          {/* ai insights section */}
           <div className="mb-8">
             <div className="flex items-center gap-2 mb-4">
               <Sparkles className="w-5 h-5 text-lavender-400" />
@@ -292,9 +268,9 @@ export function ReflectionScreen() {
             </div>
             
             <div className="space-y-3">
-              {/* Pattern Card */}
-              < div 
 
+              {/* pattern card */}
+              < div 
                 className="bg-gradient-to-br from-lavender-50 to-white rounded-2xl p-5 shadow-sm"
               >
                 <div className="flex items-start gap-3">
@@ -306,9 +282,8 @@ export function ReflectionScreen() {
                 </div>
               </ div>
 
-              {/* Wins Card */}
+              {/* wins card */}
               < div 
-
                 className="bg-gradient-to-br from-peach-50 to-white rounded-2xl p-5 shadow-sm"
               >
                 <div className="flex items-start gap-3">
@@ -320,9 +295,8 @@ export function ReflectionScreen() {
                 </div>
               </ div>
 
-              {/* Tomorrow's Focus */}
+              {/* tomorrow's focus */}
               < div 
-
                 className="bg-gradient-to-br from-blue-50 to-white rounded-2xl p-5 shadow-sm border border-blue-100"
               >
                 <div className="flex items-start gap-3">
@@ -334,10 +308,9 @@ export function ReflectionScreen() {
                 </div>
               </ div>
 
-              {/* Average Sleep */}
+              {/* average sleep */}
               < div 
-
-                className="bg-white rounded-2xl p-5 shadow-sm text-center"
+                className="bg-[var(--color-card)] rounded-2xl p-5 shadow-sm text-center"
               >
                 <div className="text-sm opacity-60 mb-1">7-Day Sleep Average</div>
                 <div className="text-2xl">{insights.avgSleep} hours</div>
@@ -345,10 +318,9 @@ export function ReflectionScreen() {
             </div>
           </div>
 
-          {/* Complete Button */}
+          {/* complete button */}
           < button 
             onClick={handleCompleteReflection}
-            //whileTap={{ scale: 0.98 }}
             disabled={hasCompletedToday && !showCelebration}
             className="w-full py-4 rounded-3xl shadow-lg transition-all duration-200 flex items-center justify-center gap-2"
             style={{
@@ -369,14 +341,6 @@ export function ReflectionScreen() {
           </ button>
         </div>
       </div>
-
-      {/* Celebration Modal */}
-        {/* {showCelebration && (
-            type="reflection"
-            affirmation={affirmation}
-            onComplete={() => setShowCelebration(false)}
-          />
-        )} */}
     </div>
   );
 }
