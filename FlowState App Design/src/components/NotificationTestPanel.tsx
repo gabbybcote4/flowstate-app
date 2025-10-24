@@ -1,7 +1,11 @@
+// src/components/NotificationTestPanel.tsx
+// Notification Test Panel
+// Testing UI for the Enhanced Notification System
+// Can be added to Settings or accessed via a debug mode
 import { useState } from 'react';
 import { useNotifications } from './system/EnhancedNotificationSystem';
-import { useTheme } from './context/ThemeContext';
-import { motion } from 'motion/react';
+import { useTheme } from './ThemeContext';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   Sparkles,
   Wind,
@@ -14,13 +18,6 @@ import {
   Bell,
   BellOff,
 } from 'lucide-react';
-
-/**
- * Notification Test Panel
- * 
- * Testing UI for the Enhanced Notification System
- * Can be added to Settings or accessed via a debug mode
- */
 
 export function NotificationTestPanel({ onNavigate }: { onNavigate?: (screen: string) => void }) {
   const { showNotification, notifications, clearAll } = useNotifications();
@@ -176,7 +173,8 @@ export function NotificationTestPanel({ onNavigate }: { onNavigate?: (screen: st
 
   return (
     <div className="bg-[var(--color-card)] rounded-3xl shadow-sm p-6 border border-[var(--color-ring-offset-background)]">
-      {/* Header */}
+
+      {/* header */}
       <div className="flex items-center justify-between mb-6">
         <div>
           <h3 className="mb-1">Notification Test Panel</h3>
@@ -197,7 +195,7 @@ export function NotificationTestPanel({ onNavigate }: { onNavigate?: (screen: st
         </div>
       </div>
 
-      {/* Notification Type Selector */}
+      {/* notification type selector */}
       <div className="mb-6">
         <p className="text-sm mb-3 opacity-70">Select notification type:</p>
         <div className="grid grid-cols-2 gap-3">
@@ -206,7 +204,7 @@ export function NotificationTestPanel({ onNavigate }: { onNavigate?: (screen: st
             const isSelected = selectedType === type.id;
             
             return (
-              < button
+              <motion.button
                 key={type.id}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => setSelectedType(type.id)}
@@ -234,14 +232,14 @@ export function NotificationTestPanel({ onNavigate }: { onNavigate?: (screen: st
                   </div>
                 </div>
                 <p className="text-xs opacity-70">{type.description}</p>
-              </ button>
+              </motion.button>
             );
           })}
         </div>
       </div>
 
-      {/* Trigger Button */}
-      <button
+      {/* trigger button */}
+      <motion.button
         onClick={() => triggerTestNotification(selectedType)}
         className="w-full py-4 rounded-2xl flex items-center justify-center gap-3 transition-all shadow-sm hover:shadow-md"
         style={{
@@ -251,9 +249,9 @@ export function NotificationTestPanel({ onNavigate }: { onNavigate?: (screen: st
       >
         <Bell size={20} />
         <span>Trigger {notificationTypes.find(t => t.id === selectedType)?.label} Notification</span>
-      </button>
+      </motion.button>
 
-      {/* Info */}
+      {/* info */}
       <div className="mt-6 p-4 bg-blue-50 rounded-2xl border border-blue-200">
         <div className="flex items-start gap-2">
           <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -274,7 +272,7 @@ export function NotificationTestPanel({ onNavigate }: { onNavigate?: (screen: st
         </div>
       </div>
 
-      {/* Smart Triggers Info */}
+      {/* smart triggers info */}
       <div className="mt-4 p-4 bg-purple-50 rounded-2xl border border-purple-200">
         <div className="flex items-start gap-2">
           <div className="w-6 h-6 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0 mt-0.5">

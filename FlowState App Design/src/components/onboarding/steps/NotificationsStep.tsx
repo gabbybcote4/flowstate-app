@@ -1,5 +1,5 @@
 // src/components/onboarding/steps/NotificationsStep.tsx
-
+// Step in onboarding wizard for configuring notification preferences
 import { OnboardingStepProps } from '../ConfigOnboardingWizard';
 import { useUserConfig } from '../../../config/UserConfigContext';
 import { Switch } from '../../ui/switch';
@@ -88,7 +88,7 @@ export function NotificationsStep({}: OnboardingStepProps) {
                   <h5 style={{ fontSize: '14px', fontWeight: '500' }}>{item.label}</h5>
                 </div>
                 <Switch
-                  checked={isEnabled}
+                  checked={!!isEnabled}
                   onCheckedChange={() => toggleNotification(item.key)}
                 />
               </ div>

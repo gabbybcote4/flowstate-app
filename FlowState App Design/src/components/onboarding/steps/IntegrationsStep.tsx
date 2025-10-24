@@ -1,4 +1,6 @@
-import { motion } from 'motion/react';
+// src/components/onboarding/steps/IntegrationsStep.tsx
+// Step in onboarding wizard for selecting integrations
+import { motion, AnimatePresence } from 'framer-motion';
 import { OnboardingStepProps } from '../ConfigOnboardingWizard';
 import { useUserConfig } from '../../../config/UserConfigContext';
 import { Badge } from '../../ui/badge';
@@ -41,7 +43,7 @@ export function IntegrationsStep({}: OnboardingStepProps) {
           const isEnabled = integration.enabled;
 
           return (
-            < button
+            <motion.button
               key={integration.id}
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -99,7 +101,7 @@ export function IntegrationsStep({}: OnboardingStepProps) {
                   </div>
                 </div>
               </div>
-            </ button>
+            </motion.button>
           );
         })}
       </div>

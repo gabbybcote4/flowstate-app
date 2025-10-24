@@ -1,34 +1,28 @@
+// src/components/ui/life-area-chip.tsx
 import React from 'react';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
-
-/**
- * LifeAreaChip Component
- * 
- * Pill-shaped chip for displaying and filtering life areas
- * Follows the design system's life area color tokens
- */
 
 export type LifeArea = 'health' | 'work' | 'social' | 'personal' | 'creative' | 'learning';
 
 interface LifeAreaChipProps {
-  /** Life area type */
+  /** life area type */
   area: LifeArea;
-  /** Custom label (defaults to capitalized area name) */
+  /** custom label (defaults to capitalized area name) */
   label?: string;
-  /** Selected/active state */
+  /** selected/active state */
   selected?: boolean;
-  /** Show close button */
+  /** show close button */
   removable?: boolean;
-  /** Size variant */
+  /** size variant */
   size?: 'sm' | 'md' | 'lg';
-  /** Click handler */
+  /** click handler */
   onClick?: () => void;
-  /** Remove handler */
+  /** remove handler */
   onRemove?: () => void;
-  /** Custom className */
+  /** custom className */
   className?: string;
-  /** Icon component */
+  /** icon component */
   icon?: React.ReactNode;
 }
 
@@ -98,7 +92,7 @@ export function LifeAreaChip({
   const displayLabel = label || config.label;
 
   return (
-    < button
+    < motion.button
       whileTap={onClick ? { scale: 0.95 } : undefined}
       onClick={onClick}
       className={`
@@ -114,21 +108,21 @@ export function LifeAreaChip({
         color: config.text,
       }}
     >
-      {/* Icon or Emoji */}
+      {/* icon or emoji */}
       {icon || (
         <span className={size === 'sm' ? 'text-xs' : 'text-sm'}>
           {config.emoji}
         </span>
       )}
       
-      {/* Label */}
+      {/* label */}
       <span className="leading-none">
         {displayLabel}
       </span>
       
-      {/* Remove button */}
+      {/* remove button */}
       {removable && onRemove && (
-        < button
+        < motion.button
           whileTap={{ scale: 0.9 }}
           onClick={(e) => {
             e.stopPropagation();
@@ -144,29 +138,29 @@ export function LifeAreaChip({
           }}
         >
           <X size={size === 'sm' ? 10 : 12} />
-        </ button>
+        </ motion.button>
       )}
-    </ button>
+    </ motion.button>
   );
 }
 
 /**
- * LifeAreaChipGroup - Group of life area chips
+ * LifeAreaChipGroup - group of life area chips
  */
 interface LifeAreaChipGroupProps {
-  /** Selected life areas */
+  /** selected life areas */
   selected: LifeArea[];
-  /** Available life areas (defaults to all) */
+  /** available life areas (defaults to all) */
   available?: LifeArea[];
-  /** Multi-select mode */
+  /** multi-select mode */
   multiSelect?: boolean;
-  /** Change handler */
+  /** change handler */
   onChange?: (selected: LifeArea[]) => void;
-  /** Size variant */
+  /** size variant */
   size?: 'sm' | 'md' | 'lg';
-  /** Wrap chips */
+  /** wrap chips */
   wrap?: boolean;
-  /** Custom className */
+  /** custom className */
   className?: string;
 }
 
@@ -183,13 +177,13 @@ export function LifeAreaChipGroup({
     if (!onChange) return;
 
     if (multiSelect) {
-      // Toggle selection
+      // toggle selection
       const newSelected = selected.includes(area)
         ? selected.filter(a => a !== area)
         : [...selected, area];
       onChange(newSelected);
     } else {
-      // Single select
+      // single select
       onChange([area]);
     }
   };
@@ -210,7 +204,7 @@ export function LifeAreaChipGroup({
 }
 
 /**
- * LifeAreaBadge - Compact badge variant for inline use
+ * LifeAreaBadge - compact badge variant for inline use
  */
 interface LifeAreaBadgeProps {
   area: LifeArea;

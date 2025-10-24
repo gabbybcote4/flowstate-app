@@ -1,4 +1,6 @@
-import { motion } from 'motion/react';
+// src/components/onboarding/steps/JournalingStep.tsx
+// Onboarding step for configuring journaling preferences
+import { motion, AnimatePresence } from 'framer-motion';
 import { OnboardingStepProps } from '../ConfigOnboardingWizard';
 import { useUserConfig } from '../../../config/UserConfigContext';
 import { Switch } from '../../ui/switch';
@@ -39,7 +41,7 @@ export function JournalingStep({}: OnboardingStepProps) {
           const isMainToggle = option.key === 'enabled';
 
           return (
-            < div
+            <motion.div
               key={option.key}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -79,7 +81,7 @@ export function JournalingStep({}: OnboardingStepProps) {
                 onCheckedChange={() => toggleJournaling(option.key)}
                 disabled={!isMainToggle && !config.journaling.enabled}
               />
-            </ div>
+            </motion.div>
           );
         })}
       </div>

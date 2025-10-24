@@ -1,6 +1,8 @@
+// src/components/GoalToHabitWizard.tsx
+// import { motion, AnimatePresence } from 'framer-motion';
 // import { useState, useEffect } from 'react';
 // import { useTheme } from '../components/context/ThemeContext';
-//   from '../lib/motion-shim';
+
 // import {
 //   Target,
 //   Zap,
@@ -15,7 +17,7 @@
 //   Award,
 //   X,
 // } from 'lucide-react';
-// import { toast } from 'sonner@2.0.3';
+// import { toast } from 'sonner';
 
 // interface GoalToHabitWizardProps {
 //   onComplete: (habit: any) => void;

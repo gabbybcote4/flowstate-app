@@ -1,40 +1,35 @@
+// src/components/ui/correlation-card.tsx
+// CorrelationCard Component for displaying habit and mood correlations
 import React from 'react';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { TrendingUp, TrendingDown, ArrowRight, Info } from 'lucide-react';
 
-/**
- * CorrelationCard Component
- * 
- * Displays insights about correlations between habits, moods, and life areas
- * Shows patterns like "Sleep → Better Focus" or "Exercise → Higher Energy"
- */
-
 interface CorrelationCardProps {
-  /** Source element (what influences) */
+  /** source element (what influences) */
   from: {
     label: string;
     icon?: React.ReactNode;
     emoji?: string;
   };
-  /** Target element (what is influenced) */
+  /** target element (what is influenced) */
   to: {
     label: string;
     icon?: React.ReactNode;
     emoji?: string;
   };
-  /** Correlation strength (0-100) */
+  /** correlation strength (0-100) */
   strength: number;
-  /** Correlation direction */
+  /** correlation direction */
   direction: 'positive' | 'negative' | 'neutral';
-  /** Descriptive insight text */
+  /** descriptive insight text */
   insight: string;
-  /** Optional additional context */
+  /** optional additional context */
   context?: string;
-  /** Data points used for correlation */
+  /** data points used for correlation */
   dataPoints?: number;
-  /** Click handler */
+  /** click handler */
   onClick?: () => void;
-  /** Custom className */
+  /** custom className */
   className?: string;
 }
 
@@ -82,7 +77,7 @@ export function CorrelationCard({
   const strengthPercentage = Math.round(strength);
 
   return (
-    < div
+    <motion.div
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       whileHover={onClick ? { scale: 1.02 } : undefined}
@@ -94,9 +89,10 @@ export function CorrelationCard({
         ${className}
       `}
     >
-      {/* Correlation Flow */}
+      {/* correlation flow */}
       <div className="flex items-center justify-between mb-4">
-        {/* From */}
+
+        {/* from */}
         <div className="flex items-center gap-2 flex-1">
           <div className="w-10 h-10 rounded-xl bg-[var(--color-card)]/80 flex items-center justify-center">
             {from.icon || <span className="text-xl">{from.emoji}</span>}
@@ -104,7 +100,7 @@ export function CorrelationCard({
           <span className={`text-sm ${colors.text}`}>{from.label}</span>
         </div>
 
-        {/* Arrow */}
+        {/* arrow */}
         <div className="flex flex-col items-center gap-1 px-3">
           <ArrowRight size={20} className={colors.icon} />
           <span className={`text-xs ${colors.text} opacity-70`}>
@@ -112,7 +108,7 @@ export function CorrelationCard({
           </span>
         </div>
 
-        {/* To */}
+        {/* to */}
         <div className="flex items-center gap-2 flex-1 justify-end">
           <span className={`text-sm ${colors.text} text-right`}>{to.label}</span>
           <div className="w-10 h-10 rounded-xl bg-[var(--color-card)]/80 flex items-center justify-center">
@@ -121,10 +117,10 @@ export function CorrelationCard({
         </div>
       </div>
 
-      {/* Strength Bar */}
+      {/* strength bar */}
       <div className="mb-3">
         <div className="h-2 bg-[var(--color-card)]/60 rounded-full overflow-hidden">
-          < div
+          <motion.div
             initial={{ width: 0 }}
             animate={{ width: `${strengthPercentage}%` }}
             transition={{ duration: 1, delay: 0.2, ease: 'easeOut' }}
@@ -134,7 +130,7 @@ export function CorrelationCard({
         </div>
       </div>
 
-      {/* Insight Text */}
+      {/* insight text */}
       <div className="mb-3">
         <div className="flex items-start gap-2">
           {direction === 'positive' ? (
@@ -150,14 +146,14 @@ export function CorrelationCard({
         </div>
       </div>
 
-      {/* Context */}
+      {/* context */}
       {context && (
         <p className={`text-xs ${colors.text} opacity-70 mb-2`}>
           {context}
         </p>
       )}
 
-      {/* Data Points */}
+      {/* data points */}
       {dataPoints && (
         <div className="flex items-center gap-1">
           <div className={`w-1.5 h-1.5 rounded-full ${colors.icon.replace('text-', 'bg-')}`} />
@@ -166,12 +162,12 @@ export function CorrelationCard({
           </span>
         </div>
       )}
-    </ div>
+    </motion.div>
   );
 }
 
 /**
- * CorrelationCardCompact - Smaller variant for lists
+ * CorrelationCardCompact - smaller variant for lists
  */
 interface CorrelationCardCompactProps {
   from: string;
@@ -225,7 +221,7 @@ export function CorrelationCardCompact({
 }
 
 /**
- * CorrelationInsightsList - Group of correlation cards
+ * CorrelationInsightsList - group of correlation cards
  */
 interface CorrelationInsightsListProps {
   insights: Array<{
@@ -250,7 +246,7 @@ export function CorrelationInsightsList({
   return (
     <div className={`space-y-3 ${className}`}>
       {insights.map((insight, index) => (
-        < div
+        <motion.div
           key={insight.id}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -260,7 +256,7 @@ export function CorrelationInsightsList({
             {...insight}
             onClick={onInsightClick ? () => onInsightClick(insight.id) : undefined}
           />
-        </ div>
+        </motion.div>
       ))}
     </div>
   );

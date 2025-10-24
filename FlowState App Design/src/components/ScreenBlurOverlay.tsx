@@ -1,4 +1,6 @@
-//  from 'motion/react';
+// src/components/ScreenBlurOverlay.tsx
+// A semi-transparent blur overlay for screen transitions
+import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
 interface ScreenBlurOverlayProps {
@@ -12,7 +14,7 @@ export function ScreenBlurOverlay({ isTransitioning }: ScreenBlurOverlayProps) {
     if (isTransitioning) {
       setShow(true);
     } else {
-      // Delay hiding to allow transition to complete
+      // delay hiding to allow transition to complete
       const timer = setTimeout(() => setShow(false), 400);
       return () => clearTimeout(timer);
     }
@@ -21,7 +23,7 @@ export function ScreenBlurOverlay({ isTransitioning }: ScreenBlurOverlayProps) {
   return (
     <AnimatePresence>
       {show && (
-        < div
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}

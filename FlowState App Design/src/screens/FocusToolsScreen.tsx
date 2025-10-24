@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
-import { FocusTimer } from '../components/timer/FocusTimer';
+import { FocusTimer } from '../components/FocusTimer';
 //import { BreathingExercise } from '../components/exercise/BreathingExercise';
 //import { MusicPlayer } from '../components/player/MusicPlayer';
 import { useTheme } from '../components/ThemeContext';

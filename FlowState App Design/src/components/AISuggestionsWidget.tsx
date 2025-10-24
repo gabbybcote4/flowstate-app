@@ -1,6 +1,8 @@
+// src/components/AISuggestionsWidget.tsx
+// import { motion, AnimatePresence } from "framer-motion";
 // import React, { useState, useEffect } from 'react';
 // import { Sparkles, X, Check, ChevronDown, ChevronUp } from 'lucide-react';
-// //  from '../lib/motion-shim';
+// 
 
 // interface AISuggestion {
 //   id: string;

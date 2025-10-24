@@ -1,5 +1,7 @@
+// src/components/FocusTimer.tsx
+// A Focus Timer component with duration selection, start/pause, reset functionality, and animated progress circle.
 import React, { useState, useEffect } from 'react';
-//  from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Play, Pause, RotateCcw } from 'lucide-react';
 
 export function FocusTimer() {
@@ -49,9 +51,10 @@ export function FocusTimer() {
 
   return (
     <div className="flex flex-col items-center">
-      {/* Duration Selector */}
+
+      {/* duration selector */}
       {!isRunning && (
-        < div
+        < motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           className="flex gap-3 mb-8"
@@ -69,13 +72,14 @@ export function FocusTimer() {
               {duration.label}
             </button>
           ))}
-        </ div>
+        </motion.div>
       )}
 
-      {/* Timer Display */}
+      {/* timer display */}
       <div className="relative mb-8">
         <svg className="transform -rotate-90" width="280" height="280">
-          {/* Background circle */}
+
+          {/* background circle */}
           <circle
             cx="140"
             cy="140"
@@ -84,7 +88,8 @@ export function FocusTimer() {
             strokeWidth="12"
             fill="none"
           />
-          {/* Progress circle */}
+
+          {/* progress circle */}
           <motion.circle
             cx="140"
             cy="140"
@@ -107,9 +112,9 @@ export function FocusTimer() {
           </defs>
         </svg>
 
-        {/* Time text */}
+        {/* time text */}
         <div className="absolute inset-0 flex items-center justify-center">
-          < div
+          <motion.div
             key={timeLeft}
             initial={{ scale: 1 }}
             animate={{ scale: [1, 1.02, 1] }}
@@ -120,22 +125,23 @@ export function FocusTimer() {
               {formatTime(timeLeft)}
             </div>
             {isRunning && (
-              <p
+              <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 0.6 }}
                 className="text-sm"
               >
                 Stay focused...
-              </p>
+              </motion.p>
             )}
-          </ div>
+          </motion.div>
         </div>
       </div>
 
-      {/* Controls */}
+      {/* controls */}
       <div className="flex gap-4">
-        {/* Play/Pause Button */}
-        < button
+
+        {/* play/pause button */}
+        < motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => setIsRunning(!isRunning)}
@@ -143,48 +149,48 @@ export function FocusTimer() {
         >
           <AnimatePresence mode="wait">
             {isRunning ? (
-              < div
+              <motion.div
                 key="pause"
                 initial={{ scale: 0, rotate: -180 }}
                 animate={{ scale: 1, rotate: 0 }}
                 exit={{ scale: 0, rotate: 180 }}
               >
                 <Pause size={32} fill="white" />
-              </ div>
+              </motion.div>
             ) : (
-              < div
+              <motion.div
                 key="play"
                 initial={{ scale: 0, rotate: -180 }}
                 animate={{ scale: 1, rotate: 0 }}
                 exit={{ scale: 0, rotate: 180 }}
               >
                 <Play size={32} fill="white" className="ml-1" />
-              </ div>
+              </motion.div>
             )}
           </AnimatePresence>
-        </ button>
+        </motion.button>
 
-        {/* Reset Button */}
-        < button
+        {/* reset button */}
+        <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={handleReset}
           className="w-20 h-20 rounded-full bg-[var(--color-card)] text-lavender-600 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center"
         >
           <RotateCcw size={28} />
-        </ button>
+        </motion.button>
       </div>
 
-      {/* Completion Message */}
+      {/* completion message */}
       {timeLeft === 0 && (
-        < div
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="mt-8 p-6 bg-green-50 rounded-3xl text-center"
         >
           <p className="text-2xl mb-2">✨ Great focus session!</p>
           <p className="opacity-70">You completed {selectedDuration} minutes</p>
-        </ div>
+        </motion.div>
       )}
     </div>
   );

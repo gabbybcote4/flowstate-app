@@ -1,5 +1,7 @@
+// src/components/onboarding/steps/NavigationStep.tsx
+// Component for reordering navigation items during onboarding
 import { useState } from 'react';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { OnboardingStepProps } from '../ConfigOnboardingWizard';
 import { useUserConfig } from '../../../config/UserConfigContext';
 import { FEATURE_REGISTRY } from '../../../config/featureRegistry';
@@ -9,7 +11,7 @@ export function NavigationStep({}: OnboardingStepProps) {
   const { config, updateConfig } = useUserConfig();
   const [draggedItem, setDraggedItem] = useState<string | null>(null);
 
-  // Get enabled features for navigation
+  // get enabled features for navigation
   const enabledNavItems = config.navOrder.filter(
     key => config.enabledFeatures[key] && FEATURE_REGISTRY[key]
   );
@@ -29,7 +31,7 @@ export function NavigationStep({}: OnboardingStepProps) {
     newOrder.splice(draggedIndex, 1);
     newOrder.splice(targetIndex, 0, draggedItem);
 
-    // Update full navOrder preserving disabled items
+    // update full navOrder preserving disabled items
     const fullOrder = config.navOrder.map(key =>
       newOrder.includes(key) ? null : key
     ).filter((k): k is string => k !== null);
@@ -64,7 +66,7 @@ export function NavigationStep({}: OnboardingStepProps) {
           const isBottomNav = index < 5;
 
           return (
-            < div
+            <motion.div
               key={key}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -118,7 +120,7 @@ export function NavigationStep({}: OnboardingStepProps) {
                   Bottom Nav
                 </span>
               )}
-            </ div>
+            </motion.div>
           );
         })}
       </div>

@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useTheme } from '../components/ThemeContext';
 import { Sparkles, ArrowRight, CheckCircle2, MessageCircle, TrendingUp, ClipboardList, Lightbulb, BookOpen, Compass, Bot } from 'lucide-react';
-// import { motion } from 'motion/react';
-// import { toast } from 'sonner@2.0.3';
+// import { motion, AnimatePresence } from 'framer-motion';
+// import { toast } from 'sonner';
 // import { DisciplineBuilderScreen } from './screens/DisciplineBuilderScreen';
 // import { HabitEducationScreen } from './screens/HabitEducationScreen';
 // import { HabitLearningJourney } from '../components/journey/HabitLearningJourney';

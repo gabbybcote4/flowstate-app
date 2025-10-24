@@ -1,4 +1,6 @@
-import { motion } from 'motion/react';
+// src/components/onboarding/steps/WidgetsStep.tsx
+// Onboarding step for selecting dashboard widgets
+import { motion, AnimatePresence } from 'framer-motion';
 import { OnboardingStepProps } from '../ConfigOnboardingWizard';
 import { useUserConfig } from '../../../config/UserConfigContext';
 import { Switch } from '../../ui/switch';
@@ -42,7 +44,7 @@ export function WidgetsStep({}: OnboardingStepProps) {
           const isEnabled = config.widgets[widget.key as keyof typeof config.widgets];
 
           return (
-            < div
+            <motion.div
               key={widget.key}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -80,7 +82,7 @@ export function WidgetsStep({}: OnboardingStepProps) {
                 checked={isEnabled}
                 onCheckedChange={() => toggleWidget(widget.key)}
               />
-            </ div>
+            </motion.div>
           );
         })}
       </div>

@@ -1,6 +1,8 @@
+// src/screens/GrowthMapScreen.tsx
+// import { motion, AnimatePresence } from 'framer-motion';
 // import { useState, useEffect } from 'react';
 // import { useTheme } from '../components/context/ThemeContext';
-// //  from '../lib/motion-shim';
+// 
 // import { 
 //   Sparkles, 
 //   TrendingUp, 
@@ -20,7 +22,7 @@
 //   ZoomIn,
 //   ZoomOut
 // } from 'lucide-react';
-// import { toast } from 'sonner@2.0.3';
+// import { toast } from 'sonner';
 
 // interface LifeAreaData {
 //   name: string;

@@ -1,3 +1,5 @@
+// src/screens/IntegrationsGuideScreen.tsx
+// import { motion, AnimatePresence } from 'framer-motion';
 // import { useState } from 'react';
 // import { useTheme } from '../components/context/ThemeContext';
 // import {
@@ -13,9 +15,9 @@
 //   Copy,
 //   Check
 // } from 'lucide-react';
-// //  from '../lib/motion-shim';
+// 
 // import { Badge } from './ui/badge';
-// import { toast } from 'sonner@2.0.3';
+// import { toast } from 'sonner';
 
 // interface APIGuide {
 //   id: string;

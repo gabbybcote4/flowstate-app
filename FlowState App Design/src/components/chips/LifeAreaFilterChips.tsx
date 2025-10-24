@@ -1,4 +1,4 @@
-// import { motion } from '../lib/motion-shim';
+import { motion, AnimatePresence } from "framer-motion";
 // import { useTheme } from '../components/context/ThemeContext';
 
 // export const LIFE_AREAS = [

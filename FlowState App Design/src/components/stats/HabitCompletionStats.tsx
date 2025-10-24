@@ -1,4 +1,4 @@
-// import { motion } from '../lib/motion-shim';
+import { motion, AnimatePresence } from "framer-motion";
 // import { TrendingUp, Target, CheckCircle2 } from 'lucide-react';
 // import { useTheme } from '../components/context/ThemeContext';
 

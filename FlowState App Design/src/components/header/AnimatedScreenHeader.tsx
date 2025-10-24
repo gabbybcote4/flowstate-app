@@ -1,4 +1,4 @@
-// import { motion } from '../lib/motion-shim';
+import { motion, AnimatePresence } from "framer-motion";
 // import { ArrowLeft } from 'lucide-react';
 // import { useTheme } from '../components/context/ThemeContext';
 

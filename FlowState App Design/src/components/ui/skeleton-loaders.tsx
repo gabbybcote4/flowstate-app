@@ -1,17 +1,8 @@
-/**
- * Skeleton Loaders
- * 
- * Loading states for Dashboard, Coach, and other screens
- * Matches the actual component layouts for smooth transitions
- */
-
+// src/components/ui/skeleton-loaders.tsx
 import React from 'react';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 
-// ============================================================================
-// BASE SKELETON COMPONENTS
-// ============================================================================
-
+// base skeleton component
 interface SkeletonProps {
   className?: string;
   animate?: boolean;
@@ -19,7 +10,7 @@ interface SkeletonProps {
 
 export function Skeleton({ className = '', animate = true }: SkeletonProps) {
   return (
-    < div
+    <motion.div
       className={`bg-gray-200 rounded ${className}`}
       animate={animate ? {
         opacity: [0.5, 0.8, 0.5],
@@ -56,20 +47,18 @@ export function SkeletonText({ lines = 1, className = '' }: { lines?: number; cl
   );
 }
 
-// ============================================================================
-// DASHBOARD SKELETON
-// ============================================================================
-
+// dashboard skeleton
 export function DashboardSkeleton() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-lavender-100 via-lavender-50 to-white p-4 pb-24">
-      {/* Header */}
+
+      {/* header */}
       <div className="mb-6">
         <Skeleton className="h-8 w-48 mb-2" />
         <Skeleton className="h-5 w-64" />
       </div>
 
-      {/* Momentum Ring Card */}
+      {/* momentum ring card */}
       <div className="bg-[var(--color-card)] rounded-3xl p-6 shadow-sm border-2 border-lavender-100 mb-4">
         <div className="flex items-center justify-between mb-4">
           <div className="flex-1">
@@ -94,14 +83,14 @@ export function DashboardSkeleton() {
         </div>
       </div>
 
-      {/* Quick Actions */}
+      {/* quick actions */}
       <div className="flex gap-2 overflow-x-auto mb-4 scrollbar-hide">
         {[1, 2, 3, 4].map((i) => (
           <Skeleton key={i} className="w-32 h-24 flex-shrink-0 rounded-2xl" />
         ))}
       </div>
 
-      {/* Today's Tasks */}
+      {/* today's to-dos */}
       <div className="mb-4">
         <Skeleton className="h-6 w-32 mb-3" />
         <div className="space-y-2">
@@ -119,7 +108,7 @@ export function DashboardSkeleton() {
         </div>
       </div>
 
-      {/* Insights Widget */}
+      {/* insights widget */}
       <div className="bg-gradient-to-br from-lavender-100 to-peach-100 rounded-3xl p-6 border-2 border-lavender-200">
         <div className="flex items-center gap-3 mb-4">
           <SkeletonCircle size="md" />
@@ -134,14 +123,12 @@ export function DashboardSkeleton() {
   );
 }
 
-// ============================================================================
-// COACH CHAT SKELETON
-// ============================================================================
-
+// coach chat skeleton
 export function CoachChatSkeleton() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-lavender-50 to-white flex flex-col">
-      {/* Header */}
+
+      {/* header */}
       <div className="p-4 border-b border-gray-200">
         <div className="flex items-center gap-3">
           <SkeletonCircle size="md" />
@@ -152,9 +139,10 @@ export function CoachChatSkeleton() {
         </div>
       </div>
 
-      {/* Chat Messages */}
+      {/* chat messages */}
       <div className="flex-1 p-4 space-y-4">
-        {/* Coach message */}
+
+        {/* coach message */}
         <div className="flex gap-3">
           <SkeletonCircle size="sm" />
           <div className="flex-1 max-w-[80%]">
@@ -165,7 +153,7 @@ export function CoachChatSkeleton() {
           </div>
         </div>
 
-        {/* User message */}
+        {/* user message */}
         <div className="flex gap-3 justify-end">
           <div className="flex-1 max-w-[80%] flex flex-col items-end">
             <div className="bg-lavender-400 rounded-3xl rounded-tr-lg p-4 w-full">
@@ -177,7 +165,7 @@ export function CoachChatSkeleton() {
           <SkeletonCircle size="sm" />
         </div>
 
-        {/* Coach message */}
+        {/* coach message */}
         <div className="flex gap-3">
           <SkeletonCircle size="sm" />
           <div className="flex-1 max-w-[80%]">
@@ -189,7 +177,7 @@ export function CoachChatSkeleton() {
         </div>
       </div>
 
-      {/* Input Area */}
+      {/* input area */}
       <div className="p-4 border-t border-gray-200">
         <div className="flex gap-2">
           <Skeleton className="flex-1 h-12 rounded-full" />
@@ -200,14 +188,12 @@ export function CoachChatSkeleton() {
   );
 }
 
-// ============================================================================
-// TODOS SKELETON
-// ============================================================================
-
+// todos skeleton
 export function TodosSkeleton() {
   return (
     <div className="min-h-screen bg-[var(--color-card)] p-4 pb-24">
-      {/* Header */}
+
+      {/* header */}
       <div className="mb-6">
         <Skeleton className="h-8 w-32 mb-4" />
         <div className="flex gap-2">
@@ -217,10 +203,10 @@ export function TodosSkeleton() {
         </div>
       </div>
 
-      {/* Add Todo */}
+      {/* add to-do */}
       <Skeleton className="h-14 w-full rounded-2xl mb-6" />
 
-      {/* Todo List */}
+      {/* to-do list */}
       <div className="space-y-3">
         {[1, 2, 3, 4, 5].map((i) => (
           <div key={i} className="bg-[var(--color-card)] rounded-2xl p-4 shadow-sm border-2 border-[var(--color-ring-offset-background)]">
@@ -241,20 +227,18 @@ export function TodosSkeleton() {
   );
 }
 
-// ============================================================================
-// CALENDAR SKELETON
-// ============================================================================
-
+// calendar skeleton
 export function CalendarSkeleton() {
   return (
     <div className="min-h-screen bg-[var(--color-card)] p-4 pb-24">
-      {/* Header */}
+
+      {/* header */}
       <div className="flex items-center justify-between mb-6">
         <Skeleton className="h-8 w-32" />
         <SkeletonCircle size="sm" />
       </div>
 
-      {/* Month View */}
+      {/* month view */}
       <div className="mb-6">
         <div className="grid grid-cols-7 gap-2 mb-2">
           {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, i) => (
@@ -268,7 +252,7 @@ export function CalendarSkeleton() {
         </div>
       </div>
 
-      {/* Events List */}
+      {/* events list */}
       <Skeleton className="h-6 w-32 mb-4" />
       <div className="space-y-3">
         {[1, 2, 3].map((i) => (
@@ -282,32 +266,30 @@ export function CalendarSkeleton() {
   );
 }
 
-// ============================================================================
-// REFLECTION SKELETON
-// ============================================================================
-
+// reflection skeleton
 export function ReflectionSkeleton() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-peach-50 to-white p-4 pb-24">
-      {/* Header */}
+
+      {/* header */}
       <div className="mb-6">
         <Skeleton className="h-8 w-48 mb-2" />
         <Skeleton className="h-5 w-64" />
       </div>
 
-      {/* Prompt Card */}
+      {/* prompt card */}
       <div className="bg-[var(--color-card)] rounded-3xl p-6 shadow-sm border-2 border-peach-200 mb-4">
         <Skeleton className="h-5 w-32 mb-4" />
         <SkeletonText lines={2} />
       </div>
 
-      {/* Reflection Input */}
+      {/* reflection input */}
       <div className="bg-[var(--color-card)] rounded-3xl p-6 shadow-sm border-2 border-[var(--color-ring-offset-background)] mb-4">
         <Skeleton className="h-5 w-40 mb-4" />
         <Skeleton className="h-32 w-full rounded-2xl" />
       </div>
 
-      {/* Gratitude Section */}
+      {/* gratitude section */}
       <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-3xl p-6 border-2 border-green-200">
         <Skeleton className="h-5 w-32 mb-4" />
         <div className="space-y-2">
@@ -320,17 +302,15 @@ export function ReflectionSkeleton() {
   );
 }
 
-// ============================================================================
-// SETTINGS SKELETON
-// ============================================================================
-
+// settings skeleton
 export function SettingsSkeleton() {
   return (
     <div className="min-h-screen bg-[var(--color-card)] p-4 pb-24">
-      {/* Header */}
+
+      {/* header */}
       <Skeleton className="h-8 w-32 mb-6" />
 
-      {/* Profile Section */}
+      {/* profile section */}
       <div className="flex items-center gap-4 mb-8 pb-6 border-b border-gray-200">
         <SkeletonCircle size="lg" />
         <div className="flex-1">
@@ -339,7 +319,7 @@ export function SettingsSkeleton() {
         </div>
       </div>
 
-      {/* Settings Groups */}
+      {/* settings groups */}
       <div className="space-y-6">
         {[1, 2, 3].map((group) => (
           <div key={group}>
@@ -362,17 +342,15 @@ export function SettingsSkeleton() {
   );
 }
 
-// ============================================================================
-// HABIT BUILDER SKELETON
-// ============================================================================
-
+// habit builder skeleton
 export function HabitBuilderSkeleton() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-lavender-50 to-white p-4 pb-24">
-      {/* Header */}
+
+      {/* header */}
       <Skeleton className="h-8 w-40 mb-6" />
 
-      {/* Progress Steps */}
+      {/* progress steps */}
       <div className="flex justify-between mb-8">
         {[1, 2, 3, 4].map((i) => (
           <div key={i} className="flex flex-col items-center">
@@ -382,12 +360,12 @@ export function HabitBuilderSkeleton() {
         ))}
       </div>
 
-      {/* Content Card */}
+      {/* content card */}
       <div className="bg-[var(--color-card)] rounded-3xl p-6 shadow-sm border-2 border-lavender-100 mb-4">
         <Skeleton className="h-6 w-48 mb-4" />
         <SkeletonText lines={2} className="mb-6" />
         
-        {/* Options */}
+        {/* options */}
         <div className="space-y-3">
           {[1, 2, 3, 4].map((i) => (
             <Skeleton key={i} className="h-16 w-full rounded-2xl" />
@@ -395,16 +373,13 @@ export function HabitBuilderSkeleton() {
         </div>
       </div>
 
-      {/* Action Button */}
+      {/* action button */}
       <Skeleton className="h-14 w-full rounded-2xl" />
     </div>
   );
 }
 
-// ============================================================================
-// GENERIC CARD SKELETON
-// ============================================================================
-
+// generic card skeleton
 export function CardSkeleton({ className = '' }: { className?: string }) {
   return (
     <div className={`bg-[var(--color-card)] rounded-2xl p-4 shadow-sm border-2 border-[var(--color-ring-offset-background)] ${className}`}>
@@ -414,10 +389,7 @@ export function CardSkeleton({ className = '' }: { className?: string }) {
   );
 }
 
-// ============================================================================
-// LIST SKELETON
-// ============================================================================
-
+// list skeleton
 export function ListSkeleton({ 
   items = 5, 
   className = '' 

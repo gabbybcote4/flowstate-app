@@ -1,4 +1,6 @@
-import { motion } from 'motion/react';
+// src/components/FadeInView.tsx
+// A reusable FadeInView component using Framer Motion for smooth fade-in animations.
+import { motion, AnimatePresence } from 'framer-motion';
 import { ReactNode } from 'react';
 
 interface FadeInViewProps {
@@ -26,7 +28,7 @@ export function FadeInView({
   };
 
   return (
-    < div
+    <motion.div
       initial={{ 
         opacity: 0,
         ...directionVariants[direction]
@@ -44,6 +46,6 @@ export function FadeInView({
       className={className}
     >
       {children}
-    </ div>
+    </motion.div>
   );
 }

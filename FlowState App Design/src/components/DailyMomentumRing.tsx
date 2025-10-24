@@ -1,7 +1,7 @@
 // DailyMomentumRing.tsx
 
 import { useEffect, useState } from "react";
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from 'framer-motion';
 import { Flame } from "lucide-react";
 
 interface MomentumData {

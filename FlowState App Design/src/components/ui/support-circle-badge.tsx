@@ -1,30 +1,26 @@
+// src/components/ui/support-circle-badge.tsx
+// Badge for displaying support circle members, accountability partners,
+// or social support elements in the FlowState app
 import React from 'react';
-import { motion } from 'motion/react';
-import { Users, Heart, MessageCircle, Sparkles } from 'lucide-react';
-
-/**
- * SupportCircleBadge Component
- * 
- * Badge for displaying support circle members, accountability partners,
- * or social support elements in the FlowState app
- */
+import { motion, AnimatePresence } from 'framer-motion';
+import { Users, Heart, MessageCircle, Sparkles } from 'lucide-react'
 
 interface SupportCircleBadgeProps {
-  /** Member/supporter info */
+  /** member/supporter info */
   name: string;
-  /** Avatar URL or emoji */
+  /** avatar URL or emoji */
   avatar?: string;
-  /** Role/relationship */
+  /** role/relationship */
   role?: string;
-  /** Support type */
+  /** support type */
   type?: 'accountability' | 'encouragement' | 'community' | 'mentor';
-  /** Online/active status */
+  /** online/active status */
   active?: boolean;
-  /** Size variant */
+  /** size variant */
   size?: 'sm' | 'md' | 'lg';
-  /** Click handler */
+  /** click handler */
   onClick?: () => void;
-  /** Custom className */
+  /** custom className */
   className?: string;
 }
 
@@ -90,11 +86,11 @@ export function SupportCircleBadge({
   const sizes = sizeConfig[size];
   const IconComponent = config.icon;
 
-  // Check if avatar is emoji (single character or emoji)
+  // check if avatar is emoji (single character or emoji)
   const isEmoji = avatar && avatar.length <= 2;
 
   return (
-    < div
+    <motion.div
       whileHover={onClick ? { scale: 1.02 } : undefined}
       whileTap={onClick ? { scale: 0.98 } : undefined}
       onClick={onClick}
@@ -109,7 +105,7 @@ export function SupportCircleBadge({
         borderColor: active ? config.color : 'transparent',
       }}
     >
-      {/* Avatar */}
+      {/* avatar */}
       <div className="relative">
         <div
           className={`${sizes.avatar} rounded-full flex items-center justify-center overflow-hidden bg-[var(--color-card)]`}
@@ -136,9 +132,9 @@ export function SupportCircleBadge({
           )}
         </div>
         
-        {/* Active indicator */}
+        {/* active indicator */}
         {active && (
-          < div
+          <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             className={`
@@ -149,7 +145,7 @@ export function SupportCircleBadge({
         )}
       </div>
 
-      {/* Info */}
+      {/* info */}
       <div className="flex-1 min-w-0">
         <p className={`${sizes.text} truncate`} style={{ color: config.color }}>
           {name}
@@ -161,19 +157,19 @@ export function SupportCircleBadge({
         )}
       </div>
 
-      {/* Type icon */}
+      {/* type icon */}
       <div
         className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0"
         style={{ backgroundColor: `${config.color}20` }}
       >
         <IconComponent size={sizes.iconSize} style={{ color: config.color }} />
       </div>
-    </ div>
+    </ motion.div>
   );
 }
 
 /**
- * SupportCircleAvatar - Minimal avatar-only variant
+ * SupportCircleAvatar - minimal avatar-only variant
  */
 interface SupportCircleAvatarProps {
   name: string;
@@ -201,7 +197,7 @@ export function SupportCircleAvatar({
   const isEmoji = avatar && avatar.length <= 2;
 
   return (
-    < div
+    < motion.div
       whileHover={onClick ? { scale: 1.1 } : undefined}
       whileTap={onClick ? { scale: 0.95 } : undefined}
       onClick={onClick}
@@ -230,12 +226,12 @@ export function SupportCircleAvatar({
       {active && (
         <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-green-500 border-2 border-white" />
       )}
-    </ div>
+    </ motion.div>
   );
 }
 
 /**
- * SupportCircleGroup - Group of support circle avatars
+ * SupportCircleGroup - group of support circle avatars
  */
 interface SupportCircleGroupProps {
   members: Array<{
@@ -294,7 +290,7 @@ export function SupportCircleGroup({
 }
 
 /**
- * SupportCircleStats - Display support circle statistics
+ * SupportCircleStats - display support circle statistics
  */
 interface SupportCircleStatsProps {
   totalMembers: number;

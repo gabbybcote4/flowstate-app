@@ -1,9 +1,5 @@
-/**
- * useScreenTransition Hook
- * 
- * Manages screen transition animations and loading states
- */
-
+// useScreenTransition.ts
+// A custom React hook to manage screen transitions with configurable duration and callbacks.
 import { useState, useEffect, useRef } from 'react';
 
 export interface TransitionConfig {
@@ -24,7 +20,7 @@ export function useScreenTransition(
 
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [previousScreen, setPreviousScreen] = useState(currentScreen);
-  const timeoutRef = useRef<NodeJS.Timeout>();
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     if (previousScreen !== currentScreen) {
@@ -32,12 +28,10 @@ export function useScreenTransition(
       setPreviousScreen(currentScreen);
       onTransitionStart?.();
 
-      // Clear any existing timeout
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
       }
 
-      // Reset transition state after animation completes
       timeoutRef.current = setTimeout(() => {
         setIsTransitioning(false);
         onTransitionEnd?.();

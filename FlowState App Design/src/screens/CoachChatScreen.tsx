@@ -1,8 +1,10 @@
+// src/screens/CoachChatScreen.tsx
+// import { motion, AnimatePresence } from 'framer-motion';
 // import { useState, useEffect, useRef } from 'react';
 // import { useTheme } from '../components/context/ThemeContext';
 // import { MessageCircle, Send, Sparkles, TrendingUp, Moon, Brain, Heart, RotateCcw, ArrowLeft, Activity, Coffee, Sun, Lightbulb, Zap, Target } from 'lucide-react';
-// //  from '../lib/motion-shim';
-// import { toast } from 'sonner@2.0.3';
+// 
+// import { toast } from 'sonner';
 
 // interface Message {
 //   id: string;

@@ -16,7 +16,7 @@
 //   MessageCircle,
 //   Plus
 // } from 'lucide-react';
-// import { motion } from '../lib/motion-shim';
+import { motion, AnimatePresence } from "framer-motion";
 
 // interface LifeArea {
 //   id: string;

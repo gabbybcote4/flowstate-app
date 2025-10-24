@@ -1,28 +1,23 @@
+// src/components/ui/stack-connector.tsx
+// StackConnector Component and Variants for Habit Stacking Visualization
 import React from 'react';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowDown, Link2, Zap } from 'lucide-react';
 
-/**
- * StackConnector Component
- * 
- * Visual connector for habit stacking - shows the relationship between
- * trigger habit and new habit in a stack
- */
-
 interface StackConnectorProps {
-  /** Type of connection */
+  /** type of connection */
   type?: 'arrow' | 'chain' | 'flow';
-  /** Connection label */
+  /** connection label */
   label?: string;
-  /** Color theme */
+  /** color theme */
   color?: string;
-  /** Show animation */
+  /** show animation */
   animated?: boolean;
-  /** Orientation */
+  /** orientation */
   orientation?: 'vertical' | 'horizontal';
-  /** Size variant */
+  /** size variant */
   size?: 'sm' | 'md' | 'lg';
-  /** Custom className */
+  /** custom className */
   className?: string;
 }
 
@@ -57,8 +52,9 @@ export function StackConnector({
   if (orientation === 'horizontal') {
     return (
       <div className={`flex items-center gap-2 ${className}`}>
-        {/* Left line */}
-        < div
+
+        {/* left line */}
+        < motion.div
           initial={animated ? { scaleX: 0 } : undefined}
           animate={{ scaleX: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
@@ -66,8 +62,8 @@ export function StackConnector({
           style={{ backgroundColor: color, opacity: 0.3 }}
         />
         
-        {/* Icon/Label */}
-        < div
+        {/* icon/Label */}
+        < motion.div
           initial={animated ? { scale: 0, rotate: -180 } : undefined}
           animate={{ scale: 1, rotate: 0 }}
           transition={{ 
@@ -89,10 +85,10 @@ export function StackConnector({
           ) : (
             getIcon()
           )}
-        </ div>
+        </ motion.div>
         
-        {/* Right line */}
-        < div
+        {/* right line */}
+        < motion.div
           initial={animated ? { scaleX: 0 } : undefined}
           animate={{ scaleX: 1 }}
           transition={{ duration: 0.5, delay: 0.4 }}
@@ -103,11 +99,12 @@ export function StackConnector({
     );
   }
 
-  // Vertical orientation
+  // vertical orientation
   return (
     <div className={`flex flex-col items-center gap-2 ${className}`}>
-      {/* Top line */}
-      < div
+
+      {/* top line */}
+      < motion.div
         initial={animated ? { scaleY: 0 } : undefined}
         animate={{ scaleY: 1 }}
         transition={{ duration: 0.5, delay: 0.2 }}
@@ -115,8 +112,8 @@ export function StackConnector({
         style={{ backgroundColor: color, opacity: 0.3 }}
       />
       
-      {/* Icon/Label */}
-      < div
+      {/* icon/Label */}
+      < motion.div
         initial={animated ? { scale: 0, rotate: -180 } : undefined}
         animate={{ scale: 1, rotate: 0 }}
         transition={{ 
@@ -138,10 +135,10 @@ export function StackConnector({
         ) : (
           getIcon()
         )}
-      </ div>
-      
-      {/* Bottom line */}
-      < div
+      </motion.div>
+
+      {/* bottom line */}
+      <motion.div
         initial={animated ? { scaleY: 0 } : undefined}
         animate={{ scaleY: 1 }}
         transition={{ duration: 0.5, delay: 0.4 }}
@@ -153,7 +150,7 @@ export function StackConnector({
 }
 
 /**
- * StackConnectorDotted - Dotted line variant
+ * StackConnectorDotted - dotted line variant
  */
 interface StackConnectorDottedProps {
   orientation?: 'vertical' | 'horizontal';
@@ -170,7 +167,7 @@ export function StackConnectorDotted({
     return (
       <div className={`flex items-center gap-1 py-2 ${className}`}>
         {[...Array(8)].map((_, i) => (
-          < div
+          <motion.div
             key={i}
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
@@ -186,7 +183,7 @@ export function StackConnectorDotted({
   return (
     <div className={`flex flex-col items-center gap-1 px-2 ${className}`}>
       {[...Array(8)].map((_, i) => (
-        < div
+        <motion.div
           key={i}
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
@@ -200,7 +197,7 @@ export function StackConnectorDotted({
 }
 
 /**
- * StackConnectorFlow - Animated flow connector
+ * StackConnectorFlow - animated flow connector
  */
 interface StackConnectorFlowProps {
   orientation?: 'vertical' | 'horizontal';
@@ -221,9 +218,9 @@ export function StackConnectorFlow({
           style={{ backgroundColor: color, opacity: 0.2 }}
         />
         
-        {/* Flowing particles */}
+        {/* flowing particles */}
         {[0, 1, 2].map((i) => (
-          < div
+          < motion.div
             key={i}
             className="absolute w-2 h-2 rounded-full"
             style={{ backgroundColor: color }}
@@ -251,9 +248,9 @@ export function StackConnectorFlow({
         style={{ backgroundColor: color, opacity: 0.2 }}
       />
       
-      {/* Flowing particles */}
+      {/* flowing particles */}
       {[0, 1, 2].map((i) => (
-        < div
+        < motion.div
           key={i}
           className="absolute w-2 h-2 rounded-full"
           style={{ backgroundColor: color }}
@@ -275,7 +272,7 @@ export function StackConnectorFlow({
 }
 
 /**
- * HabitStackVisualizer - Complete habit stack with connectors
+ * HabitStackVisualizer - complete habit stack with connectors
  */
 interface HabitStackVisualizerProps {
   habits: Array<{
@@ -297,8 +294,9 @@ export function HabitStackVisualizer({
     <div className={`space-y-2 ${className}`}>
       {habits.map((habit, index) => (
         <React.Fragment key={habit.id}>
-          {/* Habit card */}
-          < div
+
+          {/* habit card */}
+          <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: index * 0.1 }}
@@ -322,9 +320,9 @@ export function HabitStackVisualizer({
                 </svg>
               </div>
             )}
-          </ div>
+          </motion.div>
           
-          {/* Connector (except after last habit) */}
+          {/* connector (except after last habit) */}
           {index < habits.length - 1 && (
             <StackConnector
               type="arrow"

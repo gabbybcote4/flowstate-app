@@ -1,4 +1,5 @@
-// //  from '../lib/motion-shim';
+// src/components/CelebrationAnimations.tsx
+// import { motion, AnimatePresence } from 'framer-motion';
 // import { useEffect, useState } from 'react';
 // import { useTheme } from '../components/context/ThemeContext';
 // import { Sparkles, Heart, Star, Flower2, CheckCircle } from 'lucide-react';

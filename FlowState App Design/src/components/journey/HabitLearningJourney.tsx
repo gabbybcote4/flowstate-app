@@ -14,7 +14,7 @@
 //   Brain,
 //   Heart
 // } from 'lucide-react';
-// import { motion } from '../lib/motion-shim';
+import { motion, AnimatePresence } from "framer-motion";
 
 // interface Module {
 //   id: number;
