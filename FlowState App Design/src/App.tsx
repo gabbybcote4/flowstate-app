@@ -46,25 +46,25 @@ import {
 // screen imports
 import { CheckInScreen } from "./screens/CheckInScreen";
 import { DashboardScreen } from "./screens/DashboardScreen";
-import { TodosScreen } from "./screens/TodosScreen";
+// import { TodosScreen } from "./screens/TodosScreen";
 import { CoachingScreen } from "./screens/CoachingScreen";
 import { ReflectionScreen } from "./screens/ReflectionScreen";
-import { CalendarScreen } from "./screens/CalendarScreen";
+// import { CalendarScreen } from "./screens/CalendarScreen";
 import { FocusToolsScreen } from "./screens/FocusToolsScreen";
-import { TimeFlowScreen } from "./screens/TimeFlowScreen";
+// import { TimeFlowScreen } from "./screens/TimeFlowScreen";
 import { SymptomTrackerScreen } from "./screens/SymptomTrackerScreen";
 import { WeeklyInsightsDashboard } from "./screens/WeeklyInsightsDashboard";
 import { SettingsScreen } from "./screens/SettingsScreen";
 import { OnboardingWrapper } from "./screens/OnboardingScreen";
-import { HabitBuilderScreen } from "./screens/HabitBuilderScreen";
-import { DisciplineBuilderScreen } from "./screens/DisciplineBuilderScreen";
-import { IntegrationsScreen } from "./screens/IntegrationsScreen";
-import { CommunityScreen } from "./screens/CommunityScreen";
-import { HabitEducationScreen } from "./screens/HabitEducationScreen";
-import { CoachChatScreen } from "./screens/CoachChatScreen";
-import { GrowthMapScreen } from "./screens/GrowthMapScreen";
-import { DisciplineScreen } from "./screens/DisciplineScreen";
-import { SymptomScreen } from "./screens/SymptomScreen";
+// import { HabitBuilderScreen } from "./screens/HabitBuilderScreen";
+// import { DisciplineBuilderScreen } from "./screens/DisciplineBuilderScreen";
+// import { IntegrationsScreen } from "./screens/IntegrationsScreen";
+// import { CommunityScreen } from "./screens/CommunityScreen";
+// import { HabitEducationScreen } from "./screens/HabitEducationScreen";
+// import { CoachChatScreen } from "./screens/CoachChatScreen";
+// import { GrowthMapScreen } from "./screens/GrowthMapScreen";
+// import { DisciplineScreen } from "./screens/DisciplineScreen";
+// import { SymptomScreen } from "./screens/SymptomScreen";
 
 // bottom navigation configuration
 const NAV_ITEMS = [
@@ -200,7 +200,7 @@ function AppContent() {
         {currentScreen === "coach" && <CoachingScreen onNavigate={handleNavigate} />}
         {currentScreen === "todos" && <TodosScreen />}
         {currentScreen === "focus-tools" && <FocusToolsScreen />}
-        {currentScreen === "timeflow" && <TimeFlowScreen />}
+        {/* {currentScreen === "timeflow" && <TimeFlowScreen />} */}
         {currentScreen === "reflection" && <ReflectionScreen />}
         {currentScreen === "calendar" && <CalendarScreen />}
         {currentScreen === "settings" && <SettingsScreen onNavigate={handleNavigate} />}
