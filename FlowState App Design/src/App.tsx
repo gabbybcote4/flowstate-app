@@ -198,11 +198,11 @@ function AppContent() {
           <DashboardScreen onNavigateToHabits={handleNavigateToHabits} onNavigate={handleNavigate} />
         )}
         {currentScreen === "coach" && <CoachingScreen onNavigate={handleNavigate} />}
-        {currentScreen === "todos" && <TodosScreen />}
+        {/* {currentScreen === "todos" && <TodosScreen />} */}
         {currentScreen === "focus-tools" && <FocusToolsScreen />}
         {/* {currentScreen === "timeflow" && <TimeFlowScreen />} */}
         {currentScreen === "reflection" && <ReflectionScreen />}
-        {currentScreen === "calendar" && <CalendarScreen />}
+        {/* {currentScreen === "calendar" && <CalendarScreen />} */}
         {currentScreen === "settings" && <SettingsScreen onNavigate={handleNavigate} />}
         {currentScreen === "onboarding-layout" && <OnboardingWrapper editMode="layout" />}
         {currentScreen === "symptom-tracker" && <SymptomTrackerScreen onNavigate={handleNavigate} />}
