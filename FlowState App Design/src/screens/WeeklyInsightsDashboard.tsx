@@ -1,9 +1,34 @@
-// WeeklyInsightsDashboard.tsx
+// src/screens/WeeklyInsightsDashboard.tsx
+// weekly insights dashboard showing mood, sleep, and life area balance
 
-import { useState, useEffect } from 'react';
-import { useTheme } from '../components/ThemeContext';
-import {TrendingUp, Sparkles, Moon, Heart, Briefcase, Users, Palette, Home as HomeIcon, Calendar, RefreshCw, ArrowLeft, Info } from 'lucide-react';
-import {LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import React, { useState, useEffect } from "react";
+import { useTheme } from "../components/ThemeContext";
+import {
+  TrendingUp,
+  Sparkles,
+  Moon,
+  Heart,
+  Briefcase,
+  Users,
+  Palette,
+  Home as HomeIcon,
+  Calendar,
+  RefreshCw,
+  ArrowLeft,
+  Info,
+} from "lucide-react";
+import {
+  LineChart,
+  Line,
+  PieChart,
+  Pie,
+  Cell,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
 
 interface MoodSleepData {
   day: string;
@@ -22,17 +47,17 @@ interface LifeAreaData {
 interface WeeklyInsight {
   title: string;
   message: string;
-  type: 'positive' | 'growth' | 'gentle';
-  icon: any;
+  type: "positive" | "growth" | "gentle";
+  icon: React.ElementType;
 }
 
 const LIFE_AREAS = [
-  { name: 'Health', color: '#D8B4FE', icon: Heart },
-  { name: 'Work', color: '#FBBF24', icon: Briefcase },
-  { name: 'Relationships', color: '#FCA5A5', icon: Users },
-  { name: 'Personal Growth', color: '#A5B4FC', icon: TrendingUp },
-  { name: 'Creativity', color: '#FCD34D', icon: Palette },
-  { name: 'Home', color: '#A7F3D0', icon: HomeIcon },
+  { name: "Health", color: "#D8B4FE", icon: Heart },
+  { name: "Work", color: "#FBBF24", icon: Briefcase },
+  { name: "Relationships", color: "#FCA5A5", icon: Users },
+  { name: "Personal Growth", color: "#A5B4FC", icon: TrendingUp },
+  { name: "Creativity", color: "#FCD34D", icon: Palette },
+  { name: "Home", color: "#A7F3D0", icon: HomeIcon },
 ];
 
 interface WeeklyInsightsDashboardProps {
@@ -52,56 +77,42 @@ export function WeeklyInsightsDashboard({ onNavigate }: WeeklyInsightsDashboardP
 
   const loadWeeklyData = () => {
     setIsLoading(true);
-    
     setTimeout(() => {
-      // load mood vs sleep data
       const moodSleep = generateMoodSleepData();
-      setMoodSleepData(moodSleep);
-
-      // load life area distribution
       const lifeAreas = generateLifeAreaData();
-      setLifeAreaData(lifeAreas);
-
-      // generate insight of week
       const weeklyInsight = generateWeeklyInsight(moodSleep, lifeAreas);
+      setMoodSleepData(moodSleep);
+      setLifeAreaData(lifeAreas);
       setInsight(weeklyInsight);
-
       setIsLoading(false);
-    }, 500);
+    }, 400);
   };
 
+  // generate demo or localstorage mood/sleep data
   const generateMoodSleepData = (): MoodSleepData[] => {
     const data: MoodSleepData[] = [];
     const today = new Date();
-    
-    // load check-in data
-    const checkInData = JSON.parse(localStorage.getItem('flowstate-coaching-data') || '{}');
-    const reflections = JSON.parse(localStorage.getItem('flowstate-reflections') || '{}');
+    const checkInData = JSON.parse(localStorage.getItem("flowstate-coaching-data") || "{}");
+    const reflections = JSON.parse(localStorage.getItem("flowstate-reflections") || "{}");
 
-    // last 7 days
     for (let i = 6; i >= 0; i--) {
       const date = new Date(today);
       date.setDate(date.getDate() - i);
-      const dateStr = date.toISOString().split('T')[0];
-      const dayName = date.toLocaleDateString('en-US', { weekday: 'short' });
+      const dateStr = date.toISOString().split("T")[0];
+      const dayName = date.toLocaleDateString("en-US", { weekday: "short" });
 
-      // get mood from check-in (1-5 scale)
-      let mood = 3; // default
-      if (checkInData && checkInData.mood !== undefined) {
+      let mood = 3;
+      if (checkInData?.mood !== undefined) {
         mood = checkInData.mood;
       } else {
-        // andom for demo
         mood = 2 + Math.random() * 2;
       }
 
-      // get sleep from reflections
       let sleep = 0;
       if (reflections[dateStr]?.sleepQuality) {
-        // convert sleep quality (1-5) to approximate hours (4-9)
         const quality = reflections[dateStr].sleepQuality;
-        sleep = 4 + (quality * 1.0);
+        sleep = 4 + quality * 1.0;
       } else {
-        // random for demo
         sleep = 5 + Math.random() * 3;
       }
 
@@ -116,24 +127,21 @@ export function WeeklyInsightsDashboard({ onNavigate }: WeeklyInsightsDashboardP
     return data;
   };
 
+  // generate demo or localstorage life area distribution
   const generateLifeAreaData = (): LifeAreaData[] => {
-    // load time blocks from calendar/timeflow
-    const timeBlocks = JSON.parse(localStorage.getItem('flowstate-timeblocks') || '[]');
-    const calendarEvents = JSON.parse(localStorage.getItem('flowstate-calendar-events') || '[]');
-    
+    const timeBlocks = JSON.parse(localStorage.getItem("flowstate-timeblocks") || "[]");
+    const calendarEvents = JSON.parse(localStorage.getItem("flowstate-calendar-events") || "[]");
     const areaHours = new Map<string, number>();
     let totalHours = 0;
 
-    // count from time blocks
     timeBlocks.forEach((block: any) => {
       if (block.lifeArea) {
         const current = areaHours.get(block.lifeArea) || 0;
-        areaHours.set(block.lifeArea, current + 1); // assume 1 hour blocks
+        areaHours.set(block.lifeArea, current + 1);
         totalHours += 1;
       }
     });
 
-    // count from calendar events
     calendarEvents.forEach((event: any) => {
       if (event.lifeArea && event.duration) {
         const current = areaHours.get(event.lifeArea) || 0;
@@ -143,198 +151,173 @@ export function WeeklyInsightsDashboard({ onNavigate }: WeeklyInsightsDashboardP
       }
     });
 
-    // if no data, generate demo data
     if (totalHours === 0) {
-      const demoData = [
-        { area: 'Work', hours: 35 },
-        { area: 'Health', hours: 8 },
-        { area: 'Relationships', hours: 12 },
-        { area: 'Personal Growth', hours: 5 },
-        { area: 'Home', hours: 10 },
-        { area: 'Creativity', hours: 3 },
+      const demo = [
+        { area: "Work", hours: 35 },
+        { area: "Health", hours: 8 },
+        { area: "Relationships", hours: 12 },
+        { area: "Personal Growth", hours: 5 },
+        { area: "Home", hours: 10 },
+        { area: "Creativity", hours: 3 },
       ];
-      totalHours = demoData.reduce((sum, d) => sum + d.hours, 0);
-      demoData.forEach(d => areaHours.set(d.area, d.hours));
+      totalHours = demo.reduce((sum, d) => sum + d.hours, 0);
+      demo.forEach((d) => areaHours.set(d.area, d.hours));
     }
 
-    // convert to array with percentages
-    const data: LifeAreaData[] = LIFE_AREAS.map(area => {
-      const hours = areaHours.get(area.name) || 0;
-      const percentage = totalHours > 0 ? Math.round((hours / totalHours) * 100) : 0;
-      
-      return {
-        area: area.name,
-        hours: Math.round(hours * 10) / 10,
-        color: area.color,
-        percentage,
-      };
-    }).filter(d => d.hours > 0);
+    const data: LifeAreaData[] = LIFE_AREAS.map((a) => {
+      const hours = areaHours.get(a.name) || 0;
+      const percentage = totalHours ? Math.round((hours / totalHours) * 100) : 0;
+      return { area: a.name, hours, color: a.color, percentage };
+    }).filter((d) => d.hours > 0);
 
     return data;
   };
 
+  // generate context-sensitive weekly insight
   const generateWeeklyInsight = (moodData: MoodSleepData[], lifeData: LifeAreaData[]): WeeklyInsight => {
-    // calculate trends
-    const avgMood = moodData.reduce((sum, d) => sum + d.mood, 0) / moodData.length;
-    const avgSleep = moodData.reduce((sum, d) => sum + d.sleep, 0) / moodData.length;
-    
-    const moodTrend = moodData.length >= 2 
-      ? (moodData[moodData.length - 1].mood - moodData[0].mood)
-      : 0;
-    
-    const sleepTrend = moodData.length >= 2
-      ? (moodData[moodData.length - 1].sleep - moodData[0].sleep)
-      : 0;
+    const avgMood = moodData.reduce((s, d) => s + d.mood, 0) / moodData.length;
+    const avgSleep = moodData.reduce((s, d) => s + d.sleep, 0) / moodData.length;
+    const moodTrend = moodData[moodData.length - 1].mood - moodData[0].mood;
+    //const sleepTrend = moodData[moodData.length - 1].sleep - moodData[0].sleep;
 
-    // find dominant life area
-    const topArea = lifeData.sort((a, b) => b.hours - a.hours)[0];
-
-    // generate contextual insight
+    const topArea = [...lifeData].sort((a, b) => b.hours - a.hours)[0];
     const insights: WeeklyInsight[] = [];
 
-    // sleep-based insights
+    // sleep patterns
     if (avgSleep >= 7.5) {
       insights.push({
-        title: 'Beautiful Sleep Rhythm',
-        message: `You averaged ${avgSleep.toFixed(1)} hours of sleep this week. Your body is getting the rest it needs, and it shows in your gentle progress. Keep honoring your sleep. 💜`,
-        type: 'positive',
+        title: "Beautiful sleep rhythm",
+        message: `You averaged ${avgSleep.toFixed(1)} hours of sleep this week. Your body is getting the rest it needs — keep honoring that rhythm.`,
+        type: "positive",
         icon: Moon,
       });
     } else if (avgSleep < 6.5) {
       insights.push({
-        title: 'Your Body Needs You',
-        message: `Sleep has been light this week (${avgSleep.toFixed(1)}h average). This is okay — you're doing your best. Even 15 minutes earlier to bed can make a difference. Be gentle with yourself. 🌙`,
-        type: 'gentle',
+        title: "Your body needs rest",
+        message: `Sleep has been light this week (${avgSleep.toFixed(
+          1
+        )}h). Even 15 minutes earlier can help — rest is productive.`,
+        type: "gentle",
         icon: Moon,
       });
     }
 
-    // mood-based insights
+    // mood patterns
     if (moodTrend > 0.5) {
       insights.push({
-        title: 'Upward Momentum',
-        message: 'Your mood has been trending up this week. Something is working! Notice what\'s different — small shifts create big changes over time. 🌸',
-        type: 'positive',
+        title: "Upward momentum",
+        message:
+          "Your mood has been trending up this week — something is working. Small shifts compound over time.",
+        type: "positive",
         icon: TrendingUp,
       });
     } else if (avgMood >= 3.5) {
       insights.push({
-        title: 'Staying Strong',
-        message: `You've maintained good energy this week. That consistency is powerful — it means you're building sustainable habits, not just chasing highs. ✨`,
-        type: 'positive',
+        title: "Steady energy",
+        message:
+          "You’ve maintained stable energy this week. Consistency builds sustainable habits — keep showing up gently.",
+        type: "positive",
         icon: Sparkles,
       });
     } else if (avgMood < 2.5) {
       insights.push({
-        title: 'Honoring Hard Seasons',
-        message: 'This week has been heavy. That\'s real, and it matters. You\'re still showing up, still trying. That takes courage. Rest when you need to — this isn\'t forever. 💙',
-        type: 'gentle',
+        title: "Honoring hard days",
+        message:
+          "This week may have felt heavy, and that’s okay. Showing up still counts. Take rest where you can.",
+        type: "gentle",
         icon: Heart,
       });
     }
 
-    // balance-based insights
+    // balance
     if (topArea && topArea.percentage > 60) {
       insights.push({
-        title: 'Time for Balance',
-        message: `${topArea.area} took up ${topArea.percentage}% of your tracked time this week. You're dedicated! Just remember: rest isn't unproductive. Other life areas miss you. 🌿`,
-        type: 'growth',
-        icon: topArea ? LIFE_AREAS.find(a => a.name === topArea.area)?.icon || Calendar : Calendar,
+        title: "Time for balance",
+        message: `${topArea.area} filled ${topArea.percentage}% of your tracked time — impressive focus. Remember to recharge other areas, too.`,
+        type: "growth",
+        icon:
+          LIFE_AREAS.find((a) => a.name === topArea.area)?.icon ||
+          Calendar,
       });
     } else if (lifeData.length >= 4) {
       insights.push({
-        title: 'Beautiful Balance',
-        message: `You touched ${lifeData.length} different life areas this week. That wholeness matters — you're not just productive, you're living fully. This is the way. 🌈`,
-        type: 'positive',
+        title: "Beautiful balance",
+        message: `You engaged with ${lifeData.length} life areas this week — that’s a healthy mix of doing and being.`,
+        type: "positive",
         icon: Sparkles,
       });
     }
 
-    // sleep-mood correlation
-    const sleepMoodCorrelation = calculateCorrelation(
-      moodData.map(d => d.sleep),
-      moodData.map(d => d.mood)
+    // correlation
+    const corr = calculateCorrelation(
+      moodData.map((d) => d.sleep),
+      moodData.map((d) => d.mood)
     );
-
-    if (sleepMoodCorrelation > 0.6) {
+    if (corr > 0.6) {
       insights.push({
-        title: 'Sleep Fuels Your Mood',
-        message: 'We noticed your mood rises with better sleep. Your body is telling you something important — listen to it. Prioritize rest, and watch yourself bloom. 🌺',
-        type: 'growth',
+        title: "Sleep fuels mood",
+        message:
+          "Your data suggests mood rises with better sleep — listen to your body and prioritize rest.",
+        type: "growth",
         icon: Moon,
       });
     }
 
-    // return random insight or default
-    if (insights.length > 0) {
-      return insights[Math.floor(Math.random() * insights.length)];
+    if (insights.length === 0) {
+      return {
+        title: "You showed up",
+        message:
+          "Another week of learning and being human — that’s enough. Presence matters more than perfection.",
+        type: "positive",
+        icon: Heart,
+      };
     }
 
-    // default gentle insight
-    return {
-      title: 'You Showed Up',
-      message: 'Another week of trying, learning, and being human. That\'s enough. You don\'t have to be perfect — you just have to be present. And you were. 💜',
-      type: 'positive',
-      icon: Heart,
-    };
+    return insights[Math.floor(Math.random() * insights.length)];
   };
 
   const calculateCorrelation = (x: number[], y: number[]): number => {
     const n = x.length;
-    if (n === 0) return 0;
-
+    if (!n) return 0;
     const sumX = x.reduce((a, b) => a + b, 0);
     const sumY = y.reduce((a, b) => a + b, 0);
     const sumXY = x.reduce((sum, xi, i) => sum + xi * y[i], 0);
     const sumX2 = x.reduce((sum, xi) => sum + xi * xi, 0);
     const sumY2 = y.reduce((sum, yi) => sum + yi * yi, 0);
-
-    const numerator = n * sumXY - sumX * sumY;
-    const denominator = Math.sqrt((n * sumX2 - sumX * sumX) * (n * sumY2 - sumY * sumY));
-
-    return denominator === 0 ? 0 : numerator / denominator;
+    const num = n * sumXY - sumX * sumY;
+    const den = Math.sqrt((n * sumX2 - sumX ** 2) * (n * sumY2 - sumY ** 2));
+    return den === 0 ? 0 : num / den;
   };
 
-  const CustomTooltip = ({ active, payload }: any) => {
-    if (active && payload && payload.length) {
-      return (
-        <div className="bg-[var(--color-card)] px-4 py-3 rounded-xl shadow-lg border border-[var(--color-ring-offset-background)]">
-          <p className="text-sm mb-2 opacity-70">{payload[0].payload.day}</p>
-          <div className="space-y-1">
-            <p className="text-sm flex items-center gap-2">
-              <span className="w-3 h-3 rounded-full" style={{ backgroundColor: '#a78bfa' }} />
-              Mood: {payload[0].value}/5
-            </p>
-            <p className="text-sm flex items-center gap-2">
-              <span className="w-3 h-3 rounded-full" style={{ backgroundColor: '#60a5fa' }} />
-              Sleep: {payload[1].value}h
-            </p>
-          </div>
-        </div>
-      );
-    }
-    return null;
-  };
+  const CustomTooltip = ({ active, payload }: any) =>
+    active && payload?.length ? (
+      <div className="bg-[var(--color-card)] px-4 py-3 rounded-xl shadow-lg border border-[var(--color-ring-offset-background)]">
+        <p className="text-sm mb-2 opacity-70">{payload[0].payload.day}</p>
+        <p className="text-sm flex items-center gap-2">
+          <span className="w-3 h-3 rounded-full bg-purple-400" />
+          Mood: {payload[0].value}/5
+        </p>
+        <p className="text-sm flex items-center gap-2">
+          <span className="w-3 h-3 rounded-full bg-blue-400" />
+          Sleep: {payload[1].value}h
+        </p>
+      </div>
+    ) : null;
 
-  const PieTooltip = ({ active, payload }: any) => {
-    if (active && payload && payload.length) {
-      return (
-        <div className="bg-[var(--color-card)] px-4 py-3 rounded-xl shadow-lg border border-[var(--color-ring-offset-background)]">
-          <p className="text-sm mb-1">{payload[0].name}</p>
-          <p className="text-sm opacity-70">{payload[0].value}h ({payload[0].payload.percentage}%)</p>
-        </div>
-      );
-    }
-    return null;
-  };
+  const PieTooltip = ({ active, payload }: any) =>
+    active && payload?.length ? (
+      <div className="bg-[var(--color-card)] px-4 py-3 rounded-xl shadow-lg border border-[var(--color-ring-offset-background)]">
+        <p className="text-sm mb-1">{payload[0].name}</p>
+        <p className="text-sm opacity-70">
+          {payload[0].value}h ({payload[0].payload.percentage}%)
+        </p>
+      </div>
+    ) : null;
 
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        < div
-        >
-          <RefreshCw size={32} style={{ color: themeColors.primary }} />
-        </ div>
+        <RefreshCw size={32} style={{ color: themeColors.primary }} className="animate-spin" />
       </div>
     );
   }
@@ -342,21 +325,19 @@ export function WeeklyInsightsDashboard({ onNavigate }: WeeklyInsightsDashboardP
   return (
     <div className="min-h-screen pb-24">
       {/* header */}
-      < div
-        className="bg-[var(--color-card)] border-b border-[var(--color-ring-offset-background)] px-6 py-4 sticky top-0 z-10"
-      >
+      <div className="bg-[var(--color-card)] border-b border-[var(--color-ring-offset-background)] px-6 py-4 sticky top-0 z-10">
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-3">
             {onNavigate && (
               <button
-                onClick={() => onNavigate('home')}
+                onClick={() => onNavigate("home")}
                 className="p-2 hover:bg-gray-100 rounded-full transition-colors"
               >
                 <ArrowLeft size={20} className="text-gray-600" />
               </button>
             )}
             <div>
-              <h1 className="text-gray-900 flex items-center gap-2">
+              <h1 className="flex items-center gap-2 text-gray-900">
                 <Sparkles size={24} style={{ color: themeColors.primary }} />
                 Weekly Insights
               </h1>
@@ -370,15 +351,17 @@ export function WeeklyInsightsDashboard({ onNavigate }: WeeklyInsightsDashboardP
             <RefreshCw size={18} className="text-gray-600" />
           </button>
         </div>
-      </ div>
+      </div>
 
+      {/* body */}
       <div className="px-6 py-6 space-y-6 max-w-6xl mx-auto">
-
-        {/* insight of week */}
         {insight && (
-          < div
-            className="bg-gradient-to-br from-lavender-50 to-purple-50 rounded-3xl p-6 border-2"
-            style={{ borderColor: themeColors.primary }}
+          <div
+            className="rounded-3xl p-6 border-2"
+            style={{
+              borderColor: themeColors.primary,
+              background: `linear-gradient(to bottom right, ${themeColors.primaryLight}, #fff)`,
+            }}
           >
             <div className="flex items-start gap-4">
               <div
@@ -390,22 +373,24 @@ export function WeeklyInsightsDashboard({ onNavigate }: WeeklyInsightsDashboardP
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-2">
                   <Sparkles size={16} style={{ color: themeColors.primary }} />
-                  <span className="text-xs uppercase tracking-wide opacity-70">Insight of the Week</span>
+                  <span className="text-xs uppercase tracking-wide opacity-70">
+                    Insight of the week
+                  </span>
                 </div>
                 <h2 className="mb-2">{insight.title}</h2>
-                <p className="text-[var(--color-card-foreground)] leading-relaxed">{insight.message}</p>
+                <p className="text-[var(--color-card-foreground)] leading-relaxed">
+                  {insight.message}
+                </p>
               </div>
             </div>
-          </ div>
+          </div>
         )}
 
         {/* mood vs sleep chart */}
-        < div
-          className="bg-[var(--color-card)] rounded-3xl p-6 shadow-sm border border-[var(--color-ring-offset-background)]"
-        >
+        <div className="bg-[var(--color-card)] rounded-3xl p-6 shadow-sm border border-[var(--color-ring-offset-background)]">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h3 className="mb-1">Mood & Sleep Patterns</h3>
+              <h3 className="mb-1">Mood & sleep patterns</h3>
               <p className="text-sm opacity-60">How they move together</p>
             </div>
             <div className="flex items-center gap-4 text-sm">
@@ -423,33 +408,11 @@ export function WeeklyInsightsDashboard({ onNavigate }: WeeklyInsightsDashboardP
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={moodSleepData}>
               <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-              <XAxis 
-                dataKey="day" 
-                stroke="#9ca3af"
-                style={{ fontSize: '12px' }}
-              />
-              <YAxis 
-                stroke="#9ca3af"
-                style={{ fontSize: '12px' }}
-                domain={[0, 10]}
-              />
+              <XAxis dataKey="day" stroke="#9ca3af" style={{ fontSize: "12px" }} />
+              <YAxis stroke="#9ca3af" style={{ fontSize: "12px" }} domain={[0, 10]} />
               <Tooltip content={<CustomTooltip />} />
-              <Line 
-                type="monotone" 
-                dataKey="mood" 
-                stroke="#a78bfa" 
-                strokeWidth={3}
-                dot={{ fill: '#a78bfa', r: 5 }}
-                activeDot={{ r: 7 }}
-              />
-              <Line 
-                type="monotone" 
-                dataKey="sleep" 
-                stroke="#60a5fa" 
-                strokeWidth={3}
-                dot={{ fill: '#60a5fa', r: 5 }}
-                activeDot={{ r: 7 }}
-              />
+              <Line type="monotone" dataKey="mood" stroke="#a78bfa" strokeWidth={3} dot={{ r: 5 }} />
+              <Line type="monotone" dataKey="sleep" stroke="#60a5fa" strokeWidth={3} dot={{ r: 5 }} />
             </LineChart>
           </ResponsiveContainer>
 
@@ -457,24 +420,20 @@ export function WeeklyInsightsDashboard({ onNavigate }: WeeklyInsightsDashboardP
             <div className="flex items-start gap-2">
               <Info size={16} className="text-blue-600 mt-0.5 flex-shrink-0" />
               <p className="text-sm text-blue-900">
-                Notice the patterns: when sleep improves, mood often follows. Your body and mind are connected — rest is productive.
+                Notice the patterns — when sleep improves, mood often follows. Your body and mind are connected.
               </p>
             </div>
           </div>
-        </ div>
+        </div>
 
         {/* life area distribution */}
-        < div
-          className="bg-[var(--color-card)] rounded-3xl p-6 shadow-sm border border-[var(--color-ring-offset-background)]"
-        >
+        <div className="bg-[var(--color-card)] rounded-3xl p-6 shadow-sm border border-[var(--color-ring-offset-background)]">
           <div className="mb-6">
-            <h3 className="mb-1">Life Area Balance</h3>
+            <h3 className="mb-1">Life area balance</h3>
             <p className="text-sm opacity-60">Where your time & energy went</p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
-
-            {/* pie chart */}
             <div>
               <ResponsiveContainer width="100%" height={280}>
                 <PieChart>
@@ -488,8 +447,8 @@ export function WeeklyInsightsDashboard({ onNavigate }: WeeklyInsightsDashboardP
                     label={({ area, percentage }) => `${area} ${percentage}%`}
                     labelLine={false}
                   >
-                    {lifeAreaData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.color} />
+                    {lifeAreaData.map((entry, i) => (
+                      <Cell key={i} fill={entry.color} />
                     ))}
                   </Pie>
                   <Tooltip content={<PieTooltip />} />
@@ -497,12 +456,11 @@ export function WeeklyInsightsDashboard({ onNavigate }: WeeklyInsightsDashboardP
               </ResponsiveContainer>
             </div>
 
-            {/* legend */}
             <div className="space-y-3">
-              {lifeAreaData.map((area, index) => {
-                const AreaIcon = LIFE_AREAS.find(a => a.name === area.area)?.icon || Calendar;
+              {lifeAreaData.map((area) => {
+                const Icon = LIFE_AREAS.find((a) => a.name === area.area)?.icon || Calendar;
                 return (
-                  < div
+                  <div
                     key={area.area}
                     className="flex items-center justify-between p-3 bg-gray-50 rounded-2xl"
                   >
@@ -511,17 +469,15 @@ export function WeeklyInsightsDashboard({ onNavigate }: WeeklyInsightsDashboardP
                         className="w-10 h-10 rounded-xl flex items-center justify-center"
                         style={{ backgroundColor: `${area.color}20` }}
                       >
-                        <AreaIcon size={18} style={{ color: area.color }} />
+                        <Icon size={18} style={{ color: area.color }} />
                       </div>
                       <div>
                         <p className="text-sm">{area.area}</p>
                         <p className="text-xs opacity-60">{area.hours}h this week</p>
                       </div>
                     </div>
-                    <div className="text-right">
-                      <p className="text-sm opacity-70">{area.percentage}%</p>
-                    </div>
-                  </ div>
+                    <p className="text-sm opacity-70">{area.percentage}%</p>
+                  </div>
                 );
               })}
             </div>
@@ -531,11 +487,11 @@ export function WeeklyInsightsDashboard({ onNavigate }: WeeklyInsightsDashboardP
             <div className="flex items-start gap-2">
               <Heart size={16} className="text-purple-600 mt-0.5 flex-shrink-0" />
               <p className="text-sm text-purple-900">
-                Balance isn't equal parts — it's honoring what each season needs. Some weeks, work fills the space. Other weeks, rest does. Both are okay.
+                Balance isn’t equal parts — it’s honoring what each season needs. Some weeks, work leads. Other weeks, rest does. Both are okay.
               </p>
             </div>
           </div>
-        </ div>
+        </div>
       </div>
     </div>
   );

@@ -1,6 +1,4 @@
 // src/screens/TodosScreen.tsx
-// task dashboard screen with life area filters, add modal, and adaptive theme support
-
 import { useState, useEffect, useMemo } from "react";
 import { Plus } from "lucide-react";
 import { TodoCard } from "../components/card/TodoCard";
@@ -37,6 +35,7 @@ const defaultTodos: Todo[] = [
 
 export function TodosScreen() {
   const { themeColors } = useTheme();
+  const dark = themeColors.isDark;
   const { showCompletionNudge } = useActivityNudges();
 
   const [todos, setTodos] = useState<Todo[]>(() => {
@@ -65,12 +64,12 @@ export function TodosScreen() {
     completed: false,
   });
 
-  // persist todos in local storage
+  // persist todos in local storage (used by TimeFlowScreen)
   useEffect(() => {
     localStorage.setItem("flowstate-todos", JSON.stringify(todos));
   }, [todos]);
 
-  // filtering + sorting logic
+  // filtering + sorting
   const filteredTodos = useMemo(() => {
     let list = [...todos];
     Object.entries(filters).forEach(([key, val]) => {
@@ -79,32 +78,25 @@ export function TodosScreen() {
 
     switch (sort) {
       case "priority":
-        list.sort(
-          (a, b) =>
-            ({ high: 3, medium: 2, low: 1 }[b.priority] -
-             { high: 3, medium: 2, low: 1 }[a.priority])
+        list.sort((a, b) =>
+          ({ high: 3, medium: 2, low: 1 }[b.priority] - { high: 3, medium: 2, low: 1 }[a.priority])
         );
         break;
       case "energy":
-        list.sort(
-          (a, b) =>
-            ({ high: 3, moderate: 2, low: 1 }[b.energy] -
-             { high: 3, moderate: 2, low: 1 }[a.energy])
+        list.sort((a, b) =>
+          ({ high: 3, moderate: 2, low: 1 }[b.energy] - { high: 3, moderate: 2, low: 1 }[a.energy])
         );
         break;
       case "alphabetical":
         list.sort((a, b) => a.title.localeCompare(b.title));
         break;
     }
-
     return list;
   }, [todos, filters, sort]);
 
-  // toggle task completion
+  // toggle completion
   const toggleTodo = (id: number) => {
-    setTodos((prev) =>
-      prev.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t))
-    );
+    setTodos((prev) => prev.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t)));
     const completed = todos.filter((t) => t.completed).length + 1;
     showCompletionNudge(completed);
   };
@@ -124,32 +116,29 @@ export function TodosScreen() {
     });
   };
 
-  // progress stats
   const completedCount = todos.filter((t) => t.completed).length;
   const progress = todos.length ? (completedCount / todos.length) * 100 : 0;
 
-  // main ui
   return (
     <div
-      className="min-h-screen flex flex-col bg-gradient-to-b"
+      className="min-h-screen flex flex-col transition-colors"
       style={{
-        backgroundImage: `linear-gradient(to bottom, ${themeColors.gradientFrom}, ${themeColors.gradientTo})`,
+        backgroundColor: dark ? "#0b0b0e" : themeColors.card,
+        color: dark ? "#f5f5f5" : "var(--color-card-foreground)",
       }}
     >
       {/* header */}
       <header
-        className="sticky top-0 backdrop-blur-md z-10 px-6 py-4 flex justify-between items-center border-b"
+        className="sticky top-0 z-10 px-6 py-4 flex justify-between items-center border-b backdrop-blur-md"
         style={{
-          backgroundColor: `${themeColors.card}cc`,
-          borderColor: themeColors.accentLight,
+          backgroundColor: dark ? "#18181b99" : `${themeColors.card}cc`,
+          borderColor: dark ? "#27272a" : themeColors.accentLight,
         }}
       >
-        <h1 className="text-xl font-semibold text-[var(--color-card-foreground)]">
-          My To-Dos
-        </h1>
+        <h1 className="text-xl font-semibold">My To-Dos</h1>
         <button
           onClick={() => setShowAddModal(true)}
-          className="rounded-full p-3 shadow-lg transition"
+          className="rounded-full p-3 shadow-lg transition active:scale-95"
           style={{
             background: `linear-gradient(135deg, ${themeColors.primary}, ${themeColors.accentLight})`,
             color: "#fff",
@@ -159,19 +148,22 @@ export function TodosScreen() {
         </button>
       </header>
 
-      {/* filters section */}
+      {/* filters */}
       <section
-        className="px-4 py-3 sticky top-[60px] bg-[var(--color-card)]/60 backdrop-blur-md border-b z-10"
-        style={{ borderColor: themeColors.accentLight }}
+        className="px-4 py-3 sticky top-[60px] backdrop-blur-md border-b z-10"
+        style={{
+          backgroundColor: dark ? "#18181b80" : "var(--color-card)/70",
+          borderColor: dark ? "#27272a" : themeColors.accentLight,
+        }}
       >
         <div className="flex items-center justify-between mb-2">
-          <h3 className="text-sm font-semibold text-[var(--color-card-foreground)] tracking-wide">
-            Life Areas
-          </h3>
+          <h3 className="text-sm font-semibold tracking-wide">Life Areas</h3>
           <select
             value={sort}
             onChange={(e) => setSort(e.target.value as any)}
-            className="border border-purple-200 rounded-lg px-3 py-1.5 text-xs bg-[var(--color-card)]/70 hover:bg-[var(--color-card)] transition"
+            className={`border rounded-lg px-3 py-1.5 text-xs ${
+              dark ? "bg-neutral-900 border-neutral-700 text-gray-200" : "bg-white border-purple-200"
+            }`}
           >
             <option value="priority">Sort by Priority</option>
             <option value="energy">Sort by Energy</option>
@@ -179,63 +171,55 @@ export function TodosScreen() {
           </select>
         </div>
 
-        {/* scrollable life area bar */}
         <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
-          {DEFAULT_LIFE_AREAS.filter((area) => area.enabled).map((area) => {
-            const hasTasks = todos.some((t) => t.lifeArea === area.id);
-            const isActive = filters.lifeArea === area.id;
-
+          {DEFAULT_LIFE_AREAS.filter((a) => a.enabled).map((area) => {
+            const has = todos.some((t) => t.lifeArea === area.id);
+            const active = filters.lifeArea === area.id;
             return (
               <button
                 key={area.id}
                 onClick={() =>
-                  hasTasks &&
-                  setFilters((prev) => ({
-                    ...prev,
-                    lifeArea: prev.lifeArea === area.id ? "" : area.id,
-                  }))
+                  has &&
+                  setFilters((p) => ({ ...p, lifeArea: p.lifeArea === area.id ? "" : area.id }))
                 }
-                disabled={!hasTasks}
-                className={`flex items-center gap-2 shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-all shadow-sm border ${
-                  isActive
-                    ? "text-white scale-[1.05]"
-                    : hasTasks
-                    ? "bg-[var(--color-card)]/70 hover:bg-[var(--color-card)] text-[var(--color-card-foreground)]"
+                disabled={!has}
+                className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium border transition-all ${
+                  active
+                    ? "text-white scale-105"
+                    : has
+                    ? "opacity-100"
                     : "opacity-40 cursor-not-allowed"
                 }`}
                 style={{
-                  borderColor: isActive ? area.color : "rgba(167,139,250,0.25)",
-                  background: isActive
+                  borderColor: active ? area.color : dark ? "#3f3f46" : "#e5e7eb",
+                  background: active
                     ? `linear-gradient(135deg, ${area.color}, ${area.color}cc)`
-                    : undefined,
-                  boxShadow: isActive
-                    ? `0 3px 10px ${area.color}44`
-                    : "0 1px 3px rgba(0,0,0,0.05)",
+                    : dark
+                    ? "#27272a"
+                    : "var(--color-card)",
+                  boxShadow: active ? `0 3px 10px ${area.color}44` : "none",
                 }}
               >
-                <span className="text-base leading-none">{area.icon}</span>
-                <span
-                  className="whitespace-nowrap"
-                  style={{
-                    color: isActive ? "#fff" : "var(--color-card-foreground)",
-                    textShadow: isActive ? "0 1px 1px rgba(0,0,0,0.25)" : undefined,
-                  }}
-                >
-                  {area.label}
-                </span>
+                <span>{area.icon}</span>
+                <span>{area.label}</span>
               </button>
             );
           })}
-
-          {/* all button */}
           {todos.length > 0 && (
             <button
-              onClick={() => setFilters((prev) => ({ ...prev, lifeArea: "" }))}
-              className={`flex items-center gap-2 shrink-0 px-4 py-2 rounded-full text-sm font-medium border transition-all ${
+              onClick={() => setFilters((p) => ({ ...p, lifeArea: "" }))}
+              className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all ${
                 !filters.lifeArea
-                  ? "bg-purple-500 text-white"
-                  : "bg-[var(--color-card)]/60 text-[var(--color-card-foreground)] hover:bg-[var(--color-card)]"
+                  ? "text-white"
+                  : dark
+                  ? "bg-neutral-800 text-gray-200"
+                  : "bg-white text-gray-800"
               }`}
+              style={{
+                background: !filters.lifeArea
+                  ? `linear-gradient(135deg, ${themeColors.primary}, ${themeColors.accentLight})`
+                  : undefined,
+              }}
             >
               🌐 All
             </button>
@@ -243,23 +227,28 @@ export function TodosScreen() {
         </div>
       </section>
 
-      {/* progress bar */}
+      {/* progress */}
       <div className="px-6 py-3">
-        <div className="w-full h-2 bg-[var(--color-card)]/40 rounded-full overflow-hidden">
+        <div
+          className="w-full h-2 rounded-full overflow-hidden"
+          style={{
+            backgroundColor: dark ? "#27272a" : "rgba(0,0,0,0.05)",
+          }}
+        >
           <div
-            className="h-full transition-all rounded-full"
+            className="h-full rounded-full transition-all"
             style={{
               width: `${progress}%`,
               background: `linear-gradient(90deg, ${themeColors.primary}, ${themeColors.accentLight})`,
             }}
           />
         </div>
-        <p className="text-xs text-[var(--color-muted-foreground)] mt-1 text-right">
+        <p className="text-xs mt-1 text-right opacity-70">
           {completedCount}/{todos.length} completed
         </p>
       </div>
 
-      {/* todos grid */}
+      {/* grid */}
       <main className="flex-1 px-6 pb-24">
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
           {filteredTodos.map((todo) => (
@@ -270,56 +259,59 @@ export function TodosScreen() {
               onToggle={() => toggleTodo(todo.id)}
             />
           ))}
-          {filteredTodos.length === 0 && (
-            <p className="text-sm text-center opacity-50 col-span-full mt-6">
+          {!filteredTodos.length && (
+            <p className="text-sm text-center opacity-60 col-span-full mt-6">
               No tasks match your filters.
             </p>
           )}
         </div>
       </main>
 
-      {/* floating add button */}
-      <button
-        onClick={() => setShowAddModal(true)}
-        className="fixed bottom-6 right-6 p-4 rounded-full shadow-lg text-white hover:scale-105 transition"
-        style={{
-          background: `linear-gradient(135deg, ${themeColors.primary}, ${themeColors.accentLight})`,
-        }}
-      >
-        <Plus size={22} />
-      </button>
-
-      {/* add task modal */}
+      {/* add modal */}
       {showAddModal && (
-        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 animate-fadeIn">
+        <div
+          className="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-sm"
+          style={{ backgroundColor: dark ? "rgba(0,0,0,0.6)" : "rgba(0,0,0,0.4)" }}
+        >
           <div
-            className="bg-[var(--color-card)] rounded-3xl p-6 w-80 shadow-xl border"
-            style={{ borderColor: themeColors.accentLight }}
+            className="rounded-3xl p-6 w-80 shadow-2xl border"
+            style={{
+              backgroundColor: dark ? "#18181b" : themeColors.card,
+              color: dark ? "#f5f5f5" : "var(--color-card-foreground)",
+              borderColor: dark ? "#3f3f46" : themeColors.accentLight,
+            }}
           >
-            <h3 className="text-lg font-semibold mb-4 text-[var(--color-card-foreground)]">
-              Add a Task
-            </h3>
-
+            <h3 className="text-lg font-semibold mb-4">Add a Task</h3>
             <input
               type="text"
               placeholder="Task title..."
               value={newTodo.title}
               onChange={(e) => setNewTodo({ ...newTodo, title: e.target.value })}
-              className="w-full border border-purple-200 rounded-xl p-3 mb-3 focus:outline-none focus:ring-2 focus:ring-purple-300"
+              className={`w-full rounded-xl p-3 mb-3 border focus:outline-none ${
+                dark
+                  ? "bg-neutral-900 border-neutral-700 focus:ring-2 focus:ring-purple-600"
+                  : "bg-white border-purple-200 focus:ring-2 focus:ring-purple-300"
+              }`}
             />
             <input
               type="text"
               placeholder="Emoji (optional)"
               value={newTodo.icon}
               onChange={(e) => setNewTodo({ ...newTodo, icon: e.target.value })}
-              className="w-full border border-purple-200 rounded-xl p-3 mb-3 focus:outline-none focus:ring-2 focus:ring-purple-300"
+              className={`w-full rounded-xl p-3 mb-3 border focus:outline-none ${
+                dark
+                  ? "bg-neutral-900 border-neutral-700 focus:ring-2 focus:ring-purple-600"
+                  : "bg-white border-purple-200 focus:ring-2 focus:ring-purple-300"
+              }`}
             />
 
             <div className="flex flex-col gap-3 mb-4">
               <select
                 value={newTodo.priority}
                 onChange={(e) => setNewTodo({ ...newTodo, priority: e.target.value as any })}
-                className="w-full border border-purple-200 rounded-xl p-3"
+                className={`w-full rounded-xl p-3 border ${
+                  dark ? "bg-neutral-900 border-neutral-700" : "bg-white border-purple-200"
+                }`}
               >
                 <option value="low">Priority: Low</option>
                 <option value="medium">Priority: Medium</option>
@@ -329,7 +321,9 @@ export function TodosScreen() {
               <select
                 value={newTodo.lifeArea}
                 onChange={(e) => setNewTodo({ ...newTodo, lifeArea: e.target.value as any })}
-                className="w-full border border-purple-200 rounded-xl p-3"
+                className={`w-full rounded-xl p-3 border ${
+                  dark ? "bg-neutral-900 border-neutral-700" : "bg-white border-purple-200"
+                }`}
               >
                 {DEFAULT_LIFE_AREAS.map((a) => (
                   <option key={a.id} value={a.id}>
@@ -341,7 +335,9 @@ export function TodosScreen() {
               <select
                 value={newTodo.energy}
                 onChange={(e) => setNewTodo({ ...newTodo, energy: e.target.value as any })}
-                className="w-full border border-purple-200 rounded-xl p-3"
+                className={`w-full rounded-xl p-3 border ${
+                  dark ? "bg-neutral-900 border-neutral-700" : "bg-white border-purple-200"
+                }`}
               >
                 <option value="low">Energy: Low</option>
                 <option value="moderate">Energy: Moderate</option>
@@ -352,9 +348,13 @@ export function TodosScreen() {
             <div className="flex gap-3">
               <button
                 onClick={() => setShowAddModal(false)}
-                className="flex-1 py-3 rounded-xl border border-gray-300 hover:bg-gray-50"
+                className={`flex-1 py-3 rounded-xl border ${
+                  dark
+                    ? "border-neutral-700 hover:bg-neutral-800"
+                    : "border-gray-300 hover:bg-gray-50"
+                }`}
               >
-                cancel
+                Cancel
               </button>
               <button
                 onClick={addTodo}
@@ -363,7 +363,7 @@ export function TodosScreen() {
                   background: `linear-gradient(135deg, ${themeColors.primary}, ${themeColors.accentLight})`,
                 }}
               >
-                add
+                Add
               </button>
             </div>
           </div>
