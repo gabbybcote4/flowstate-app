@@ -1,6 +1,5 @@
 // src/components/ui/alert-dialog.tsx
-// accessible confirmation dialog built with radix primitives and flowstate theme support
-
+// accessible confirmation dialog built with radix primitives and FlowState theme support
 "use client";
 
 import * as React from "react";
@@ -39,50 +38,59 @@ function AlertDialogPortal(
   );
 }
 
-// background overlay with fade animation
-function AlertDialogOverlay({
-  className,
-  ...props
-}: React.ComponentProps<typeof AlertDialogPrimitive.Overlay>) {
-  return (
-    <AlertDialogPrimitive.Overlay
-      data-slot="alert-dialog-overlay"
+// overlay with forwardRef
+export const AlertDialogOverlay = React.forwardRef<
+  React.ElementRef<typeof AlertDialogPrimitive.Overlay>,
+  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Overlay>
+>(({ className, ...props }, ref) => (
+  <AlertDialogPrimitive.Overlay
+    ref={ref}
+    data-slot="alert-dialog-overlay"
+    className={cn(
+      "fixed inset-0 z-50 bg-black/50 backdrop-blur-[2px]",
+      "data-[state=open]:animate-in data-[state=closed]:animate-out",
+      "data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0",
+      "transition-all duration-200 ease-out",
+      className
+    )}
+    {...props}
+  />
+));
+AlertDialogOverlay.displayName = "AlertDialogOverlay";
+
+// content with forwardRef
+export const AlertDialogContent = React.forwardRef<
+  React.ElementRef<typeof AlertDialogPrimitive.Content>,
+  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Content>
+>(({ className, ...props }, ref) => (
+  <AlertDialogPortal>
+    <AlertDialogOverlay />
+    <AlertDialogPrimitive.Content
+      ref={ref}
+      data-slot="alert-dialog-content"
       className={cn(
-        "fixed inset-0 z-50 bg-black/50 backdrop-blur-[2px]",
+        // proper centering
+        "fixed inset-0 z-[60] flex items-center justify-center p-4",
+        // transition & animation
         "data-[state=open]:animate-in data-[state=closed]:animate-out",
         "data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0",
-        "transition-all duration-200 ease-out",
-        className
+        "data-[state=open]:zoom-in-95 data-[state=closed]:zoom-out-95",
+        "duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"
       )}
-      {...props}
-    />
-  );
-}
-
-// main content area with scale and fade animation
-function AlertDialogContent({
-  className,
-  ...props
-}: React.ComponentProps<typeof AlertDialogPrimitive.Content>) {
-  return (
-    <AlertDialogPortal>
-      <AlertDialogOverlay />
-      <AlertDialogPrimitive.Content
-        data-slot="alert-dialog-content"
+    >
+      <div
         className={cn(
-          "fixed top-1/2 left-1/2 z-50 grid w-full max-w-md -translate-x-1/2 -translate-y-1/2 gap-4 rounded-2xl border shadow-xl",
-          "flow-card",
-          "data-[state=open]:animate-in data-[state=closed]:animate-out",
-          "data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0",
-          "data-[state=open]:zoom-in-95 data-[state=closed]:zoom-out-95",
-          "duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] p-6",
+          "w-full max-w-md rounded-2xl border shadow-xl flow-card p-6",
+          "bg-[var(--color-card)] text-[var(--color-card-foreground)]",
+          "relative z-[61]",
           className
         )}
         {...props}
       />
-    </AlertDialogPortal>
-  );
-}
+    </AlertDialogPrimitive.Content>
+  </AlertDialogPortal>
+));
+AlertDialogContent.displayName = "AlertDialogContent";
 
 // dialog header
 function AlertDialogHeader({
@@ -178,9 +186,7 @@ function AlertDialogCancel({
 export {
   AlertDialog,
   AlertDialogPortal,
-  AlertDialogOverlay,
   AlertDialogTrigger,
-  AlertDialogContent,
   AlertDialogHeader,
   AlertDialogFooter,
   AlertDialogTitle,

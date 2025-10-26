@@ -1,6 +1,5 @@
 // src/components/card/TodoCard.tsx
 // to-do card component with adaptive theme support and dark mode
-
 import React from "react";
 import { Checkbox } from "../ui/checkbox";
 import { useTheme } from "../ThemeContext";
@@ -27,7 +26,7 @@ export function TodoCard({
   return (
     <div className="relative">
       <div
-        className="flex items-center gap-3 p-4 rounded-2xl transition-all duration-300 border shadow-sm hover:shadow-md"
+        className="flex items-center text-sm p-2 rounded-2xl transition-all duration-300 border shadow-sm hover:shadow-md"
         style={{
           backgroundColor: themeColors.card,
           borderColor: themeColors.accentLight,
@@ -40,7 +39,7 @@ export function TodoCard({
       >
         <Checkbox checked={completed} onCheckedChange={onToggle} />
 
-        <div className="flex items-center gap-2 flex-1">
+        <div className="flex flex-1 px-1">
           {icon && <span className="opacity-80">{icon}</span>}
           <span
             className={`transition-all ${
@@ -53,7 +52,7 @@ export function TodoCard({
 
         {lifeArea && lifeAreaEmoji && (
           <div
-            className="flex items-center gap-1 px-2 py-1 rounded-lg text-xs font-medium"
+            className="flex items-center gap-1 rounded-lg text-xs"
             style={{
               backgroundColor: `${themeColors.accentLight}22`,
               color: themeColors.cardForeground,

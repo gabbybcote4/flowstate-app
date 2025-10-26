@@ -51,7 +51,7 @@ export function NotificationsStep({}: OnboardingStepProps) {
             <h4 style={{ fontSize: '16px', fontWeight: '600' }}>
               Enable Notifications
             </h4>
-            <p className="text-sm opacity-60">Turn on gentle reminders</p>
+            <p className="text-sm opacity-60">Turn on reminders</p>
           </div>
           <Switch
             checked={config.notifications.enabled}
@@ -104,7 +104,7 @@ export function NotificationsStep({}: OnboardingStepProps) {
           <h4 className="mb-3" style={{ fontSize: '15px', fontWeight: '500' }}>
             Notification Frequency
           </h4>
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 w-24 items-center">
             {(['minimal', 'moderate', 'frequent'] as const).map((freq) => (
               <button
                 key={freq}

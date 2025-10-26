@@ -1,6 +1,5 @@
 // src/screens/WelcomeScreen.tsx
 // adaptive welcome screen — matches theme and dark mode system
-
 import { Sparkles, Shield } from "lucide-react";
 import { useTheme } from "../components/ThemeContext";
 
@@ -23,6 +22,7 @@ export function WelcomeScreen({ userName = "Friend", onStartCheckIn }: WelcomeSc
     >
       {/* wave background */}
       <div className="absolute inset-0 overflow-hidden opacity-70">
+
         {/* wave 1 */}
         <div className="absolute bottom-0 left-0 right-0">
           <svg
@@ -75,6 +75,7 @@ export function WelcomeScreen({ userName = "Friend", onStartCheckIn }: WelcomeSc
       {/* main content */}
       <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-6 py-12">
         <div className="max-w-md w-full text-center">
+
           {/* icon circle */}
           <div className="mb-8 flex justify-center">
             <div
@@ -99,7 +100,7 @@ export function WelcomeScreen({ userName = "Friend", onStartCheckIn }: WelcomeSc
                 textTransform: "capitalize",
               }}
             >
-              welcome {userName} 🌿
+              Welcome {userName} 🌿
             </h1>
             <p
               className="opacity-70 text-[var(--color-card-foreground)]"
@@ -108,7 +109,7 @@ export function WelcomeScreen({ userName = "Friend", onStartCheckIn }: WelcomeSc
                 lineHeight: "1.4",
               }}
             >
-              you're in flow.
+              You're in flow.
             </p>
           </div>
 
@@ -120,7 +121,7 @@ export function WelcomeScreen({ userName = "Friend", onStartCheckIn }: WelcomeSc
               lineHeight: "1.6",
             }}
           >
-            let's begin by checking in with how you're feeling today. this helps
+            Let's begin by checking in with how you're feeling today. This helps
             FlowState adapt to your energy and set the right tone for your day.
           </p>
 
@@ -135,7 +136,7 @@ export function WelcomeScreen({ userName = "Friend", onStartCheckIn }: WelcomeSc
                 fontWeight: 500,
               }}
             >
-              start your first check-in
+              Start your first check-in
               <Sparkles size={20} />
             </button>
           </div>
@@ -165,27 +166,13 @@ export function WelcomeScreen({ userName = "Friend", onStartCheckIn }: WelcomeSc
                 }}
               >
                 <span style={{ color: themeColors.primary, fontWeight: 500 }}>
-                  your privacy matters:
+                  Your privacy matters:
                 </span>{" "}
-                data is stored locally on your device and only syncs when you
-                choose. you’re always in control.
+                Data is stored locally on your device and only syncs when you
+                choose. You’re always in control.
               </p>
             </div>
           </div>
-
-          {/* subtle particles */}
-          <div
-            className="absolute top-1/4 left-1/4 w-2 h-2 rounded-full"
-            style={{ background: themeColors.primary }}
-          />
-          <div
-            className="absolute top-1/3 right-1/4 w-3 h-3 rounded-full"
-            style={{ background: themeColors.primaryLight }}
-          />
-          <div
-            className="absolute bottom-1/3 left-1/3 w-2 h-2 rounded-full"
-            style={{ background: themeColors.primaryDark }}
-          />
         </div>
       </div>
     </div>

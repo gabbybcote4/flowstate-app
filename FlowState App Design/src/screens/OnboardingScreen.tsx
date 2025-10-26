@@ -35,41 +35,41 @@ const onboardingSteps: OnboardingStep[] = [
   {
     id: 1,
     icon: <Sparkles size={48} className="text-[var(--color-primary)]" />,
-    title: "welcome to flowstate",
-    description: "your gentle companion for navigating life with fluctuating energy",
-    buttonText: "let’s begin",
+    title: "Welcome to FlowState",
+    description: "Your gentle companion for navigating life with fluctuating energy",
+    buttonText: "Let’s begin",
     illustration: "✨",
   },
   {
     id: 2,
     icon: <Activity size={48} className="text-[var(--color-primary)]" />,
     title: "track your energy patterns",
-    description: "understand your natural rhythms and work with them, not against them",
-    buttonText: "continue",
+    description: "Understand your natural rhythms and work with them, not against them",
+    buttonText: "Continue",
     illustration: "🌊",
   },
   {
     id: 3,
     icon: <Target size={48} className="text-[var(--color-primary)]" />,
     title: "set wellness goals",
-    description: "create meaningful goals that adapt to how you’re feeling each day",
-    buttonText: "next",
+    description: "Create meaningful goals that adapt to how you’re feeling each day",
+    buttonText: "Next",
     illustration: "🎯",
   },
   {
     id: 4,
     icon: <Zap size={48} className="text-[var(--color-primary)]" />,
     title: "connect your tools",
-    description: "sync calendars, habits, and health data for a complete picture",
-    buttonText: "almost there",
+    description: "Sync calendars, habits, and health data for a complete picture",
+    buttonText: "Almost there",
     illustration: "🔗",
   },
   {
     id: 5,
     icon: <UserPlus size={48} className="text-[var(--color-primary)]" />,
     title: "you’re all set",
-    description: "let’s start building routines that honor your energy, not fight it",
-    buttonText: "get started",
+    description: "Let’s start building routines that honor your energy, not fight it",
+    buttonText: "Get started",
     illustration: "🌱",
   },
 ];
@@ -110,15 +110,16 @@ export function OnboardingScreen({ onComplete }: OnboardingScreenProps) {
           onClick={handleSkip}
           className="text-sm opacity-60 hover:opacity-100 transition-opacity px-4 py-2 text-[var(--color-card-foreground)]"
         >
-          skip
+          Skip
         </button>
       </div>
 
       {/* content */}
       <div className="flex-1 flex flex-col items-center justify-center px-6 pb-12">
         <div className="w-full max-w-md text-center">
+          
           {/* illustration circle */}
-          <div className="mb-8">
+          <div className="mb-8 items-center justify-center flex">
             <div
               className="w-32 h-32 rounded-full flex items-center justify-center text-7xl mx-auto"
               style={{
@@ -129,8 +130,6 @@ export function OnboardingScreen({ onComplete }: OnboardingScreenProps) {
               {step.illustration}
             </div>
           </div>
-
-          <div className="mb-4">{step.icon}</div>
 
           <h1 className="mb-4 text-2xl font-semibold text-[var(--color-card-foreground)] capitalize">
             {step.title}

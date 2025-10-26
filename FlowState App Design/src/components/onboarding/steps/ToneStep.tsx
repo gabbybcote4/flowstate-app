@@ -1,9 +1,9 @@
-// ToneStep.tsx
-
-import { OnboardingStepProps } from '../ConfigOnboardingWizard';
-import { useUserConfig } from '../../../config/UserConfigContext';
-import { TonePreference } from '../../../config/userConfig.types';
-import { Heart, Zap, Briefcase, Smile } from 'lucide-react';
+// src/components/onboarding/steps/ToneStep.tsx
+import React from "react";
+import { OnboardingStepProps } from "../ConfigOnboardingWizard";
+import { useUserConfig } from "../../../config/UserConfigContext";
+import { TonePreference } from "../../../config/userConfig.types";
+import { Heart, Zap, Briefcase, Smile, Check } from "lucide-react";
 
 const TONE_OPTIONS: Array<{
   value: TonePreference;
@@ -13,36 +13,36 @@ const TONE_OPTIONS: Array<{
   example: string;
 }> = [
   {
-    value: 'gentle',
-    label: 'Gentle & Compassionate',
+    value: "gentle",
+    label: "Gentle & Compassionate",
     icon: Heart,
-    description: 'Soft, supportive language with lots of encouragement',
-    example: '"You\'re doing great. Let\'s take this one step at a time. 💜"',
+    description: "Soft, supportive language with lots of encouragement.",
+    example: "“You’re doing great. Let’s take this one step at a time.” 💜",
   },
   {
-    value: 'motivating',
-    label: 'Motivating & Energetic',
+    value: "motivating",
+    label: "Motivating & Energetic",
     icon: Zap,
-    description: 'Upbeat and inspiring to keep you moving forward',
-    example: '"You\'ve got this! Let\'s crush today\'s goals together! 🚀"',
+    description: "Upbeat and inspiring to keep you moving forward.",
+    example: "“You’ve got this! Let’s crush today’s goals together!” 🚀",
   },
   {
-    value: 'practical',
-    label: 'Practical & Direct',
+    value: "practical",
+    label: "Practical & Direct",
     icon: Briefcase,
-    description: 'Clear, straightforward guidance without fluff',
-    example: '"3 tasks remaining. Start with the easiest one."',
+    description: "Clear, straightforward guidance without fluff.",
+    example: "“3 tasks remaining. Start with the easiest one.”",
   },
   {
-    value: 'playful',
-    label: 'Playful & Fun',
+    value: "playful",
+    label: "Playful & Fun",
     icon: Smile,
-    description: 'Light-hearted with a touch of personality',
-    example: '"Look at you go! Time to level up? 🎮✨"',
+    description: "Light-hearted with a touch of personality.",
+    example: "“Look at you go! Time to level up? 🎮✨”",
   },
 ];
 
-export function ToneStep({ }: OnboardingStepProps) {
+export function ToneStep({}: OnboardingStepProps) {
   const { config, updateConfig } = useUserConfig();
 
   const handleSelectTone = (tone: TonePreference) => {
@@ -51,109 +51,83 @@ export function ToneStep({ }: OnboardingStepProps) {
 
   return (
     <div className="space-y-6">
-      <div>
-        <p className="opacity-70 mb-6" style={{ fontSize: '16px', lineHeight: '1.6' }}>
-          How would you like FlowState to communicate with you? This affects all messages, coaching, and encouragement throughout the app.
-        </p>
-      </div>
+      <p className="opacity-70 mb-6 text-[15px] leading-relaxed text-[var(--color-card-foreground)]">
+        How would you like FlowState to communicate with you? This affects all
+        messages, coaching, and encouragement throughout the app.
+      </p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {TONE_OPTIONS.map((option, index) => {
+      <div className="grid grid-cols-1 gap-2">
+        {TONE_OPTIONS.map((option) => {
           const Icon = option.icon;
           const isSelected = config.tone === option.value;
 
           return (
-            < button
+            <button
               key={option.value}
               onClick={() => handleSelectTone(option.value)}
-              className="rounded-3xl p-6 text-left transition-all duration-300 hover:shadow-lg"
-              style={{
-                background: isSelected
-                  ? 'linear-gradient(135deg, #A78BFA 0%, #C084FC 100%)'
-                  : 'white',
-                border: isSelected
-                  ? '2px solid transparent'
-                  : '2px solid rgba(167, 139, 250, 0.2)',
-                color: isSelected ? 'white' : 'inherit',
-                transform: isSelected ? 'scale(1.02)' : 'scale(1)',
-                boxShadow: isSelected
-                  ? '0 10px 40px rgba(167, 139, 250, 0.3)'
-                  : '0 4px 20px rgba(0, 0, 0, 0.05)',
-              }}
+              className={`relative group p-3 rounded-2xl text-left border transition-all duration-300
+                ${
+                  isSelected
+                    ? "border-transparent bg-gradient-to-br from-[var(--color-primary)] to-[#C084FC] text-white shadow-[0_6px_20px_rgba(167,139,250,0.3)] scale-[1.01]"
+                    : "border-[var(--color-ring-offset-background)] bg-[var(--color-card)] hover:shadow-md hover:scale-[1.01]"
+                }`}
             >
-              {/* icon */}
-              <div className="mb-4">
-                <Icon 
-                  size={32} 
-                  style={{ 
-                    color: isSelected ? 'white' : '#A78BFA',
-                    opacity: isSelected ? 1 : 0.8 
-                  }}
-                />
-              </div>
-
-              {/* title */}
-              <h3 
-                className="mb-2"
-                style={{
-                  fontSize: '18px',
-                  fontWeight: '600',
-                  opacity: isSelected ? 1 : 0.9
-                }}
-              >
-                {option.label}
-              </h3>
-
-              {/* description */}
-              <p 
-                className="mb-3"
-                style={{
-                  fontSize: '14px',
-                  opacity: isSelected ? 0.9 : 0.6,
-                  lineHeight: '1.5'
-                }}
-              >
-                {option.description}
-              </p>
-
-              {/* example */}
-              <div 
-                className="rounded-2xl p-3 text-sm italic"
-                style={{
-                  background: isSelected 
-                    ? 'rgba(255, 255, 255, 0.15)' 
-                    : 'rgba(167, 139, 250, 0.05)',
-                  fontSize: '13px',
-                  lineHeight: '1.4'
-                }}
-              >
-                {option.example}
-              </div>
-
-              {/* selection indicator */}
-              {isSelected && (
+              <div className="flex items-start gap-3">
                 <div
-                  className="mt-4 flex items-center gap-2"
+                  className={`p-2 rounded-xl transition-colors ${
+                    isSelected
+                      ? "bg-white/20 text-white"
+                      : "bg-[var(--color-primary-light)]/20 text-[var(--color-primary)]"
+                  }`}
                 >
-                  <div className="w-5 h-5 rounded-full flow-card">
-                    <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#A78BFA' }} />
+                  <Icon size={22} />
+                </div>
+
+                <div className="flex-1">
+                  <h3
+                    className={`font-semibold mb-1 text-[16px] ${
+                      isSelected
+                        ? "text-white"
+                        : "text-[var(--color-card-foreground)]"
+                    }`}
+                  >
+                    {option.label}
+                  </h3>
+                  <p
+                    className={`text-sm leading-snug ${
+                      isSelected
+                        ? "text-white/80"
+                        : "text-[var(--color-muted-foreground)]"
+                    }`}
+                  >
+                    {option.description}
+                  </p>
+
+                  <div
+                    className={`mt-3 rounded-xl p-2.5 text-sm italic transition-colors ${
+                      isSelected
+                        ? "bg-white/20 text-white/90"
+                        : "bg-[var(--color-primary-light)]/10 text-[var(--color-muted-foreground)]"
+                    }`}
+                  >
+                    {option.example}
                   </div>
-                  <span style={{ fontSize: '14px', fontWeight: '500' }}>Selected</span>
-                </ div>
+                </div>
+              </div>
+
+              {isSelected && (
+                <div className="absolute top-3 right-3 bg-white/30 rounded-full p-1.5">
+                  <Check size={16} className="text-white" />
+                </div>
               )}
-            </ button>
+            </button>
           );
         })}
       </div>
 
-      {/* helper text */}
-      <div
-        className="text-center"
-      >
-        <p className="text-sm opacity-50">
-          Don't worry, you can change this anytime in Settings
-        </p>
-      </ div>
+      <p className="text-center text-sm opacity-60 mt-6">
+        You can change this anytime in Settings
+      </p>
     </div>
   );
 }

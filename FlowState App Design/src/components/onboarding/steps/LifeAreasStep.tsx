@@ -1,4 +1,6 @@
 // src/components/onboarding/steps/LifeAreasStep.tsx
+// onboarding step for selecting life areas to focus on
+import React from 'react';
 
 import { OnboardingStepProps } from '../ConfigOnboardingWizard';
 import { useUserConfig } from '../../../config/UserConfigContext';
@@ -22,7 +24,7 @@ export function LifeAreasStep({}: OnboardingStepProps) {
         </p>
       </div>
 
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-3 gap-3">
         {config.lifeAreas.map((area, index) => (
           < button
             key={area.id}

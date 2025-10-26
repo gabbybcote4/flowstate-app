@@ -1,5 +1,6 @@
-// ReviewStep.tsx
-
+// src/components/onboarding/steps/ReviewStep.tsx
+// final review step of onboarding wizard
+import React from 'react';
 import { OnboardingStepProps } from '../ConfigOnboardingWizard';
 import { useUserConfig } from '../../../config/UserConfigContext';
 import { FEATURE_REGISTRY } from '../../../config/featureRegistry';
@@ -67,7 +68,10 @@ export function ReviewStep({ onNext, onBack }: OnboardingStepProps) {
               <span 
                 key={feature}
                 className="text-xs px-2 py-1 rounded-full"
-                style={{ background: 'rgba(167, 139, 250, 0.1)' }}
+                style={{
+                  background: 'rgba(var(--color-primary-rgb, 167,139,250), 0.12)',
+                  border: '1px solid var(--color-accent)',
+                }}
               >
                 {feature}
               </span>
@@ -99,7 +103,10 @@ export function ReviewStep({ onNext, onBack }: OnboardingStepProps) {
               <span 
                 key={widget}
                 className="text-xs px-2 py-1 rounded-full"
-                style={{ background: 'rgba(167, 139, 250, 0.1)' }}
+                style={{
+                  background: 'rgba(var(--color-primary-rgb, 167,139,250), 0.12)',
+                  border: '1px solid var(--color-accent)',
+                }}
               >
                 {widget}
               </span>

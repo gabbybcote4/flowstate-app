@@ -1,5 +1,6 @@
 // src/components/onboarding/steps/WelcomeStep.tsx
-
+// welcome step of onboarding wizard
+import React from 'react';
 import { OnboardingStepProps } from '../ConfigOnboardingWizard';
 import { Sparkles, Zap, Heart, Shield } from 'lucide-react';
 
@@ -12,12 +13,7 @@ export function WelcomeStep({ onNext }: OnboardingStepProps) {
       >
         <div
           className="w-24 h-24 mx-auto mb-6 rounded-full flex items-center justify-center"
-          style={{
-            background: 'linear-gradient(135deg, #A78BFA 0%, #C084FC 100%)',
-            boxShadow: '0 12px 40px rgba(167, 139, 250, 0.3)',
-          }}
         >
-          <Sparkles size={48} className="text-white" />
         </div>
         <p className="text-base text-gray-600 max-w-lg mx-auto leading-relaxed">
           Let’s create a gentle, personalized routine that flexes with your mood
@@ -50,7 +46,7 @@ export function WelcomeStep({ onNext }: OnboardingStepProps) {
         className="pt-4"
       >
         <p className="text-xs text-gray-400 mt-3">
-          Takes less than 2 minutes — you can adjust anything later.
+          This takes less than 2 minutes — you can adjust anything later.
         </p>
       </div>
     </div>

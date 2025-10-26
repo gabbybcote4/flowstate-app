@@ -1,5 +1,6 @@
-// ThemeStep.tsx
-
+// src/components/onboarding/steps/ThemeStep.tsx
+// onboarding step for selecting theme preferences
+import React from 'react';
 import { OnboardingStepProps } from '../ConfigOnboardingWizard';
 import { useUserConfig } from '../../../config/UserConfigContext';
 import { ThemeMode } from '../../../config/userConfig.types';
@@ -85,7 +86,7 @@ export function ThemeStep({}: OnboardingStepProps) {
           Select the visual mode that's most comfortable for you.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 gap-2">
           {THEME_OPTIONS.map((option, index) => {
             const Icon = option.icon;
             const isSelected = config.theme.mode === option.value;
@@ -107,8 +108,11 @@ export function ThemeStep({}: OnboardingStepProps) {
               >
                 {/* preview */}
                 <div 
-                  className="h-32 p-4 flex items-center justify-center"
-                  style={{ background: option.preview.background }}
+                  className="h-10 p-3 flex items-center justify-center"
+                  style={{
+                    background: option.preview.background || 'var(--card-surface)',
+                    border: '1px solid var(--card-border)',
+                  }}
                 >
                   <div 
                     className="w-full h-full rounded-2xl p-3 flex flex-col"
@@ -207,7 +211,7 @@ export function ThemeStep({}: OnboardingStepProps) {
                 }}
               >
                 <div 
-                  className="w-12 h-12 rounded-full transition-all"
+                  className="w-8 h-8 rounded-full transition-all"
                   style={{
                     backgroundColor: option.color,
                     border: isSelected ? '3px solid #6B21A8' : '2px solid rgba(0, 0, 0, 0.1)',
@@ -229,15 +233,6 @@ export function ThemeStep({}: OnboardingStepProps) {
           })}
         </div>
       </div>
-
-      {/* helper text */}
-      <div
-        className="text-center"
-      >
-        <p className="text-sm opacity-50">
-          Your theme choices are reflected in the live preview on the right →
-        </p>
-      </ div>
     </div>
   );
 }

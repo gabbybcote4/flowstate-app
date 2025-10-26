@@ -1,8 +1,10 @@
 // src/components/onboarding/steps/DashboardLayoutStep.tsx
+// onboarding step for selecting dashboard layout template with widget preview
+import React from "react";
 import { OnboardingStepProps } from "../ConfigOnboardingWizard";
 import { useUserConfig } from "../../../config/UserConfigContext";
 import { DashboardTemplate, DashboardWidget } from "../../../config/userConfig.types";
-import { LayoutGrid, Heart, Zap, Target, Check } from "lucide-react";
+import { LayoutGrid, Heart, Zap, Target, Check, ListTodo, Calendar, Activity, Brain, ClipboardList } from "lucide-react";
 
 const TEMPLATES: Array<{
   value: DashboardTemplate;
@@ -15,7 +17,7 @@ const TEMPLATES: Array<{
     value: "wellness",
     label: "Wellness Focus",
     icon: Heart,
-    description: "Energy tracking, mood, and self-care first",
+    description: "Energy tracking, mood, and self-care first.",
     widgets: [
       { id: "mood", type: "Mood Check-In", size: "M", position: 0 },
       { id: "momentum", type: "Daily Momentum", size: "S", position: 1 },
@@ -27,7 +29,7 @@ const TEMPLATES: Array<{
     value: "planner",
     label: "Planner Mode",
     icon: Target,
-    description: "Tasks, calendar, and productivity tools",
+    description: "Tasks, calendar, and productivity tools.",
     widgets: [
       { id: "todos", type: "To-Do List", size: "L", position: 0 },
       { id: "calendar", type: "Calendar Events", size: "M", position: 1 },
@@ -39,7 +41,7 @@ const TEMPLATES: Array<{
     value: "hybrid",
     label: "Balanced Hybrid",
     icon: Zap,
-    description: "Mix of wellness and productivity",
+    description: "A mix of wellness and productivity tools.",
     widgets: [
       { id: "mood", type: "Mood Check-In", size: "S", position: 0 },
       { id: "todos", type: "To-Do List", size: "M", position: 1 },
@@ -51,7 +53,7 @@ const TEMPLATES: Array<{
     value: "custom",
     label: "Custom Layout",
     icon: LayoutGrid,
-    description: "Build your own from scratch",
+    description: "Build your own dashboard from scratch.",
     widgets: [],
   },
 ];
@@ -68,8 +70,8 @@ export function DashboardLayoutStep({}: OnboardingStepProps) {
 
   return (
     <div className="space-y-6">
-      <p className="opacity-70 mb-6 text-[16px] leading-relaxed">
-        Choose a dashboard template or create your own. You can customize this later.
+      <p className="opacity-70 mb-6 text-[15px] leading-relaxed text-[var(--color-card-foreground)]">
+        Choose a dashboard template or create your own. You can always customize widgets later.
       </p>
 
       <div className="grid grid-cols-1 gap-4">
@@ -81,29 +83,58 @@ export function DashboardLayoutStep({}: OnboardingStepProps) {
             <button
               key={template.value}
               onClick={() => selectTemplate(template.value, template.widgets)}
-              className="rounded-3xl overflow-hidden text-left border transition-none"
-              style={{
-                borderColor: isSelected ? "#A78BFA" : "rgba(0,0,0,0.1)",
-                backgroundColor: "white",
-                boxShadow: isSelected
-                  ? "0 0 0 2px #A78BFA inset"
-                  : "0 1px 4px rgba(0,0,0,0.05)",
-              }}
+              className={`rounded-2xl text-left border transition-all duration-200 p-4 hover:shadow-md ${
+                isSelected
+                  ? "border-[var(--color-primary)] bg-gradient-to-br from-[var(--color-primary-light)]/10 to-[var(--color-primary)]/5"
+                  : "border-[var(--color-ring-offset-background)] bg-[var(--color-card)]"
+              }`}
             >
-              <div className="p-4 flex items-center justify-between">
-                <div>
-                  <div className="flex items-center gap-3 mb-1">
-                    <Icon size={22} style={{ color: "#A78BFA" }} />
-                    <h4 className="text-[16px] font-semibold">{template.label}</h4>
+              {/* header */}
+              <div className="flex items-start justify-between mb-2">
+                <div className="flex items-center gap-3">
+                  <Icon
+                    size={22}
+                    className={`${
+                      isSelected
+                        ? "text-[var(--color-primary)]"
+                        : "text-[var(--color-primary-light)]"
+                    }`}
+                  />
+                  <div>
+                    <h4 className="text-[16px] font-semibold text-[var(--color-card-foreground)]">
+                      {template.label}
+                    </h4>
+                    <p className="text-sm opacity-70">{template.description}</p>
                   </div>
-                  <p className="text-sm opacity-60">{template.description}</p>
                 </div>
                 {isSelected && (
-                  <div className="flex items-center justify-center w-6 h-6 rounded-full bg-purple-500 text-white">
+                  <div className="flex items-center justify-center w-6 h-6 rounded-full bg-[var(--color-primary)] text-white shadow-sm">
                     <Check size={16} />
                   </div>
                 )}
               </div>
+
+              {/* widget preview */}
+              {template.widgets.length > 0 ? (
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {template.widgets.map((widget) => (
+                    <div
+                      key={widget.id}
+                      className={`text-xs px-3 py-1.5 rounded-full border ${
+                        isSelected
+                          ? "border-[var(--color-primary)]/50 bg-[var(--color-primary)]/10 text-[var(--color-primary)]"
+                          : "border-[var(--color-ring-offset-background)] text-[var(--color-muted-foreground)] bg-[var(--color-primary-light)]/5"
+                      }`}
+                    >
+                      {widget.type}
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="mt-3 text-sm opacity-60 italic">
+                  Add widgets after setup to build your perfect layout.
+                </div>
+              )}
             </button>
           );
         })}

@@ -1,6 +1,5 @@
 // src/components/ui/checkbox.tsx
 // adaptive checkbox styled for flowstate theme system
-
 "use client";
 
 import * as React from "react";
@@ -19,7 +18,7 @@ export function Checkbox({
     <CheckboxPrimitive.Root
       data-slot="checkbox"
       className={cn(
-        "peer flex items-center justify-center rounded-[6px] border transition-all duration-200 size-5 shrink-0 focus-visible:ring-2 focus-visible:ring-offset-2 outline-none",
+        "peer flex items-center justify-center rounded-[3px] border transition-all duration-200 size-4 shrink-0 focus-visible:ring-2 focus-visible:ring-offset-2 outline",
         "disabled:cursor-not-allowed disabled:opacity-50",
         className
       )}

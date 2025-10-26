@@ -1,6 +1,5 @@
 // src/screens/AuthScreen.tsx
 // adaptive authentication screen — theme-based gradients and dark mode support
-
 import { useState } from "react";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
@@ -65,7 +64,7 @@ export function AuthScreen({ onAuthComplete }: AuthScreenProps) {
             FlowState
           </h1>
           <p className="text-center mt-2 opacity-70 text-[var(--color-card-foreground)]">
-            {mode === "login" ? "welcome back" : "start your journey"}
+            {mode === "login" ? "Welcome back" : "Start your journey"}
           </p>
         </div>
       </div>
@@ -74,6 +73,7 @@ export function AuthScreen({ onAuthComplete }: AuthScreenProps) {
       <div className="flex-1 px-6 pb-12">
         <div className="max-w-md mx-auto">
           <div key={mode}>
+
             {/* form card */}
             <form
               onSubmit={handleSubmit}
@@ -86,10 +86,11 @@ export function AuthScreen({ onAuthComplete }: AuthScreenProps) {
               }}
             >
               <div className="space-y-5">
+
                 {/* email */}
                 <div className="space-y-2">
                   <Label htmlFor="email" className="opacity-70">
-                    email
+                    Email
                   </Label>
                   <div className="relative">
                     <Mail
@@ -101,7 +102,7 @@ export function AuthScreen({ onAuthComplete }: AuthScreenProps) {
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      placeholder="your@email.com"
+                      placeholder=""
                       className="pl-12 h-14 rounded-2xl border border-[var(--color-ring-offset-background)] focus:border-[var(--color-primary)] transition-colors"
                       style={{ fontSize: "16px" }}
                       required
@@ -112,7 +113,7 @@ export function AuthScreen({ onAuthComplete }: AuthScreenProps) {
                 {/* password */}
                 <div className="space-y-2">
                   <Label htmlFor="password" className="opacity-70">
-                    password
+                    Password
                   </Label>
                   <div className="relative">
                     <Lock
@@ -124,7 +125,7 @@ export function AuthScreen({ onAuthComplete }: AuthScreenProps) {
                       type={showPassword ? "text" : "password"}
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      placeholder="••••••••"
+                      placeholder=""
                       className="pl-12 pr-12 h-14 rounded-2xl border border-[var(--color-ring-offset-background)] focus:border-[var(--color-primary)] transition-colors"
                       style={{ fontSize: "16px" }}
                       required
@@ -161,12 +162,12 @@ export function AuthScreen({ onAuthComplete }: AuthScreenProps) {
                       <div
                         className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"
                       />
-                      <span>please wait...</span>
+                      <span>Please wait...</span>
                     </div>
                   ) : mode === "login" ? (
-                    "log in"
+                    "Log in"
                   ) : (
-                    "create account"
+                    "Create account"
                   )}
                 </Button>
               </div>
@@ -183,6 +184,7 @@ export function AuthScreen({ onAuthComplete }: AuthScreenProps) {
 
             {/* social auth buttons */}
             <div className="space-y-3 mb-6">
+
               {/* google */}
               <button
                 type="button"
@@ -242,7 +244,7 @@ export function AuthScreen({ onAuthComplete }: AuthScreenProps) {
 
             {/* note */}
             <p className="text-center text-sm opacity-60 mb-6 px-4 text-[var(--color-card-foreground)]">
-              we’ll never spam or overwhelm you 💜
+              We’ll never spam or overwhelm you 💜
             </p>
 
             {/* toggle */}
@@ -254,22 +256,22 @@ export function AuthScreen({ onAuthComplete }: AuthScreenProps) {
               >
                 {mode === "login" ? (
                   <>
-                    don’t have an account?{" "}
+                    Don’t have an account?{" "}
                     <span
                       className="font-medium"
                       style={{ color: themeColors.primary }}
                     >
-                      sign up
+                      Sign up
                     </span>
                   </>
                 ) : (
                   <>
-                    already have an account?{" "}
+                    Already have an account?{" "}
                     <span
                       className="font-medium"
                       style={{ color: themeColors.primary }}
                     >
-                      log in
+                      Log in
                     </span>
                   </>
                 )}

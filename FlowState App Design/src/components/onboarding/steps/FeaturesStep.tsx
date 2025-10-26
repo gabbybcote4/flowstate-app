@@ -1,5 +1,5 @@
 // src/components/onboarding/steps/FeaturesStep.tsx
-
+// onboarding step for selecting features to enable
 import { useEffect } from 'react';
 import { OnboardingStepProps } from '../ConfigOnboardingWizard';
 import { useUserConfig } from '../../../config/UserConfigContext';
@@ -59,7 +59,7 @@ export function FeaturesStep({}: OnboardingStepProps) {
       </p>
 
       {/* category layout */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         {categories.map((category) => {
           const features = Object.values(FEATURE_REGISTRY).filter(
             (f) => f.category === category
@@ -72,6 +72,7 @@ export function FeaturesStep({}: OnboardingStepProps) {
 
           return (
             <div key={category}>
+
               {/* Category Header */}
               <h3
                 className="mb-3 font-semibold text-[16px] flex items-center gap-2"
@@ -97,7 +98,7 @@ export function FeaturesStep({}: OnboardingStepProps) {
                   return (
                     <div
                       key={feature.key}
-                      className="rounded-2xl p-4 flex items-center gap-4 transition-all"
+                      className="rounded-2xl p-2 flex items-center gap-3 transition-all"
                       style={{
                         background: isEnabled
                           ? 'rgba(167, 139, 250, 0.05)'

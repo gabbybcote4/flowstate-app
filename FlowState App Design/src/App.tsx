@@ -1,10 +1,9 @@
 // src/App.tsx
 // main application wrapper and navigation controller
-
 import React, { useEffect } from "react";
 
 import { UserConfigProvider } from "./config/UserConfigContext";
-import { ThemeProvider } from "./components/ThemeContext";
+import { ThemeProvider, useTheme } from "./components/ThemeContext";
 import {
   NotificationProvider,
   EnhancedNotificationDisplay,
@@ -46,25 +45,24 @@ import {
 // screen imports
 import { CheckInScreen } from "./screens/CheckInScreen";
 import { DashboardScreen } from "./screens/DashboardScreen";
-// import { TodosScreen } from "./screens/TodosScreen";
+import { TodosScreen } from "./screens/TodosScreen"; 
 import { CoachingScreen } from "./screens/CoachingScreen";
 import { ReflectionScreen } from "./screens/ReflectionScreen";
-// import { CalendarScreen } from "./screens/CalendarScreen";
+import { CalendarScreen } from "./screens/CalendarScreen"; 
 import { FocusToolsScreen } from "./screens/FocusToolsScreen";
-// import { TimeFlowScreen } from "./screens/TimeFlowScreen";
+import { TimeFlowScreen } from "./screens/TimeFlowScreen"; 
 import { SymptomTrackerScreen } from "./screens/SymptomTrackerScreen";
 import { WeeklyInsightsDashboard } from "./screens/WeeklyInsightsDashboard";
 import { SettingsScreen } from "./screens/SettingsScreen";
 import { OnboardingWrapper } from "./screens/OnboardingScreen";
-// import { HabitBuilderScreen } from "./screens/HabitBuilderScreen";
-// import { DisciplineBuilderScreen } from "./screens/DisciplineBuilderScreen";
-// import { IntegrationsScreen } from "./screens/IntegrationsScreen";
-// import { CommunityScreen } from "./screens/CommunityScreen";
-// import { HabitEducationScreen } from "./screens/HabitEducationScreen";
-// import { CoachChatScreen } from "./screens/CoachChatScreen";
-// import { GrowthMapScreen } from "./screens/GrowthMapScreen";
-// import { DisciplineScreen } from "./screens/DisciplineScreen";
-// import { SymptomScreen } from "./screens/SymptomScreen";
+import { HabitBuilderScreen } from "./screens/HabitBuilderScreen";
+import { DisciplineBuilderScreen } from "./screens/DisciplineBuilderScreen";
+import { IntegrationsScreen } from "./screens/IntegrationsScreen";
+import { CommunityScreen } from "./screens/CommunityScreen";
+import { HabitEducationScreen } from "./screens/HabitEducationScreen";
+import { CoachChatScreen } from "./screens/CoachChatScreen"; 
+import { GrowthMapScreen } from "./screens/GrowthMapScreen"; 
+
 
 // bottom navigation configuration
 const NAV_ITEMS = [
@@ -116,6 +114,7 @@ const MORE_MENU_CATEGORIES = [
 function AppContent() {
   const { navigate, currentScreen } = useNavigation();
   const { hasSetMood, setMood } = useMoodCheck();
+  const { darkMode } = useTheme(); // ✅ moved here safely
   const [showMoreMenu, setShowMoreMenu] = React.useState(false);
 
   // sync stored config with theme and font settings
@@ -182,13 +181,15 @@ function AppContent() {
   const legacyScreen = screenMapping[currentScreen] || currentScreen;
 
   return (
-      <div
-        className="relative min-h-screen overflow-x-hidden transition-colors"
-        style={{
-          backgroundColor: "var(--color-background)",
-          color: "var(--color-card-foreground)",
-        }}
-      >
+    <div
+      className="relative min-h-screen overflow-x-hidden transition-colors"
+      style={{
+        background: darkMode
+          ? `linear-gradient(180deg, var(--color-background) 0%, #11131c 40%, #0d0f18 100%)`
+          : `linear-gradient(180deg, var(--color-background) 0%, var(--color-card) 50%, #f9f8fc 100%)`,
+        color: "var(--color-card-foreground)",
+      }}
+    >
       <ScrollToTop screenKey={currentScreen} />
 
       {/* screen transitions */}
@@ -198,11 +199,11 @@ function AppContent() {
           <DashboardScreen onNavigateToHabits={handleNavigateToHabits} onNavigate={handleNavigate} />
         )}
         {currentScreen === "coach" && <CoachingScreen onNavigate={handleNavigate} />}
-        {/* {currentScreen === "todos" && <TodosScreen />} */}
+        {currentScreen === "todos" && <TodosScreen />}
         {currentScreen === "focus-tools" && <FocusToolsScreen />}
-        {/* {currentScreen === "timeflow" && <TimeFlowScreen />} */}
+        {currentScreen === "timeflow" && <TimeFlowScreen />}
         {currentScreen === "reflection" && <ReflectionScreen />}
-        {/* {currentScreen === "calendar" && <CalendarScreen />} */}
+        {currentScreen === "calendar" && <CalendarScreen />}
         {currentScreen === "settings" && <SettingsScreen onNavigate={handleNavigate} />}
         {currentScreen === "onboarding-layout" && <OnboardingWrapper editMode="layout" />}
         {currentScreen === "symptom-tracker" && <SymptomTrackerScreen onNavigate={handleNavigate} />}

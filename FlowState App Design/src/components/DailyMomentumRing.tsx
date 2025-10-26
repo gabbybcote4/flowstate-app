@@ -1,5 +1,6 @@
-// DailyMomentumRing.tsx
-
+// src/components/DailyMomentumRing.tsx
+// daily momentum ring component showing user's progress
+import React from "react";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from 'framer-motion';
 import { Flame } from "lucide-react";
@@ -31,7 +32,6 @@ export function DailyMomentumRing() {
     calculateMomentum();
 
     const handleUpdate = () => {
-      console.log("🔄 flowstate-update received — recalculating momentum");
       calculateMomentum();
     };
 
@@ -97,15 +97,6 @@ export function DailyMomentumRing() {
     else if (percentage >= 50) motivationLevel = "strong";
     else if (percentage >= 20) motivationLevel = "building";
 
-    console.log("🧩 Momentum breakdown:", {
-      habitsCompleted,
-      totalHabits,
-      todosCompleted,
-      totalTodos,
-      checkIns,
-      percentage,
-    });
-
     setMomentum({
       habitsCompleted,
       totalHabits,
@@ -149,104 +140,108 @@ export function DailyMomentumRing() {
 
   // render
   return (
-    <div className="flow-card">
-      <div className="flex items-center justify-between mb-4">
-        <div>
-          <h3 className="opacity-60 text-sm mb-1">Today's Momentum</h3>
-          <div className="opacity-80">{getMotivationMessage()}</div>
+    <div className="flow-card p-4">
+      <div className="flex items-center justify-between mb-3">
+        <h3 className="text-sm font-medium">Daily Momentum</h3>
+        <div className="flex items-center gap-2 text-xs opacity-70">
+          <Flame
+            size={18}
+            style={{ color: getMotivationColor() }}
+            className="opacity-80"
+          />
+          {getMotivationMessage()}
         </div>
-        <Flame
-          size={24}
-          style={{ color: getMotivationColor() }}
-          className="opacity-80"
-        />
       </div>
 
-      <div className="flex items-center gap-6">
-        {/* RING */}
-        <div className="relative">
-          <svg width="120" height="120" className="transform -rotate-90">
+      <div className="flex items-center gap-4">
+
+        {/* compact ring */}
+        <div className="relative w-[80px] h-[80px]">
+          <svg width="80" height="80" className="transform -rotate-90">
             <circle
-              cx="60"
-              cy="60"
-              r="45"
+              cx="40"
+              cy="40"
+              r="32"
               fill="none"
-              stroke="#E5E7EB"
-              strokeWidth="8"
+              stroke="var(--color-card-border)"
+              strokeWidth="6"
             />
             <motion.circle
-              cx="60"
-              cy="60"
-              r="45"
+              cx="40"
+              cy="40"
+              r="32"
               fill="none"
               stroke={getMotivationColor()}
-              strokeWidth="8"
+              strokeWidth="6"
               strokeLinecap="round"
-              strokeDasharray={circumference}
-              initial={{ strokeDashoffset: circumference }}
-              animate={{ strokeDashoffset }}
-              transition={{
-                duration: 1.5,
-                ease: [0.25, 0.46, 0.45, 0.94],
-                delay: 0.2,
+              strokeDasharray={2 * Math.PI * 32}
+              animate={{
+                strokeDashoffset:
+                  (2 * Math.PI * 32 * (100 - momentum.percentage)) / 100,
               }}
+              transition={{ duration: 1.2, ease: "easeOut" }}
             />
           </svg>
           <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <div className="text-3xl" style={{ color: getMotivationColor() }}>
+            <div
+              className="text-base font-semibold opacity-60"            
+              >
               {momentum.percentage}%
             </div>
-            <div className="text-xs opacity-60 mt-1">complete</div>
+            <div className="text-[10px] opacity-60 leading-tight">complete</div>
           </div>
         </div>
 
-        {/* STATS */}
-        <div className="flex-1 space-y-3">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-purple-100 flex items-center justify-center text-purple-600 text-lg">
-              💪
-            </div>
-            <div>
-              <div className="text-xs opacity-60">Habits</div>
-              <div className="text-sm">
-                {momentum.habitsCompleted}/{momentum.totalHabits}
+        {/* dashboard stats */}
+        <div className="flex-1 space-y-2">
+          {[
+            {
+              label: "Habits",
+              emoji: "💪",
+              done: momentum.habitsCompleted,
+              total: momentum.totalHabits,
+              color: "#8B5CF6",
+            },
+            {
+              label: "To-Dos",
+              emoji: "📝",
+              done: momentum.todosCompleted,
+              total: momentum.totalTodos,
+              color: "#EC4899",
+            },
+            {
+              label: "Check-ins",
+              emoji: "💬",
+              done: momentum.todayCheckIns,
+              total: momentum.totalCheckIns,
+              color: "#10B981",
+            },
+          ].map((item) => {
+            const percent =
+              item.total > 0 ? (item.done / item.total) * 100 : 0;
+            return (
+              <div key={item.label} className="text-xs">
+                <div className="flex justify-between mb-0.5">
+                  <span className="opacity-70">{item.emoji} {item.label}</span>
+                  <span className="opacity-60">
+                    {item.done}/{item.total || 0}
+                  </span>
+                </div>
+                <div className="w-full h-[5px] rounded-full bg-gray-100 dark:bg-gray-700/40 overflow-hidden">
+                  <div
+                    className="h-full rounded-full transition-all duration-700"
+                    style={{
+                      width: `${percent}%`,
+                      backgroundColor: `${item.color}33`, // adds transparency
+                      boxShadow: `0 0 6px ${item.color}66`, // soft glow
+                    }}
+                  />
+                </div>
               </div>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-pink-100 flex items-center justify-center text-pink-600 text-lg">
-              📝
-            </div>
-            <div>
-              <div className="text-xs opacity-60">To-Dos</div>
-              <div className="text-sm">
-                {momentum.todosCompleted}/{momentum.totalTodos}
-              </div>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-green-100 flex items-center justify-center text-green-600 text-lg">
-              💬
-            </div>
-            <div>
-              <div className="text-xs opacity-60">Check-ins</div>
-              <div className="text-sm">
-                {momentum.todayCheckIns}/{momentum.totalCheckIns}
-              </div>
-            </div>
-          </div>
+            );
+          })}
         </div>
       </div>
-
-      {momentum.percentage < 30 && momentum.totalTodos + momentum.totalHabits > 0 && (
-        <div className="mt-4 pt-4 border-t border-[var(--color-ring-offset-background)]">
-          <p className="text-xs opacity-60 text-center">
-            Small steps create big momentum ✨
-          </p>
-        </div>
-      )}
     </div>
   );
 }

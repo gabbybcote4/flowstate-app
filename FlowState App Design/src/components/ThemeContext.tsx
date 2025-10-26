@@ -1,6 +1,5 @@
 // src/components/ThemeContext.tsx
 // manages global theme, font size, nudges, and dark mode state
-
 import React, { createContext, useContext, useState, useEffect } from "react";
 
 // theme + font size types
@@ -40,14 +39,14 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 const lightThemeConfig: Record<Theme, ThemeColors> = {
   Lavender: {
     primary: "#a78bfa",
-    primaryLight: "#ddd6fe",
+    primaryLight: "#c4b5fd",
     primaryDark: "#7c3aed",
     accentLight: "#f5d0fe",
-    background: "#faf9ff",
-    card: "#ffffff",
-    gradientFrom: "#faf9ff",
-    gradientTo: "#f5f3ff",
-    cardForeground: "#1f2937",
+    background: "#908cb9ff", // slightly darker base background
+    card: "#f9f8fc", // soft off-white card background
+    gradientFrom: "#ebeaf3",
+    gradientTo: "#e3e1ec",
+    cardForeground: "#1f1f27",
     shadow: "rgba(0,0,0,0.08)",
   },
   Mint: {
@@ -55,26 +54,27 @@ const lightThemeConfig: Record<Theme, ThemeColors> = {
     primaryLight: "#a7f3d0",
     primaryDark: "#059669",
     accentLight: "#bbf7d0",
-    background: "#f9fffb",
-    card: "#ffffff",
-    gradientFrom: "#f9fffb",
-    gradientTo: "#ecfdf5",
+    background: "#eaf7f2",
+    card: "#f9fffb",
+    gradientFrom: "#eaf7f2",
+    gradientTo: "#f0fcf7",
     cardForeground: "#1f2937",
     shadow: "rgba(0,0,0,0.08)",
   },
   Peach: {
     primary: "#fb923c",
-    primaryLight: "#fed7aa",
+    primaryLight: "#fdba74",
     primaryDark: "#ea580c",
     accentLight: "#ffe4cc",
-    background: "#fffaf6",
-    card: "#ffffff",
-    gradientFrom: "#fffaf6",
-    gradientTo: "#fff7ed",
+    background: "#fff3ec",
+    card: "#fff8f2",
+    gradientFrom: "#fff3ec",
+    gradientTo: "#ffece1",
     cardForeground: "#1f2937",
     shadow: "rgba(0,0,0,0.08)",
   },
 };
+
 
 // dark theme color sets
 const darkThemeConfig: Record<Theme, ThemeColors> = {

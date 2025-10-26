@@ -1,5 +1,6 @@
 // src/screens/DashboardScreen.tsx
 // main dashboard overview screen — theme + dark mode aligned
+
 import { useState, useEffect } from "react";
 import {
   Smile,
@@ -12,10 +13,8 @@ import {
 } from "lucide-react";
 import { useTheme } from "../components/ThemeContext";
 import { useUserConfig } from "../config/UserConfigContext";
-import { AdaptiveGreeting } from "../components/greeting/AdaptiveGreeting";
-import { TimeOfDayIndicator } from "../components/indicator/TimeOfDayIndicator";
+import { AdaptiveGreeting } from "../components/AdaptiveGreeting";
 import { DailyMomentumRing } from "../components/DailyMomentumRing";
-//import { WeatherMoonWidget } from "../components/widget/WeatherMoonWidget";
 import { WeeklySummaryCard } from "../components/card/WeeklySummaryCard";
 import { HealthWidget } from "../components/widget/HealthWidget";
 import { LifeAreaCard } from "../components/card/LifeAreaCard";
@@ -50,7 +49,7 @@ interface LifeArea {
 }
 
 const LIFE_AREA_CONFIG = [
-  { id: "Health", icon: "❤️", title: "Health", suggestion: "Your body deserves gentle care", color: "#DCBBA3" },
+  { id: "Health", icon: "❤️", title: "Health", suggestion: "Your body deserves care", color: "#DCBBA3" },
   { id: "Work", icon: "💼", title: "Work", suggestion: "Progress over perfection", color: "#A3C9DC" },
   { id: "Self-Care", icon: "🧘", title: "Self-Care", suggestion: "You deserve this time", color: "#E9D5FF" },
   { id: "Relationships", icon: "💕", title: "Relationships", suggestion: "Connection nurtures the soul", color: "#DCADC9" },
@@ -60,13 +59,40 @@ const LIFE_AREA_CONFIG = [
   { id: "Finances", icon: "💰", title: "Finances", suggestion: "Financial peace brings freedom", color: "#D4AF37" },
 ];
 
+const WIDGET_SIZES: Record<string, "small" | "medium" | "large"> = {
+  mood: "small",
+  momentum: "small",
+  todos: "small",
+  health: "medium",
+  weekly: "medium",
+  habits: "large",
+  aiInsights: "medium",
+  reflection: "medium",
+  adaptive: "medium",
+};
+
 export function DashboardScreen({ onNavigateToHabits, onNavigate }: DashboardScreenProps = {}) {
   const { themeColors, darkMode } = useTheme();
   const { config } = useUserConfig();
   const [currentMood, setCurrentMood] = useState<string>("");
   const [lifeAreas, setLifeAreas] = useState<LifeArea[]>([]);
   const [selectedLifeArea, setSelectedLifeArea] = useState<LifeArea | null>(null);
+  const [todos, setTodos] = useState<any[]>([]);
 
+  // load saved todos once
+  useEffect(() => {
+    const savedTodos = JSON.parse(localStorage.getItem("flowstate-todos") || "[]");
+    setTodos(savedTodos);
+  }, []);
+
+  const toggleTodo = (index: number) => {
+    const updated = [...todos];
+    updated[index].completed = !updated[index].completed;
+    localStorage.setItem("flowstate-todos", JSON.stringify(updated));
+    setTodos(updated);
+  };
+
+  // mood + life area calculations
   useEffect(() => {
     const savedMood = getLocalStorageItem("flowstate-mood", "");
     if (savedMood) setCurrentMood(savedMood);
@@ -112,19 +138,10 @@ export function DashboardScreen({ onNavigateToHabits, onNavigate }: DashboardScr
 
   const getMoodLabel = (mood: string) => {
     switch (mood) {
-      case "low": return "low energy";
-      case "moderate": return "moderate";
-      case "good": return "good energy";
-      default: return "not set";
-    }
-  };
-
-  const getMoodEmoji = (mood: string) => {
-    switch (mood) {
-      case "low": return "😌";
-      case "moderate": return "😊";
-      case "good": return "🌟";
-      default: return "💭";
+      case "low": return "Low energy";
+      case "moderate": return "Moderate";
+      case "good": return "Good energy";
+      default: return "Not set";
     }
   };
 
@@ -133,18 +150,33 @@ export function DashboardScreen({ onNavigateToHabits, onNavigate }: DashboardScr
 
   const renderWidget = (widgetId: string) => {
     switch (widgetId) {
-      case "mood":
-        return (
-          <div className="flow-card">
-            <div className="flex items-center gap-3 mb-3">
-              <Smile size={20} style={{ color: themeColors.primary }} />
-              <h3>Today's mood</h3>
-            </div>
-            <div className="text-sm opacity-70">
-              {currentMood ? `${getMoodEmoji(currentMood)} ${getMoodLabel(currentMood)}` : "no check-in yet"}
-            </div>
-          </div>
-        );
+      // case "mood":
+      //   return (
+      //     <div
+      //       className="flow-card flex items-center justify-between p-3 rounded-2xl"
+      //       style={{
+      //         minHeight: "64px",
+      //         background: darkMode
+      //           ? "linear-gradient(135deg, #1a1b28, #2b2550)"
+      //           : "linear-gradient(135deg, #f4f2ff, #ede9fe)",
+      //         boxShadow: darkMode
+      //           ? "0 0 10px rgba(167,139,250,0.15)"
+      //           : "0 0 10px rgba(167,139,250,0.1)",
+      //       }}
+      //     >
+      //       <div className="flex items-center gap-2 text-sm font-medium">
+      //         <Smile size={18} style={{ color: themeColors.primary }} />
+      //         <span className="opacity-80">
+      //           Mood : 
+      //           <span className="ml-1 font-semibold opacity-100">
+      //             {currentMood
+      //               ? ` ${getMoodLabel(currentMood)}`
+      //               : " —"}
+      //           </span>
+      //         </span>
+      //       </div>
+      //     </div>
+      //   );
 
       case "momentum":
         return <DailyMomentumRing />;
@@ -165,13 +197,62 @@ export function DashboardScreen({ onNavigateToHabits, onNavigate }: DashboardScr
         return <WeeklySummaryCard onViewDetails={() => onNavigate?.("weekly-insights")} />;
 
       case "todos":
+        const activeTodos = todos.filter((t) => !t.completed).slice(0, 6);
+
         return (
-          <div className="flow-card">
-            <h2 className="flex items-center gap-2 mb-4">
-              <CheckCircle2 size={24} style={{ color: themeColors.primary }} />
-              Today's to-dos
+          <div className="flow-card p-2">
+            <h2 className="flex items-center gap-2 text-sm font-semibold">
+              <CheckCircle2 size={18} style={{ color: themeColors.primary }} />
+              Today's To-Dos
             </h2>
-            <p className="text-sm opacity-70">Your to-do list goes here</p>
+
+            {activeTodos.length > 0 ? (
+              <ul className="text-sm grid grid-cols-2">
+                {activeTodos.map((todo: any, index: number) => (
+                  <li
+                    key={index}
+                    onClick={() => {
+                      // toggle and immediately remove from dashboard view
+                      const allTodos = [...todos];
+                      const todoIndex = todos.findIndex((t) => t.id === todo.id);
+                      if (todoIndex !== -1) {
+                        allTodos[todoIndex].completed = !allTodos[todoIndex].completed;
+                        localStorage.setItem("flowstate-todos", JSON.stringify(allTodos));
+                        setTodos(allTodos.filter((t) => !t.completed));
+                      }
+                    }}
+                    className="flex flex-col rounded-lg border border-[var(--color-input)] hover:bg-[var(--color-accent)] transition-all cursor-pointer"
+                  >
+                    <div className="flex items-center gap-2 py-0.5">
+                      <span
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          const allTodos = [...todos];
+                          const todoIndex = todos.findIndex((t) => t.id === todo.id);
+                          if (todoIndex !== -1) {
+                            allTodos[todoIndex].completed = !allTodos[todoIndex].completed;
+                            localStorage.setItem("flowstate-todos", JSON.stringify(allTodos));
+                            setTodos(allTodos.filter((t) => !t.completed));
+                          }
+                        }}
+                        className="w-3 h-3 flex-shrink-0 rounded-full border border-[var(--color-ring)] hover:scale-110 transition-all"
+                      />
+                      <span className="flex-1 truncate text-[0.9rem] font-sm">
+                        {todo.title}
+                      </span>
+                    </div>
+
+                    {todo.lifeArea && (
+                      <span className="ml-6 mb-1 text-[0.7rem] opacity-60 tracking-wide">
+                        {todo.lifeArea}
+                      </span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-xs opacity-60 italic">No to-dos for today ✨</p>
+            )}
           </div>
         );
 
@@ -180,7 +261,7 @@ export function DashboardScreen({ onNavigateToHabits, onNavigate }: DashboardScr
           <div>
             <h2 className="mb-4">Life areas</h2>
             <p className="text-sm opacity-60 mb-4">Click a life area to view and manage habits</p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-2">
               {lifeAreas.map((area) => (
                 <button
                   key={area.id}
@@ -194,11 +275,7 @@ export function DashboardScreen({ onNavigateToHabits, onNavigate }: DashboardScr
         );
 
       case "aiInsights":
-        return (
-          <div className="flow-card">
-            <p className="text-sm opacity-70">AI insights placeholder</p>
-          </div>
-        );
+        return <div className="flow-card"><p className="text-sm opacity-70">AI insights placeholder</p></div>;
 
       case "reflection":
         return <EncouragementMessage />;
@@ -215,32 +292,68 @@ export function DashboardScreen({ onNavigateToHabits, onNavigate }: DashboardScr
     <div
       className="min-h-screen pb-24 relative overflow-hidden transition-colors"
       style={{
-        background: darkMode
-          ? `linear-gradient(180deg, #0b0d14 0%, #11131c 40%, #0d0f18 100%)`
-          : `linear-gradient(to bottom, ${themeColors.gradientFrom}, ${themeColors.gradientTo})`,
+      background: darkMode
+        ? `linear-gradient(
+            180deg,
+            var(--color-background) 0%,
+            #1a1b28 25%,
+            #201d3d 55%,
+            #14122a 85%,
+            #0d0f18 100%
+          )`
+        : `linear-gradient(
+            180deg,
+            var(--color-background) 0%,
+            #ede9fe 100%,
+            #e3dcff 80%,
+            #dcd4ff 50%,
+            #f3f2ff 20%
+          )`,
       }}
     >
       <div className="p-4 md:p-6 pt-8 md:pt-12 relative z-10">
         <div className="max-w-6xl mx-auto">
+
           <div className="mb-6">
             <AdaptiveGreeting />
           </div>
 
-          <div className="mb-6">
-            <TimeOfDayIndicator />
-          </div>
+          {/* <div className="w-full flex justify-center my-2">
+            <span
+              style={{
+                color: darkMode ? "#a78bfa" : "#6d28d9",
+                fontSize: "0.1rem",
+                lineHeight: "0.5rem",
+              }}
+            >
+              •
+            </span>
+          </div> */}
 
           {dashboardLayout.length > 0 ? (
-            <div className="space-y-6">
-              {dashboardLayout.map((widget) => (
-                <div key={widget.id}>{renderWidget(widget.id)}</div>
-              ))}
+            <div className="grid gap-2">
+              {dashboardLayout.map((widget) => {
+                const size = WIDGET_SIZES[widget.id] || "medium";
+                const colSpan =
+                  size === "large"
+                    ? "sm:col-span-2 lg:col-span-3"
+                    : size === "medium"
+                    ? "sm:col-span-2"
+                    : "col-span-1";
+                return (
+                  <div key={widget.id} className={`relative ${colSpan}`}>
+                    {renderWidget(widget.id)}
+                  </div>
+                );
+              })}
             </div>
           ) : (
-            <div className="flow-card">
+            <div className="flow-card text-center p-6">
               <div className="mb-4 text-4xl">🌱</div>
               <h3 className="mb-2">Your dashboard is empty</h3>
-              <p className="text-sm opacity-70 mb-6">Add widgets to personalize your dashboard</p>
+              <p className="text-sm opacity-70 mb-6">
+                Add widgets to personalize your dashboard
+              </p>
               {onNavigate && (
                 <button
                   onClick={() => onNavigate("settings")}
@@ -253,11 +366,23 @@ export function DashboardScreen({ onNavigateToHabits, onNavigate }: DashboardScr
             </div>
           )}
 
+          <div className="w-full flex justify-center my-6">
+            <span
+              style={{
+                color: darkMode ? "#a78bfa" : "#6d28d9",
+                fontSize: "0.1rem",
+                lineHeight: "1rem",
+              }}
+            >
+              •
+            </span>
+          </div>
+
           {onNavigate && (
             <div className="mt-8">
               <button
                 onClick={() => onNavigate("growth-map")}
-                className="rounded-3xl p-6 shadow-sm border-2 transition-all group relative overflow-hidden"
+                className="rounded-3xl p-2 w-full shadow-sm border-2 transition-all group relative overflow-hidden"
                 style={{
                   background: darkMode
                     ? "linear-gradient(135deg, #2b2550 0%, #1a1b28 100%)"
@@ -268,21 +393,10 @@ export function DashboardScreen({ onNavigateToHabits, onNavigate }: DashboardScr
                     : "0 0 18px -6px rgba(251,191,36,0.25)",
                 }}
               >
-                {/* soft moving glow overlay for dark mode */}
-                {darkMode && (
-                  <div
-                    className="absolute inset-0 opacity-20 blur-2xl animate-pulse"
-                    style={{
-                      background:
-                        "radial-gradient(circle at 30% 30%, rgba(167,139,250,0.3), transparent 60%)",
-                    }}
-                  ></div>
-                )}
-
-                <div className="relative z-10 flex items-center justify-between">
-                  <div className="flex items-center gap-4">
+                <div className="relative flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-2">
                     <div
-                      className="w-14 h-14 rounded-2xl flex items-center justify-center group-hover:opacity-80 transition-all"
+                      className="w-7 h-7 rounded-2xl flex items-center justify-center group-hover:opacity-80 transition-all"
                       style={{
                         backgroundColor: darkMode ? "#a78bfa" : themeColors.primary,
                         boxShadow: darkMode
@@ -290,11 +404,11 @@ export function DashboardScreen({ onNavigateToHabits, onNavigate }: DashboardScr
                           : "0 0 10px rgba(251,191,36,0.3)",
                       }}
                     >
-                      <Flower2 size={28} className="text-white" />
+                      <Flower2 size={14} className="text-white" />
                     </div>
                     <div className="text-left">
                       <h3
-                        className="mb-1 font-medium"
+                        className="mb-1 font-sm"
                         style={{
                           color: darkMode ? "#f4f3ff" : themeColors.primaryDark,
                         }}
@@ -302,7 +416,7 @@ export function DashboardScreen({ onNavigateToHabits, onNavigate }: DashboardScr
                         Explore your growth map
                       </h3>
                       <p
-                        className="text-sm opacity-70"
+                        className="text-xs opacity-50"
                         style={{
                           color: darkMode ? "#b3b8d0" : "inherit",
                         }}
@@ -312,7 +426,7 @@ export function DashboardScreen({ onNavigateToHabits, onNavigate }: DashboardScr
                     </div>
                   </div>
                   <TrendingUp
-                    size={24}
+                    size={12}
                     style={{
                       color: darkMode ? "#c4b5fd" : themeColors.primaryDark,
                       opacity: 0.7,

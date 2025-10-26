@@ -1,6 +1,5 @@
 // src/components/ui/switch.tsx
-// toggle switch component used for dark mode and settings options
-
+// elegant adaptive toggle for light & dark mode, matches FlowState theme
 "use client";
 
 import * as React from "react";
@@ -15,10 +14,14 @@ function Switch({
     <SwitchPrimitive.Root
       data-slot="switch"
       className={cn(
-        // base size and layout
-        "peer inline-flex h-[1.15rem] w-8 shrink-0 items-center rounded-full border border-transparent outline-none transition-all disabled:cursor-not-allowed disabled:opacity-50",
-        // color logic for light and dark mode
-        "data-[state=checked]:bg-[var(--color-primary)] data-[state=unchecked]:bg-[var(--color-switch-background)] dark:data-[state=unchecked]:bg-[var(--color-input)] focus-visible:ring-[3px] focus-visible:ring-[var(--color-ring)]/40",
+        // base structure
+        "peer relative inline-flex h-[1.25rem] w-[2.25rem] shrink-0 cursor-pointer items-center rounded-full border transition-all outline-none",
+        // background & state transitions
+        "data-[state=checked]:bg-[var(--color-primary)] data-[state=unchecked]:bg-[var(--color-muted)]/40",
+        // subtle inner border + glow when active
+        "data-[state=checked]:shadow-[0_0_6px_rgba(167,139,250,0.6)] dark:data-[state=checked]:shadow-[0_0_8px_rgba(167,139,250,0.7)]",
+        "focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]/40 focus-visible:ring-offset-1",
+        "disabled:cursor-not-allowed disabled:opacity-50",
         className
       )}
       {...props}
@@ -26,10 +29,12 @@ function Switch({
       <SwitchPrimitive.Thumb
         data-slot="switch-thumb"
         className={cn(
-          // thumb position + color transition
-          "pointer-events-none block size-4 rounded-full ring-0 transition-transform",
-          // background color logic
-          "flow-card"
+          // base thumb size + motion
+          "pointer-events-none block h-[0.9rem] w-[0.9rem] rounded-full transition-transform duration-200 ease-in-out",
+          // position
+          "translate-x-[0.2rem] data-[state=checked]:translate-x-[1.15rem]",
+          // color logic
+          "bg-white dark:bg-[var(--color-card)] shadow-md"
         )}
       />
     </SwitchPrimitive.Root>

@@ -1,7 +1,8 @@
-/* src/styles/globals.css */
+/* styles/globals.css */
+/* global styles and theme tokens */
 @import "tailwindcss";
 
-/* theme tokens */
+/* theme tokens — base color system */
 @theme {
   /* lavender palette */
   --color-lavender-50: #f5f3ff;
@@ -39,20 +40,38 @@
   --color-switch-background: #e5e7eb;
 }
 
-/* base light mode */
+/* base light mode — soft lavender neutral */
 :root {
-  --color-background: #ffffff;
-  --color-card: #ffffff;
-  --color-input: #e5e7eb;
-  --color-card-foreground: #1f2937;
+  --color-background: #e9e7f3;  /* main background */
+  --color-surface-low: #e3e1ec; /* subtle depth for surfaces */
+  --color-card: #f9f8fc;        /* bright, soft card */
+  --color-input: #eceaf5;
+
+  --color-card-foreground: #1f1f27;
   --color-primary-foreground: #ffffff;
-  --color-muted-foreground: #6b7280;
-  --color-accent: #f3f4f6;
-  --color-ring-offset-background: #ffffff;
-  --color-switch-background: #e5e7eb;
-  --color-accent-light: #f5d0fe;
+  --color-primary-rgb: 167,139,250; /* fallback for light lavender */
+  --color-muted-foreground: #666677;
+  --color-accent: #dcdbe8;
+  --color-accent-light: #f0d8fd;
+
+  --color-ring-offset-background: #ebeaf3;
+  --color-switch-background: #e8e8f2;
+
+  --shadow-low: 0 2px 6px rgba(0, 0, 0, 0.06);
+  --shadow-high: 0 4px 16px rgba(0, 0, 0, 0.1);
+
+  /* Shared variables for consistency */
+  --background-gradient: linear-gradient(
+    180deg,
+    var(--color-background) 0%,
+    var(--color-card) 60%,
+    #f9f8fc 100%
+  );
+  --card-surface: var(--color-card);
+  --card-border: var(--color-accent);
 }
 
+/* global reset + typography */
 html {
   scroll-behavior: smooth;
 }
@@ -71,19 +90,18 @@ html {
 }
 
 body {
-  background-color: var(--color-background);
+  background: var(--background-gradient);
   color: var(--color-card-foreground);
   font-family: var(--font-sans);
   transition: background-color 0.3s, color 0.3s;
 }
 
-/* typography & components */
 h1, h2, h3 {
   color: var(--color-card-foreground);
 }
 
 p {
-  font-size: 1rem;
+  font-size: 0.9rem;
   line-height: 1.6;
 }
 
@@ -94,15 +112,15 @@ select {
   font-family: inherit;
 }
 
-/* global containers */
+/* component basics */
 .card,
 .dialog,
 section,
 nav,
 footer {
-  background-color: var(--color-card);
+  background-color: var(--card-surface);
   color: var(--color-card-foreground);
-  border-color: var(--color-accent);
+  border-color: var(--card-border);
 }
 
 /* inputs */
@@ -112,6 +130,14 @@ select {
   background-color: var(--color-card);
   color: var(--color-card-foreground);
   border-color: var(--color-input);
+}
+
+/* dashboard container example */
+section.dashboard {
+  background-color: var(--color-accent);
+  border-radius: 1.25rem;
+  box-shadow: var(--shadow-low);
+  padding: 1rem;
 }
 
 /* dark mode */
@@ -138,74 +164,43 @@ html.dark,
 
   --shadow-low: 0 2px 6px rgba(0, 0, 0, 0.3);
   --shadow-high: 0 4px 12px rgba(0, 0, 0, 0.5);
+
+  --background-gradient: linear-gradient(
+    180deg,
+    var(--color-background) 0%,
+    #11131c 40%,
+    #0d0f18 100%
+  );
+  --card-surface: var(--color-card);
+  --card-border: var(--color-accent);
 }
 
 html.dark body {
-  background-color: var(--color-background);
+  background: var(--background-gradient);
   color: var(--color-card-foreground);
-}
-
-.dark .card,
-.dark section,
-.dark nav,
-.dark footer {
-  background-color: var(--color-card);
-  color: var(--color-card-foreground);
-  border: 1px solid var(--color-accent);
-  box-shadow: var(--shadow-low);
-  border-radius: 1rem;
-}
-
-.dark h1,
-.dark h2,
-.dark h3 {
-  color: var(--color-card-foreground);
-}
-
-.dark p {
-  color: var(--color-muted-foreground);
-}
-
-.dark input,
-.dark textarea,
-.dark select {
-  background-color: var(--color-input);
-  color: var(--color-card-foreground);
-  border-color: var(--color-accent);
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4);
-}
-
-.dark .dashboard-card,
-.dark .bg-\[var\(--color-card\)\] {
-  background-color: #181b25 !important;
-  border-color: rgba(255, 255, 255, 0.06) !important;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
 /* card utilities */
 .flow-card {
   position: relative;
-  background: var(--color-card);
+  background: var(--card-surface);
   border-radius: 1.25rem;
-  border: 1px solid var(--color-ring-offset-background);
-  padding: 1.5rem;
+  border: 1px solid var(--card-border);
+  padding: 0.9rem;
+  box-shadow: var(--shadow-low);
+  backdrop-filter: blur(8px);
   transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  outline: rgba(90, 83, 108, 0.25) solid 2px;
 }
 
 .flow-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
-}
-
-.flow-card-content {
-  position: relative;
-  z-index: 10;
+  box-shadow: var(--shadow-high);
 }
 
 .dark .flow-card {
-  background: #181b25;
-  border-color: rgba(255, 255, 255, 0.08);
+  background: var(--card-surface);
+  border-color: var(--card-border);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
 }
 
@@ -228,7 +223,7 @@ html.dark body {
   opacity: 0.3;
 }
 
-/* text contrast in dark cards */
+/* text contrast */
 .dark .flow-card h2,
 .dark .flow-card h3 {
   color: #f5f3ff;
@@ -238,7 +233,7 @@ html.dark body {
   color: #b3b8d0;
 }
 
-/* utilities */
+/* utility classes */
 .theme-accent-glow {
   box-shadow: 0 0 20px -5px var(--color-primary);
 }
@@ -254,4 +249,14 @@ html.dark body {
 
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
+}
+
+@keyframes gradient-move {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-gradient-move {
+  animation: gradient-move 15s ease-in-out infinite alternate;
 }
