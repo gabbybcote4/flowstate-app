@@ -50,9 +50,6 @@ export function HomeScreen() {
           {/* adaptive greeting */}
           <AdaptiveGreeting />
 
-          {/* time of day indicator */}
-          <TimeOfDayIndicator />
-
           {/* weather & moon */}
           <WeatherMoonWidget />
 
