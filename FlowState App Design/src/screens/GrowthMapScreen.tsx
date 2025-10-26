@@ -1,4 +1,4 @@
-src/screens/GrowthMapScreen.tsx
+// src/screens/GrowthMapScreen.tsx
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { useTheme } from '../components/context/ThemeContext';
