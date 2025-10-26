@@ -8,7 +8,6 @@ import { WeatherMoonWidget } from "../components/widget/WeatherMoonWidget";
 import { AdaptiveGreeting } from "../components/AdaptiveGreeting";
 import { MoodCheckInWidget } from "../components/widget/MoodCheckInWidget";
 import { QuickReflectionCard } from "../components/card/QuickReflectionCard";
-import { TimeOfDayIndicator } from "../components/TimeOfDayIndicator";
 import { getTimeOfDay } from "../components/background/adaptiveBackgrounds";
 import { Moon, Footprints, Heart, Plus } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogFooter } from "../components/ui/dialog";
