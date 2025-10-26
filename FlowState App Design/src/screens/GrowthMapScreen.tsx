@@ -1,7 +1,7 @@
 // src/screens/GrowthMapScreen.tsx
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
-import { useTheme } from '../components/context/ThemeContext';
+import { useTheme } from '../components/ThemeContext';
 
 import { 
   Sparkles, 
@@ -300,12 +300,12 @@ export function GrowthMapScreen({ onNavigate }: GrowthMapScreenProps) {
 
         {/* Overall Growth Score */}
         <div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
+          // initial={{ opacity: 0, scale: 0.9 }}
+          // animate={{ opacity: 1, scale: 1 }}
           className="max-w-xs mx-auto mb-12 flow-card"
         >
           <div className="text-sm opacity-60 mb-2">Overall Growth</div>
-          <div 
+          <motion.div 
             className="relative w-32 h-32 mx-auto mb-3"
             animate={overallGrowth >= 70 ? { 
               scale: [1, 1.05, 1],
@@ -355,7 +355,7 @@ export function GrowthMapScreen({ onNavigate }: GrowthMapScreenProps) {
                 {overallGrowth}%
               </motion.span>
             </div>
-          </ div>
+          </ motion.div>
           <p className="text-sm opacity-70">
             {overallGrowth >= 70 ? 'Thriving across life areas! 🌟' 
               : overallGrowth >= 40 ? 'Building momentum 💪'
@@ -366,20 +366,21 @@ export function GrowthMapScreen({ onNavigate }: GrowthMapScreenProps) {
         {/* Flower Visualization */}
         <div className="max-w-2xl mx-auto mb-12">
           <div className="relative h-96 flex items-center justify-center">
+
             {/* Center Hub */}
             <div
-              initial={{ scale: 0 }}
-              animate={{ 
-                scale: 1,
-              }}
-              transition={{ delay: 0.2, type: 'spring' }}
+              // initial={{ scale: 0 }}
+              // animate={{ 
+              //   scale: 1,
+              // }}
+              // transition={{ delay: 0.2, type: 'spring' }}
               className="absolute w-24 h-24 rounded-full flex items-center justify-center z-10 shadow-xl"
               style={{ 
                 backgroundColor: themeColors.primary,
                 boxShadow: `0 0 30px ${themeColors.primary}40`,
               }}
             >
-              <div
+              <motion.div
                 animate={{ 
                   scale: [1, 1.1, 1],
                 }}
@@ -390,7 +391,7 @@ export function GrowthMapScreen({ onNavigate }: GrowthMapScreenProps) {
                 }}
               >
                 <Heart size={32} className="text-white" />
-              </ div>
+              </ motion.div>
             </ div>
 
             {/* Petals/Life Areas */}
@@ -402,7 +403,7 @@ export function GrowthMapScreen({ onNavigate }: GrowthMapScreenProps) {
                 : 0;
 
               return (
-                < button
+                < motion.button
                   key={area.name}
                   initial={{ scale: 0, opacity: 0 }}
                   animate={{ 
@@ -445,26 +446,26 @@ export function GrowthMapScreen({ onNavigate }: GrowthMapScreenProps) {
                     {area.icon}
                   </motion.span>
                   {data && data.growthTrend === 'up' && (
-                    <div 
+                    <motion.div 
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
                       transition={{ delay: 0.5 + index * 0.1 }}
                       className="absolute -top-1 -right-1 w-5 h-5 bg-green-500 rounded-full flex items-center justify-center"
                     >
                       <TrendingUp size={12} className="text-white" />
-                    </ div>
+                    </ motion.div>
                   )}
                   {data && completionRate === 100 && data.activeHabits > 0 && (
-                    <div 
+                    <motion.div 
                       initial={{ scale: 0, rotate: -180 }}
                       animate={{ scale: 1, rotate: 0 }}
                       transition={{ delay: 0.6 + index * 0.1, type: 'spring' }}
                       className="absolute -bottom-1 -right-1 w-5 h-5 bg-yellow-500 rounded-full flex items-center justify-center"
                     >
                       <Award size={12} className="text-white" />
-                    </ div>
+                    </motion.div>
                   )}
-                </ button>
+                </ motion.button>
               );
             })}
 
@@ -567,7 +568,7 @@ export function GrowthMapScreen({ onNavigate }: GrowthMapScreenProps) {
                 {/* Events */}
                 <div className="space-y-6">
                   {timelineEvents.map((event, index) => (
-                    < button
+                    < motion.button
                       key={event.id}
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
@@ -579,7 +580,7 @@ export function GrowthMapScreen({ onNavigate }: GrowthMapScreenProps) {
                       {/* Date dot */}
                       <div className="relative flex-shrink-0">
                         <div
-                          whileHover={{ scale: 1.3 }}
+                          //whileHover={{ scale: 1.3 }}
                           className="w-16 h-16 rounded-full flex items-center justify-center shadow-lg relative z-10 transition-all"
                           style={{ 
                             backgroundColor: event.color || themeColors.primary,
@@ -592,7 +593,7 @@ export function GrowthMapScreen({ onNavigate }: GrowthMapScreenProps) {
                         </ div>
                         
                         {/* Connection pulse */}
-                        <div
+                        <motion.div
                           initial={{ scale: 0.8, opacity: 0 }}
                           animate={{ 
                             scale: [0.8, 1.2, 0.8],
@@ -614,7 +615,7 @@ export function GrowthMapScreen({ onNavigate }: GrowthMapScreenProps) {
                       {/* Event content */}
                       <div 
                         className="flex-1 bg-gray-50 rounded-2xl p-5 group-hover:bg-gray-100 transition-all"
-                        whileHover={{ x: 5 }}
+                        //whileHover={{ x: 5 }}
                       >
                         <div className="flex items-start justify-between mb-2">
                           <div>
@@ -672,15 +673,15 @@ export function GrowthMapScreen({ onNavigate }: GrowthMapScreenProps) {
                           </div>
                         )}
                       </ div>
-                    </ button>
+                    </ motion.button>
                   ))}
                 </div>
 
                 {/* End marker */}
                 <div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: timelineEvents.length * 0.05 + 0.5 }}
+                  // initial={{ opacity: 0 }}
+                  // animate={{ opacity: 1 }}
+                  // transition={{ delay: timelineEvents.length * 0.05 + 0.5 }}
                   className="flex items-center gap-6 mt-8"
                 >
                   <div className="w-16 h-16 rounded-full flex items-center justify-center bg-gradient-to-br shadow-lg"
@@ -703,14 +704,14 @@ export function GrowthMapScreen({ onNavigate }: GrowthMapScreenProps) {
       {/* Expanded Detail Panel */}
       <AnimatePresence>
         {selectedArea && selectedData && selectedAreaConfig && (
-          <div
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 bg-black/50 z-50 flex items-end md:items-center justify-center p-4"
             onClick={() => setSelectedArea(null)}
           >
-            <div
+            <motion.div
               initial={{ y: '100%', opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: '100%', opacity: 0 }}
@@ -830,8 +831,8 @@ export function GrowthMapScreen({ onNavigate }: GrowthMapScreenProps) {
               {/* Actions */}
               <div className="p-6 space-y-3">
                 < button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  //whileHover={{ scale: 1.02 }}
+                  //whileTap={{ scale: 0.98 }}
                   onClick={() => handleExploreArea(selectedAreaConfig.name)}
                   className="w-full py-4 rounded-2xl text-white flex items-center justify-center gap-2 shadow-lg transition-all"
                   style={{ backgroundColor: selectedAreaConfig.color }}
@@ -865,22 +866,22 @@ export function GrowthMapScreen({ onNavigate }: GrowthMapScreenProps) {
                   Schedule in Time Flow
                 </button>
               </div>
-            </ div>
-          </ div>
+            </ motion.div>
+          </ motion.div>
         )}
       </AnimatePresence>
 
       {/* Timeline Event Detail Modal */}
       <AnimatePresence>
         {selectedEvent && (
-          <div
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 bg-black/50 z-50 flex items-end md:items-center justify-center p-4"
             onClick={() => setSelectedEvent(null)}
           >
-            <div
+            <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
@@ -981,8 +982,8 @@ export function GrowthMapScreen({ onNavigate }: GrowthMapScreenProps) {
                 <div className="flex gap-3">
                   {selectedEvent.type === 'habit' && (
                     < button
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
+                      // whileHover={{ scale: 1.02 }}
+                      // whileTap={{ scale: 0.98 }}
                       onClick={() => {
                         setSelectedEvent(null);
                         onNavigate('habits');
@@ -995,8 +996,8 @@ export function GrowthMapScreen({ onNavigate }: GrowthMapScreenProps) {
                   )}
                   {selectedEvent.type === 'reflection' && (
                     < button
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
+                      // whileHover={{ scale: 1.02 }}
+                      // whileTap={{ scale: 0.98 }}
                       onClick={() => {
                         setSelectedEvent(null);
                         onNavigate('reflection');
@@ -1009,8 +1010,8 @@ export function GrowthMapScreen({ onNavigate }: GrowthMapScreenProps) {
                   )}
                   {selectedEvent.type === 'mood' && (
                     < button
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
+                      // whileHover={{ scale: 1.02 }}
+                      // whileTap={{ scale: 0.98 }}
                       onClick={() => {
                         setSelectedEvent(null);
                         onNavigate('coach');
@@ -1029,8 +1030,8 @@ export function GrowthMapScreen({ onNavigate }: GrowthMapScreenProps) {
                   </button>
                 </div>
               </div>
-            </ div>
-          </ div>
+            </ motion.div>
+          </ motion.div>
         )}
       </AnimatePresence>
     </div>
