@@ -102,7 +102,7 @@ function DraggableEvent({ event, onDrop, onToggleComplete, onEdit, onDelete, onC
   if (viewType === 'week' || viewType === 'month') {
     return (
       <div
-        ref={drag}
+        //ref={drag}
         onClick={() => onEdit(event)}
         className={`rounded-lg border-l-4 px-2 py-1 mb-1 cursor-pointer text-xs ${conflictStyle} ${completedStyle} ${
           isDragging ? 'opacity-50' : 'hover:shadow-sm'
@@ -141,7 +141,7 @@ function DraggableEvent({ event, onDrop, onToggleComplete, onEdit, onDelete, onC
   // Full view for day/3day
   return (
     <div
-      ref={drag}
+      //ref={drag}
       onMouseEnter={() => setShowActions(true)}
       onMouseLeave={() => setShowActions(false)}
       className={`absolute ${compact ? 'left-0 right-1' : 'left-16 right-2'} rounded-xl border-l-4 p-2 cursor-move transition-all duration-200 ${conflictStyle} ${completedStyle} ${
@@ -255,7 +255,7 @@ function TimeSlot({ hour, minute, onDrop, date, showLabel = true }: TimeSlotProp
 
   return (
     <div
-      ref={drop}
+      //ref={drop}
       className={`relative h-5 border-b transition-colors ${
         minute === 0 ? 'border-gray-300' : 'border-[var(--color-ring-offset-background)]'
       } ${isOver ? 'bg-lavender-50' : ''}`}
@@ -548,7 +548,7 @@ export function CalendarScreen() {
                   const statusColor = status === 'full' ? '#10b981' : status === 'balanced' ? '#f59e0b' : '#ef4444';
                   
                   return (
-                    <div
+                    <motion.div
                       key={balance.area}
                       initial={{ opacity: 0, scale: 0.9 }}
                       animate={{ opacity: 1, scale: 1 }}
@@ -566,7 +566,7 @@ export function CalendarScreen() {
                         style={{ backgroundColor: statusColor }}
                         title={status}
                       />
-                    </ div>
+                    </ motion.div>
                   );
                 })}
               </div>
