@@ -1,7 +1,7 @@
-src/screens/CoachChatScreen.tsx
+//src/screens/CoachChatScreen.tsx
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
-import { useTheme } from '../components/context/ThemeContext';
+import { useTheme } from '../components/ThemeContext';
 import { MessageCircle, Send, Sparkles, TrendingUp, Moon, Brain, Heart, RotateCcw, ArrowLeft, Activity, Coffee, Sun, Lightbulb, Zap, Target } from 'lucide-react';
 
 import { toast } from 'sonner';
@@ -633,10 +633,11 @@ export function CoachChatScreen({ onNavigate }: CoachChatScreenProps) {
 
   return (
     <div className="min-h-screen pb-24" style={{ backgroundColor: themeColors.background }}>
+
       {/* Header */}
       <div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
+        // initial={{ opacity: 0, y: -20 }}
+        // animate={{ opacity: 1, y: 0 }}
         className="sticky top-0 z-20 flow-card"
       >
         <div className="max-w-4xl mx-auto">
@@ -713,7 +714,7 @@ export function CoachChatScreen({ onNavigate }: CoachChatScreenProps) {
               {insightChips.map(chip => {
                 const Icon = chip.icon;
                 return (
-                  <div
+                  <motion.div
                     key={chip.id}
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
@@ -726,7 +727,7 @@ export function CoachChatScreen({ onNavigate }: CoachChatScreenProps) {
                     <Icon size={12} style={{ color: chip.color }} />
                     <span style={{ color: chip.color }}>{chip.label}:</span>
                     <span className="opacity-80">{chip.value}</span>
-                  </ div>
+                  </ motion.div>
                 );
               })}
             </div>
@@ -738,7 +739,7 @@ export function CoachChatScreen({ onNavigate }: CoachChatScreenProps) {
       <div className="max-w-4xl mx-auto px-4 md:px-6 py-6 space-y-4">
         <AnimatePresence>
           {messages.map((message, index) => (
-            <div
+            <motion.div
               key={message.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -764,8 +765,8 @@ export function CoachChatScreen({ onNavigate }: CoachChatScreenProps) {
                     {message.quickReplies.map(reply => (
                       < button
                         key={reply.id}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
+                        // whileHover={{ scale: 1.05 }}
+                        // whileTap={{ scale: 0.95 }}
                         onClick={() => handleQuickReply(reply)}
                         className="px-4 py-2 rounded-2xl text-sm transition-all flow-card"
                       >
@@ -775,37 +776,37 @@ export function CoachChatScreen({ onNavigate }: CoachChatScreenProps) {
                   </div>
                 )}
               </div>
-            </ div>
+            </ motion.div>
           ))}
         </AnimatePresence>
 
         {/* Typing Indicator */}
         {isTyping && (
-          <div
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="flex justify-start"
           >
             <div className="bg-gradient-to-br from-white to-gray-50 rounded-3xl px-5 py-4 shadow-sm border border-[var(--color-ring-offset-background)]">
               <div className="flex gap-2">
-                <div
+                <motion.div
                   animate={{ scale: [1, 1.2, 1] }}
                   transition={{ repeat: Infinity, duration: 0.8, delay: 0 }}
                   className="w-2 h-2 rounded-full bg-gray-400"
                 />
-                <div
+                <motion.div
                   animate={{ scale: [1, 1.2, 1] }}
                   transition={{ repeat: Infinity, duration: 0.8, delay: 0.2 }}
                   className="w-2 h-2 rounded-full bg-gray-400"
                 />
-                <div
+                <motion.div
                   animate={{ scale: [1, 1.2, 1] }}
                   transition={{ repeat: Infinity, duration: 0.8, delay: 0.4 }}
                   className="w-2 h-2 rounded-full bg-gray-400"
                 />
               </div>
             </div>
-          </ div>
+          </ motion.div>
         )}
 
         <div ref={messagesEndRef} />
@@ -820,8 +821,8 @@ export function CoachChatScreen({ onNavigate }: CoachChatScreenProps) {
               return (
                 < button
                   key={action.id}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  // whileHover={{ scale: 1.05 }}
+                  // whileTap={{ scale: 0.95 }}
                   onClick={() => handleQuickAction(action.action)}
                   className="flex items-center gap-2 px-4 py-2.5 rounded-2xl text-sm flow-card"
                 >
@@ -843,8 +844,8 @@ export function CoachChatScreen({ onNavigate }: CoachChatScreenProps) {
               className="flex-1 bg-transparent outline-none text-gray-900 placeholder-gray-400"
             />
             < button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              // whileHover={{ scale: 1.05 }}
+              // whileTap={{ scale: 0.95 }}
               onClick={handleSendMessage}
               disabled={!inputValue.trim()}
               className="p-3 rounded-2xl transition-all disabled:opacity-50"
