@@ -1,27 +1,17 @@
 // src/App.tsx
-// main application wrapper and navigation controller
 import React, { useEffect } from "react";
-
 import { UserConfigProvider } from "./config/UserConfigContext";
 import { ThemeProvider, useTheme } from "./components/ThemeContext";
-import {
-  NotificationProvider,
-  EnhancedNotificationDisplay,
-} from "./components/EnhancedNotificationSystem";
-import {
-  NavigationProvider,
-  useNavigation,
-} from "./components/context/NavigationContext";
+import { NotificationProvider, EnhancedNotificationDisplay } from "./components/EnhancedNotificationSystem";
+import { NavigationProvider, useNavigation } from "./components/context/NavigationContext";
 import { NavigationTransition } from "./components/NavigationTransition";
 import { AnimatedBottomNav } from "./components/AnimatedBottomNav";
 import { AnimatedMoreMenu } from "./components/AnimatedMoreMenu";
 import { ScrollToTop } from "./components/ScrollToTop";
 import { Toaster } from "./components/ui/sonner";
-
 import { useMoodCheck } from "./hooks/useMoodCheck";
 import { useConfigSync } from "./hooks/useConfigSync";
 import { migrateLocalStorage } from "./lib/localStorage-migration";
-
 import {
   Home,
   ListTodo,
@@ -62,7 +52,6 @@ import { CommunityScreen } from "./screens/CommunityScreen";
 import { HabitEducationScreen } from "./screens/HabitEducationScreen";
 import { CoachChatScreen } from "./screens/CoachChatScreen"; 
 import { GrowthMapScreen } from "./screens/GrowthMapScreen"; 
-
 
 // bottom navigation configuration
 const NAV_ITEMS = [
@@ -256,16 +245,16 @@ export default function App() {
   }, []);
 
   return (
-    <UserConfigProvider>
-      <ThemeProvider>
-        <NotificationProvider>
-          <NavigationProvider persist initialScreen="home">
-            <OnboardingWrapper>
+    <ThemeProvider>
+      <UserConfigProvider>
+        <NavigationProvider persist initialScreen="home">
+          <OnboardingWrapper>
+            <NotificationProvider>
               <AppContent />
-            </OnboardingWrapper>
-          </NavigationProvider>
-        </NotificationProvider>
-      </ThemeProvider>
-    </UserConfigProvider>
+            </NotificationProvider>
+          </OnboardingWrapper>
+        </NavigationProvider>
+      </UserConfigProvider>
+    </ThemeProvider>
   );
 }

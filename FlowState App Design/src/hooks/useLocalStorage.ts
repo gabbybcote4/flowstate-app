@@ -1,16 +1,11 @@
-/**
- * useLocalStorage Hook
- * 
- * Reusable hook for localStorage state management with TypeScript support
- */
-
+//src/hooks/useLocalStorage.ts
 import { useState, useEffect, useCallback } from 'react';
 
 export function useLocalStorage<T>(
   key: string,
   initialValue: T
 ): [T, (value: T | ((val: T) => T)) => void, () => void] {
-  // State to store our value
+  // state to store our value
   const [storedValue, setStoredValue] = useState<T>(() => {
     if (typeof window === 'undefined') {
       return initialValue;
@@ -22,16 +17,16 @@ export function useLocalStorage<T>(
       }
       
       try {
-        // Try to parse as JSON
+        // try to parse as JSON
         return JSON.parse(item);
       } catch (parseError) {
-        // If parsing fails, it's a plain string - migrate it automatically
+        // if parsing fails, plain string - migrate it automatically
         console.log(`Auto-migrating plain string for key "${key}" in useLocalStorage`);
         
-        // Re-save as JSON-stringified value
+        // re-save as JSON-stringified value
         window.localStorage.setItem(key, JSON.stringify(item));
         
-        // Return the plain string as the value
+        // return plain string as value
         return item as T;
       }
     } catch (error) {
@@ -40,11 +35,11 @@ export function useLocalStorage<T>(
     }
   });
 
-  // Return a wrapped version of useState's setter function that persists to localStorage
+  // return wrapped version of useState's setter function that persists to localStorage
   const setValue = useCallback(
     (value: T | ((val: T) => T)) => {
       try {
-        // Allow value to be a function so we have same API as useState
+        // allow value to be function so same API as useState
         const valueToStore =
           value instanceof Function ? value(storedValue) : value;
         
@@ -60,7 +55,7 @@ export function useLocalStorage<T>(
     [key, storedValue]
   );
 
-  // Function to remove the value from localStorage
+  // function to remove the value from localStorage
   const removeValue = useCallback(() => {
     try {
       if (typeof window !== 'undefined') {
@@ -75,9 +70,7 @@ export function useLocalStorage<T>(
   return [storedValue, setValue, removeValue];
 }
 
-/**
- * Simple localStorage getter with automatic plain-string migration
- */
+ // simple localStorage getter with automatic plain-string migration
 export function getLocalStorageItem<T>(key: string, defaultValue: T): T {
   if (typeof window === 'undefined') {
     return defaultValue;
@@ -89,16 +82,16 @@ export function getLocalStorageItem<T>(key: string, defaultValue: T): T {
     }
     
     try {
-      // Try to parse as JSON
+      // try to parse as JSON
       return JSON.parse(item);
     } catch (parseError) {
-      // If parsing fails, it's a plain string - migrate it automatically
+      // if parsing fails, plain string - migrate it automatically
       console.log(`Auto-migrating plain string for key "${key}"`);
       
-      // Re-save as JSON-stringified value
+      // re-save as JSON-stringified value
       window.localStorage.setItem(key, JSON.stringify(item));
       
-      // Return the plain string as the value
+      // return the plain string as the value
       return item as T;
     }
   } catch (error) {
@@ -107,9 +100,7 @@ export function getLocalStorageItem<T>(key: string, defaultValue: T): T {
   }
 }
 
-/**
- * Simple localStorage setter
- */
+// simple localStorage setter
 export function setLocalStorageItem<T>(key: string, value: T): void {
   if (typeof window === 'undefined') return;
   try {
@@ -119,9 +110,7 @@ export function setLocalStorageItem<T>(key: string, value: T): void {
   }
 }
 
-/**
- * Clear specific localStorage items by prefix
- */
+// clear specific localStorage items by prefix
 export function clearLocalStorageByPrefix(prefix: string): void {
   if (typeof window === 'undefined') return;
   try {

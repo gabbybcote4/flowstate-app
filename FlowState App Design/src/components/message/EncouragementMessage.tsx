@@ -1,3 +1,4 @@
+// src/components/message/EncouragementMessage.tsx
 import { useEffect, useState } from 'react';
 import { Sparkles } from 'lucide-react';
 
@@ -19,7 +20,7 @@ export function EncouragementMessage() {
   const [message, setMessage] = useState('');
 
   useEffect(() => {
-    // Select a message based on the day of year for consistency
+    // select message based on day of year for consistency
     const dayOfYear = Math.floor((new Date().getTime() - new Date(new Date().getFullYear(), 0, 0).getTime()) / 86400000);
     const index = dayOfYear % encouragementMessages.length;
     setMessage(encouragementMessages[index]);
@@ -27,12 +28,9 @@ export function EncouragementMessage() {
 
   return (
     <div style={{ position: 'relative' }}>
-      <div className="absolute top-0 right-0 bg-black/75 text-white px-2 py-1 text-[10px] rounded-bl z-50">
-        ENCOURAGEMENT MESSAGE
-      </div>
-      <div className="bg-gradient-to-br from-lavender-100 to-peach-100 rounded-3xl shadow-sm p-6 border border-lavender-200">
-        <div className="flex items-start gap-3">
-          <div className="flex-shrink-0 mt-1">
+      <div className="bg-gradient-to-br from-lavender-100 to-peach-100 rounded-3xl shadow-sm p-2 border border-lavender-200">
+        <div className="flex gap-2">
+          <div className="flex mt-1">
             <Sparkles size={24} className="text-lavender-600" />
           </div>
           <div className="flex-1">

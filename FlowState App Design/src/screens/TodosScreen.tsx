@@ -4,6 +4,15 @@ import { Plus } from "lucide-react";
 import { TodoCard } from "../components/card/TodoCard";
 import { useTheme } from "../components/ThemeContext";
 import { useActivityNudges } from "../components/system/NudgeSystem";
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+} from "@/components/ui/dialog";
 
 interface Todo {
   id: number;
@@ -147,27 +156,133 @@ export function TodosScreen() {
       />
 
       {/* header */}
-      <header
-        className="sticky top-0 z-10 px-6 py-4 flex justify-between items-center border-b backdrop-blur-md"
+{/* header */}
+<header
+  className="sticky top-0 z-10 px-6 py-4 flex justify-between items-center border-b backdrop-blur-md"
+  style={{
+    backgroundColor: darkMode
+      ? "rgba(18,18,28,0.6)"
+      : "rgba(255,255,255,0.4)",
+    borderColor: darkMode ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.05)",
+  }}
+>
+  <h1 className="text-lg font-semibold">My To-Dos</h1>
+
+  {/* --- Add To-Do Modal --- */}
+  <Dialog open={showAddModal} onOpenChange={setShowAddModal}>
+    <DialogTrigger asChild>
+      <button
+        className="rounded-full p-2 shadow-lg transition active:scale-95"
         style={{
-          backgroundColor: darkMode
-            ? "rgba(18,18,28,0.6)"
-            : "rgba(255,255,255,0.4)",
-          borderColor: darkMode ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.05)",
+          background: `linear-gradient(135deg, ${themeColors.primary}, ${themeColors.accentLight})`,
+          color: "#000000ff",
         }}
       >
-        <h1 className="text-lg font-semibold">My To-Dos</h1>
+        <Plus size={18} />
+      </button>
+    </DialogTrigger>
+
+    <DialogContent className="z-[2147483647] sm:max-w-[400px] bg-[var(--color-card)] text-[var(--color-card-foreground)]">
+      <DialogHeader>
+        <DialogTitle>Add a new To-Do</DialogTitle>
+        <DialogDescription>
+          Fill in the details below to add a new task.
+        </DialogDescription>
+      </DialogHeader>
+
+      <div className="space-y-4 py-2">
+        <div>
+          <label className="text-sm font-medium">Title</label>
+          <input
+            className="w-full mt-1 border rounded-md px-3 py-2 bg-[var(--color-card)] border-[var(--color-input)]"
+            placeholder="Enter task name"
+            value={newTodo.title}
+            onChange={(e) => setNewTodo({ ...newTodo, title: e.target.value })}
+          />
+        </div>
+
+        <div>
+          <label className="text-sm font-medium">Life Area</label>
+          <select
+            className="w-full mt-1 border rounded-md px-3 py-2 bg-[var(--color-card)] border-[var(--color-input)]"
+            value={newTodo.lifeArea}
+            onChange={(e) => setNewTodo({ ...newTodo, lifeArea: e.target.value })}
+          >
+            {DEFAULT_LIFE_AREAS.map((area) => (
+              <option key={area.id} value={area.id}>
+                {area.label}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <label className="text-sm font-medium">Energy Level</label>
+          <div className="flex gap-3">
+            {["Low", "Moderate", "High"].map((lvl) => (
+              <label key={lvl} className="flex items-center gap-1 text-sm">
+                <input
+                  type="radio"
+                  name="energy"
+                  value={lvl}
+                  checked={newTodo.energy === lvl}
+                  onChange={() => setNewTodo({ ...newTodo, energy: lvl as any })}
+                />
+                {lvl}
+              </label>
+            ))}
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <label className="text-sm font-medium">Priority</label>
+          <div className="flex gap-3">
+            {["Low", "Medium", "High"].map((lvl) => (
+              <label key={lvl} className="flex items-center gap-1 text-sm">
+                <input
+                  type="radio"
+                  name="priority"
+                  value={lvl}
+                  checked={newTodo.priority === lvl}
+                  onChange={() => setNewTodo({ ...newTodo, priority: lvl as any })}
+                />
+                {lvl}
+              </label>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <DialogFooter>
         <button
-          onClick={() => setShowAddModal(true)}
-          className="rounded-full p-2 shadow-lg transition active:scale-95 outline"
+          onClick={() => {
+            if (!newTodo.title.trim()) return;
+            setTodos((prev) => [
+              ...prev,
+              { ...newTodo, id: Date.now() },
+            ]);
+            setShowAddModal(false);
+            setNewTodo({
+              title: "",
+              icon: "📝",
+              priority: "Medium",
+              lifeArea: "Work",
+              energy: "Moderate",
+              completed: false,
+            });
+          }}
+          className="w-full py-2 rounded-md text-white font-medium"
           style={{
             background: `linear-gradient(135deg, ${themeColors.primary}, ${themeColors.accentLight})`,
-            color: "#000000ff",
           }}
         >
-          <Plus size={18} />
+          Add Task
         </button>
-      </header>
+      </DialogFooter>
+    </DialogContent>
+  </Dialog>
+</header>
+
 
       {/* filters */}
       <section

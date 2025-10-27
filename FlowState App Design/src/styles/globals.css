@@ -260,3 +260,25 @@ html.dark body {
 .animate-gradient-move {
   animation: gradient-move 15s ease-in-out infinite alternate;
 }
+
+/* fix radix dialog visibility */
+[data-slot="dialog-overlay"],
+[data-slot="dialog-content"],
+[data-slot="dialog-portal"] {
+  position: fixed !important;
+  z-index: 2147483647 !important; /* absolute top of page */
+  pointer-events: auto !important;
+  isolation: isolate !important;
+}
+
+/* prevent blur/transform from trapping modals */
+.flow-card,
+.flow-card * {
+  transform: none !important;
+  filter: none !important;
+  backdrop-filter: none !important;
+  z-index: auto !important;
+  isolation: isolate !important;
+}
+
+

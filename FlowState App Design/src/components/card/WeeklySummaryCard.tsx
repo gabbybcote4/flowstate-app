@@ -1,5 +1,4 @@
-// WeeklySummaryCard.tsx
-
+// src/components/card/WeeklySummaryCard.tsx
 import { useState, useEffect } from 'react';
 import { TrendingUp, TrendingDown, Minus, Sparkles } from 'lucide-react';
 
@@ -175,7 +174,7 @@ export function WeeklySummaryCard({ onViewDetails }: WeeklySummaryCardProps) {
       >
 
         {/* header */}
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center justify-between">
           <h3 className="text-[var(--color-card-foreground)] flex items-center gap-2">
             <span>📊</span>
             <span>This Week</span>
@@ -184,11 +183,11 @@ export function WeeklySummaryCard({ onViewDetails }: WeeklySummaryCardProps) {
         </div>
 
         {/* stats grid */}
-        <div className="grid grid-cols-3 gap-4 mb-4">
+        <div className="grid grid-cols-3 gap-2">
 
-          {/* Mood */}
-          <div className="flex flex-col items-center p-3 bg-gray-50 rounded-2xl">
-            <div className="text-2xl mb-1.5">🌤️</div>
+          {/* mood */}
+          <div className="flex flex-col items-center bg-gray-50 rounded-2xl">
+            <div className="text-xl mb-1.5">🌤️</div>
             <div className="text-xs opacity-60 mb-1.5">Mood</div>
             <div className="flex items-center gap-1.5">
               <span className="text-sm">{getMoodLabel(summary.averageMood)}</span>
@@ -197,8 +196,8 @@ export function WeeklySummaryCard({ onViewDetails }: WeeklySummaryCardProps) {
           </div>
 
           {/* sleep */}
-          <div className="flex flex-col items-center p-3 bg-gray-50 rounded-2xl">
-            <div className="text-2xl mb-1.5">💤</div>
+          <div className="flex flex-col items-center bg-gray-50 rounded-2xl">
+            <div className="text-xl mb-1.5">💤</div>
             <div className="text-xs opacity-60 mb-1.5">Sleep</div>
             <div className="flex items-center gap-1.5">
               <span className="text-sm">
@@ -209,8 +208,8 @@ export function WeeklySummaryCard({ onViewDetails }: WeeklySummaryCardProps) {
           </div>
 
           {/* habits */}
-          <div className="flex flex-col items-center p-3 bg-gray-50 rounded-2xl">
-            <div className="text-2xl mb-1.5">✅</div>
+          <div className="flex flex-col items-center bg-gray-50 rounded-2xl">
+            <div className="text-xl mb-1.5">✅</div>
             <div className="text-xs opacity-60 mb-1.5">Habits</div>
             <div className="flex items-center gap-1.5">
               <span className="text-sm">{summary.todosCompleted}</span>

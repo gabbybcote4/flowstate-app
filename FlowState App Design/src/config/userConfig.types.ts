@@ -1,9 +1,8 @@
-// UserConfig.types.ts
-
-export type ThemeMode = 'light' | 'dark' | 'minimal' | 'auto';
-export type TonePreference = 'gentle' | 'motivating' | 'practical' | 'playful';
-export type WidgetSize = 'S' | 'M' | 'L';
-export type DashboardTemplate = 'planner' | 'wellness' | 'hybrid' | 'custom';
+// src/config/UserConfig.types.ts
+export type ThemeMode = 'Light' | 'Dark' | 'Auto';
+export type TonePreference = 'Gentle' | 'Motivating' | 'Practical' | 'Playful';
+export type WidgetSize = 'small' | 'medium' | 'large';
+export type DashboardTemplate = 'Planner' | 'Wellness' | 'Hybrid' | 'Custom';
 
 export interface LifeArea {
   id: string;
@@ -29,7 +28,7 @@ export interface NotificationConfig {
   habitReminders: boolean;
   encouragement: boolean;
   insights: boolean;
-  frequency: 'minimal' | 'moderate' | 'frequent';
+  frequency: 'Minimal' | 'Moderate' | 'Frequent';
 }
 
 export interface IntegrationConfig {
@@ -62,7 +61,7 @@ export interface UserConfig {
   theme: {
     mode: ThemeMode;
     primaryColor: string;
-    fontSize: 'small' | 'medium' | 'large';
+    fontSize: 'Small' | 'Medium' | 'Large';
   };
   
   // life areas
@@ -111,25 +110,25 @@ export interface UserConfig {
 }
 
 export const DEFAULT_LIFE_AREAS: LifeArea[] = [
-  { id: 'health', label: 'Health & Wellness', icon: '💚', color: '#10B981', enabled: true },
-  { id: 'work', label: 'Work & Career', icon: '💼', color: '#3B82F6', enabled: true },
-  { id: 'relationships', label: 'Relationships', icon: '💜', color: '#A78BFA', enabled: true },
-  { id: 'personal', label: 'Personal Growth', icon: '🌱', color: '#8B5CF6', enabled: true },
-  { id: 'creativity', label: 'Creativity', icon: '🎨', color: '#EC4899', enabled: false },
-  { id: 'finance', label: 'Finance', icon: '💰', color: '#F59E0B', enabled: false },
-  { id: 'home', label: 'Home & Living', icon: '🏡', color: '#14B8A6', enabled: false },
-  { id: 'learning', label: 'Learning', icon: '📚', color: '#6366F1', enabled: false },
+  { id: 'Health', label: 'Health & Wellness', icon: '💚', color: '#10B981', enabled: true },
+  { id: 'Work', label: 'Work & Career', icon: '💼', color: '#3B82F6', enabled: true },
+  { id: 'Relationships', label: 'Relationships', icon: '💜', color: '#A78BFA', enabled: true },
+  { id: 'Personal', label: 'Personal Growth', icon: '🌱', color: '#8B5CF6', enabled: true },
+  { id: 'Creativity', label: 'Creativity', icon: '🎨', color: '#EC4899', enabled: false },
+  { id: 'Finance', label: 'Finance', icon: '💰', color: '#F59E0B', enabled: false },
+  { id: 'Home', label: 'Home & Living', icon: '🏡', color: '#14B8A6', enabled: false },
+  { id: 'Learning', label: 'Learning', icon: '📚', color: '#6366F1', enabled: false },
 ];
 
 export const DEFAULT_USER_CONFIG: UserConfig = {
   version: 1,
   
-  tone: 'gentle',
+  tone: 'Gentle',
   
   theme: {
-    mode: 'light',
+    mode: 'Light',
     primaryColor: '#A78BFA',
-    fontSize: 'medium',
+    fontSize: 'Medium',
   },
   
   lifeAreas: DEFAULT_LIFE_AREAS,
@@ -155,7 +154,7 @@ export const DEFAULT_USER_CONFIG: UserConfig = {
   navOrder: ['home', 'checkin', 'todos', 'reflection', 'settings'],
   
   dashboardLayout: [],
-  dashboardTemplate: 'wellness',
+  dashboardTemplate: 'Wellness',
   
   widgets: {
     weather: false,
@@ -183,7 +182,7 @@ export const DEFAULT_USER_CONFIG: UserConfig = {
     habitReminders: false,
     encouragement: true,
     insights: false,
-    frequency: 'minimal',
+    frequency: 'Minimal',
   },
   
   integrations: [

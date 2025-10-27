@@ -2,9 +2,9 @@
 // adaptive dashboard home screen with theme-based background and time-of-day updates
 
 import { useState, useEffect } from "react";
-import { HealthWidget } from "../components/widget/HealthWidget";
+import { HealthWidget } from "../components/HealthWidget";
 import { WeeklySummaryCard } from "../components/card/WeeklySummaryCard";
-import { WeatherMoonWidget } from "../components/widget/WeatherMoonWidget";
+import { WeatherMoonWidget } from "../components/WeatherMoonWidget";
 import { AdaptiveGreeting } from "../components/AdaptiveGreeting";
 import { MoodCheckInWidget } from "../components/widget/MoodCheckInWidget";
 import { QuickReflectionCard } from "../components/card/QuickReflectionCard";

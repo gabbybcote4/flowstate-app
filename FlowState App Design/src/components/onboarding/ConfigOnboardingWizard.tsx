@@ -1,5 +1,4 @@
 // src/components/onboarding/ConfigOnboardingWizard.tsx
-// onboarding wizard for initial user configuration
 import { useState, useEffect } from "react";
 import { useUserConfig } from "../../config/UserConfigContext";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -14,6 +13,10 @@ import { FeaturesStep } from "./steps/FeaturesStep";
 import { DashboardLayoutStep } from "./steps/DashboardLayoutStep";
 import { NotificationsStep } from "./steps/NotificationsStep";
 import { ReviewStep } from "./steps/ReviewStep";
+import { WidgetsStep } from "./steps/WidgetsStep";
+import { JournalingStep } from "./steps/JournalingStep";
+import { NavigationStep } from "./steps/NavigationStep";
+import { IntegrationsStep } from "./steps/IntegrationsStep";
 
 export interface OnboardingStepProps {
   onNext: () => void;
@@ -28,8 +31,12 @@ const ONBOARDING_STEPS = [
   { id: "theme", title: "Theme", component: ThemeStep },
   { id: "lifeAreas", title: "Focus Areas", component: LifeAreasStep },
   { id: "features", title: "Features You’ll Use", component: FeaturesStep },
+  { id: "widgets", title: "Widgets", component: WidgetsStep },
+  { id: "journaling", title: "Journaling", component: JournalingStep },
+  { id: "integrations", title: "Integrations", component: IntegrationsStep },
   { id: "layout", title: "Dashboard Setup", component: DashboardLayoutStep },
-  { id: "notifications", title: "Reminders & Journaling", component: NotificationsStep },
+  { id: "navigation", title: "Bottom Navigation Setup", component: NavigationStep },
+  { id: "notifications", title: "Reminders", component: NotificationsStep },
   { id: "review", title: "Review & Apply", component: ReviewStep },
 ];
 

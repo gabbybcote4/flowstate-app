@@ -1,5 +1,4 @@
-// UserConfigContext.tsx
-
+// src/config/UserConfigContext.tsx
 import { createContext, useContext, useReducer, useEffect, ReactNode } from 'react';
 import { UserConfig, DEFAULT_USER_CONFIG } from './userConfig.types';
 

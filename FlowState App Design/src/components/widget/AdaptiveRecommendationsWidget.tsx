@@ -1,21 +1,21 @@
-import { useState } from 'react';
-//import { useTheme } from '../components/context/ThemeContext';
+import { useState, useEffect } from 'react';
+import { useTheme } from '../ThemeContext';
 import { 
   Brain,
   Heart,
   Calendar,
   Cloud,
   Zap,
-  //TrendingUp,
- // AlertCircle,
-//  Sparkles,
+  TrendingUp,
+ AlertCircle,
+ Sparkles,
   ChevronRight
 } from 'lucide-react';
-//import { Badge } from '../components/ui/badge';
+// import { Badge, badgeVariants } from './components/ui/badge';
 // import { 
 //   AdaptiveEngine, 
 //   type AICoachingInsight 
-// } from '../components/integrations/api-integrations';
+// } from 'src/components/integrations/api-integrations';
 
 /**
  * Adaptive Recommendations Widget
@@ -29,110 +29,110 @@ import {
  * This widget demonstrates how to integrate the adaptive engine into FlowState UI
  */
 export function AdaptiveRecommendationsWidget() {
-  //const { themeColors } = useTheme();
-  // const [isLoading, setIsLoading] = useState(true);
-  // const [recommendations, setRecommendations] = useState<any>(null);
-  // const [error, setError] = useState<string | null>(null);
+  const { themeColors } = useTheme();
+  const [isLoading, setIsLoading] = useState(true);
+  const [recommendations, setRecommendations] = useState<any>(null);
+  const [error, setError] = useState<string | null>(null);
   const [showDetails, setShowDetails] = useState(false);
 
-  // useEffect(() => {
-  //   loadRecommendations();
-  // }, []);
+  useEffect(() => {
+    loadRecommendations();
+  }, []);
 
-  // const loadRecommendations = async () => {
-  //   try {
-  //     setIsLoading(true);
-  //     setError(null);
+  const loadRecommendations = async () => {
+    try {
+      setIsLoading(true);
+      setError(null);
 
-  //     // Initialize adaptive engine with mock data for demo
-  //     // In production, replace with actual API keys from environment variables
-  //     const engine = new AdaptiveEngine({
-  //       healthApiKey: 'MOCK_HEALTH_KEY',
-  //       calendarApiKey: 'MOCK_CALENDAR_KEY',
-  //       weatherApiKey: 'MOCK_WEATHER_KEY',
-  //       focusApiKey: 'MOCK_FOCUS_KEY',
-  //       aiApiKey: 'MOCK_AI_KEY',
-  //     });
+      // Initialize adaptive engine with mock data for demo
+      // In production, replace with actual API keys from environment variables
+      // const engine = new AdaptiveEngine({
+      //   healthApiKey: 'MOCK_HEALTH_KEY',
+      //   calendarApiKey: 'MOCK_CALENDAR_KEY',
+      //   weatherApiKey: 'MOCK_WEATHER_KEY',
+      //   focusApiKey: 'MOCK_FOCUS_KEY',
+      //   aiApiKey: 'MOCK_AI_KEY',
+      // });
 
-  //     const dailyRecs = await engine.getDailyRecommendations();
-  //     setRecommendations(dailyRecs);
-  //   } catch (err) {
-  //     console.error('Error loading recommendations:', err);
-  //     setError('Unable to load recommendations');
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // };
+      // const dailyRecs = await engine.getDailyRecommendations();
+      // setRecommendations(dailyRecs);
+    } catch (err) {
+      console.error('Error loading recommendations:', err);
+      setError('Unable to load recommendations');
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-  // if (isLoading) {
-  //   return (
-  //     <div className="flow-card">
-  //       <div className="flex items-center gap-3 mb-4">
-  //         <div className="w-10 h-10 rounded-xl bg-purple-100 animate-pulse" />
-  //         <div className="flex-1">
-  //           <div className="h-5 bg-gray-200 rounded animate-pulse mb-2 w-1/2" />
-  //           <div className="h-3 bg-gray-100 rounded animate-pulse w-3/4" />
-  //         </div>
-  //       </div>
-  //       <div className="space-y-2">
-  //         <div className="h-4 bg-gray-100 rounded animate-pulse" />
-  //         <div className="h-4 bg-gray-100 rounded animate-pulse w-5/6" />
-  //       </div>
-  //     </div>
-  //   );
-  // }
+  if (isLoading) {
+    return (
+      <div className="flow-card">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-10 h-10 rounded-xl bg-purple-100 animate-pulse" />
+          <div className="flex-1">
+            <div className="h-5 bg-gray-200 rounded animate-pulse mb-2 w-1/2" />
+            <div className="h-3 bg-gray-100 rounded animate-pulse w-3/4" />
+          </div>
+        </div>
+        <div className="space-y-2">
+          <div className="h-4 bg-gray-100 rounded animate-pulse" />
+          <div className="h-4 bg-gray-100 rounded animate-pulse w-5/6" />
+        </div>
+      </div>
+    );
+  }
 
-  // if (error || !recommendations) {
-  //   return (
-  //     <div className="flow-card">
-  //       <div className="flex items-center gap-3 text-orange-600">
-  //         <AlertCircle size={20} />
-  //         <p className="text-sm">Unable to generate recommendations right now</p>
-  //       </div>
-  //     </div>
-  //   );
-  // }
+  if (error || !recommendations) {
+    return (
+      <div className="flow-card">
+        <div className="flex items-center gap-3 text-orange-600">
+          <AlertCircle size={20} />
+          <p className="text-sm">Unable to generate recommendations right now</p>
+        </div>
+      </div>
+    );
+  }
 
-  // const getEnergyColor = (level: string) => {
-  //   switch (level) {
-  //     case 'low':
-  //       return '#3b82f6'; // blue
-  //     case 'medium':
-  //       return '#f59e0b'; // amber
-  //     case 'high':
-  //       return '#10b981'; // green
-  //     default:
-  //       return themeColors.primary;
-  //   }
-  // };
+  const getEnergyColor = (level: string) => {
+    switch (level) {
+      case 'low':
+        return '#3b82f6'; // blue
+      case 'medium':
+        return '#f59e0b'; // amber
+      case 'high':
+        return '#10b981'; // green
+      default:
+        return themeColors.primary;
+    }
+  };
 
-  // const getEnergyIcon = (level: string) => {
-  //   switch (level) {
-  //     case 'low':
-  //       return '🌙';
-  //     case 'medium':
-  //       return '☀️';
-  //     case 'high':
-  //       return '⚡';
-  //     default:
-  //       return '✨';
-  //   }
-  // };
+  const getEnergyIcon = (level: string) => {
+    switch (level) {
+      case 'low':
+        return '🌙';
+      case 'medium':
+        return '☀️';
+      case 'high':
+        return '⚡';
+      default:
+        return '✨';
+    }
+  };
 
-  // const getInsightIcon = (type: string) => {
-  //   switch (type) {
-  //     case 'pattern':
-  //       return TrendingUp;
-  //     case 'suggestion':
-  //       return Sparkles;
-  //     case 'encouragement':
-  //       return Heart;
-  //     case 'warning':
-  //       return AlertCircle;
-  //     default:
-  //       return Brain;
-  //   }
-  // };
+  const getInsightIcon = (type: string) => {
+    switch (type) {
+      case 'pattern':
+        return TrendingUp;
+      case 'suggestion':
+        return Sparkles;
+      case 'encouragement':
+        return Heart;
+      case 'warning':
+        return AlertCircle;
+      default:
+        return Brain;
+    }
+  };
 
   return (
     <div className="flow-card">
@@ -140,7 +140,7 @@ export function AdaptiveRecommendationsWidget() {
       <div 
         className="p-6 text-white"
         style={{ 
-          //background: `linear-gradient(135deg, ${themeColors.primary}, ${themeColors.secondary})` 
+          background: `linear-gradient(135deg, ${themeColors.primary})` 
         }}
       >
         <div className="flex items-center justify-between mb-3">
@@ -165,13 +165,13 @@ export function AdaptiveRecommendationsWidget() {
         </div>
 
         {/* Energy Level */}
-        {/* <div className="flex items-center gap-2 mb-2">
+        <div className="flex items-center gap-2 mb-2">
           <span className="text-2xl">{getEnergyIcon(recommendations.energyLevel)}</span>
           <div>
             <div className="text-sm opacity-80">Predicted Energy</div>
             <div className="text-lg capitalize">{recommendations.energyLevel} Energy Day</div>
           </div>
-        </div> */}
+        </div>
 
         {/* Recommended Routine */}
         <div className="mt-3 pt-3 border-t border-white/20">
@@ -190,7 +190,7 @@ export function AdaptiveRecommendationsWidget() {
         <div>
           <div className="text-xs opacity-60 mb-3">Key Recommendations</div>
           <div className="space-y-2">
-            {/* {recommendations.topSuggestions.map((suggestion: string, index: number) => (
+            {recommendations.topSuggestions.map((suggestion: string, index: number) => (
               <div
                 key={index}
                 className="flex items-start gap-3 p-3 rounded-xl bg-gray-50"
@@ -203,19 +203,19 @@ export function AdaptiveRecommendationsWidget() {
                 </div>
                 <p className="text-sm text-[var(--color-card-foreground)] leading-relaxed">{suggestion}</p>
               </ div>
-            ))} */}
+            ))}
           </div>
         </div>
 
         {/* Optimal Work Times */}
-        {/* {recommendations.optimalWorkTimes.length > 0 && (
+        {recommendations.optimalWorkTimes.length > 0 && (
           <div>
             <div className="flex items-center gap-2 mb-3">
               <Calendar size={14} className="opacity-60" />
               <div className="text-xs opacity-60">Best Times for Focus Work</div>
             </div>
             <div className="flex flex-wrap gap-2">
-              {recommendations.optimalWorkTimes.map((time: string, index: number) => (
+              {/* {recommendations.optimalWorkTimes.map((time: string, index: number) => (
                 <Badge 
                   key={index} 
                   variant="outline"
@@ -224,49 +224,49 @@ export function AdaptiveRecommendationsWidget() {
                   <Clock size={12} className="mr-1" />
                   {time}
                 </Badge>
-              ))}
+              ))} */}
             </div>
           </div>
-        )} */}
+        )}
       </div>
 
       {/* Detailed Insights (Expandable) */}
-        {/* {showDetails && recommendations.insights.length > 0 && (
+        {showDetails && recommendations.insights.length > 0 && (
           <div
             className="border-t border-gray-200 overflow-hidden"
           >
             <div className="p-6 bg-gray-50 space-y-3">
               <div className="text-xs opacity-60 mb-3">AI Insights</div>
-              {recommendations.insights.map((insight: AICoachingInsight, index: number) => {
+              {/* {recommendations.insights.map((insight: AICoachingInsight, index: number) => { */}
                 const InsightIcon = getInsightIcon(insight.type);
                 
                 return (
                   <div
-                    key={index}
+                    // key={index}
                     className="flow-card"
                   >
                     <div className="flex items-start gap-3">
-                      {/* <div 
+                      <div 
                         className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
                         style={{ 
                           backgroundColor: `${getEnergyColor(recommendations.energyLevel)}20` 
                         }}
                       >
-                        <InsightIcon 
+                        {/* <InsightIcon 
                           size={16} 
                           style={{ color: getEnergyColor(recommendations.energyLevel) }}
-                        />
-                      </div> */}
+                        /> */}
+                      </div>
                       <div className="flex-1">
                         <div className="flex items-start justify-between gap-2 mb-1">
-                          {/* <h4 className="text-sm">{insight.title}</h4>
-                          <Badge variant="outline" className="text-xs">
+                          {/* <h4 className="text-sm">{insight.title}</h4> */}
+                          {/* <Badge variant="outline" className="text-xs">
                             {Math.round(insight.confidence * 100)}% confidence
                           </Badge> */}
                         </div>
-                        {/* <p className="text-sm text-gray-600 mb-2">{insight.message}</p>
+                        {/* <p className="text-sm text-gray-600 mb-2">{insight.message}</p> */}
                         
-                        {insight.suggestedAction && (
+                        {/* {insight.suggestedAction && (
                           <div className="flex items-center gap-2 mt-2 pt-2 border-t border-[var(--color-ring-offset-background)]">
                             <Zap size={12} className="text-purple-600" />
                             <span className="text-xs text-purple-600">
@@ -291,10 +291,10 @@ export function AdaptiveRecommendationsWidget() {
                     </div>
                 //  </ div>
                 );
-         //     })}
-        //    </div>
-    //      </ div>
-    //    )} */}
+             {/* })} */}
+           </div>
+         </ div>
+       )} 
 
       {/* Data Sources Footer */}
       <div className="px-6 py-3 bg-gray-50 border-t border-gray-200">
@@ -317,17 +317,17 @@ export function AdaptiveRecommendationsWidget() {
               <span>Focus</span>
             </div>
           </div>
-          {/* <button
+          <button
             onClick={loadRecommendations}
             className="text-xs opacity-60 hover:opacity-100 transition-opacity"
           >
             Refresh
-          </button> */}
+          </button>
         </div>
       </div>
   //   </div>
-  // );
+  );
 }
 
 // Missing import
-//import { Clock } from 'lucide-react';
+import { Clock } from 'lucide-react';

@@ -1,13 +1,10 @@
 // src/screens/OnboardingScreen.tsx
-// adaptive onboarding flow using theme colors and dark mode background
-
 import { useState } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { AuthScreen } from "../screens/AuthScreen";
 import { WelcomeScreen } from "../screens/WelcomeScreen";
 import { ConfigOnboardingWizard } from "../components/onboarding/ConfigOnboardingWizard";
 import { useNavigation } from "../components/context/NavigationContext";
-import { useUserConfig } from "../config/UserConfigContext";
 import { useTheme } from "../components/ThemeContext";
 import { Sparkles, Activity, Target, Zap, UserPlus, ChevronRight } from "lucide-react";
 
@@ -36,39 +33,44 @@ const onboardingSteps: OnboardingStep[] = [
     id: 1,
     icon: <Sparkles size={48} className="text-[var(--color-primary)]" />,
     title: "Welcome to FlowState",
-    description: "Your gentle companion for navigating life with fluctuating energy",
+    description:
+      "Your gentle companion for navigating life with fluctuating energy",
     buttonText: "Let’s begin",
     illustration: "✨",
   },
   {
     id: 2,
     icon: <Activity size={48} className="text-[var(--color-primary)]" />,
-    title: "track your energy patterns",
-    description: "Understand your natural rhythms and work with them, not against them",
+    title: "Track your energy patterns",
+    description:
+      "Understand your natural rhythms and work with them, not against them",
     buttonText: "Continue",
     illustration: "🌊",
   },
   {
     id: 3,
     icon: <Target size={48} className="text-[var(--color-primary)]" />,
-    title: "set wellness goals",
-    description: "Create meaningful goals that adapt to how you’re feeling each day",
+    title: "Set wellness goals",
+    description:
+      "Create meaningful goals that adapt to how you’re feeling each day",
     buttonText: "Next",
     illustration: "🎯",
   },
   {
     id: 4,
     icon: <Zap size={48} className="text-[var(--color-primary)]" />,
-    title: "connect your tools",
-    description: "Sync calendars, habits, and health data for a complete picture",
+    title: "Connect your tools",
+    description:
+      "Sync calendars, habits, and health data for a complete picture",
     buttonText: "Almost there",
     illustration: "🔗",
   },
   {
     id: 5,
     icon: <UserPlus size={48} className="text-[var(--color-primary)]" />,
-    title: "you’re all set",
-    description: "Let’s start building routines that honor your energy, not fight it",
+    title: "You’re all set",
+    description:
+      "Let’s start building routines that honor your energy, not fight it",
     buttonText: "Get started",
     illustration: "🌱",
   },
@@ -117,7 +119,7 @@ export function OnboardingScreen({ onComplete }: OnboardingScreenProps) {
       {/* content */}
       <div className="flex-1 flex flex-col items-center justify-center px-6 pb-12">
         <div className="w-full max-w-md text-center">
-          
+
           {/* illustration circle */}
           <div className="mb-8 items-center justify-center flex">
             <div
@@ -177,8 +179,6 @@ export function OnboardingScreen({ onComplete }: OnboardingScreenProps) {
 // unified wrapper
 export function OnboardingWrapper({ children, editMode }: OnboardingWrapperProps) {
   const { navigate } = useNavigation();
-  const { config } = useUserConfig();
-
   const [hasCompletedOnboarding, setHasCompletedOnboarding] = useLocalStorage(
     "flowstate-onboarding-complete",
     false
@@ -191,6 +191,10 @@ export function OnboardingWrapper({ children, editMode }: OnboardingWrapperProps
     "flowstate-welcome-complete",
     false
   );
+  const [hasCompletedConfig, setHasCompletedConfig] = useLocalStorage(
+    "flowstate-config-complete",
+    false
+  );
   const [userName] = useLocalStorage("flowstate-user-name", "Friend");
 
   const handleOnboardingComplete = () => setHasCompletedOnboarding(true);
@@ -199,15 +203,24 @@ export function OnboardingWrapper({ children, editMode }: OnboardingWrapperProps
     setHasCompletedWelcome(true);
     navigate("checkin");
   };
+
   const handleConfigComplete = () => {
-    if (editMode === "layout") navigate("settings");
-    else navigate("home");
+    // save completion and navigate
+    setHasCompletedConfig(true);
+    if (editMode === "layout") {
+      navigate("settings");
+    } else {
+      navigate("home");
+    }
   };
 
   // layout edit mode
   if (editMode === "layout") {
     return (
-      <ConfigOnboardingWizard onComplete={handleConfigComplete} editMode="layout" />
+      <ConfigOnboardingWizard
+        onComplete={handleConfigComplete}
+        editMode="layout"
+      />
     );
   }
 
@@ -222,14 +235,17 @@ export function OnboardingWrapper({ children, editMode }: OnboardingWrapperProps
 
   if (!hasCompletedWelcome) {
     return (
-      <WelcomeScreen userName={userName} onStartCheckIn={handleWelcomeComplete} />
+      <WelcomeScreen
+        userName={userName}
+        onStartCheckIn={handleWelcomeComplete}
+      />
     );
   }
 
-  if (!config.onboardingCompleted) {
+  if (!hasCompletedConfig) {
     return <ConfigOnboardingWizard onComplete={handleConfigComplete} />;
   }
 
-  // main app
+  // main app after all onboarding steps
   return <>{children}</>;
 }
