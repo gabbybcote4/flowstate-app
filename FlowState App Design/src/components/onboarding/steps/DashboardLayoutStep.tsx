@@ -1,5 +1,4 @@
 // src/components/onboarding/steps/DashboardLayoutStep.tsx
-// onboarding step for selecting dashboard layout template with widget preview
 import React from "react";
 import { OnboardingStepProps } from "../ConfigOnboardingWizard";
 import { useUserConfig } from "../../../config/UserConfigContext";
@@ -19,10 +18,10 @@ const TEMPLATES: Array<{
     icon: Heart,
     description: "Energy tracking, mood, and self-care first.",
     widgets: [
-      { id: "mood", type: "Mood Check-In", size: "M", position: 0 },
-      { id: "momentum", type: "Daily Momentum", size: "S", position: 1 },
-      { id: "health", type: "Health Stats", size: "M", position: 2 },
-      { id: "reflection", type: "Quick Reflection", size: "L", position: 3 },
+      { id: "mood", type: "Mood Check-In", size: "medium", position: 0 },
+      { id: "momentum", type: "Daily Momentum", size: "small", position: 1 },
+      { id: "health", type: "Health Stats", size: "medium", position: 2 },
+      { id: "reflection", type: "Quick Reflection", size: "large", position: 3 },
     ],
   },
   {
@@ -31,10 +30,10 @@ const TEMPLATES: Array<{
     icon: Target,
     description: "Tasks, calendar, and productivity tools.",
     widgets: [
-      { id: "todos", type: "To-Do List", size: "L", position: 0 },
-      { id: "calendar", type: "Calendar Events", size: "M", position: 1 },
-      { id: "focus", type: "Focus Timer", size: "S", position: 2 },
-      { id: "weekly", type: "Weekly Summary", size: "M", position: 3 },
+      { id: "todos", type: "To-Do List", size: "large", position: 0 },
+      { id: "calendar", type: "Calendar Events", size: "medium", position: 1 },
+      { id: "focus", type: "Focus Timer", size: "small", position: 2 },
+      { id: "weekly", type: "Weekly Summary", size: "medium", position: 3 },
     ],
   },
   {
@@ -43,10 +42,10 @@ const TEMPLATES: Array<{
     icon: Zap,
     description: "A mix of wellness and productivity tools.",
     widgets: [
-      { id: "mood", type: "Mood Check-In", size: "S", position: 0 },
-      { id: "todos", type: "To-Do List", size: "M", position: 1 },
-      { id: "momentum", type: "Daily Momentum", size: "S", position: 2 },
-      { id: "habits", type: "Habits", size: "M", position: 3 },
+      { id: "mood", type: "Mood Check-In", size: "small", position: 0 },
+      { id: "todos", type: "To-Do List", size: "medium", position: 1 },
+      { id: "momentum", type: "Daily Momentum", size: "small", position: 2 },
+      { id: "habits", type: "Habits", size: "medium", position: 3 },
     ],
   },
   {
