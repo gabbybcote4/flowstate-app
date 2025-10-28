@@ -1,5 +1,4 @@
 // src/components/onboarding/steps/ThemeStep.tsx
-// onboarding step for selecting theme preferences
 import React from 'react';
 import { OnboardingStepProps } from '../ConfigOnboardingWizard';
 import { useUserConfig } from '../../../config/UserConfigContext';

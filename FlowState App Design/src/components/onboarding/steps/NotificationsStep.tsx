@@ -1,5 +1,4 @@
 // src/components/onboarding/steps/NotificationsStep.tsx
-// Step in onboarding wizard for configuring notification preferences
 import { OnboardingStepProps } from '../ConfigOnboardingWizard';
 import { useUserConfig } from '../../../config/UserConfigContext';
 import { Switch } from '../../ui/switch';

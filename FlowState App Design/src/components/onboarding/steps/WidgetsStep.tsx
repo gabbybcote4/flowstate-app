@@ -60,7 +60,7 @@ export function WidgetsStep({}: OnboardingStepProps) {
         .map(([key], index) => ({
           id: mapWidgetKeyToDashboardId(key),
           type: "widget",
-          size: "M", 
+          size: "medium", 
           position: index, 
         })),
     });
@@ -96,7 +96,7 @@ export function WidgetsStep({}: OnboardingStepProps) {
       dashboardLayout: WIDGET_OPTIONS.map((w, index) => ({
         id: mapWidgetKeyToDashboardId(w.key),
         type: "widget",
-        size: "M", 
+        size: "medium", 
         position: index, 
       })),
     });
