@@ -1,5 +1,4 @@
 // src/hooks/useConfigSync.ts
-
 import { useEffect, useRef } from 'react';
 import { useUserConfig } from '../config/UserConfigContext';
 import { useTheme } from '../components/ThemeContext';
@@ -34,9 +33,6 @@ export function useConfigSync() {
           break;
         case 'dark':
           setDarkMode(true);
-          break;
-        case 'minimal':
-          setDarkMode(false);
           break;
         case 'auto':
           // detect system preference
